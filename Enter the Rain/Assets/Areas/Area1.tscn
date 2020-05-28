@@ -69,9 +69,21 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 
 [node name="Area1" type="Node2D"]
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 294.363, 318.921 )
+current = true
+process_mode = 0
+smoothing_enabled = true
+
+[node name="ParedeTeste" type="TileMap" parent="."]
+tile_set = SubResource( 6 )
+format = 1
+tile_data = PoolIntArray( 131072, 0, 0, 262153, 0, 0 )
+
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 294.363, 318.921 )
 collision_mask = 3
+MAX_SPEED = 300
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
@@ -81,14 +93,3 @@ position = Vector2( 699.823, 313.761 )
 detect_radius = 250
 fire_rate = 1.0
 Bullet = ExtResource( 3 )
-
-[node name="ParedeTeste" type="TileMap" parent="."]
-tile_set = SubResource( 6 )
-format = 1
-tile_data = PoolIntArray( 131072, 0, 0, 262153, 0, 0 )
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 294.363, 318.921 )
-current = true
-process_mode = 0
-smoothing_enabled = true

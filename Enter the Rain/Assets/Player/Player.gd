@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+#Me batendo com o git, scrr
+
 enum {
 	MOVE,
 	ROLL
@@ -7,7 +9,7 @@ enum {
 
 #Variaveis
 var moveDirection = Vector2(0,0)
-export (int) var MAX_SPEED = 200
+export (int) var MAX_SPEED = 250
 var moveAnt = Vector2.RIGHT
 var posAnt = Vector2.RIGHT
 var state = MOVE
@@ -48,11 +50,6 @@ func roll_state(delta):
 	state = MOVE
 #Fim das funções de estado
 
-func atualiza(movedir):
-	if movedir != Vector2.ZERO:
-		roll_vector = movedir
-		moveAnt = movedir
-
 func atualizatiro(pos):
 	if pos != Vector2.ZERO:
 		posAnt = pos
@@ -61,7 +58,6 @@ func control_loop():
 	#Passando o movimento direto com a anulação de tecla ja feita
 	moveDirection.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	moveDirection.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
-	atualiza(moveDirection)
 
 func shot_dir():
 	var Posicao = Vector2.ZERO
@@ -82,6 +78,8 @@ func shot_dir():
 func movement_loop(delta):
 	if moveDirection != Vector2.ZERO:
 		moveDirection += moveDirection.normalized() * MAX_SPEED
+		roll_vector = moveDirection.normalized()
+		moveAnt = moveDirection.normalized()
 	else:
 		moveDirection = moveDirection.move_toward(Vector2.ZERO, FRICTION * delta)
 	move()
