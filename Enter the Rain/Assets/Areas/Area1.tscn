@@ -1,9 +1,11 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Assets/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Torreta/Torreta.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Torreta/TurretBullet.tscn" type="PackedScene" id=3]
 [ext_resource path="res://icon.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Inimigo/Inimigo.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Arena/Arena.tscn" type="PackedScene" id=6]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -90,6 +92,14 @@ remote_path = NodePath("../../Camera2D")
 
 [node name="Torreta" parent="." instance=ExtResource( 2 )]
 position = Vector2( 699.823, 313.761 )
-detect_radius = 250
-fire_rate = 1.0
 Bullet = ExtResource( 3 )
+
+[node name="Inimigo" parent="." instance=ExtResource( 5 )]
+position = Vector2( 159.164, 450.285 )
+
+[node name="Arena" parent="." instance=ExtResource( 6 )]
+position = Vector2( -163.245, 345.761 )
+detect_area_x = 100
+detect_area_y = 100
+min_enemies = 1
+max_enemies = 3
