@@ -8,6 +8,8 @@
 extents = Vector2( 32, 32 )
 
 [node name="Shot" type="Area2D"]
+collision_layer = 0
+collision_mask = 8
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
@@ -30,4 +32,5 @@ scale = Vector2( 0.3, 0.3 )
 [node name="Line2D" type="Line2D" parent="Node"]
 script = ExtResource( 3 )
 trail_length = 4
+[connection signal="area_entered" from="." to="." method="_on_Shot_area_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

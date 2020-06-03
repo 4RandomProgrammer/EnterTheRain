@@ -5,6 +5,7 @@ export (float) var fire_rate  # Deixa que cada torreta criada tenha uma taxa de 
 export (PackedScene) var Bullet  # Deixa empacotar um objeto, que será o tiro da torreta.
 var vis_color = Color(.867, .91, .247, 0.1)
 var laser_color = Color(1.0, .329, .298)
+onready var stats = $Stats
 
 var target
 var hit_pos
@@ -70,3 +71,11 @@ func _on_Alcance_body_exited(body):  # Um alvo saiu do "range".
 func _on_ShootTimer_timeout():  # "Fire rate" da torreta.
 	can_shoot = true
 
+
+func _on_HurtBox_area_entered(area):
+	stats.Health -= 1
+	
+
+
+func _on_Stats_no_health():
+	queue_free()

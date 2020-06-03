@@ -8,6 +8,7 @@ enum {
 }
 
 #Variaveis
+onready var stats = $Stats
 var moveDirection = Vector2(0,0)
 export (int) var MAX_SPEED = 250
 var moveAnt = Vector2.RIGHT
@@ -28,7 +29,7 @@ func _physics_process(delta):
 			estado_base(delta)
 
 		ROLL:
-			roll_state(delta)
+			roll_state()
 
 
 #Func para os estados
@@ -44,7 +45,7 @@ func estado_base(delta):
 	if Input.is_action_just_pressed("Roll"):
 		state = ROLL
 
-func roll_state(delta):
+func roll_state():
 	moveDirection += roll_vector * ROLL_SPEED
 	move()
 	state = MOVE
@@ -87,3 +88,11 @@ func movement_loop(delta):
 func move():
 	moveDirection = move_and_slide(moveDirection)
 
+
+
+func _on_HurtBox_area_entered(area):
+	stats.Health -= 1
+
+
+func _on_Stats_no_health():
+	queue_free()

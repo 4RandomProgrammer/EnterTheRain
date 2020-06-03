@@ -3,6 +3,8 @@ extends Area2D
 var speed = 700
 var velocity = Vector2()
 
+const DAMAGE = 1
+
 func start(pos, dir):
 	position = pos
 	rotation = dir
