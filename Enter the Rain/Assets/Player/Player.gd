@@ -15,7 +15,7 @@ var moveAnt = Vector2.RIGHT
 var posAnt = Vector2.RIGHT
 var state = MOVE
 var roll_vector = Vector2.DOWN
-
+var dano = 1
 #Constantes
 const SHOT = preload("res://Assets/Shot/Shot.tscn")
 const FRICTION = 25
@@ -40,6 +40,7 @@ func estado_base(delta):
 	if Input.is_action_just_pressed("Shoot"):
 		var shots = SHOT.instance()
 		shots.shotdirection(moveAnt)
+		shots.DAMAGE += 1
 		get_parent().add_child(shots)
 		shots.position = $Position2D.global_position
 	if Input.is_action_just_pressed("Roll"):

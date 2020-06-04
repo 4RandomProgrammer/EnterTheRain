@@ -97,7 +97,8 @@ func _on_Alcance_body_exited(body):
 
 
 func _on_HurtBox_area_entered(area):
-	stats.Health -= 1
+	var dano = area.DAMAGE
+	stats.Health -= dano
 
 
 func _on_Stats_no_health():
