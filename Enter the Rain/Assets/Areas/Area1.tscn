@@ -103,10 +103,11 @@ position = Vector2( 159.164, 450.285 )
 position = Vector2( -163.245, 345.761 )
 detect_area_x = 100
 detect_area_y = 100
-min_enemies = 1
+min_enemies = 3
 max_enemies = 3
 
 [node name="Item" parent="." instance=ExtResource( 7 )]
 position = Vector2( 262.363, 66.2979 )
 dano = 1
+velocidade = 100
 sprite = ExtResource( 8 )

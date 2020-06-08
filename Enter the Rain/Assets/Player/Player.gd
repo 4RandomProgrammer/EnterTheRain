@@ -40,7 +40,7 @@ func estado_base(delta):
 	if Input.is_action_just_pressed("Shoot"):
 		var shots = SHOT.instance()
 		shots.shotdirection(moveAnt)
-		shots.DAMAGE += 1
+		shots.DAMAGE += dano
 		get_parent().add_child(shots)
 		shots.position = $Position2D.global_position
 	if Input.is_action_just_pressed("Roll"):

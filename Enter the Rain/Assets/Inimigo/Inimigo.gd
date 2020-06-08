@@ -71,7 +71,8 @@ func aim():
 				state = PERSEGUINDO  # Estado atual: perseguindo o player.
 				break
 			else:  # Se o alvo não ver o player por causa da parede, voltar a sua posic. antiga.
-				state = VOLTANDO  # Para isso, usar o state voltando
+				if state != ANDANDO_ALEATORIO and state != PARADO:
+					state = pick_random_state([PARADO, ANDANDO_ALEATORIO])  # Para isso, usar o state voltando
 
 				
 func random_state_timer():  # Função que troca de estado após certo tempo.
