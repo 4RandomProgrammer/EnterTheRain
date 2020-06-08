@@ -80,7 +80,7 @@ smoothing_enabled = true
 [node name="ParedeTeste" type="TileMap" parent="."]
 tile_set = SubResource( 6 )
 format = 1
-tile_data = PoolIntArray( 131072, 0, 0, 262153, 0, 0 )
+tile_data = PoolIntArray( 196612, 0, 0, 196613, 0, 0, 262153, 0, 0, 393223, 0, 0 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 294.363, 318.921 )

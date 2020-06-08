@@ -18,9 +18,10 @@ var roll_vector = Vector2.DOWN
 
 #Constantes
 const SHOT = preload("res://Assets/Shot/Shot.tscn")
+const POWERUP1 = preload("res://Assets/PowerUps/Granada.tscn")
 const FRICTION = 25
 const DistCentro = 48
-const ROLL_SPEED = 4000
+const ROLL_SPEED = 450
 
 func _physics_process(delta):
 	#Maquina de estados
@@ -42,13 +43,21 @@ func estado_base(delta):
 		shots.shotdirection(moveAnt)
 		get_parent().add_child(shots)
 		shots.position = $Position2D.global_position
+	
 	if Input.is_action_just_pressed("Roll"):
 		state = ROLL
+	
+	if Input.is_action_just_pressed("ui_accept"):
+		var powerup1 = POWERUP1.instance()
+		powerup1.shotdir(moveAnt)
+		get_parent().add_child(powerup1)
+		powerup1.position = $Position2D.global_position
 
 func roll_state():
-	moveDirection += roll_vector * ROLL_SPEED
+	$AnimationPlayer.play("Dash")
+	moveDirection = roll_vector * ROLL_SPEED
+	$HurtBox/CollisionShape2D.call_deferred("set","disabled", true)
 	move()
-	state = MOVE
 #Fim das funções de estado
 
 func atualizatiro(pos):
@@ -96,3 +105,8 @@ func _on_HurtBox_area_entered(area):
 
 func _on_Stats_no_health():
 	queue_free()
+
+
+func _on_AnimationPlayer_animation_finished(Dash):
+	state = MOVE
+	$HurtBox/CollisionShape2D.call_deferred("set","disabled", false)
