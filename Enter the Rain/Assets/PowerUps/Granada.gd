@@ -1,4 +1,4 @@
-extends Area2D
+extends RigidBody2D
 
 onready var explosion = $Explosion/ExplosionArea
 var Movement  = Vector2()
@@ -26,7 +26,6 @@ func shotdir(direct):
 
 func _on_Granada_body_entered(body):
 	collided = 1
-	translate(Movement)
 	explosion.call_deferred("set","disabled", false)
 	$AnimationPlayer.play("Explosion")
 

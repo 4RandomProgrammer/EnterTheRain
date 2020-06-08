@@ -15,8 +15,9 @@ extents = Vector2( 32, 32 )
 extents = Vector2( 32, 32 )
 
 [node name="Torreta" type="KinematicBody2D"]
+position = Vector2( 2, 1 )
 collision_layer = 16
-collision_mask = 6
+collision_mask = 2
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -36,12 +37,12 @@ autostart = true
 
 [node name="HurtBox" parent="." instance=ExtResource( 3 )]
 collision_layer = 8
+collision_mask = 8
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 shape = SubResource( 2 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 5 )]
-collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]

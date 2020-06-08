@@ -52,7 +52,7 @@ func estado_base(delta):
 	if Input.is_action_just_pressed("Roll"):
 		state = ROLL
 	
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("PowerUp1"):
 		var powerup1 = POWERUP1.instance()
 		powerup1.shotdir(moveAnt)
 		get_parent().add_child(powerup1)

@@ -24,13 +24,12 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ) ]
 }
 
-[node name="Granada" type="Area2D"]
+[node name="Granada" type="RigidBody2D"]
 collision_layer = 0
-collision_mask = 9
+collision_mask = 17
+contacts_reported = 1
+contact_monitor = true
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.3, 0.3 )
