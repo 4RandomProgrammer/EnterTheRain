@@ -75,7 +75,8 @@ func _on_ShootTimer_timeout():  # "Fire rate" da torreta.
 
 
 func _on_HurtBox_area_entered(area):
-	stats.Health -= 1
+	var dano = area.DAMAGE
+	stats.Health -= dano
 	
 
 

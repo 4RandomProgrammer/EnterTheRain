@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Assets/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Torreta/Torreta.tscn" type="PackedScene" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://icon.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Inimigo/Inimigo.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Arena/Arena.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Itens/Itens.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Itens/espada.png" type="Texture" id=8]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -101,5 +103,11 @@ position = Vector2( 159.164, 450.285 )
 position = Vector2( -163.245, 345.761 )
 detect_area_x = 100
 detect_area_y = 100
-min_enemies = 1
+min_enemies = 3
 max_enemies = 3
+
+[node name="Item" parent="." instance=ExtResource( 7 )]
+position = Vector2( 262.363, 66.2979 )
+dano = 1
+velocidade = 100
+sprite = ExtResource( 8 )

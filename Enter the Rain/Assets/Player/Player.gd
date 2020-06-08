@@ -19,6 +19,7 @@ var roll_vector = Vector2.DOWN
 var state = MOVE
 var Can_PowerUp1 = true
 var can_fire = true
+var dano = 1
 
 #Constantes
 const SHOT = preload("res://Assets/Shot/Shot.tscn")
@@ -45,6 +46,7 @@ func estado_base(delta):
 	if Input.is_action_pressed("Shoot") and can_fire:
 		var shots = SHOT.instance()
 		shots.shotdirection(moveAnt)
+		shots.DAMAGE += dano
 		get_parent().add_child(shots)
 		shots.position = $Position2D.global_position
 		can_fire = false
