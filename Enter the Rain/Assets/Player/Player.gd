@@ -9,12 +9,14 @@ enum {
 
 #Variaveis
 onready var stats = $Stats
-var moveDirection = Vector2(0,0)
 export (int) var MAX_SPEED = 250
+export (float)var fire_rate = 0.5
+var moveDirection = Vector2(0,0)
 var moveAnt = Vector2.RIGHT
 var posAnt = Vector2.RIGHT
 var state = MOVE
 var roll_vector = Vector2.DOWN
+var can_fire = true
 
 #Constantes
 const SHOT = preload("res://Assets/Shot/Shot.tscn")
@@ -38,11 +40,14 @@ func estado_base(delta):
 	control_loop()
 	movement_loop(delta)
 	shot_dir()
-	if Input.is_action_just_pressed("Shoot"):
+	if Input.is_action_pressed("Shoot") and can_fire:
 		var shots = SHOT.instance()
 		shots.shotdirection(moveAnt)
 		get_parent().add_child(shots)
 		shots.position = $Position2D.global_position
+		can_fire = false
+		yield(get_tree().create_timer(fire_rate), "timeout")
+		can_fire = true
 	
 	if Input.is_action_just_pressed("Roll"):
 		state = ROLL
