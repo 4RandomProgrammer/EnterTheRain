@@ -11,11 +11,13 @@ enum {
 onready var stats = $Stats
 export (int) var MAX_SPEED = 250
 export (float)var fire_rate = 0.5
+export (float)var cooldownP1 = 2
 var moveDirection = Vector2(0,0)
 var moveAnt = Vector2.RIGHT
 var posAnt = Vector2.RIGHT
-var state = MOVE
 var roll_vector = Vector2.DOWN
+var state = MOVE
+var Can_PowerUp1 = true
 var can_fire = true
 
 #Constantes
@@ -52,11 +54,15 @@ func estado_base(delta):
 	if Input.is_action_just_pressed("Roll"):
 		state = ROLL
 	
-	if Input.is_action_just_pressed("PowerUp1"):
+	#Falta CoolDown
+	if Input.is_action_just_pressed("PowerUp1") and Can_PowerUp1:
 		var powerup1 = POWERUP1.instance()
 		powerup1.shotdir(moveAnt)
 		get_parent().add_child(powerup1)
 		powerup1.position = $Position2D.global_position
+		Can_PowerUp1 = false
+		yield(get_tree().create_timer(cooldownP1), "timeout")
+		Can_PowerUp1 = true
 
 func roll_state():
 	$AnimationPlayer.play("Dash")
