@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/Bau/Bau.gd" type="Script" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 71.6602
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 31.806, 31.8045 )
+
+[node name="Bau" type="KinematicBody2D"]
+collision_layer = 63
+collision_mask = 63
+script = ExtResource( 2 )
+
+[node name="Range_abrir" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Range_abrir"]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+[connection signal="body_entered" from="Range_abrir" to="." method="_on_Range_abrir_body_entered"]
+[connection signal="body_exited" from="Range_abrir" to="." method="_on_Range_abrir_body_exited"]

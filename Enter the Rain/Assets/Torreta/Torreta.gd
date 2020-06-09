@@ -79,6 +79,8 @@ func _on_HurtBox_area_entered(area):
 	stats.Health -= dano
 	
 
-
 func _on_Stats_no_health():
+	var rng = RandomNumberGenerator.new()
+	var din = get_parent().get_node("Sistema_Dinheiro")
+	din.aumenta_dinheiro(rng.randi_range(30, 60))
 	queue_free()
