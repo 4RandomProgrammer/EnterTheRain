@@ -12,13 +12,14 @@ func _ready():
 
 
 func _process(delta):
+	move_and_slide(Vector2.ZERO)
 	if player_no_range:
 		dinheiro = get_parent().get_parent().get_node("Sistema_Dinheiro").dinheiro
 		if Input.is_action_pressed("ui_select") and dinheiro >= dinheiro_necessario:
 			get_parent().get_parent().get_node("Sistema_Dinheiro").dinheiro -= dinheiro_necessario
 			var item = Item.instance()
 			item.position = global_position
-			get_parent().add_child(item)
+			get_parent().get_parent().add_child(item)
 			queue_free()
 
 

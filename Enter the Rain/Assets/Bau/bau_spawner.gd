@@ -4,7 +4,6 @@ export (int) var min_bau = 1
 export (int) var max_bau = 1
 export (int) var area_x = 100
 export (int) var area_y = 100
-var rect_area = Vector2(area_x, area_y)
 onready var rng = RandomNumberGenerator.new()
 onready var bau = Bau.instance()
 var random_x = 0
@@ -25,5 +24,5 @@ func _ready():
 
 
 func _draw():
-	var rect = Rect2(- rect_area.x, - rect_area.y, rect_area.x * 2, rect_area.y * 2)
+	var rect = Rect2(- area_x, - area_y, area_x * 2, area_y * 2)
 	draw_rect(rect, ColorN("Red"), false)

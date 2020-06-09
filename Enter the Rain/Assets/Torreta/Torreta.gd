@@ -20,6 +20,7 @@ func _ready():
 	$Sprite.texture = Sprite_torre
 
 func _physics_process(delta):  # Loop principal da torreta.
+	move_and_slide(Vector2.ZERO)
 	update()
 	if target:  # Se tem um alvo, então mire nele.
 		aim()
