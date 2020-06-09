@@ -1,9 +1,7 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Assets/Player/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Assets/Inimigo/Inimigo.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/tilesets Enter the Rain/ashlands_tileset.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Torreta/Torreta.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Bau/bau_spawner.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Sistema_Dinheiro.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Itens/Itens.tscn" type="PackedScene" id=7]
@@ -259,12 +257,6 @@ remote_path = NodePath("../../Camera2D")
 current = true
 process_mode = 0
 
-[node name="Inimigo" parent="." instance=ExtResource( 2 )]
-position = Vector2( 267.779, 355.13 )
-
-[node name="Torreta" parent="." instance=ExtResource( 4 )]
-position = Vector2( 517.511, 537.99 )
-
 [node name="Sistema_Dinheiro" parent="." instance=ExtResource( 6 )]
 
 [node name="Item" parent="." instance=ExtResource( 7 )]
@@ -281,7 +273,8 @@ max_bau = 10
 
 [node name="Arena" parent="." instance=ExtResource( 9 )]
 position = Vector2( 719.399, 146.816 )
-detect_area_x = 300
-detect_area_y = 300
-min_enemies = 5
-max_enemies = 5
+collision_mask = 0
+detect_area_x = 1000
+detect_area_y = 1000
+min_enemies = 100
+max_enemies = 100

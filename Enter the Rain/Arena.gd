@@ -8,7 +8,7 @@ onready var rect_area = Vector2(detect_area_x, detect_area_y)
 onready var Torreta = load("res://Assets/Torreta/Torreta.tscn")
 onready var Inimigo = load("res://Assets/Inimigo/Inimigo.tscn")
 var fix_pos = 32
-var spawn = true
+var spawn = false
 var enemies_list = []
 
 
@@ -27,12 +27,14 @@ func _ready():
 			var torre = Torreta.instance()
 			torre.position.x = random_x
 			torre.position.y = random_y
-			enemies_list.append(torre)
+			#enemies_list.append(torre)
+			get_parent().call_deferred("add_child",torre)
 		else:
 			var inimigo = Inimigo.instance()
 			inimigo.position.x = random_x
 			inimigo.position.y = random_y
-			enemies_list.append(inimigo)
+			#enemies_list.append(inimigo)
+			get_parent().call_deferred("add_child",inimigo)
 
 
 func _draw():  # Desenha o raio laser e o range da torre. (decidir se isso vai ficar ou não no jogo).
