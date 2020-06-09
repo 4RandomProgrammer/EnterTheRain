@@ -281,7 +281,7 @@ max_bau = 10
 
 [node name="Arena" parent="." instance=ExtResource( 9 )]
 position = Vector2( 719.399, 146.816 )
-detect_area_x = 100
-detect_area_y = 100
-min_enemies = 10
-max_enemies = 10
+detect_area_x = 300
+detect_area_y = 300
+min_enemies = 5
+max_enemies = 5

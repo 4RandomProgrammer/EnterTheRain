@@ -45,4 +45,5 @@ func _on_Arena_body_entered(body):
 	if spawn:
 		spawn = false
 		for enemy in enemies_list:
-			get_parent().add_child(enemy)
+			#get_parent().add_child(enemy)
+			get_parent().call_deferred("add_child",enemy)
