@@ -10,6 +10,7 @@ onready var Inimigo = load("res://Assets/Inimigo/Inimigo.tscn")
 var fix_pos = 32
 var spawn = false
 var enemies_list = []
+var enemy
 
 
 func _ready():
@@ -24,28 +25,15 @@ func _ready():
 		var random_x = rand.randf_range(global_position.x - detect_area_x, global_position.x + detect_area_x)
 		var random_y = rand.randf_range(global_position.y - detect_area_y, global_position.y + detect_area_y)
 		if tipo_inimigo == 0:
-			var torre = Torreta.instance()
-			torre.position.x = random_x
-			torre.position.y = random_y
-			#enemies_list.append(torre)
-			get_parent().call_deferred("add_child",torre)
+			enemy = Torreta.instance()
 		else:
-			var inimigo = Inimigo.instance()
-			inimigo.position.x = random_x
-			inimigo.position.y = random_y
-			#enemies_list.append(inimigo)
-			get_parent().call_deferred("add_child",inimigo)
+			enemy = Inimigo.instance()
+		enemy.position.x = random_x
+		enemy.position.y = random_y
+		#enemies_list.append(inimigo)
+		get_parent().call_deferred("add_child",enemy)
 
 
 func _draw():  # Desenha o raio laser e o range da torre. (decidir se isso vai ficar ou não no jogo).
 	var rect = Rect2(- rect_area.x, - rect_area.y, rect_area.x * 2, rect_area.y * 2)
 	draw_rect(rect, ColorN("Yellow"), false)  # "Range".
-
-
-
-func _on_Arena_body_entered(body):
-	if spawn:
-		spawn = false
-		for enemy in enemies_list:
-			#get_parent().add_child(enemy)
-			get_parent().call_deferred("add_child",enemy)

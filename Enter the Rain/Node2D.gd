@@ -1,9 +1,9 @@
 extends Node2D
 
 
-export (float) var dano = 1
-export (float) var velocidade = 50
-export (float) var atack_speed = 50
+export (float) var dano = 0
+export (float) var velocidade = 0
+export (float) var atack_speed = 0
 
 export (Resource) var sprite = load("res://Assets/Itens/espada.png")
 

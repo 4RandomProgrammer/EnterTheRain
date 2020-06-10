@@ -14,6 +14,7 @@ collision_mask = 33
 script = ExtResource( 2 )
 
 [node name="Range_abrir" type="Area2D" parent="."]
+collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Range_abrir"]
@@ -23,5 +24,14 @@ shape = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = -20.0
+margin_top = -50.0
+margin_right = 20.0
+margin_bottom = -36.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="body_entered" from="Range_abrir" to="." method="_on_Range_abrir_body_entered"]
 [connection signal="body_exited" from="Range_abrir" to="." method="_on_Range_abrir_body_exited"]
