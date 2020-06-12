@@ -14,9 +14,10 @@ func _ready():
 	print(lista_stats)
 	$Sprite.texture = sprite_bau
 	rng.randomize()
-	if dinheiro_necessario < 0:
+	if dinheiro_necessario < 0:  # Dinheiro para abrir bau é por padrão aleatório.
 		dinheiro_necessario = rng.randi_range(100, 500)
 	$Label.text = str(dinheiro_necessario)
+	# Carregar item selecionado aleatoriamente na cena "bau_spawner".
 	item = Item.instance()
 	item.sprite = lista_stats[0]
 	item.dano = lista_stats[1]
@@ -28,8 +29,10 @@ func _ready():
 func _process(delta):
 	move_and_slide(Vector2.ZERO)
 	if player_no_range:
+		# Toda vez que o player entrar no "range", verificar se ele quer abrir o bau e tem o dinheiro necessário.
 		dinheiro = get_parent().get_node("Sistema_Dinheiro").dinheiro
 		if Input.is_action_pressed("ui_select") and dinheiro >= dinheiro_necessario:
+			# Atualizar dinheiro atual, spawnar o item e desaparecer com o baú.
 			get_parent().get_node("Sistema_Dinheiro").dinheiro -= dinheiro_necessario
 			get_parent().add_child(item)
 			queue_free()

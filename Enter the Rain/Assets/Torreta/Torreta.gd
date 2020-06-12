@@ -3,7 +3,7 @@ extends KinematicBody2D
 export (int) var detect_radius = 250  # Deixa que cada torreta criada tenha um "range" único (selecionavel no inspector).
 export (float) var fire_rate = 1 # Deixa que cada torreta criada tenha uma taxa de tiro única.
 export (PackedScene) var Bullet =  load("res://Assets/Torreta/TurretBullet.tscn") # Deixa empacotar um objeto, que será o tiro da torreta.
-export (Resource) var Sprite_torre = load("res://icon2.png")
+export (Resource) var Sprite_torre
 var vis_color = Color(.867, .91, .247, 0.1)
 var laser_color = Color(1.0, .329, .298)
 onready var stats = $Stats
@@ -17,7 +17,8 @@ func _ready():
 	shape.radius = detect_radius  # Cria o "range" com o raio selecionado.
 	$Alcance/CollisionShape2D.shape = shape  # Coloca o "range" na torreta.
 	$ShootTimer.wait_time = fire_rate  # Define o tempo de demora para cada tiro sair.
-	$Sprite.texture = Sprite_torre
+	if Sprite_torre:
+		$Sprite.texture = Sprite_torre
 
 func _physics_process(delta):  # Loop principal da torreta.
 	move_and_slide(Vector2.ZERO)
@@ -81,6 +82,7 @@ func _on_HurtBox_area_entered(area):
 	
 
 func _on_Stats_no_health():
+	# Chamada quando a torreta morrer, player receberá dinheiro e a torreta sumirá.
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	var din = get_parent().get_node("Sistema_Dinheiro")
