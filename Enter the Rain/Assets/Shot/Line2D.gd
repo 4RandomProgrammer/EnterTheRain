@@ -6,7 +6,7 @@ onready var target = get_parent().get_parent()
 var point
 var stop = false
 
-func _process(delta):
+func _process(_delta):
 	if stop:
 		remove_point(0)
 

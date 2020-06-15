@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Assets/Inimigo/Inimigo.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Movimento_aletorio.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Engine/HurtBox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Engine/Stats.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Engine/Hitbox.tscn" type="PackedScene" id=5]
+[ext_resource path="res://icon.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1451.95, 133.409 )
@@ -22,6 +23,7 @@ script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.960928, 0.989137 )
+texture = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2( -0.0197921, 0.218094 )
@@ -50,7 +52,12 @@ shape = SubResource( 3 )
 
 [node name="Stats" parent="." instance=ExtResource( 4 )]
 MaxHealth = 3
+
+[node name="StunTimer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 5.0
 [connection signal="body_entered" from="Alcance" to="." method="_on_Alcance_body_entered"]
 [connection signal="body_exited" from="Alcance" to="." method="_on_Alcance_body_exited"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
+[connection signal="timeout" from="StunTimer" to="." method="_on_StunTimer_timeout"]

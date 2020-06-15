@@ -19,7 +19,7 @@ func _ready():
 	var rand = RandomNumberGenerator.new()
 	rand.randomize()
 	var repeticoes = rand.randi_range(min_enemies, max_enemies)  # Número de vezes que irá spawnar.
-	for i in range(repeticoes):
+	for _i in range(repeticoes):
 		var tipo_inimigo = rand.randi_range(0, 1)
 		var random_x = rand.randf_range(global_position.x - detect_area_x, global_position.x + detect_area_x)
 		var random_y = rand.randf_range(global_position.y - detect_area_y, global_position.y + detect_area_y)
@@ -41,7 +41,7 @@ func _draw():  # Desenha o raio laser e o range da torre. (decidir se isso vai f
 
 
 
-func _on_Arena_body_entered(body):
+func _on_Arena_body_entered(_body):
 	if spawn:
 		spawn = false
 		for enemy in enemies_list:

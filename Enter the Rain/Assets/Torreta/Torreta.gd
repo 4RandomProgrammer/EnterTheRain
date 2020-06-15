@@ -1,12 +1,17 @@
 extends KinematicBody2D
 
+enum{
+	NORMAL,
+	ESTUNADO
+}
+
 export (int) var detect_radius = 250  # Deixa que cada torreta criada tenha um "range" único (selecionavel no inspector).
 export (float) var fire_rate = 1 # Deixa que cada torreta criada tenha uma taxa de tiro única.
 export (PackedScene) var Bullet =  load("res://Assets/Torreta/TurretBullet.tscn") # Deixa empacotar um objeto, que será o tiro da torreta.
-export (Resource) var Sprite_torre = load("res://icon2.png")
+onready var stats = $Stats
 var vis_color = Color(.867, .91, .247, 0.1)
 var laser_color = Color(1.0, .329, .298)
-onready var stats = $Stats
+var estado = NORMAL
 
 var target
 var hit_pos
@@ -17,12 +22,16 @@ func _ready():
 	shape.radius = detect_radius  # Cria o "range" com o raio selecionado.
 	$Alcance/CollisionShape2D.shape = shape  # Coloca o "range" na torreta.
 	$ShootTimer.wait_time = fire_rate  # Define o tempo de demora para cada tiro sair.
-	$Sprite.texture = Sprite_torre
 
-func _physics_process(delta):  # Loop principal da torreta.
-	update()
-	if target:  # Se tem um alvo, então mire nele.
-		aim()
+func _physics_process(_delta):  # Loop principal da torreta.
+	match estado:
+		NORMAL:
+			update()
+			if target:  # Se tem um alvo, então mire nele.
+				aim()
+		ESTUNADO:
+			#PlaceHolder pq não sei oq colocar, pra não ficar vazio
+			print("estunei")
 
 func aim():
 	hit_pos = []  # Uma lista que terá todas as posições das bordas do player.
@@ -64,7 +73,6 @@ func _on_Alcance_body_entered(body):  # Um alvo entrou no "range".
 		return
 	target = body  # Se chegou até aqui, ainda não tinha alvo, e o novo alvo agora é quem entrou no range.
 
-
 func _on_Alcance_body_exited(body):  # Um alvo saiu do "range".
 	if body == target:  # Se quem saiu era o alvo:
 		target = null  # Definir que o alvo agora é ninguém.
@@ -73,12 +81,17 @@ func _on_Alcance_body_exited(body):  # Um alvo saiu do "range".
 func _on_ShootTimer_timeout():  # "Fire rate" da torreta.
 	can_shoot = true
 
-
 func _on_HurtBox_area_entered(area):
 	var dano = area.DAMAGE
 	stats.Health -= dano
-	
 
 
 func _on_Stats_no_health():
 	queue_free()
+
+func stun_state():
+	estado = ESTUNADO
+	$StunTimer.start(-1)
+	
+func _on_StunTimer_timeout():
+	estado = NORMAL

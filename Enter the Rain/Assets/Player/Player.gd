@@ -12,12 +12,14 @@ onready var stats = $Stats
 export (int) var MAX_SPEED = 250
 export (float)var fire_rate = 0.5
 export (float)var cooldownP1 = 2
+export (float)var cooldownP2 = 3
 var moveDirection = Vector2(0,0)
 var moveAnt = Vector2.RIGHT
 var posAnt = Vector2.RIGHT
 var roll_vector = Vector2.DOWN
 var state = MOVE
 var Can_PowerUp1 = true
+var Can_PowerUp2 = true
 var can_fire = true
 var dano = 1
 
@@ -27,6 +29,9 @@ const POWERUP1 = preload("res://Assets/PowerUps/Granada.tscn")
 const FRICTION = 25
 const DistCentro = 48
 const ROLL_SPEED = 450
+
+#Sinais
+signal healthchanged(health)
 
 func _physics_process(delta):
 	#Maquina de estados
@@ -56,7 +61,7 @@ func estado_base(delta):
 	if Input.is_action_just_pressed("Roll"):
 		state = ROLL
 	
-	#Falta CoolDown
+	
 	if Input.is_action_just_pressed("PowerUp1") and Can_PowerUp1:
 		var powerup1 = POWERUP1.instance()
 		powerup1.shotdir(moveAnt)
@@ -65,6 +70,16 @@ func estado_base(delta):
 		Can_PowerUp1 = false
 		yield(get_tree().create_timer(cooldownP1), "timeout")
 		Can_PowerUp1 = true
+	if Input.is_action_just_pressed("PowerUp2") and Can_PowerUp2:
+		var powerup2 = SHOT.instance()
+		powerup2.stunbullet = true
+		powerup2.shotdirection(moveAnt)
+		get_parent().add_child(powerup2)
+		powerup2.position = $Position2D.global_position
+		Can_PowerUp2 = false
+		yield(get_tree().create_timer(cooldownP2),"timeout")
+		Can_PowerUp2 = true
+		
 
 func roll_state():
 	$AnimationPlayer.play("Dash")
@@ -73,15 +88,18 @@ func roll_state():
 	move()
 #Fim das funções de estado
 
+#Atualiza posição que vai o tiro
 func atualizatiro(pos):
 	if pos != Vector2.ZERO:
 		posAnt = pos
 
+#Controle do movimento
 func control_loop():
 	#Passando o movimento direto com a anulação de tecla ja feita
 	moveDirection.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	moveDirection.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
-
+	
+#Func de direção do tiro, vê aonde o jogador esta andando e atualiza para onde ele vai atirar
 func shot_dir():
 	var Posicao = Vector2.ZERO
 	if Input.is_action_pressed("ui_left"):
@@ -112,14 +130,15 @@ func move():
 
 
 
-func _on_HurtBox_area_entered(area):
+func _on_HurtBox_area_entered(_area):
 	stats.Health -= 1
+	emit_signal("healthchanged",stats.Health)
 
 
 func _on_Stats_no_health():
 	queue_free()
 
 
-func _on_AnimationPlayer_animation_finished(Dash):
+func _on_AnimationPlayer_animation_finished(_Dash):
 	state = MOVE
 	$HurtBox/CollisionShape2D.call_deferred("set","disabled", false)

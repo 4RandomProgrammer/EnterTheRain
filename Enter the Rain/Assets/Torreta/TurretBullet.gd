@@ -13,7 +13,7 @@ func start(pos, dir):
 func _physics_process(delta):
 	position += velocity * delta
 
-func _on_TurretBullet_body_entered(body):
+func _on_TurretBullet_body_entered(_body):
 	queue_free()
 
 

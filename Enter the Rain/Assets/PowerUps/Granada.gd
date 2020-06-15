@@ -5,7 +5,7 @@ var Movement  = Vector2()
 var direction = Vector2.RIGHT
 var collided = 0
 
-const BULLETSPEED = 300
+const BULLETSPEED = 200
 
 func _ready():
 	$Timer.start()
@@ -25,12 +25,12 @@ func shotdir(direct):
 	direction = direct
 
 
-func _on_Granada_body_entered(body):
+func _on_Granada_body_entered(_body):
 	collided = 1
 	explosion.call_deferred("set","disabled", false)
 	$AnimationPlayer.play("Explosion")
 
-func _on_AnimationPlayer_animation_finished(Explosion):
+func _on_AnimationPlayer_animation_finished(_Explosion):
 	queue_free()
 
 
@@ -38,3 +38,4 @@ func _on_Timer_timeout():
 	collided = 1
 	explosion.call_deferred("set","disabled", false)
 	$AnimationPlayer.play("Explosion")
+	

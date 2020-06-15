@@ -1,20 +1,23 @@
 extends KinematicBody2D
 
 export (int) var detect_radius = 250  # Deixa que cada torreta criada tenha um "range" único (selecionavel no inspector).
-export (Resource) var sprite = load("res://icon.png")
 export (int) var velocidade = 100
 export (float) var arruma_posic = 4
 onready var wanderController = $Movimento_aletorio
 onready var stats = $Stats
 
+
 enum {
+	NORMAL
 	PARADO
 	ANDANDO_ALEATORIO
 	PERSEGUINDO
 	VOLTANDO
+	ESTUNADO
 }
 
 var state = PARADO
+var megaestado = NORMAL
 var velocity = Vector2.ZERO
 var target
 var hit_pos
@@ -24,12 +27,26 @@ func _ready():
 	var shape = CircleShape2D.new() 
 	shape.radius = detect_radius  # Cria o "range" com o raio selecionado.
 	$Alcance/CollisionShape2D.shape = shape  # Coloca o "range" na torreta.
-	$Sprite.texture = sprite
 
-func _physics_process(delta):  # Loop principal da torreta.
+func _physics_process(_delta):  # Loop principal da torreta.
 	update()
-	if target:  # Se tem um alvo, então mire nele.
-		aim()
+	match_megaestado()
+			
+			
+	velocity = move_and_slide(velocity)
+
+func match_megaestado():
+	match megaestado:
+		NORMAL:
+			estado_normal()
+		ESTUNADO:
+			velocity = Vector2.ZERO
+			
+		
+	
+func estado_normal():
+	if target and megaestado != ESTUNADO:  # Se tem um alvo, então mire nele.
+				aim()
 	match state:  # Dependendo do estado, escolher a movimentação do inimigo.
 		PARADO:  # Se o estado for "parado", a velocidade do inimigo deve ser 0.
 			velocity = Vector2.ZERO
@@ -41,7 +58,7 @@ func _physics_process(delta):  # Loop principal da torreta.
 			random_state_timer()  # Escolher estado aleatório depois depois que o tempo passar.
 			if global_position.distance_to(wanderController.target_position) <= arruma_posic:  # Se chegar muito próximo do objetivo, trocar de estado.
 				state = pick_random_state([PARADO, ANDANDO_ALEATORIO])
-				wanderController.start_wander_timer(rand_range(1, 3))	
+				wanderController.start_wander_timer(rand_range(1, 3))
 				
 		PERSEGUINDO:  # Se o estado for "perseguindo", andar até a posição atual do player.
 			var direcao = global_position.direction_to(target.global_position)
@@ -50,8 +67,6 @@ func _physics_process(delta):  # Loop principal da torreta.
 		VOLTANDO:  # Se o estado for "voltando", tentar voltar até a posic. inicial do inimigo.
 			var direcao = global_position.direction_to(wanderController.target_position)
 			velocity = velocity.move_toward(direcao * velocidade, velocidade)
-	velocity = move_and_slide(velocity)
-			
 
 func aim():
 	hit_pos = []  # Uma lista que terá todas as posições das bordas do player.
@@ -67,7 +82,6 @@ func aim():
 		if result:
 			hit_pos.append(result.position)
 			if result.collider.name == "Player":  # Fazer isso apenas se o alvo for "player":
-				rotation = (target.position - position).angle()  # Girar o inimigo na direção do alvo.
 				state = PERSEGUINDO  # Estado atual: perseguindo o player.
 				break
 			else:  # Se o alvo não ver o player por causa da parede, voltar a sua posic. antiga.
@@ -104,3 +118,12 @@ func _on_HurtBox_area_entered(area):
 
 func _on_Stats_no_health():
 	queue_free()
+	
+func stun_state():
+	megaestado = ESTUNADO
+	$StunTimer.start(-1)
+	
+
+
+func _on_StunTimer_timeout():
+	megaestado = NORMAL
