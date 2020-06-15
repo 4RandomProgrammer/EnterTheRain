@@ -9,6 +9,7 @@ enum {
 
 #Variaveis
 onready var stats = $Stats
+onready var InvunerabilityTimer = $InvunerabilityTimer
 export (int) var MAX_SPEED = 250
 export (float)var fire_rate = 0.5
 export (float)var cooldownP1 = 2
@@ -130,9 +131,12 @@ func move():
 
 
 
-func _on_HurtBox_area_entered(_area):
-	stats.Health -= 1
-	emit_signal("healthchanged",stats.Health)
+func _on_HurtBox_area_entered(area):
+	if InvunerabilityTimer.is_stopped():
+		InvunerabilityTimer.start()
+		$AnimationPlayer.play("Flash")
+		stats.Health -= area.DAMAGE
+		emit_signal("healthchanged",stats.Health)
 
 
 func _on_Stats_no_health():
