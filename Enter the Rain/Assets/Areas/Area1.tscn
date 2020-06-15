@@ -231,7 +231,7 @@ points = PoolVector2Array( 48, 32, 0, 32, 0, 0, 48, 0 )
 3/z_index = 0
 
 [sub_resource type="RectangleShape2D" id=8]
-extents = Vector2( 290.078, 197.864 )
+extents = Vector2( 461.883, 480.904 )
 
 [node name="Area1" type="Node2D"]
 
@@ -262,12 +262,12 @@ process_mode = 0
 position = Vector2( 0, 1 )
 
 [node name="bau_spawner" parent="." instance=ExtResource( 5 )]
-position = Vector2( 1625.26, 103.857 )
+position = Vector2( 1588.38, 659.32 )
 shape = SubResource( 8 )
-min_bau_spawns = 2
-max_bau_spawns = 2
+min_bau_spawns = 12
+max_bau_spawns = 12
 
 [node name="Arena" parent="." instance=ExtResource( 9 )]
 position = Vector2( 486.003, 936.407 )
-min_enemies = 4
-max_enemies = 10
+min_enemies = 100
+max_enemies = 100

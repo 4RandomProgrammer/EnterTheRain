@@ -29,7 +29,6 @@ func _ready():
 		bau.position.x = random_x_position
 		bau.position.y = random_y_position
 		bau.lista_stats = lista_de_itens[rng.randi_range(0, tamanho_lista - 1)]  # Escolher um item aleatório para o baú.
-		print(lista_de_itens[rng.randi_range(0, tamanho_lista - 1)])
 		get_parent().call_deferred("add_child",bau)
 
 
