@@ -49,6 +49,7 @@ func estado_base(delta):
 	control_loop()
 	movement_loop(delta)
 	shot_dir()
+	
 	if Input.is_action_pressed("Shoot") and can_fire:
 		var shots = SHOT.instance()
 		shots.shotdirection(moveAnt)
@@ -62,7 +63,6 @@ func estado_base(delta):
 	if Input.is_action_just_pressed("Roll"):
 		state = ROLL
 	
-	
 	if Input.is_action_just_pressed("PowerUp1") and Can_PowerUp1:
 		var powerup1 = POWERUP1.instance()
 		powerup1.shotdir(moveAnt)
@@ -71,16 +71,17 @@ func estado_base(delta):
 		Can_PowerUp1 = false
 		yield(get_tree().create_timer(cooldownP1), "timeout")
 		Can_PowerUp1 = true
+	
 	if Input.is_action_just_pressed("PowerUp2") and Can_PowerUp2:
-		var powerup2 = SHOT.instance()
-		powerup2.stunbullet = true
-		powerup2.shotdirection(moveAnt)
-		get_parent().add_child(powerup2)
-		powerup2.position = $Position2D.global_position
+		var i = 0
+		while i < 5:
+			shot()
+			yield(get_tree().create_timer(0.2),"timeout")
+			i += 1
+			
 		Can_PowerUp2 = false
 		yield(get_tree().create_timer(cooldownP2),"timeout")
 		Can_PowerUp2 = true
-		
 
 func roll_state():
 	$AnimationPlayer.play("Dash")
@@ -95,6 +96,14 @@ func atualizatiro(pos):
 		posAnt = pos
 
 #Controle do movimento
+func shot():
+	var powerup2 = SHOT.instance()
+	powerup2.stunbullet = true
+	powerup2.shotdirection(moveAnt)
+	get_parent().add_child(powerup2)
+	powerup2.position = $Position2D.global_position
+	
+
 func control_loop():
 	#Passando o movimento direto com a anulação de tecla ja feita
 	moveDirection.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
