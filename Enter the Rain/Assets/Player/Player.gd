@@ -129,8 +129,6 @@ func movement_loop(delta):
 func move():
 	moveDirection = move_and_slide(moveDirection)
 
-
-
 func _on_HurtBox_area_entered(area):
 	if InvunerabilityTimer.is_stopped():
 		InvunerabilityTimer.start()

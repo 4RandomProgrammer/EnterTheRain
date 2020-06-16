@@ -11,13 +11,13 @@ func _ready():
 	$Sweep.value = 0
 	$Sweep.texture_progress = texture_normal
 	$Timer.wait_time = cooldown
-	set_process(false)
 
 
 func _process(_delta):
 	on_key_pressed()
-	time_label.text = "%3.1f" % $Timer.time_left
-	$Sweep.value = int(($Timer.time_left / cooldown) * 100)
+	if not can_use:
+		time_label.text = "%3.1f" % $Timer.time_left
+		$Sweep.value = int(($Timer.time_left / cooldown) * 100)
 
 
 func on_key_pressed():
@@ -33,7 +33,6 @@ func _on_Timer_timeout():
 	$Sweep.value = 0
 	disabled = false
 	time_label.hide()
-	set_process(false)
 	can_use = true
 
 func _on_AbilityButton_pressed():

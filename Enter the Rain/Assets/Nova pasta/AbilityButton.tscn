@@ -8,7 +8,6 @@ anchor_right = 0.031
 anchor_bottom = 0.053
 margin_right = -31.744
 margin_bottom = -12.6
-toggle_mode = true
 action_mode = 0
 texture_normal = ExtResource( 1 )
 script = ExtResource( 2 )
@@ -52,5 +51,4 @@ clip_text = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="pressed" from="." to="." method="_on_AbilityButton_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
