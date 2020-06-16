@@ -21,7 +21,7 @@ func _process(_delta):
 
 
 func on_key_pressed():
-	if Input.is_action_just_pressed("PowerUp1") and can_use:
+	if Input.is_action_just_pressed("PowerUp2") and can_use:
 		disabled = true
 		set_process(true)
 		$Timer.start()
@@ -29,7 +29,7 @@ func on_key_pressed():
 		can_use = false
 
 func _on_Timer_timeout():
-	print("ability 1 ready")
+	print("ability 2 ready")
 	$Sweep.value = 0
 	disabled = false
 	time_label.hide()

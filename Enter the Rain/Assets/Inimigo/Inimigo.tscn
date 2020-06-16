@@ -56,6 +56,7 @@ MaxHealth = 3
 [node name="StunTimer" type="Timer" parent="."]
 process_mode = 0
 wait_time = 5.0
+one_shot = true
 [connection signal="body_entered" from="Alcance" to="." method="_on_Alcance_body_entered"]
 [connection signal="body_exited" from="Alcance" to="." method="_on_Alcance_body_exited"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
