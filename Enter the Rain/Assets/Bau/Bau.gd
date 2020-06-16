@@ -11,7 +11,6 @@ var item
 
 
 func _ready():
-	print(lista_stats)
 	$Sprite.texture = sprite_bau
 	rng.randomize()
 	if dinheiro_necessario < 0:  # Dinheiro para abrir bau é por padrão aleatório.

@@ -264,10 +264,10 @@ position = Vector2( 0, 1 )
 [node name="bau_spawner" parent="." instance=ExtResource( 5 )]
 position = Vector2( 1588.38, 659.32 )
 shape = SubResource( 8 )
-min_bau_spawns = 12
-max_bau_spawns = 12
+min_bau_spawns = 4
+max_bau_spawns = 4
 
 [node name="Arena" parent="." instance=ExtResource( 9 )]
 position = Vector2( 486.003, 936.407 )
-min_enemies = 100
-max_enemies = 100
+min_enemies = 10
+max_enemies = 10

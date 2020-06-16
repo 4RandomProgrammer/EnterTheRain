@@ -48,7 +48,7 @@ collision_layer = 4
 shape = SubResource( 2 )
 
 [node name="Stats" parent="." instance=ExtResource( 5 )]
-MaxHealth = 1000
+MaxHealth = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Dash = SubResource( 3 )
