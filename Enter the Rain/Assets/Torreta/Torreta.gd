@@ -2,15 +2,15 @@ extends KinematicBody2D
 
 export (int) var detect_radius = 250  # Deixa que cada torreta criada tenha um "range" único (selecionavel no inspector).
 export (float) var fire_rate = 1 # Deixa que cada torreta criada tenha uma taxa de tiro única.
-export (PackedScene) var Bullet =  load("res://Assets/Torreta/TurretBullet.tscn") # Deixa empacotar um objeto, que será o tiro da torreta.
+export (PackedScene) var Bullet =  load("res://Assets/Enemy_bullet/EnemyBullet.tscn") # Deixa empacotar um objeto, que será o tiro da torreta.
 export (Resource) var Sprite_torre
 var vis_color = Color(.867, .91, .247, 0.1)
 var laser_color = Color(1.0, .329, .298)
 onready var stats = $Stats
-
 var target
 var hit_pos
 var can_shoot = true
+
 
 func _ready():
 	var shape = CircleShape2D.new() 
@@ -20,11 +20,13 @@ func _ready():
 	if Sprite_torre:
 		$Sprite.texture = Sprite_torre
 
+
 func _physics_process(delta):  # Loop principal da torreta.
 	move_and_slide(Vector2.ZERO)
 	update()
 	if target:  # Se tem um alvo, então mire nele.
 		aim()
+
 
 func aim():
 	hit_pos = []  # Uma lista que terá todas as posições das bordas do player.
@@ -46,6 +48,7 @@ func aim():
 					shoot(pos)
 				break
 
+
 func shoot(pos):  # Função que atira no alvo quando possível.
 	var b = Bullet.instance()  # Cria o tiro.
 	var a = (pos - global_position).angle()  # Direção do tiro.
@@ -54,12 +57,14 @@ func shoot(pos):  # Função que atira no alvo quando possível.
 	can_shoot = false  # Após um tiro, deve-se dar um delay para o próximo tiro.
 	$ShootTimer.start()
 
+
 func _draw():  # Desenha o raio laser e o range da torre. (decidir se isso vai ficar ou não no jogo).
 	draw_circle(Vector2(), detect_radius, vis_color)  # "Range".
 	if target:
 		for hit in hit_pos:
 			draw_circle((hit - position).rotated(-rotation), 5, laser_color)  # Circulo no alvo atingido.
 			draw_line(Vector2(), (hit - position).rotated(-rotation), laser_color)  # Linha até o alvo.
+
 
 func _on_Alcance_body_entered(body):  # Um alvo entrou no "range".
 	if target:  # Se já tinha um alvo, então ignorar.
@@ -72,6 +77,7 @@ func _on_Alcance_body_exited(body):  # Um alvo saiu do "range".
 		target = null  # Definir que o alvo agora é ninguém.
 		$Sprite.self_modulate.r = 0.2  # Deixa a sprite com um tom de cor mais fraco.
 
+
 func _on_ShootTimer_timeout():  # "Fire rate" da torreta.
 	can_shoot = true
 
@@ -79,7 +85,7 @@ func _on_ShootTimer_timeout():  # "Fire rate" da torreta.
 func _on_HurtBox_area_entered(area):
 	var dano = area.DAMAGE
 	stats.Health -= dano
-	
+
 
 func _on_Stats_no_health():
 	# Chamada quando a torreta morrer, player receberá dinheiro e a torreta sumirá.
