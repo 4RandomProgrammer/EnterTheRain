@@ -25,21 +25,21 @@ func _ready():
 	item.global_position = global_position
 
 
-func _process(delta):
+func _process(_delta):
 	move_and_slide(Vector2.ZERO)
 	if player_no_range:
 		# Toda vez que o player entrar no "range", verificar se ele quer abrir o bau e tem o dinheiro necessário.
 		dinheiro = get_parent().get_node("Sistema_Dinheiro").dinheiro
 		if Input.is_action_pressed("ui_select") and dinheiro >= dinheiro_necessario:
 			# Atualizar dinheiro atual, spawnar o item e desaparecer com o baú.
-			get_parent().get_node("Sistema_Dinheiro").dinheiro -= dinheiro_necessario
+			dinheiro -= dinheiro_necessario
 			get_parent().add_child(item)
 			queue_free()
 
 
-func _on_Range_abrir_body_entered(body):
+func _on_Range_abrir_body_entered(_body):
 	player_no_range = true
 
 
-func _on_Range_abrir_body_exited(body):
+func _on_Range_abrir_body_exited(_body):
 	player_no_range = false

@@ -20,7 +20,7 @@ var quant_baus
 func _ready():
 	rng.randomize()
 	quant_baus = rng.randi_range(min_bau_spawns, max_bau_spawns)
-	for i in range(quant_baus):
+	for _i in range(quant_baus):
 		# Spawnar os baus com posições aleatórias no range dado.
 		bau = Bau.instance()
 		# Escolher posição aleatória para o bau (dentro do range).

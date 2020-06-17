@@ -9,7 +9,7 @@ export (Resource) var sprite = load("res://Assets/Itens/espada.png")
 
 func _ready():
 	$Item_sprite.texture = sprite
-	
+
 
 func _on_Area2D_body_entered(body):
 	# Atualizar os dados do player quando ele pegar um item.

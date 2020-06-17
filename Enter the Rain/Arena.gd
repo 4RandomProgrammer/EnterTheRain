@@ -13,7 +13,7 @@ func _ready():
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	var repeticoes = rng.randi_range(min_enemies, max_enemies)  # Número de vezes que irá spawnar.
-	for i in range(repeticoes):
+	for _i in range(repeticoes):
 		var tipo_inimigo = rng.randi_range(0, 1)
 		var random_x = rng.randf_range(global_position.x - tamanho_area_x, global_position.x + tamanho_area_x)
 		var random_y = rng.randf_range(global_position.y - tamanho_area_y, global_position.y + tamanho_area_y)
