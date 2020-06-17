@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 export (int) var detect_radius = 250  # Deixa que cada torreta criada tenha um "range" único (selecionavel no inspector).
+export (Resource) var sprite_inimigo
 export (int) var velocidade = 100
 export (float) var arruma_posic = 4
 onready var wanderController = $Movimento_aletorio
@@ -27,6 +28,8 @@ func _ready():
 	var shape = CircleShape2D.new() 
 	shape.radius = detect_radius  # Cria o "range" com o raio selecionado.
 	$Alcance/CollisionShape2D.shape = shape  # Coloca o "range" na torreta.
+	if sprite_inimigo:
+		$Sprite.texture = sprite_inimigo
 
 func _physics_process(_delta):  # Loop principal da torreta.
 	update()
@@ -117,6 +120,11 @@ func _on_HurtBox_area_entered(area):
 
 
 func _on_Stats_no_health():
+	# Chamada quando o inimigo morrer, player receberá dinheiro e o inimigo sumirá.
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	var din = get_parent().get_node("Sistema_Dinheiro")
+	din.aumenta_dinheiro(rng.randi_range(30,60))
 	queue_free()
 	
 func stun_state():

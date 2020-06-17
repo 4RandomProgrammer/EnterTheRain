@@ -9,6 +9,7 @@ export (int) var detect_radius = 250  # Deixa que cada torreta criada tenha um "
 export (float) var fire_rate = 1 # Deixa que cada torreta criada tenha uma taxa de tiro única.
 export (PackedScene) var Bullet =  load("res://Assets/Torreta/TurretBullet.tscn") # Deixa empacotar um objeto, que será o tiro da torreta.
 onready var stats = $Stats
+export (Resource) var Sprite_torre
 var vis_color = Color(.867, .91, .247, 0.1)
 var laser_color = Color(1.0, .329, .298)
 var estado = NORMAL
@@ -32,6 +33,7 @@ func _physics_process(_delta):  # Loop principal da torreta.
 		ESTUNADO:
 			#PlaceHolder pq não sei oq colocar, pra não ficar vazio
 			print("estunei")
+
 
 func aim():
 	hit_pos = []  # Uma lista que terá todas as posições das bordas do player.
@@ -85,8 +87,12 @@ func _on_HurtBox_area_entered(area):
 	var dano = area.DAMAGE
 	stats.Health -= dano
 
-
 func _on_Stats_no_health():
+	# Chamada quando a torreta morrer, player receberá dinheiro e a torreta sumirá.
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	var din = get_parent().get_node("Sistema_Dinheiro")
+	din.aumenta_dinheiro(rng.randi_range(30, 60))
 	queue_free()
 
 func stun_state():
