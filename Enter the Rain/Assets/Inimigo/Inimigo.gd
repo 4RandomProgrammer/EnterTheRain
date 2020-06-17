@@ -88,7 +88,7 @@ func aim():
 				if state != ANDANDO_ALEATORIO and state != PARADO:
 					state = pick_random_state([PARADO, ANDANDO_ALEATORIO])  # Para isso, usar o state voltando
 
-				
+
 func random_state_timer():  # Função que troca de estado após certo tempo.
 	if wanderController.get_time_left() == 0:
 		state = pick_random_state([PARADO, ANDANDO_ALEATORIO])
