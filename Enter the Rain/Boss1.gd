@@ -26,7 +26,6 @@ func _physics_process(delta):
 		aim()
 	match estado:
 		ANDANDO:
-			var space_state = get_world_2d().direct_space_state
 			var colisao = move_and_collide(velocidade * delta)
 			if colisao:
 				print('BATEU')

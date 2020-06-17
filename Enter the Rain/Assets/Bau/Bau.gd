@@ -25,7 +25,7 @@ func _ready():
 	item.global_position = global_position
 
 
-func _process(delta):
+func _process(_delta):
 	move_and_slide(Vector2.ZERO)
 	if player_no_range:
 		# Toda vez que o player entrar no "range", verificar se ele quer abrir o bau e tem o dinheiro necessário.
@@ -37,9 +37,9 @@ func _process(delta):
 			queue_free()
 
 
-func _on_Range_abrir_body_entered(body):
+func _on_Range_abrir_body_entered(_body):
 	player_no_range = true
 
 
-func _on_Range_abrir_body_exited(body):
+func _on_Range_abrir_body_exited(_body):
 	player_no_range = false

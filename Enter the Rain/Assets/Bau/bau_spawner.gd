@@ -1,9 +1,9 @@
-extends CollisionShape2D
+extends Area2D
 onready var Bau = preload("res://Assets/Bau/Bau.tscn")
 export (int) var min_bau_spawns = 1
 export (int) var max_bau_spawns = 1
-onready var tamanho_area_x = shape.extents.x
-onready var tamanho_area_y = shape.extents.y
+onready var tamanho_area_x = $CollisionShape2D.shape.extents.x
+onready var tamanho_area_y = $CollisionShape2D.shape.extents.y
 onready var rng = RandomNumberGenerator.new()
 onready var bau = Bau.instance()
 # Lista_de_itens possue todos itens existentes no jogo.
@@ -20,7 +20,7 @@ var quant_baus
 func _ready():
 	rng.randomize()
 	quant_baus = rng.randi_range(min_bau_spawns, max_bau_spawns)
-	for i in range(quant_baus):
+	for _i in range(quant_baus):
 		# Spawnar os baus com posições aleatórias no range dado.
 		bau = Bau.instance()
 		# Escolher posição aleatória para o bau (dentro do range).

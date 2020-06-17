@@ -27,7 +27,7 @@ func _ready():
 	if sprite_inimigo:
 		$Sprite.texture = sprite_inimigo
 
-func _physics_process(delta):  # Loop principal da torreta.
+func _physics_process(_delta):  # Loop principal da torreta.
 	update()
 	if target:  # Se tem um alvo, então mire nele.
 		aim()
