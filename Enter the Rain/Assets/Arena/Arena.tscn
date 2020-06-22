@@ -1,11 +1,10 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Arena.gd" type="Script" id=1]
 
-[node name="Arena" type="Area2D"]
-collision_layer = 0
-collision_mask = 2
-script = ExtResource( 1 )
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 476.898, 605.005 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-[connection signal="body_entered" from="." to="." method="_on_Arena_body_entered"]
+[node name="Arena" type="CollisionShape2D"]
+shape = SubResource( 1 )
+script = ExtResource( 1 )
