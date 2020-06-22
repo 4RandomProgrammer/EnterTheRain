@@ -20,7 +20,6 @@ func shotdirection(dir):
 func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
 
-
 func _on_Shot_body_entered(body):
 	if body.has_method("stun_state") and stunbullet:
 		body.stun_state()
