@@ -13,10 +13,10 @@ export (Resource) var Sprite_torre
 var vis_color = Color(.867, .91, .247, 0.1)
 var laser_color = Color(1.0, .329, .298)
 var estado = NORMAL
+
 var target
 var hit_pos
 var can_shoot = true
-
 
 func _ready():
 	var shape = CircleShape2D.new() 
@@ -55,7 +55,6 @@ func aim():
 					shoot(pos)
 				break
 
-
 func shoot(pos):  # Função que atira no alvo quando possível.
 	var b = Bullet.instance()  # Cria o tiro.
 	var a = (pos - global_position).angle()  # Direção do tiro.
@@ -64,14 +63,12 @@ func shoot(pos):  # Função que atira no alvo quando possível.
 	can_shoot = false  # Após um tiro, deve-se dar um delay para o próximo tiro.
 	$ShootTimer.start()
 
-
 func _draw():  # Desenha o raio laser e o range da torre. (decidir se isso vai ficar ou não no jogo).
 	draw_circle(Vector2(), detect_radius, vis_color)  # "Range".
 	if target:
 		for hit in hit_pos:
 			draw_circle((hit - position).rotated(-rotation), 5, laser_color)  # Circulo no alvo atingido.
 			draw_line(Vector2(), (hit - position).rotated(-rotation), laser_color)  # Linha até o alvo.
-
 
 func _on_Alcance_body_entered(body):  # Um alvo entrou no "range".
 	if target:  # Se já tinha um alvo, então ignorar.
@@ -82,7 +79,6 @@ func _on_Alcance_body_exited(body):  # Um alvo saiu do "range".
 	if body == target:  # Se quem saiu era o alvo:
 		target = null  # Definir que o alvo agora é ninguém.
 		$Sprite.self_modulate.r = 0.2  # Deixa a sprite com um tom de cor mais fraco.
-
 
 func _on_ShootTimer_timeout():  # "Fire rate" da torreta.
 	can_shoot = true

@@ -11,14 +11,14 @@
 extents = Vector2( 1451.95, 133.409 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 29.2334, 29.4693 )
+extents = Vector2( 28.5748, 28.965 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 29.2334, 29.6953 )
+extents = Vector2( 29.1436, 27.8274 )
 
 [node name="Inimigo" type="KinematicBody2D"]
 collision_layer = 16
-collision_mask = 19
+collision_mask = 50
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -41,22 +41,24 @@ collision_mask = 2
 [node name="HurtBox" parent="." instance=ExtResource( 3 )]
 collision_layer = 8
 
-[node name="CollisionShape2D" parent="HurtBox" index="0"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource( 2 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 5 )]
 collision_mask = 4
 
-[node name="CollisionShape2D" parent="Hitbox" index="0"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource( 3 )
 
 [node name="Stats" parent="." instance=ExtResource( 4 )]
 MaxHealth = 3
+
+[node name="StunTimer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 5.0
+one_shot = true
 [connection signal="body_entered" from="Alcance" to="." method="_on_Alcance_body_entered"]
 [connection signal="body_exited" from="Alcance" to="." method="_on_Alcance_body_exited"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
-
-[editable path="HurtBox"]
-
-[editable path="Hitbox"]
+[connection signal="timeout" from="StunTimer" to="." method="_on_StunTimer_timeout"]
