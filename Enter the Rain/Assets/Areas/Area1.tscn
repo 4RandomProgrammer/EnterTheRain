@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Assets/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Inimigo/Inimigo.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Engine/Restart.gd" type="Script" id=9]
 [ext_resource path="res://Assets/Sistema_Dinheiro.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Assets/Bau/bau_spawner.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Assets/Boss/Boss1.tscn" type="PackedScene" id=12]
 
 [sub_resource type="TileSet" id=1]
 0/name = "ashlands_tileset.png 0"
@@ -236,6 +237,10 @@ points = PoolVector2Array( 48, 32, 0, 32, 0, 0, 48, 0 )
 } ]
 3/z_index = 0
 
+[sub_resource type="RectangleShape2D" id=8]
+
+[sub_resource type="RectangleShape2D" id=9]
+
 [node name="Area1" type="Node2D"]
 script = ExtResource( 9 )
 
@@ -330,6 +335,14 @@ position = Vector2( 649.606, 96.0768 )
 min_enemies = 4
 max_enemies = 4
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arena"]
+shape = SubResource( 8 )
+
 [node name="bau_spawner" parent="." instance=ExtResource( 11 )]
 position = Vector2( 1706.12, 695.097 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bau_spawner"]
+shape = SubResource( 9 )
+
+[node name="Boss1" parent="." instance=ExtResource( 12 )]
 [connection signal="healthchanged" from="Player" to="Camera2D/CanvasLayer/HealthBar" method="_on_Player_healthchanged"]

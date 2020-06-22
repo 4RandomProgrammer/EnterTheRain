@@ -1,11 +1,11 @@
-extends CollisionShape2D
+extends Area2D
 
 export (int) var min_enemies
 export (int) var max_enemies
 onready var Torreta = load("res://Assets/Torreta/Torreta.tscn")
 onready var Inimigo = load("res://Assets/Inimigo/Inimigo.tscn")
-onready var tamanho_area_x = shape.extents.x
-onready var tamanho_area_y = shape.extents.y
+onready var tamanho_area_x = $CollisionShape2D.shape.extents.x
+onready var tamanho_area_y = $CollisionShape2D.shape.extents.y
 var enemy
 
 

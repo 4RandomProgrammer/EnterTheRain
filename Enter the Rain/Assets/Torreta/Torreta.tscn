@@ -18,7 +18,7 @@ extents = Vector2( 32, 32 )
 [node name="Torreta" type="KinematicBody2D"]
 position = Vector2( 2, 1 )
 collision_layer = 16
-collision_mask = 50
+collision_mask = 19
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -51,17 +51,11 @@ shape = SubResource( 3 )
 
 [node name="Stats" parent="." instance=ExtResource( 4 )]
 MaxHealth = 2
-
-[node name="StunTimer" type="Timer" parent="."]
-process_mode = 0
-wait_time = 5.0
-one_shot = true
 [connection signal="body_entered" from="Alcance" to="." method="_on_Alcance_body_entered"]
 [connection signal="body_exited" from="Alcance" to="." method="_on_Alcance_body_exited"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
-[connection signal="timeout" from="StunTimer" to="." method="_on_StunTimer_timeout"]
 
 [editable path="HurtBox"]
 

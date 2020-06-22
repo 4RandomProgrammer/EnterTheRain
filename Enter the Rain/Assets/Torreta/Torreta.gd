@@ -1,38 +1,31 @@
 extends KinematicBody2D
 
-enum{
-	NORMAL,
-	ESTUNADO
-}
-
 export (int) var detect_radius = 250  # Deixa que cada torreta criada tenha um "range" único (selecionavel no inspector).
 export (float) var fire_rate = 1 # Deixa que cada torreta criada tenha uma taxa de tiro única.
-export (PackedScene) var Bullet =  load("res://Assets/Torreta/TurretBullet.tscn") # Deixa empacotar um objeto, que será o tiro da torreta.
-onready var stats = $Stats
+export (PackedScene) var Bullet =  load("res://Assets/Enemy_bullet/EnemyBullet.tscn") # Deixa empacotar um objeto, que será o tiro da torreta.
 export (Resource) var Sprite_torre
 var vis_color = Color(.867, .91, .247, 0.1)
 var laser_color = Color(1.0, .329, .298)
-var estado = NORMAL
-
+onready var stats = $Stats
 var target
 var hit_pos
 var can_shoot = true
+
 
 func _ready():
 	var shape = CircleShape2D.new() 
 	shape.radius = detect_radius  # Cria o "range" com o raio selecionado.
 	$Alcance/CollisionShape2D.shape = shape  # Coloca o "range" na torreta.
 	$ShootTimer.wait_time = fire_rate  # Define o tempo de demora para cada tiro sair.
+	if Sprite_torre:
+		$Sprite.texture = Sprite_torre
+
 
 func _physics_process(_delta):  # Loop principal da torreta.
-	match estado:
-		NORMAL:
-			update()
-			if target:  # Se tem um alvo, então mire nele.
-				aim()
-		ESTUNADO:
-			#PlaceHolder pq não sei oq colocar, pra não ficar vazio
-			print("estunei")
+	move_and_slide(Vector2.ZERO)
+	update()
+	if target:  # Se tem um alvo, então mire nele.
+		aim()
 
 
 func aim():
@@ -55,6 +48,7 @@ func aim():
 					shoot(pos)
 				break
 
+
 func shoot(pos):  # Função que atira no alvo quando possível.
 	var b = Bullet.instance()  # Cria o tiro.
 	var a = (pos - global_position).angle()  # Direção do tiro.
@@ -63,6 +57,7 @@ func shoot(pos):  # Função que atira no alvo quando possível.
 	can_shoot = false  # Após um tiro, deve-se dar um delay para o próximo tiro.
 	$ShootTimer.start()
 
+
 func _draw():  # Desenha o raio laser e o range da torre. (decidir se isso vai ficar ou não no jogo).
 	draw_circle(Vector2(), detect_radius, vis_color)  # "Range".
 	if target:
@@ -70,22 +65,27 @@ func _draw():  # Desenha o raio laser e o range da torre. (decidir se isso vai f
 			draw_circle((hit - position).rotated(-rotation), 5, laser_color)  # Circulo no alvo atingido.
 			draw_line(Vector2(), (hit - position).rotated(-rotation), laser_color)  # Linha até o alvo.
 
+
 func _on_Alcance_body_entered(body):  # Um alvo entrou no "range".
 	if target:  # Se já tinha um alvo, então ignorar.
 		return
 	target = body  # Se chegou até aqui, ainda não tinha alvo, e o novo alvo agora é quem entrou no range.
+
 
 func _on_Alcance_body_exited(body):  # Um alvo saiu do "range".
 	if body == target:  # Se quem saiu era o alvo:
 		target = null  # Definir que o alvo agora é ninguém.
 		$Sprite.self_modulate.r = 0.2  # Deixa a sprite com um tom de cor mais fraco.
 
+
 func _on_ShootTimer_timeout():  # "Fire rate" da torreta.
 	can_shoot = true
+
 
 func _on_HurtBox_area_entered(area):
 	var dano = area.DAMAGE
 	stats.Health -= dano
+
 
 func _on_Stats_no_health():
 	# Chamada quando a torreta morrer, player receberá dinheiro e a torreta sumirá.
@@ -94,10 +94,3 @@ func _on_Stats_no_health():
 	var din = get_parent().get_node("Sistema_Dinheiro")
 	din.aumenta_dinheiro(rng.randi_range(30, 60))
 	queue_free()
-
-func stun_state():
-	estado = ESTUNADO
-	$StunTimer.start(-1)
-	
-func _on_StunTimer_timeout():
-	estado = NORMAL

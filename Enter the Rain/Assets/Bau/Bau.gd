@@ -32,7 +32,7 @@ func _process(_delta):
 		dinheiro = get_parent().get_node("Sistema_Dinheiro").dinheiro
 		if Input.is_action_pressed("ui_select") and dinheiro >= dinheiro_necessario:
 			# Atualizar dinheiro atual, spawnar o item e desaparecer com o baú.
-			dinheiro -= dinheiro_necessario
+			get_parent().get_node("Sistema_Dinheiro").dinheiro -= dinheiro_necessario
 			get_parent().add_child(item)
 			queue_free()
 
