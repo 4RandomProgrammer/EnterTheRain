@@ -26,6 +26,7 @@ func _ready():
 	$Alcance/CollisionShape2D.shape = shape  # Coloca o "range" na torreta.
 	$Sprite.texture = sprite
 
+# warning-ignore:unused_argument
 func _physics_process(delta):  # Loop principal da torreta.
 	update()
 	if target:  # Se tem um alvo, então mire nele.

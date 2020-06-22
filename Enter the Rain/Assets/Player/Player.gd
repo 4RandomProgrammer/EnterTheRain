@@ -9,7 +9,7 @@ enum {
 
 #Variaveis
 onready var stats = $Stats
-export (int) var MAX_SPEED = 250
+export (int) var MAX_SPEED = 125
 export (float)var fire_rate = 0.5
 export (float)var cooldownP1 = 2
 var moveDirection = Vector2(0,0)
