@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Enter the Rain"
-run/main_scene="res://Assets/Areas/Area1.tscn"
+run/main_scene="res://StartMenu/StartMenu.tscn"
 config/icon="res://icon.png"
 
 [display]

@@ -283,9 +283,8 @@ __meta__ = {
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Camera2D/CanvasLayer/Control"]
 margin_top = 32.0
-margin_right = 68.0
+margin_right = 80.0
 margin_bottom = 64.0
-alignment = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -301,6 +300,22 @@ margin_left = 36.0
 margin_right = 68.0
 margin_bottom = 32.0
 cooldown = 4.0
+
+[node name="DinheiroCounter" type="MarginContainer" parent="Camera2D/CanvasLayer/Control/HBoxContainer"]
+margin_left = 72.0
+margin_right = 80.0
+margin_bottom = 32.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Dinheiro" type="Label" parent="Camera2D/CanvasLayer/Control/HBoxContainer/DinheiroCounter"]
+modulate = Color( 0.933333, 0.0196078, 0.145098, 1 )
+margin_top = 9.0
+margin_right = 8.0
+margin_bottom = 23.0
+text = "0"
+uppercase = true
 
 [node name="Sistema_Dinheiro" parent="." instance=ExtResource( 10 )]
 

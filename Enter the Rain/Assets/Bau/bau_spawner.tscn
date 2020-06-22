@@ -3,7 +3,7 @@
 [ext_resource path="res://Assets/Bau/bau_spawner.gd" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 100, 100 )
+extents = Vector2( 362.731, 365.073 )
 
 [node name="bau_spawner" type="CollisionShape2D"]
 shape = SubResource( 1 )

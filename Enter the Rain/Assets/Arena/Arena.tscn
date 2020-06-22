@@ -3,7 +3,7 @@
 [ext_resource path="res://Arena.gd" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 476.898, 605.005 )
+extents = Vector2( 476.898, 454.084 )
 
 [node name="Arena" type="CollisionShape2D"]
 shape = SubResource( 1 )
