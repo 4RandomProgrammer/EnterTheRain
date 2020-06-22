@@ -10,10 +10,17 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1451.95, 133.409 )
 
+<<<<<<< HEAD
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 28.5748, 28.965 )
 
 [sub_resource type="RectangleShape2D" id=3]
+=======
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 28.5748, 28.965 )
+
+[sub_resource type="RectangleShape2D" id=4]
+>>>>>>> parent of d63627f... Revert "Merge branch 'master' into PowerUp2-and-Ui"
 extents = Vector2( 29.1436, 27.8274 )
 
 [node name="Inimigo" type="KinematicBody2D"]
@@ -42,13 +49,21 @@ collision_mask = 2
 collision_layer = 8
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtBox"]
+<<<<<<< HEAD
 shape = SubResource( 2 )
+=======
+shape = SubResource( 3 )
+>>>>>>> parent of d63627f... Revert "Merge branch 'master' into PowerUp2-and-Ui"
 
 [node name="Hitbox" parent="." instance=ExtResource( 5 )]
 collision_mask = 4
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
+<<<<<<< HEAD
 shape = SubResource( 3 )
+=======
+shape = SubResource( 4 )
+>>>>>>> parent of d63627f... Revert "Merge branch 'master' into PowerUp2-and-Ui"
 
 [node name="Stats" parent="." instance=ExtResource( 4 )]
 MaxHealth = 3
@@ -61,4 +76,7 @@ one_shot = true
 [connection signal="body_exited" from="Alcance" to="." method="_on_Alcance_body_exited"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
+<<<<<<< HEAD
 [connection signal="timeout" from="StunTimer" to="." method="_on_StunTimer_timeout"]
+=======
+>>>>>>> parent of d63627f... Revert "Merge branch 'master' into PowerUp2-and-Ui"
