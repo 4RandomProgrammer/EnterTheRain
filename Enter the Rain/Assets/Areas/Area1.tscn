@@ -232,13 +232,13 @@ points = PoolVector2Array( 48, 32, 0, 32, 0, 0, 48, 0 )
 } ]
 3/z_index = 0
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 99.2109, 85.1243 )
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 89.377, 96.0972 )
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 78.7396, 59.836 )
 
 [node name="Area1" type="Node2D"]
@@ -272,7 +272,7 @@ position = Vector2( -78.0211, 0 )
 position = Vector2( 486.003, 936.407 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Arena"]
-shape = SubResource( 10 )
+shape = SubResource( 8 )
 
 [node name="Boss1" parent="." instance=ExtResource( 2 )]
 position = Vector2( 692.677, 0 )
@@ -288,13 +288,13 @@ min_bau_spawns = 10
 max_bau_spawns = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bau_spawner"]
-shape = SubResource( 8 )
+shape = SubResource( 9 )
 
 [node name="Bau_spawner2" parent="." instance=ExtResource( 5 )]
 position = Vector2( -538.912, 492.387 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bau_spawner2"]
-shape = SubResource( 9 )
+shape = SubResource( 10 )
 
 [editable path="Bau_spawner"]
 

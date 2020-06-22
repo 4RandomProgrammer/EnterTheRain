@@ -7,6 +7,7 @@ onready var timer_parar = $Timer_parar
 onready var timer_andar = $Timer_andar
 onready var enemy_bullet = load("res://Assets/Enemy_bullet/EnemyBullet.tscn")
 onready var stats = $Stats
+onready var rng = RandomNumberGenerator.new()
 var movimento = Vector2.ZERO
 enum {
 	PARADO
@@ -18,7 +19,8 @@ var can_shoot = true
 
 
 func _ready():
-	velocidade = direcoes[0]
+	rng.randomize()
+	velocidade = direcoes[rng.randi_range(0, 3)]
 
 
 func _physics_process(delta):
@@ -29,12 +31,12 @@ func _physics_process(delta):
 			var colisao = move_and_collide(velocidade * delta)
 			if colisao:
 				print('BATEU')
-				velocidade = velocidade.bounce(colisao.normal)
+				velocidade = velocidade.bounce(colisao.normal)  # Toda vez que bater em algo, rebater.
 		PARADO:
 			pass
 
 
-func aim():
+func aim():  # Mirar no player se tiver no range.
 	var space_state = get_world_2d().direct_space_state
 	var target_extents = target.get_node('CollisionShape2D').shape.extents - Vector2(5, 5)
 	var nw = target.position - target_extents
@@ -45,14 +47,14 @@ func aim():
 		var result = space_state.intersect_ray(position,
 				pos, [self], collision_mask)
 		if result:
-			if result.collider.name == "Player":  
+			if result.collider.name == "Player":  # Conseguiu mirar no player
 				rotation = (target.position - position).angle()
 				if can_shoot:
 					shoot(pos)
 				break
 
 
-func shoot(pos):
+func shoot(pos):  # Atirar no player.
 	var bullet = enemy_bullet.instance()
 	var dir = (pos - global_position).angle() 
 	bullet.start(global_position, dir + rand_range(-0.05, 0.05))
@@ -61,16 +63,17 @@ func shoot(pos):
 	$Bullet_timer.start()
 
 
-func _on_Timer_parar_timeout():
-	print('Hora de parar')
-	timer_andar.start(5)
-	estado = PARADO
-
-
-func _on_Timer_andar_timeout():
+func _on_Timer_parar_timeout():  # Começar a andar novamente.
 	print('Hora de andar')
+	velocidade = direcoes[rng.randi_range(0, 3)]
 	timer_andar.start(10)
 	estado = ANDANDO
+
+
+func _on_Timer_andar_timeout():  # Parar por 5s.
+	print('Hora de parar')
+	timer_parar.start(5)
+	estado = PARADO
 
 func _on_Alcance_body_entered(body):
 	if target:

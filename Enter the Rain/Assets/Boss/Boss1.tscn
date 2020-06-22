@@ -30,10 +30,13 @@ texture = ExtResource( 2 )
 shape = SubResource( 1 )
 
 [node name="Timer_parar" type="Timer" parent="."]
-wait_time = 10.0
-autostart = true
+wait_time = 5.0
+one_shot = true
 
 [node name="Timer_andar" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
 
 [node name="HurtBox" parent="." instance=ExtResource( 4 )]
 collision_layer = 8
