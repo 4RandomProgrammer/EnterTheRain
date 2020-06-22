@@ -1,5 +1,10 @@
 extends KinematicBody2D
 
+enum {
+	NORMAL,
+	ESTUNADO
+}
+
 export (int) var detect_radius = 250  # Deixa que cada torreta criada tenha um "range" único (selecionavel no inspector).
 export (float) var fire_rate = 1 # Deixa que cada torreta criada tenha uma taxa de tiro única.
 export (PackedScene) var Bullet =  load("res://Assets/Enemy_bullet/EnemyBullet.tscn") # Deixa empacotar um objeto, que será o tiro da torreta.
@@ -10,6 +15,7 @@ onready var stats = $Stats
 var target
 var hit_pos
 var can_shoot = true
+var state = NORMAL
 
 
 func _ready():
@@ -23,9 +29,14 @@ func _ready():
 
 func _physics_process(_delta):  # Loop principal da torreta.
 	move_and_slide(Vector2.ZERO)
-	update()
-	if target:  # Se tem um alvo, então mire nele.
-		aim()
+	
+	match state:
+		NORMAL:
+			update()
+			if target:  # Se tem um alvo, então mire nele.
+				aim()
+		ESTUNADO:
+			print("estunei")
 
 
 func aim():
@@ -94,3 +105,12 @@ func _on_Stats_no_health():
 	var din = get_parent().get_node("Sistema_Dinheiro")
 	din.aumenta_dinheiro(rng.randi_range(30, 60))
 	queue_free()
+
+func stun_state():
+	state = ESTUNADO
+	$StunTimer.start(-1)
+	
+
+
+func _on_StunTimer_timeout():
+	state = NORMAL
