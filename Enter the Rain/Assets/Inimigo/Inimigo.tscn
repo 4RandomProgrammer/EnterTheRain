@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Assets/Inimigo/Inimigo.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Movimento_aletorio.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Engine/Stats.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Engine/Hitbox.tscn" type="PackedScene" id=5]
 [ext_resource path="res://icon.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Aim.tscn" type="PackedScene" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1451.95, 133.409 )
@@ -15,6 +16,9 @@ extents = Vector2( 28.5748, 28.965 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 29.1436, 27.8274 )
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 250.0
 
 [node name="Inimigo" type="KinematicBody2D"]
 collision_layer = 16
@@ -31,12 +35,15 @@ shape = SubResource( 1 )
 
 [node name="Alcance" type="Area2D" parent="."]
 scale = Vector2( 0.975244, 1.00558 )
-collision_layer = 4
+collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Alcance"]
 
 [node name="Movimento_aletorio" parent="." instance=ExtResource( 2 )]
+
+[node name="Timer" parent="Movimento_aletorio" index="0"]
+wait_time = 2.0
 
 [node name="HurtBox" parent="." instance=ExtResource( 3 )]
 collision_layer = 8
@@ -57,8 +64,17 @@ MaxHealth = 3
 process_mode = 0
 wait_time = 5.0
 one_shot = true
+
+[node name="Alcance2" parent="." instance=ExtResource( 7 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Alcance2"]
+shape = SubResource( 4 )
 [connection signal="body_entered" from="Alcance" to="." method="_on_Alcance_body_entered"]
 [connection signal="body_exited" from="Alcance" to="." method="_on_Alcance_body_exited"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="timeout" from="StunTimer" to="." method="_on_StunTimer_timeout"]
+
+[editable path="Movimento_aletorio"]
+
+[editable path="Alcance2"]

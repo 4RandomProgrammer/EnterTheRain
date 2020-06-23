@@ -5,6 +5,7 @@ export (Resource) var sprite_inimigo
 export (int) var velocidade = 100
 export (float) var arruma_posic = 4
 onready var wanderController = $Movimento_aletorio
+onready var alcance = $Alcance2
 onready var stats = $Stats
 
 
@@ -13,7 +14,6 @@ enum {
 	PARADO
 	ANDANDO_ALEATORIO
 	PERSEGUINDO
-	VOLTANDO
 	ESTUNADO
 }
 
@@ -48,8 +48,10 @@ func match_megaestado():
 		
 	
 func estado_normal():
-	if target and megaestado != ESTUNADO:  # Se tem um alvo, então mire nele.
-				aim()
+	if megaestado != ESTUNADO and alcance.target:  # Se tem um alvo, então mire nele.
+		aim()
+	else:
+		state = pick_random_state([PARADO, ANDANDO_ALEATORIO])
 	match state:  # Dependendo do estado, escolher a movimentação do inimigo.
 		PARADO:  # Se o estado for "parado", a velocidade do inimigo deve ser 0.
 			velocity = Vector2.ZERO
@@ -64,33 +66,17 @@ func estado_normal():
 				wanderController.start_wander_timer(rand_range(1, 3))
 				
 		PERSEGUINDO:  # Se o estado for "perseguindo", andar até a posição atual do player.
-			var direcao = global_position.direction_to(target.global_position)
+			var direcao = global_position.direction_to(alcance.target.global_position)
 			velocity = velocity.move_toward(direcao * velocidade, velocidade / 2)
-		
-		VOLTANDO:  # Se o estado for "voltando", tentar voltar até a posic. inicial do inimigo.
-			var direcao = global_position.direction_to(wanderController.target_position)
-			velocity = velocity.move_toward(direcao * velocidade, velocidade)
+
 
 func aim():
-	hit_pos = []  # Uma lista que terá todas as posições das bordas do player.
-	var space_state = get_world_2d().direct_space_state
-	var target_extents = target.get_node('CollisionShape2D').shape.extents - Vector2(5, 5)
-	var nw = target.position - target_extents  # coordenada para o canto superior esquerdo do player
-	var se = target.position + target_extents  # canto superior direito
-	var ne = target.position + Vector2(target_extents.x, -target_extents.y)  # canto inferior direito.
-	var sw = target.position + Vector2(-target_extents.x, target_extents.y)  # canto inferior esquerdo.
-	for pos in [target.position, nw, ne, se, sw]:  # Loop que vai criar todas as "miras" da torreta.
-		var result = space_state.intersect_ray(position,
-				pos, [self], collision_mask)
-		if result:
-			hit_pos.append(result.position)
-			if result.collider.name == "Player":  # Fazer isso apenas se o alvo for "player":
-				state = PERSEGUINDO  # Estado atual: perseguindo o player.
-				break
-			else:  # Se o alvo não ver o player por causa da parede, voltar a sua posic. antiga.
-				if state != ANDANDO_ALEATORIO and state != PARADO:
-					state = pick_random_state([PARADO, ANDANDO_ALEATORIO])  # Para isso, usar o state voltando
-
+	if alcance.aim():
+		state = PERSEGUINDO
+	else:
+		if state != ANDANDO_ALEATORIO and state != PARADO:
+			state = pick_random_state([PARADO, ANDANDO_ALEATORIO])  # Para isso, usar o state voltando
+	
 
 func random_state_timer():  # Função que troca de estado após certo tempo.
 	if wanderController.get_time_left() == 0:
@@ -102,16 +88,17 @@ func pick_random_state(state_list):  # Função que escolhe estado aleatório.
 	state_list.shuffle()
 	return state_list.pop_front()
 
-func _on_Alcance_body_entered(body):
-	if target:  # Se já tinha um alvo, então ignorar.
-		return
-	target = body  # Se chegou até aqui, ainda não tinha alvo, e o novo alvo agora é quem entrou no range.
+#func _on_Alcance_body_entered(body):
+	#if target:  # Se já tinha um alvo, então ignorar.
+		#return
+	#target = body  # Se chegou até aqui, ainda não tinha alvo, e o novo alvo agora é quem entrou no range.
 
 
-func _on_Alcance_body_exited(body):
-	state = pick_random_state([PARADO, ANDANDO_ALEATORIO])
-	if body == target:  # Se quem saiu era o alvo:
-		target = null  # Definir que o alvo agora é ninguém.
+
+#func _on_Alcance_body_exited(body):
+	#state = pick_random_state([PARADO, ANDANDO_ALEATORIO])
+	#if body == target:  # Se quem saiu era o alvo:
+		#target = null  # Definir que o alvo agora é ninguém.
 
 
 func _on_HurtBox_area_entered(area):
@@ -130,7 +117,6 @@ func _on_Stats_no_health():
 func stun_state():
 	megaestado = ESTUNADO
 	$StunTimer.start(-1)
-	
 
 
 func _on_StunTimer_timeout():
