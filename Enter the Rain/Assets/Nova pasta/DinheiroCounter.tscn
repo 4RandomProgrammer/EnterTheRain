@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Assets/Nova pasta/DinheiroCounter.gd" type="Script" id=1]
+
+[node name="DinheiroCounter" type="MarginContainer"]
+margin_left = 72.0
+margin_right = 80.0
+margin_bottom = 32.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Dinheiro" type="Label" parent="."]
+modulate = Color( 0.933333, 0.0196078, 0.145098, 1 )
+margin_top = 9.0
+margin_right = 8.0
+margin_bottom = 23.0
+text = "0"
+uppercase = true

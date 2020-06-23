@@ -51,11 +51,14 @@ shape = SubResource( 3 )
 
 [node name="Stats" parent="." instance=ExtResource( 4 )]
 MaxHealth = 2
+
+[node name="StunTimer" type="Timer" parent="."]
 [connection signal="body_entered" from="Alcance" to="." method="_on_Alcance_body_entered"]
 [connection signal="body_exited" from="Alcance" to="." method="_on_Alcance_body_exited"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
+[connection signal="timeout" from="StunTimer" to="." method="_on_StunTimer_timeout"]
 
 [editable path="HurtBox"]
 
