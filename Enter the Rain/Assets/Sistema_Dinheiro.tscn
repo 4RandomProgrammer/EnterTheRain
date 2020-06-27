@@ -2,6 +2,5 @@
 
 [ext_resource path="res://Assets/Sistema_Dinheiro.gd" type="Script" id=1]
 
-
 [node name="Sistema_Dinheiro" type="Node2D"]
 script = ExtResource( 1 )

@@ -1,104 +1,92 @@
 extends KinematicBody2D
 
-export (int) var detect_radius = 250  # Deixa que cada torreta criada tenha um "range" único (selecionavel no inspector).
-export (Resource) var sprite_inimigo
 export (int) var velocidade = 100
 export (float) var arruma_posic = 4
-onready var wanderController = $Movimento_aletorio
-onready var alcance = $Alcance
+onready var wanderController = $Random_moviment
+onready var enemy_range = $Range
 onready var stats = $Stats
-
-
-enum {
-	PARADO
-	ANDANDO_ALEATORIO
-	PERSEGUINDO
-	ESTUNADO
-}
-
-var state = PARADO
+onready var screen_verification = $VisibilityNotifier2D
+var state = STOPED
 var velocity = Vector2.ZERO
 var target
 var hit_pos
+var direction
+enum {
+	STOPED
+	RANDOM_WALKING
+	CHASING
+	STUNNED
+}
 
-
-func _ready():
-	var shape = CircleShape2D.new() 
-	shape.radius = detect_radius  # Cria o "range" com o raio selecionado.
-	$Alcance/CollisionShape2D.shape = shape  # Coloca o "range" na torreta.
-	if sprite_inimigo:
-		$Sprite.texture = sprite_inimigo
 
 func _physics_process(_delta):  # Loop principal da torreta.
 	update()
-	movimentation()
-	velocity = move_and_slide(velocity)
+	if screen_verification.is_on_screen:
+		try_aim_and_change_state()
+		movimentation()
+		velocity = move_and_slide(velocity)
 
 
 func movimentation():
-	match state:  # Dependendo do estado, escolher a movimentação do inimigo.
-		PARADO:  # Se o estado for "parado", a velocidade do inimigo deve ser 0.
-			aim()
+	match state:
+		STOPED:  
 			velocity = Vector2.ZERO
-			random_state_timer()  # Se o tempo de troca de estado tiver passado, escolher outro estado aleatório.
-			
-		ANDANDO_ALEATORIO:  # Se o estado for "Andando aleatorio", andar até uma posição aleatória.
-			aim()
-			var direcao = global_position.direction_to(wanderController.target_position)  # Pegar posic. aleatória do modulo 'movimento_aleatorio'
-			velocity = velocity.move_toward(direcao * velocidade, velocidade)  # Mover até essa posição aleatória.
-			random_state_timer()  # Escolher estado aleatório depois depois que o tempo passar.
-			if global_position.distance_to(wanderController.target_position) <= arruma_posic:  # Se chegar muito próximo do objetivo, trocar de estado.
-				state = pick_random_state([PARADO, ANDANDO_ALEATORIO])
+			random_state_timer()
+		RANDOM_WALKING:
+			direction = global_position.direction_to(wanderController.target_position)  # Pegar posic. aleatória do modulo 'movimento_aleatorio'
+			velocity = velocity.move_toward(direction * velocidade, velocidade)  # Mover até essa posição aleatória.
+			random_state_timer()
+			if global_position.distance_to(wanderController.target_position) <= arruma_posic:  # Se chegar muito próximo da posic. aleatória, trocar de estado.
+				state = pick_random_state([STOPED, RANDOM_WALKING])
 				wanderController.start_wander_timer(rand_range(1, 3))
-				
-		PERSEGUINDO:  # Se o estado for "perseguindo", andar até a posição atual do player.
-			if not alcance.target:
-				state = pick_random_state([PARADO, ANDANDO_ALEATORIO])
+		CHASING:
+			if not enemy_range.target:  # Player saiu do range. Hora de mudar de estado
+				state = pick_random_state([STOPED, RANDOM_WALKING])
 			else:
-				aim()
-				var direcao = global_position.direction_to(alcance.target.global_position)
-				velocity = velocity.move_toward(direcao * velocidade, velocidade / 2)
-		ESTUNADO:
+				direction = global_position.direction_to(enemy_range.target.global_position)
+				velocity = velocity.move_toward(direction * velocidade, velocidade / 2)
+		STUNNED:
 			velocity = Vector2.ZERO
 
 
-func aim():
-	if alcance.aim():
-		state = PERSEGUINDO
-	else:
-		if state != ANDANDO_ALEATORIO and state != PARADO:
-			state = pick_random_state([PARADO, ANDANDO_ALEATORIO])  # Para isso, usar o state voltando
+func try_aim_and_change_state():  # Tenta "mirar" no inimigo. Se conseguir, irá persegui-lo.
+	if state != STUNNED:
+		if enemy_range.player_aimed():
+			state = CHASING
+		else:
+			if state != RANDOM_WALKING and state != STOPED:  # Trocar de estado quando o alvo se esconder atrás da parede.
+				state = pick_random_state([STOPED, RANDOM_WALKING])
 
 
 func random_state_timer():  # Função que troca de estado após certo tempo.
 	if wanderController.get_time_left() == 0:
-		state = pick_random_state([PARADO, ANDANDO_ALEATORIO])
+		state = pick_random_state([STOPED, RANDOM_WALKING])
 		wanderController.start_wander_timer(rand_range(1, 3))
 		
 
-func pick_random_state(state_list):  # Função que escolhe estado aleatório.
+func pick_random_state(state_list):  # Função que escolhe um estado aleatório.
 	state_list.shuffle()
 	return state_list.pop_front()
 
 
 func _on_HurtBox_area_entered(area):
-	var dano = area.DAMAGE
-	stats.Health -= dano
+	var damage = area.DAMAGE
+	stats.Health -= damage
 
 
 func _on_Stats_no_health():
 	# Chamada quando o inimigo morrer, player receberá dinheiro e o inimigo sumirá.
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
-	var din = get_parent().get_node("Sistema_Dinheiro")
-	din.aumenta_dinheiro(rng.randi_range(30,60))
+	var money = get_parent().get_node("Sistema_Dinheiro")
+	money.aumenta_dinheiro(rng.randi_range(30,60))
 	queue_free()
 
 
 func stun_state():
-	state = ESTUNADO
+	state = STUNNED
 	$StunTimer.start(-1)
 
 
 func _on_StunTimer_timeout():
-	state = pick_random_state([PARADO, ANDANDO_ALEATORIO])
+	state = pick_random_state([STOPED, RANDOM_WALKING])

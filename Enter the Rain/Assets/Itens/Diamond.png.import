@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/arco.png-ce9288643f8d0b08151cfa44385c5db6.stex"
+path="res://.import/Diamond.png-e9db268e13d1980c26fb2e81c151b46d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Itens/arco.png"
-dest_files=[ "res://.import/arco.png-ce9288643f8d0b08151cfa44385c5db6.stex" ]
+source_file="res://Assets/Itens/Diamond.png"
+dest_files=[ "res://.import/Diamond.png-e9db268e13d1980c26fb2e81c151b46d.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Diamante.png-02ce39cd469eadc524447b51f579ba86.stex"
+path="res://.import/Bow1.png-1af17ea1d728ef2142fb7c99bf38ad5e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Itens/Diamante.png"
-dest_files=[ "res://.import/Diamante.png-02ce39cd469eadc524447b51f579ba86.stex" ]
+source_file="res://Assets/Itens/Bow1.png"
+dest_files=[ "res://.import/Bow1.png-1af17ea1d728ef2142fb7c99bf38ad5e.stex" ]
 
 [params]
 
