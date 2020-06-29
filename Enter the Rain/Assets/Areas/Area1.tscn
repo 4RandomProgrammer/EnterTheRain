@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Assets/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Inimigo/Inimigo.tscn" type="PackedScene" id=2]
@@ -12,6 +12,8 @@
 [ext_resource path="res://Assets/Sistema_Dinheiro.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Assets/Bau/bau_spawner.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Assets/Boss/Boss1.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Assets/Nova pasta/DinheiroCounter.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Assets/Nova pasta/Pause.gd" type="Script" id=14]
 
 [sub_resource type="TileSet" id=1]
 0/name = "ashlands_tileset.png 0"
@@ -280,6 +282,7 @@ process_mode = 0
 [node name="HealthBar" parent="Camera2D/CanvasLayer" instance=ExtResource( 6 )]
 
 [node name="Control" type="Control" parent="Camera2D/CanvasLayer"]
+pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -306,21 +309,23 @@ margin_right = 68.0
 margin_bottom = 32.0
 cooldown = 4.0
 
-[node name="DinheiroCounter" type="MarginContainer" parent="Camera2D/CanvasLayer/Control/HBoxContainer"]
-margin_left = 72.0
-margin_right = 80.0
-margin_bottom = 32.0
+[node name="DinheiroCounter" parent="Camera2D/CanvasLayer/Control/HBoxContainer" instance=ExtResource( 13 )]
+
+[node name="Pause" type="Control" parent="Camera2D/CanvasLayer"]
+pause_mode = 2
+visible = false
+margin_right = 1024.0
+margin_bottom = 600.0
+script = ExtResource( 14 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Dinheiro" type="Label" parent="Camera2D/CanvasLayer/Control/HBoxContainer/DinheiroCounter"]
-modulate = Color( 0.933333, 0.0196078, 0.145098, 1 )
-margin_top = 9.0
-margin_right = 8.0
-margin_bottom = 23.0
-text = "0"
-uppercase = true
+[node name="BackGround" type="ColorRect" parent="Camera2D/CanvasLayer/Pause"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0509804, 0.176471, 0.372549, 0.552941 )
 
 [node name="Sistema_Dinheiro" parent="." instance=ExtResource( 10 )]
 
@@ -345,4 +350,6 @@ position = Vector2( 1706.12, 695.097 )
 shape = SubResource( 9 )
 
 [node name="Boss1" parent="." instance=ExtResource( 12 )]
+position = Vector2( -398.25, 69.8128 )
 [connection signal="healthchanged" from="Player" to="Camera2D/CanvasLayer/HealthBar" method="_on_Player_healthchanged"]
+[connection signal="dinheiro_recebido" from="Sistema_Dinheiro" to="Camera2D/CanvasLayer/Control/HBoxContainer/DinheiroCounter" method="_on_Sistema_Dinheiro_dinheiro_recebido"]
