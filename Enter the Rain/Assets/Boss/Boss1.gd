@@ -11,7 +11,6 @@ onready var boss_range = $Alcance
 onready var screen_verification = $VisibilityNotifier2D
 onready var rng = RandomNumberGenerator.new()
 var angle_pat_1 = 0
-var bullet_pat_1
 enum {
 	POWER_1
 	WALKING
@@ -50,7 +49,7 @@ func power_1():
 	var current_dir = 0
 	angle_pat_1 += 0.01  # Rotação.
 	while current_dir < 2 * PI:  # Adicionar 90° (pi/2) a cada loop. Isso criará bullets nas 4 direções.
-		bullet_pat_1 = enemy_bullet.instance()
+		var bullet_pat_1 = enemy_bullet.instance()
 		bullet_pat_1.start(global_position, current_dir + angle_pat_1)
 		get_parent().add_child(bullet_pat_1)
 		current_dir += PI / 2

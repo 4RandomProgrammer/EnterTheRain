@@ -329,6 +329,8 @@ color = Color( 0.0509804, 0.176471, 0.372549, 0.552941 )
 
 [node name="Arena" parent="." instance=ExtResource( 5 )]
 position = Vector2( 1193.54, 1127.82 )
+min_entities = 10
+max_entities = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Arena"]
 shape = SubResource( 8 )
