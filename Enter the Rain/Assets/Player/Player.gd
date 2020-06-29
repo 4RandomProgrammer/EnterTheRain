@@ -10,6 +10,7 @@ enum {
 #Variaveis
 onready var stats = $Stats
 onready var InvunerabilityTimer = $InvunerabilityTimer
+onready var hurtbox = $HurtBox
 export (int) var MAX_SPEED = 250
 export (float)var fire_rate = 0.5
 export (float)var cooldownP1 = 2
@@ -90,11 +91,6 @@ func roll_state():
 	move()
 #Fim das funções de estado
 
-#Atualiza posição que vai o tiro
-func atualizatiro(pos):
-	if pos != Vector2.ZERO:
-		posAnt = pos
-
 #Controle do movimento
 func shot():
 	var powerup2 = SHOT.instance()
@@ -121,7 +117,9 @@ func shot_dir():
 	elif Input.is_action_pressed("ui_down"):
 		Posicao += Vector2.DOWN
 	
-	atualizatiro(Posicao)
+	
+	if Posicao != Vector2.ZERO:
+		posAnt = Posicao
 	
 	$Position2D.set_position(posAnt.normalized() * DistCentro)
 	
@@ -140,7 +138,8 @@ func move():
 
 func _on_HurtBox_area_entered(area):
 	if InvunerabilityTimer.is_stopped():
-		InvunerabilityTimer.start()
+		hurtbox.start_invincibility(0.4)
+		InvunerabilityTimer.start(0.5)
 		$AnimationPlayer.play("Flash")
 		stats.Health -= area.DAMAGE
 		emit_signal("healthchanged",stats.Health)
