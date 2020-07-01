@@ -69,6 +69,13 @@ autostart = true
 shape = SubResource( 4 )
 
 [node name="VisibilityNotifier2D" parent="." instance=ExtResource( 7 )]
+
+[node name="Power_2_timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Power_3_timer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
 [connection signal="timeout" from="Timer_parar" to="." method="_on_Timer_parar_timeout"]
 [connection signal="timeout" from="Timer_andar" to="." method="_on_Timer_andar_timeout"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
