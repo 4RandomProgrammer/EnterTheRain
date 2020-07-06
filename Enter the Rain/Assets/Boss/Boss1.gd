@@ -13,8 +13,11 @@ onready var stats = $Stats
 onready var boss_range = $Alcance
 onready var screen_verification = $VisibilityNotifier2D
 onready var rng = RandomNumberGenerator.new()
-var angle_pat_1 = 0
+export var quant_bullets_pow2 = 50
+export var rotation_speed_pow1 = 100
+var final_ang = 2 * PI
 var current_dir
+var angle_pat_1 = 0
 enum {
 	WALKING
 	POWER_1
@@ -62,8 +65,8 @@ func shoot(pos):  # Atirar no player.
 
 func power_1():
 	current_dir = 0
-	angle_pat_1 += 0.01  # Rotação.
-	while current_dir < 2 * PI:  # Adicionar 90° (pi/2) a cada loop. Isso criará bullets nas 4 direções.
+	angle_pat_1 += rotation_speed_pow1 * 0.0001
+	while current_dir < final_ang:  # Adicionar 90° (pi/2) a cada loop. Isso criará bullets nas 4 direções.
 		var bullet_pat_1 = enemy_bullet.instance()
 		bullet_pat_1.start(global_position, current_dir + angle_pat_1)
 		get_parent().add_child(bullet_pat_1)
@@ -72,15 +75,16 @@ func power_1():
 
 func power_2():
 	current_dir = 0
-	while current_dir < 2 * PI:
+	var denominator = (quant_bullets_pow2 / 2.0)
+	while current_dir < final_ang:
 		var bullet_pat_2 = enemy_bullet.instance()
 		bullet_pat_2.start(global_position, current_dir)
 		get_parent().add_child(bullet_pat_2)
-		current_dir += PI / 25
+		current_dir += PI / denominator
 
 
 func power_3():
-	current_dir = rand_range(0, 2 * PI)
+	current_dir = rand_range(0, final_ang)
 	var bullet_pat_3 = super_bullet.instance()
 	bullet_pat_3.start(global_position, current_dir)
 	get_parent().add_child(bullet_pat_3)
