@@ -28,7 +28,7 @@ var dano = 1
 const SHOT = preload("res://Assets/Shot/Shot.tscn")
 const POWERUP1 = preload("res://Assets/PowerUps/Granada.tscn")
 const FRICTION = 25
-const DistCentro = 48
+const DistCentro = 16
 const ROLL_SPEED = 450
 
 #Sinais

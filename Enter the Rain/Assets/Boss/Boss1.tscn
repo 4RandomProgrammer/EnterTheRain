@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Assets/Boss/Boss1.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Boss/boss_icon.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Sprites/BossArea1.png" type="Texture" id=2]
 [ext_resource path="res://Engine/Hitbox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Engine/HurtBox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Engine/Stats.tscn" type="PackedScene" id=5]
@@ -29,6 +29,7 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
