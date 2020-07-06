@@ -8,8 +8,10 @@ enum {
 }
 
 #Variaveis
-onready var stats = $Stats
 onready var InvunerabilityTimer = $InvunerabilityTimer
+onready var hurtbox = $HurtBox
+onready var Health = MaxHealth
+export(int) var  MaxHealth = 1
 export (int) var MAX_SPEED = 250
 export (float)var fire_rate = 0.5
 export (float)var cooldownP1 = 2
@@ -24,6 +26,8 @@ var Can_PowerUp2 = true
 var can_fire = true
 var dano = 1
 
+
+
 #Constantes
 const SHOT = preload("res://Assets/Shot/Shot.tscn")
 const POWERUP1 = preload("res://Assets/PowerUps/Granada.tscn")
@@ -32,7 +36,10 @@ const DistCentro = 16
 const ROLL_SPEED = 450
 
 #Sinais
-signal healthchanged(health)
+signal healthChanged(health)
+signal maxhealthChanged(value)
+
+
 
 func _physics_process(delta):
 	#Maquina de estados
@@ -90,11 +97,6 @@ func roll_state():
 	move()
 #Fim das funções de estado
 
-#Atualiza posição que vai o tiro
-func atualizatiro(pos):
-	if pos != Vector2.ZERO:
-		posAnt = pos
-
 #Controle do movimento
 func shot():
 	var powerup2 = SHOT.instance()
@@ -121,7 +123,9 @@ func shot_dir():
 	elif Input.is_action_pressed("ui_down"):
 		Posicao += Vector2.DOWN
 	
-	atualizatiro(Posicao)
+	
+	if Posicao != Vector2.ZERO:
+		posAnt = Posicao
 	
 	$Position2D.set_position(posAnt.normalized() * DistCentro)
 	
@@ -140,16 +144,21 @@ func move():
 
 func _on_HurtBox_area_entered(area):
 	if InvunerabilityTimer.is_stopped():
-		InvunerabilityTimer.start()
+		hurtbox.start_invincibility(0.4)
+		InvunerabilityTimer.start(0.5)
 		$AnimationPlayer.play("Flash")
-		stats.Health -= area.DAMAGE
-		emit_signal("healthchanged",stats.Health)
+		Health -= area.DAMAGE
+		emit_signal("healthChanged",Health)
+		if Health <= 0:
+			die()
 
-
-func _on_Stats_no_health():
+func die():
 	queue_free()
 
-
+func set_MaxHealth(value):
+	MaxHealth += value
+	emit_signal("maxhealthChanged", MaxHealth)
+	
 func _on_AnimationPlayer_animation_finished(_Dash):
 	state = MOVE
 	$HurtBox/CollisionShape2D.call_deferred("set","disabled", false)

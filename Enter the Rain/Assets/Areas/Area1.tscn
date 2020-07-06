@@ -973,5 +973,6 @@ shape = SubResource( 51 )
 
 [node name="Boss1" parent="." instance=ExtResource( 12 )]
 position = Vector2( -398.25, 69.8128 )
-[connection signal="healthchanged" from="Player" to="Camera2D/CanvasLayer/HealthBar" method="_on_Player_healthchanged"]
+[connection signal="healthChanged" from="Player" to="Camera2D/CanvasLayer/HealthBar" method="_on_Player_healthChanged"]
+[connection signal="maxhealthChanged" from="Player" to="Camera2D/CanvasLayer/HealthBar" method="_on_Player_maxhealthChanged"]
 [connection signal="dinheiro_recebido" from="Sistema_Dinheiro" to="Camera2D/CanvasLayer/Control/HBoxContainer/DinheiroCounter" method="_on_Sistema_Dinheiro_dinheiro_recebido"]
