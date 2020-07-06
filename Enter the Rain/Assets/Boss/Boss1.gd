@@ -23,8 +23,9 @@ enum {
 	POWER_1
 	POWER_2
 	POWER_3
+	SPAWNING
 }
-var state = WALKING
+var state = SPAWNING
 var target
 var can_shoot = true
 
@@ -36,22 +37,27 @@ func _ready():
 
 func _physics_process(delta):
 	if screen_verification.is_on_screen:
-		try_aim_player()
 		match state:
 			WALKING:
+				try_aim_player()
 				var collision = move_and_collide(velocity * delta)
 				if collision:
 					velocity = velocity.bounce(collision.normal)  # Toda vez que bater em algo, rebater.
 			POWER_1:
+				try_aim_player()
 				power_1()
 			POWER_2:
+				try_aim_player()
 				if timer_pow_2.time_left == 0:
 					power_2()
 					timer_pow_2.start()
 			POWER_3:
+				try_aim_player()
 				if timer_pow_3.time_left == 0:
 					power_3()
 					timer_pow_3.start()
+			SPAWNING:
+				$Sprite.self_modulate.r = 0.2
 
 
 func shoot(pos):  # Atirar no player.
@@ -98,6 +104,7 @@ func try_aim_player():  # Tentar atirar no player se tiver no range e sem obstac
 
 func _on_Timer_parar_timeout():  # Começar a andar novamente por 10s.
 	velocity = directions[rng.randi_range(0, 3)]
+	$Sprite.self_modulate.r = 1
 	timer_walk.start(10)
 	state = WALKING
 
@@ -118,8 +125,9 @@ func _on_Stats_no_health():
 
 
 func _on_HurtBox_area_entered(area):
-	var damage = area.DAMAGE
-	stats.Health -= damage
+	if state != SPAWNING:
+		var damage = area.DAMAGE
+		stats.Health -= damage
 
 
 func _on_Bullet_timer_timeout():
@@ -128,3 +136,7 @@ func _on_Bullet_timer_timeout():
 
 func _on_StunTimer_timeout():
 	state = WALKING
+
+
+func teste():
+	print('opa')

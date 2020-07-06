@@ -1,4 +1,4 @@
-extends "res://Assets/RandomSpawner.gd"
+extends "res://Assets/Spawners/RandomSpawner.gd"
 
 onready var Torreta = load("res://Assets/Torreta/Torreta.tscn")
 onready var Inimigo = load("res://Assets/Inimigo/Inimigo.tscn")

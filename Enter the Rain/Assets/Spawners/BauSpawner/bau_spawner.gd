@@ -1,4 +1,4 @@
-extends "res://Assets/RandomSpawner.gd"
+extends "res://Assets/Spawners/RandomSpawner.gd"
 
 onready var Chest = preload("res://Assets/Bau/Bau.tscn")
 onready var Sword1 = preload("res://Assets/Itens/Sword1.tscn")
