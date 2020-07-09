@@ -5,18 +5,18 @@
 [ext_resource path="res://Engine/HurtBox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Engine/Stats.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Engine/Hitbox.tscn" type="PackedScene" id=5]
-[ext_resource path="res://icon.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Sprites/ab' contornada.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Aim.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Assets/ScreenVerificator.tscn" type="PackedScene" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 1451.95, 133.409 )
+extents = Vector2( 741.518, 60.4304 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 28.5748, 28.965 )
+extents = Vector2( 14.1723, 13.1795 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 29.1436, 27.8274 )
+extents = Vector2( 14.4497, 12.9021 )
 
 [sub_resource type="CircleShape2D" id=4]
 radius = 250.0
@@ -35,6 +35,7 @@ scale = Vector2( -0.0197921, 0.218094 )
 shape = SubResource( 1 )
 
 [node name="Random_moviment" parent="." instance=ExtResource( 2 )]
+visible = false
 
 [node name="HurtBox" parent="." instance=ExtResource( 3 )]
 collision_layer = 8
@@ -57,6 +58,7 @@ wait_time = 5.0
 one_shot = true
 
 [node name="Range" parent="." instance=ExtResource( 7 )]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
 shape = SubResource( 4 )

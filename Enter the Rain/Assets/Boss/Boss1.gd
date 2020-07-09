@@ -5,15 +5,24 @@ onready var directions = [Vector2(velocity, velocity), Vector2(- velocity, - vel
 						Vector2(- velocity, velocity), Vector2(velocity, - velocity)]
 onready var timer_stop = $Timer_parar
 onready var timer_walk = $Timer_andar
+onready var timer_pow_2 = $Power_2_timer
+onready var timer_pow_3 = $Power_3_timer
 onready var enemy_bullet = load("res://Assets/Enemy_bullet/EnemyBullet.tscn")
+onready var super_bullet = load("res://Assets/Enemy_bullet/SuperBullet.tscn")
 onready var stats = $Stats
 onready var boss_range = $Alcance
 onready var screen_verification = $VisibilityNotifier2D
 onready var rng = RandomNumberGenerator.new()
+export var quant_bullets_pow2 = 50
+export var rotation_speed_pow1 = 100
+var final_ang = 2 * PI
+var current_dir
 var angle_pat_1 = 0
 enum {
-	POWER_1
 	WALKING
+	POWER_1
+	POWER_2
+	POWER_3
 }
 var state = WALKING
 var target
@@ -35,6 +44,14 @@ func _physics_process(delta):
 					velocity = velocity.bounce(collision.normal)  # Toda vez que bater em algo, rebater.
 			POWER_1:
 				power_1()
+			POWER_2:
+				if timer_pow_2.time_left == 0:
+					power_2()
+					timer_pow_2.start()
+			POWER_3:
+				if timer_pow_3.time_left == 0:
+					power_3()
+					timer_pow_3.start()
 
 
 func shoot(pos):  # Atirar no player.
@@ -45,14 +62,32 @@ func shoot(pos):  # Atirar no player.
 	can_shoot = false
 	$Bullet_timer.start()
 
+
 func power_1():
-	var current_dir = 0
-	angle_pat_1 += 0.01  # Rotação.
-	while current_dir < 2 * PI:  # Adicionar 90° (pi/2) a cada loop. Isso criará bullets nas 4 direções.
+	current_dir = 0
+	angle_pat_1 += rotation_speed_pow1 * 0.0001
+	while current_dir < final_ang:  # Adicionar 90° (pi/2) a cada loop. Isso criará bullets nas 4 direções.
 		var bullet_pat_1 = enemy_bullet.instance()
 		bullet_pat_1.start(global_position, current_dir + angle_pat_1)
 		get_parent().add_child(bullet_pat_1)
 		current_dir += PI / 2
+
+
+func power_2():
+	current_dir = 0
+	var denominator = (quant_bullets_pow2 / 2.0)
+	while current_dir < final_ang:
+		var bullet_pat_2 = enemy_bullet.instance()
+		bullet_pat_2.start(global_position, current_dir)
+		get_parent().add_child(bullet_pat_2)
+		current_dir += PI / denominator
+
+
+func power_3():
+	current_dir = rand_range(0, final_ang)
+	var bullet_pat_3 = super_bullet.instance()
+	bullet_pat_3.start(global_position, current_dir)
+	get_parent().add_child(bullet_pat_3)
 
 
 func try_aim_player():  # Tentar atirar no player se tiver no range e sem obstaculos na frente.
@@ -69,7 +104,13 @@ func _on_Timer_parar_timeout():  # Começar a andar novamente por 10s.
 
 func _on_Timer_andar_timeout():  # Parar por 5s.
 	timer_stop.start(5)
-	state = POWER_1
+	var power = rng.randi_range(1, 3)
+	if power == 1:
+		state = POWER_1
+	elif power == 2:
+		state = POWER_2
+	else:
+		state = POWER_3
 
 
 func _on_Stats_no_health():
