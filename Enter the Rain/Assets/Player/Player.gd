@@ -20,6 +20,7 @@ var moveDirection = Vector2(0,0)
 var moveAnt = Vector2.RIGHT
 var posAnt = Vector2.RIGHT
 var roll_vector = Vector2.DOWN
+var Mouse = Vector2.ZERO
 var state = MOVE
 var Can_PowerUp1 = true
 var Can_PowerUp2 = true
@@ -55,14 +56,12 @@ func _physics_process(delta):
 func estado_base(delta):
 	control_loop()
 	movement_loop(delta)
-	shot_dir()
-	
 	if Input.is_action_pressed("Shoot") and can_fire:
 		var shots = SHOT.instance()
-		shots.shotdirection(moveAnt)
-		shots.DAMAGE += dano
 		get_parent().add_child(shots)
-		shots.position = $Position2D.global_position
+		shots.position = $Weapon/Position2D.global_position
+		shots.rotation_degrees = $Weapon.rotation_degrees
+		shots.apply_impulse(Vector2(), Vector2(shots.BULLET_SPEED, 0).rotated($Weapon.rotation))
 		can_fire = false
 		yield(get_tree().create_timer(fire_rate), "timeout")
 		can_fire = true
@@ -72,9 +71,10 @@ func estado_base(delta):
 	
 	if Input.is_action_just_pressed("PowerUp1") and Can_PowerUp1:
 		var powerup1 = POWERUP1.instance()
-		powerup1.shotdir(moveAnt)
 		get_parent().add_child(powerup1)
-		powerup1.position = $Position2D.global_position
+		powerup1.position = $Weapon/Position2D.global_position
+		powerup1.rotation_degrees = $Weapon.rotation_degrees
+		powerup1.apply_impulse(Vector2(), Vector2(powerup1.BULLETSPEED, 0).rotated($Weapon.rotation))
 		Can_PowerUp1 = false
 		yield(get_tree().create_timer(cooldownP1), "timeout")
 		Can_PowerUp1 = true
@@ -101,10 +101,10 @@ func roll_state():
 func shot():
 	var powerup2 = SHOT.instance()
 	powerup2.stunbullet = true
-	powerup2.shotdirection(moveAnt)
+	powerup2.position = $Weapon/Position2D.global_position
+	powerup2.apply_impulse(Vector2(), Vector2(powerup2.BULLET_SPEED, 0).rotated($Weapon.rotation))
 	get_parent().add_child(powerup2)
-	powerup2.position = $Position2D.global_position
-	
+
 
 func control_loop():
 	#Passando o movimento direto com a anulação de tecla ja feita
@@ -112,22 +112,7 @@ func control_loop():
 	moveDirection.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	
 #Func de direção do tiro, vê aonde o jogador esta andando e atualiza para onde ele vai atirar
-func shot_dir():
-	var Posicao = Vector2.ZERO
-	if Input.is_action_pressed("ui_left"):
-		Posicao += Vector2.LEFT
-	elif Input.is_action_pressed("ui_right"):
-		Posicao += Vector2.RIGHT
-	if Input.is_action_pressed("ui_up"):
-		Posicao += Vector2.UP
-	elif Input.is_action_pressed("ui_down"):
-		Posicao += Vector2.DOWN
-	
-	
-	if Posicao != Vector2.ZERO:
-		posAnt = Posicao
-	
-	$Position2D.set_position(posAnt.normalized() * DistCentro)
+
 	
 #Func de movimento, aqui se adiciona knockback se quiser
 func movement_loop(delta):

@@ -1,19 +1,22 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Shot/Shot.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Shot/Line2D.gd" type="Script" id=3]
+[ext_resource path="res://Engine/Hitbox.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
 
-[node name="Shot" type="Area2D"]
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 3.32324, 3.2843 )
+
+[node name="Shot" type="RigidBody2D"]
 collision_layer = 0
 collision_mask = 25
+contacts_reported = 1
+contact_monitor = true
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="Sprite" type="Sprite" parent="."]
 modulate = Color( 0, 0, 0, 1 )
@@ -32,5 +35,13 @@ scale = Vector2( 0.3, 0.3 )
 [node name="Line2D" type="Line2D" parent="Node"]
 script = ExtResource( 3 )
 trail_length = 4
+
+[node name="Hitbox" parent="." instance=ExtResource( 4 )]
+collision_mask = 8
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource( 2 )
 [connection signal="body_entered" from="." to="." method="_on_Shot_body_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+
+[editable path="Hitbox"]
