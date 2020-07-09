@@ -11,7 +11,7 @@ func _ready():
 	item = item.instance()
 	item.position.x = position.x
 	item.position.y = position.y
-	min_money = rng.randi_range(100, 500)
+	min_money = rng.randi_range(100, 300)
 	$Label.text = str(min_money)
 
 
