@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=2]
+[gd_scene load_steps=71 format=2]
 
 [ext_resource path="res://Assets/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Spawners/BossSpawner/BossSpawner.tscn" type="PackedScene" id=2]
@@ -860,10 +860,31 @@ points = PoolVector2Array( 0, 9.44562, 16, 8.86691, 16, 16, 0, 16 )
 17/z_index = 0
 
 [sub_resource type="RectangleShape2D" id=50]
-extents = Vector2( 336.458, 176.514 )
+extents = Vector2( 240.051, 97.2583 )
 
 [sub_resource type="RectangleShape2D" id=51]
-extents = Vector2( 101.023, 144.045 )
+extents = Vector2( 221.968, 102.482 )
+
+[sub_resource type="RectangleShape2D" id=52]
+extents = Vector2( 177.668, 82.1878 )
+
+[sub_resource type="RectangleShape2D" id=53]
+extents = Vector2( 92.0772, 50.9566 )
+
+[sub_resource type="RectangleShape2D" id=54]
+extents = Vector2( 338.753, 171.299 )
+
+[sub_resource type="RectangleShape2D" id=55]
+extents = Vector2( 94.4917, 37.8217 )
+
+[sub_resource type="RectangleShape2D" id=56]
+extents = Vector2( 127.614, 42.9844 )
+
+[sub_resource type="RectangleShape2D" id=57]
+extents = Vector2( 891.993, 619.701 )
+
+[sub_resource type="RectangleShape2D" id=58]
+extents = Vector2( 101.023, 93.0435 )
 
 [node name="Area1" type="Node2D"]
 script = ExtResource( 9 )
@@ -956,21 +977,88 @@ color = Color( 0.0509804, 0.176471, 0.372549, 0.552941 )
 [node name="Sistema_Dinheiro" parent="." instance=ExtResource( 10 )]
 
 [node name="Arena" parent="." instance=ExtResource( 5 )]
-position = Vector2( 1193.54, 1127.82 )
-min_entities = 10
-max_entities = 10
+position = Vector2( 1028.7, 920.164 )
+min_entities = 2
+max_entities = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Arena"]
 shape = SubResource( 50 )
 
+[node name="Arena2" parent="." instance=ExtResource( 5 )]
+position = Vector2( -89.0154, 446.99 )
+min_entities = 2
+max_entities = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arena2"]
+shape = SubResource( 51 )
+
+[node name="Arena3" parent="." instance=ExtResource( 5 )]
+position = Vector2( 684.441, 113.907 )
+min_entities = 2
+max_entities = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arena3"]
+shape = SubResource( 52 )
+
+[node name="Arena4" parent="." instance=ExtResource( 5 )]
+position = Vector2( 956.655, 82.9942 )
+min_entities = 2
+max_entities = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arena4"]
+shape = SubResource( 53 )
+
+[node name="Arena5" parent="." instance=ExtResource( 5 )]
+position = Vector2( -229.179, 1354.35 )
+min_entities = 8
+max_entities = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arena5"]
+position = Vector2( 5, 0 )
+shape = SubResource( 54 )
+
+[node name="Arena6" parent="." instance=ExtResource( 5 )]
+position = Vector2( 1863.53, 1313.35 )
+min_entities = 1
+max_entities = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arena6"]
+position = Vector2( -15, -1 )
+shape = SubResource( 55 )
+
+[node name="Arena7" parent="." instance=ExtResource( 5 )]
+position = Vector2( 2091.8, 1175.8 )
+min_entities = 2
+max_entities = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arena7"]
+position = Vector2( 6, 0 )
+shape = SubResource( 56 )
+
+[node name="Arena8" parent="." instance=ExtResource( 5 )]
+position = Vector2( 1021.35, 1331.74 )
+min_entities = 20
+max_entities = 30
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arena8"]
+position = Vector2( 0, 1 )
+shape = SubResource( 57 )
+
 [node name="bau_spawner" parent="." instance=ExtResource( 11 )]
-position = Vector2( 1706.12, 695.097 )
-min_entities = 10
-max_entities = 10
+position = Vector2( 1397.98, 312.035 )
+min_entities = 8
+max_entities = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bau_spawner"]
-visible = false
-shape = SubResource( 51 )
+shape = SubResource( 58 )
+
+[node name="bau_spawner2" parent="." instance=ExtResource( 11 )]
+position = Vector2( 1925.8, 307.954 )
+min_entities = 8
+max_entities = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bau_spawner2"]
+shape = SubResource( 58 )
 
 [node name="BossSpawner" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1660.4, 80.8527 )
