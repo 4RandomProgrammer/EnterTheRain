@@ -2,6 +2,7 @@ extends RigidBody2D
 
 const BULLET_SPEED = 500
 var stunbullet = false
+export var damage = 1
 
 var Velocity = Vector2.ZERO
 var direction = Vector2.ZERO

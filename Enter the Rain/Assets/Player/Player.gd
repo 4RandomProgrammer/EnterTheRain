@@ -25,7 +25,7 @@ var state = MOVE
 var Can_PowerUp1 = true
 var Can_PowerUp2 = true
 var can_fire = true
-var dano = 1
+onready var dano = 1
 
 
 
@@ -58,10 +58,12 @@ func estado_base(delta):
 	movement_loop(delta)
 	if Input.is_action_pressed("Shoot") and can_fire:
 		var shots = SHOT.instance()
+		shots.damage = dano
 		get_parent().add_child(shots)
 		shots.position = $Weapon/Position2D.global_position
 		shots.rotation_degrees = $Weapon.rotation_degrees
 		shots.apply_impulse(Vector2(), Vector2(shots.BULLET_SPEED, 0).rotated($Weapon.rotation))
+		shots.damage = dano
 		can_fire = false
 		yield(get_tree().create_timer(fire_rate), "timeout")
 		can_fire = true

@@ -9,6 +9,7 @@ onready var stats = $Stats
 onready var screen_verification = $VisibilityNotifier2D
 var can_shoot = true
 var state = NORMAL
+export var damage = 1
 var rng = RandomNumberGenerator.new()
 
 
