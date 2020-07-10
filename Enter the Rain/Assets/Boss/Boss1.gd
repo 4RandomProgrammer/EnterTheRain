@@ -72,6 +72,7 @@ func shoot(pos):  # Atirar no player.
 func power_1():
 	current_dir = 0
 	angle_pat_1 += rotation_speed_pow1 * 0.0001
+	rotation += rotation_speed_pow1 * 0.0001
 	while current_dir < final_ang:  # Adicionar 90° (pi/2) a cada loop. Isso criará bullets nas 4 direções.
 		var bullet_pat_1 = enemy_bullet.instance()
 		bullet_pat_1.start(global_position, current_dir + angle_pat_1)
