@@ -1,9 +1,8 @@
-[gd_scene load_steps=72 format=2]
+[gd_scene load_steps=71 format=2]
 
 [ext_resource path="res://Assets/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Spawners/BossSpawner/BossSpawner.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/tilesets Enter the Rain/ashlands_tileset.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Itens/Sword1.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Spawners/Arena/Arena.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Nova pasta/HealthBar.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Nova pasta/AbilityButton.tscn" type="PackedScene" id=7]
@@ -1063,8 +1062,6 @@ shape = SubResource( 58 )
 
 [node name="BossSpawner" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1660.4, 80.8527 )
-
-[node name="Item" parent="." instance=ExtResource( 4 )]
 [connection signal="healthChanged" from="Player" to="Camera2D/CanvasLayer/HealthBar" method="_on_Player_healthChanged"]
 [connection signal="maxhealthChanged" from="Player" to="Camera2D/CanvasLayer/HealthBar" method="_on_Player_maxhealthChanged"]
 [connection signal="dinheiro_recebido" from="Sistema_Dinheiro" to="Camera2D/CanvasLayer/Control/HBoxContainer/DinheiroCounter" method="_on_Sistema_Dinheiro_dinheiro_recebido"]
