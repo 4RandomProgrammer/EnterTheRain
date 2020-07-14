@@ -17,6 +17,7 @@ export (float)var fire_rate = 0.5
 export (float)var cooldownP1 = 2
 export (float)var cooldownP2 = 3
 export var stun_probability = 0
+export var extra_bullet_probability = 100
 onready var rng = RandomNumberGenerator.new()
 var moveDirection = Vector2(0,0)
 var moveAnt = Vector2.RIGHT
@@ -64,11 +65,13 @@ func estado_base(delta):
 		shots.damage = dano
 		if rng.randi_range(1, 100) <= stun_probability:
 			shots.stunbullet = true
+		if rng.randi_range(1, 100) <= extra_bullet_probability:
+			spawn_bullet(PI / 4)
+			spawn_bullet(-PI / 4)
 		get_parent().add_child(shots)
 		shots.position = $Weapon/Position2D.global_position
 		shots.rotation_degrees = $Weapon.rotation_degrees
 		shots.apply_impulse(Vector2(), Vector2(shots.BULLET_SPEED, 0).rotated($Weapon.rotation))
-		shots.damage = dano
 		can_fire = false
 		yield(get_tree().create_timer(fire_rate), "timeout")
 		can_fire = true
@@ -154,3 +157,12 @@ func set_MaxHealth(value):
 func _on_AnimationPlayer_animation_finished(_Dash):
 	state = MOVE
 	$HurtBox/CollisionShape2D.call_deferred("set","disabled", false)
+
+func spawn_bullet(extra_angle=0):
+	# Função de spawna shot na direção da arma do player.
+	var shot = SHOT.instance()
+	shot.damage = dano
+	shot.position = $Weapon/Position2D.global_position
+	shot.rotation_degrees = $Weapon/Position2D.rotation_degrees + extra_angle
+	shot.apply_impulse(Vector2(), Vector2(shot.BULLET_SPEED, 0).rotated($Weapon.rotation + extra_angle))
+	get_parent().add_child(shot)
