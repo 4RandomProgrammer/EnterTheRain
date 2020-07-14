@@ -8,7 +8,7 @@ enum {
 }
 
 #Variaveis
-onready var InvunerabilityTimer = $InvunerabilityTimer
+onready var InvunerabilityTimer = $HurtBox/Timer
 onready var hurtbox = $HurtBox
 onready var Health = MaxHealth
 export(int) var  MaxHealth = 1
@@ -16,9 +16,6 @@ export (int) var MAX_SPEED = 250
 export (float)var fire_rate = 0.5
 export (float)var cooldownP1 = 2
 export (float)var cooldownP2 = 3
-export var stun_probability = 0
-export var extra_bullet_probability = 100
-onready var rng = RandomNumberGenerator.new()
 var moveDirection = Vector2(0,0)
 var moveAnt = Vector2.RIGHT
 var posAnt = Vector2.RIGHT
@@ -28,16 +25,14 @@ var state = MOVE
 var Can_PowerUp1 = true
 var Can_PowerUp2 = true
 var can_fire = true
-onready var dano = 1
+var dano = 1
 
-func _ready():
-	rng.randomize()
+
 
 #Constantes
 const SHOT = preload("res://Assets/Shot/Shot.tscn")
 const POWERUP1 = preload("res://Assets/PowerUps/Granada.tscn")
 const FRICTION = 25
-const DistCentro = 16
 const ROLL_SPEED = 450
 
 #Sinais
@@ -55,31 +50,23 @@ func _physics_process(delta):
 		ROLL:
 			roll_state()
 
-
 #Func para os estados
 func estado_base(delta):
 	control_loop()
 	movement_loop(delta)
-	if Input.is_action_pressed("Shoot") and can_fire:
-		var shots = SHOT.instance()
-		shots.damage = dano
-		if rng.randi_range(1, 100) <= stun_probability:
-			shots.stunbullet = true
-		if rng.randi_range(1, 100) <= extra_bullet_probability:
-			spawn_bullet(PI / 4)
-			spawn_bullet(-PI / 4)
-		get_parent().add_child(shots)
-		shots.position = $Weapon/Position2D.global_position
-		shots.rotation_degrees = $Weapon.rotation_degrees
-		shots.apply_impulse(Vector2(), Vector2(shots.BULLET_SPEED, 0).rotated($Weapon.rotation))
-		can_fire = false
-		yield(get_tree().create_timer(fire_rate), "timeout")
-		can_fire = true
 	
 	if Input.is_action_just_pressed("Roll"):
 		state = ROLL
 	
-	if Input.is_action_just_pressed("PowerUp1") and Can_PowerUp1:
+	#Cond. tiro
+	if Input.is_action_pressed("Shoot") and can_fire:
+		shot(false)
+		can_fire = false
+		yield(get_tree().create_timer(fire_rate), "timeout")
+		can_fire = true
+	
+	#Cond. Granada
+	elif Input.is_action_just_pressed("PowerUp1") and Can_PowerUp1:
 		var powerup1 = POWERUP1.instance()
 		get_parent().add_child(powerup1)
 		powerup1.position = $Weapon/Position2D.global_position
@@ -89,14 +76,18 @@ func estado_base(delta):
 		yield(get_tree().create_timer(cooldownP1), "timeout")
 		Can_PowerUp1 = true
 	
-	if Input.is_action_just_pressed("PowerUp2") and Can_PowerUp2:
+	#Cond. Rajada stun
+	elif Input.is_action_just_pressed("PowerUp2") and Can_PowerUp2:
 		var i = 0
+		can_fire = false
+		Can_PowerUp2 = false
 		while i < 5:
-			shot()
+			shot(true)
 			yield(get_tree().create_timer(0.2),"timeout")
 			i += 1
-			
-		Can_PowerUp2 = false
+		
+		can_fire = true
+		
 		yield(get_tree().create_timer(cooldownP2),"timeout")
 		Can_PowerUp2 = true
 
@@ -107,23 +98,21 @@ func roll_state():
 	move()
 #Fim das funções de estado
 
-#Controle do movimento
-func shot():
-	var powerup2 = SHOT.instance()
-	powerup2.stunbullet = true
-	powerup2.position = $Weapon/Position2D.global_position
-	powerup2.apply_impulse(Vector2(), Vector2(powerup2.BULLET_SPEED, 0).rotated($Weapon.rotation))
-	get_parent().add_child(powerup2)
+#Func de tiro
+func shot(isStunBullet):
+	var shots = SHOT.instance()
+	get_parent().add_child(shots)
+	shots.stunbullet = isStunBullet
+	shots.position = $Weapon/Position2D.global_position
+	shots.rotation_degrees = $Weapon.rotation_degrees
+	shots.apply_impulse(Vector2(), Vector2(shots.BULLET_SPEED, 0).rotated($Weapon.rotation))
 
-
+#Func de inputs
 func control_loop():
 	#Passando o movimento direto com a anulação de tecla ja feita
 	moveDirection.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	moveDirection.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
-	
-#Func de direção do tiro, vê aonde o jogador esta andando e atualiza para onde ele vai atirar
 
-	
 #Func de movimento, aqui se adiciona knockback se quiser
 func movement_loop(delta):
 	if moveDirection != Vector2.ZERO:
@@ -139,7 +128,6 @@ func move():
 
 func _on_HurtBox_area_entered(area):
 	if InvunerabilityTimer.is_stopped():
-		hurtbox.start_invincibility(0.4)
 		InvunerabilityTimer.start(0.5)
 		$AnimationPlayer.play("Flash")
 		Health -= area.DAMAGE
@@ -153,16 +141,7 @@ func die():
 func set_MaxHealth(value):
 	MaxHealth += value
 	emit_signal("maxhealthChanged", MaxHealth)
-	
+
 func _on_AnimationPlayer_animation_finished(_Dash):
 	state = MOVE
 	$HurtBox/CollisionShape2D.call_deferred("set","disabled", false)
-
-func spawn_bullet(extra_angle=0):
-	# Função de spawna shot na direção da arma do player.
-	var shot = SHOT.instance()
-	shot.damage = dano
-	shot.position = $Weapon/Position2D.global_position
-	shot.rotation_degrees = $Weapon/Position2D.rotation_degrees + extra_angle
-	shot.apply_impulse(Vector2(), Vector2(shot.BULLET_SPEED, 0).rotated($Weapon.rotation + extra_angle))
-	get_parent().add_child(shot)
