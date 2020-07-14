@@ -16,6 +16,8 @@ export (int) var MAX_SPEED = 250
 export (float)var fire_rate = 0.5
 export (float)var cooldownP1 = 2
 export (float)var cooldownP2 = 3
+export var stun_probability = 0
+onready var rng = RandomNumberGenerator.new()
 var moveDirection = Vector2(0,0)
 var moveAnt = Vector2.RIGHT
 var posAnt = Vector2.RIGHT
@@ -27,7 +29,8 @@ var Can_PowerUp2 = true
 var can_fire = true
 onready var dano = 1
 
-
+func _ready():
+	rng.randomize()
 
 #Constantes
 const SHOT = preload("res://Assets/Shot/Shot.tscn")
@@ -59,6 +62,8 @@ func estado_base(delta):
 	if Input.is_action_pressed("Shoot") and can_fire:
 		var shots = SHOT.instance()
 		shots.damage = dano
+		if rng.randi_range(1, 100) <= stun_probability:
+			shots.stunbullet = true
 		get_parent().add_child(shots)
 		shots.position = $Weapon/Position2D.global_position
 		shots.rotation_degrees = $Weapon.rotation_degrees

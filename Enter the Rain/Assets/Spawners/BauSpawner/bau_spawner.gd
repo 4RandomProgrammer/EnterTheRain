@@ -4,8 +4,9 @@ onready var Chest = preload("res://Assets/Bau/Bau.tscn")
 onready var Sword1 = preload("res://Assets/Itens/Sword1.tscn")
 onready var Bow1 = preload("res://Assets/Itens/Bow1.tscn")
 onready var Diamond = preload("res://Assets/Itens/Diamond.tscn")
+onready var Staff = preload("res://Assets/Itens/Staff.tscn")
 
-onready var lista_de_itens = [Sword1, Bow1, Diamond]
+onready var lista_de_itens = [Sword1, Bow1, Diamond, Staff]
 onready var tamanho_lista = len(lista_de_itens)
 
 

@@ -72,7 +72,6 @@ func pick_random_state(state_list):  # Função que escolhe um estado aleatório
 
 func _on_HurtBox_area_entered(area):
 	var damage = area.DAMAGE
-	print(damage)
 	stats.Health -= damage
 
 
