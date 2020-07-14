@@ -12,7 +12,7 @@ func _process(_delta):
 		queue_free()
 
 
-func _on_RangeStart_body_entered(body):
+func _on_RangeStart_body_entered(_body):
 	can_start = true
 	$Label.text = "Clique espaço para batalhar com o Boss!"
 

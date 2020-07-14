@@ -77,10 +77,14 @@ playback_process_mode = 0
 anims/Dash = SubResource( 3 )
 anims/Flash = SubResource( 4 )
 
-[node name="InvunerabilityTimer" type="Timer" parent="."]
+[node name="PowerUp1CD" type="Timer" parent="."]
 process_mode = 0
 wait_time = 0.4
 one_shot = true
+
+[node name="PowerUp2CD" type="Timer" parent="."]
+
+[node name="ShotCD" type="Timer" parent="."]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 

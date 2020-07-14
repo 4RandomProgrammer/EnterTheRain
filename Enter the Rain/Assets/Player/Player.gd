@@ -8,7 +8,7 @@ enum {
 }
 
 #Variaveis
-onready var InvunerabilityTimer = $InvunerabilityTimer
+onready var InvunerabilityTimer = $HurtBox/Timer
 onready var hurtbox = $HurtBox
 onready var Health = MaxHealth
 export(int) var  MaxHealth = 1
@@ -56,20 +56,19 @@ func _physics_process(delta):
 func estado_base(delta):
 	control_loop()
 	movement_loop(delta)
-	if Input.is_action_pressed("Shoot") and can_fire:
-		var shots = SHOT.instance()
-		get_parent().add_child(shots)
-		shots.position = $Weapon/Position2D.global_position
-		shots.rotation_degrees = $Weapon.rotation_degrees
-		shots.apply_impulse(Vector2(), Vector2(shots.BULLET_SPEED, 0).rotated($Weapon.rotation))
-		can_fire = false
-		yield(get_tree().create_timer(fire_rate), "timeout")
-		can_fire = true
 	
 	if Input.is_action_just_pressed("Roll"):
 		state = ROLL
 	
-	if Input.is_action_just_pressed("PowerUp1") and Can_PowerUp1:
+	#Cond. tiro
+	if Input.is_action_pressed("Shoot") and can_fire:
+		shot(false)
+		can_fire = false
+		yield(get_tree().create_timer(fire_rate), "timeout")
+		can_fire = true
+	
+	#Cond. Granada
+	elif Input.is_action_just_pressed("PowerUp1") and Can_PowerUp1:
 		var powerup1 = POWERUP1.instance()
 		get_parent().add_child(powerup1)
 		powerup1.position = $Weapon/Position2D.global_position
@@ -79,10 +78,11 @@ func estado_base(delta):
 		yield(get_tree().create_timer(cooldownP1), "timeout")
 		Can_PowerUp1 = true
 	
-	if Input.is_action_just_pressed("PowerUp2") and Can_PowerUp2:
+	#Cond. Rajada stun
+	elif Input.is_action_just_pressed("PowerUp2") and Can_PowerUp2:
 		var i = 0
 		while i < 5:
-			shot()
+			shot(true)
 			yield(get_tree().create_timer(0.2),"timeout")
 			i += 1
 			
@@ -97,13 +97,14 @@ func roll_state():
 	move()
 #Fim das funções de estado
 
-#Controle do movimento
-func shot():
-	var powerup2 = SHOT.instance()
-	powerup2.stunbullet = true
-	powerup2.position = $Weapon/Position2D.global_position
-	powerup2.apply_impulse(Vector2(), Vector2(powerup2.BULLET_SPEED, 0).rotated($Weapon.rotation))
-	get_parent().add_child(powerup2)
+#
+func shot(isStunBullet):
+	var shots = SHOT.instance()
+	get_parent().add_child(shots)
+	shots.stunbullet = isStunBullet
+	shots.position = $Weapon/Position2D.global_position
+	shots.rotation_degrees = $Weapon.rotation_degrees
+	shots.apply_impulse(Vector2(), Vector2(shots.BULLET_SPEED, 0).rotated($Weapon.rotation))
 
 
 func control_loop():
@@ -129,7 +130,6 @@ func move():
 
 func _on_HurtBox_area_entered(area):
 	if InvunerabilityTimer.is_stopped():
-		hurtbox.start_invincibility(0.4)
 		InvunerabilityTimer.start(0.5)
 		$AnimationPlayer.play("Flash")
 		Health -= area.DAMAGE
