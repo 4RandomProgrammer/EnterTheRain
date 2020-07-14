@@ -128,8 +128,8 @@ func _on_Stats_no_health():
 
 func _on_HurtBox_area_entered(area):
 	if state != SPAWNING:
-		var damage = area.DAMAGE
-		stats.Health -= damage
+		var dano = area.DAMAGE
+		stats.Health -= dano
 
 
 func _on_Bullet_timer_timeout():

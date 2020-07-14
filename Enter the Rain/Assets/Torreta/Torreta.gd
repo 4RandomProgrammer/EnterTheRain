@@ -45,8 +45,8 @@ func _on_ShootTimer_timeout():  # Quando acabar esse tempo, torreta pode atirar 
 
 
 func _on_HurtBox_area_entered(area):  # Torreta foi atingida.
-	var damage = area.DAMAGE
-	stats.Health -= damage
+	var dano = area.DAMAGE
+	stats.Health -= dano
 
 
 func _on_Stats_no_health():

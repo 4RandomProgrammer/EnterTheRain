@@ -33,7 +33,6 @@ var dano = 1
 const SHOT = preload("res://Assets/Shot/Shot.tscn")
 const POWERUP1 = preload("res://Assets/PowerUps/Granada.tscn")
 const FRICTION = 25
-const DistCentro = 16
 const ROLL_SPEED = 450
 
 #Sinais
@@ -50,7 +49,6 @@ func _physics_process(delta):
 
 		ROLL:
 			roll_state()
-
 
 #Func para os estados
 func estado_base(delta):
@@ -81,12 +79,15 @@ func estado_base(delta):
 	#Cond. Rajada stun
 	elif Input.is_action_just_pressed("PowerUp2") and Can_PowerUp2:
 		var i = 0
+		can_fire = false
+		Can_PowerUp2 = false
 		while i < 5:
 			shot(true)
 			yield(get_tree().create_timer(0.2),"timeout")
 			i += 1
-			
-		Can_PowerUp2 = false
+		
+		can_fire = true
+		
 		yield(get_tree().create_timer(cooldownP2),"timeout")
 		Can_PowerUp2 = true
 
@@ -97,7 +98,7 @@ func roll_state():
 	move()
 #Fim das funções de estado
 
-#
+#Func de tiro
 func shot(isStunBullet):
 	var shots = SHOT.instance()
 	get_parent().add_child(shots)
@@ -106,15 +107,12 @@ func shot(isStunBullet):
 	shots.rotation_degrees = $Weapon.rotation_degrees
 	shots.apply_impulse(Vector2(), Vector2(shots.BULLET_SPEED, 0).rotated($Weapon.rotation))
 
-
+#Func de inputs
 func control_loop():
 	#Passando o movimento direto com a anulação de tecla ja feita
 	moveDirection.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	moveDirection.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
-	
-#Func de direção do tiro, vê aonde o jogador esta andando e atualiza para onde ele vai atirar
 
-	
 #Func de movimento, aqui se adiciona knockback se quiser
 func movement_loop(delta):
 	if moveDirection != Vector2.ZERO:
@@ -143,7 +141,7 @@ func die():
 func set_MaxHealth(value):
 	MaxHealth += value
 	emit_signal("maxhealthChanged", MaxHealth)
-	
+
 func _on_AnimationPlayer_animation_finished(_Dash):
 	state = MOVE
 	$HurtBox/CollisionShape2D.call_deferred("set","disabled", false)
