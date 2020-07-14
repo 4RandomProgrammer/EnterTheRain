@@ -9,6 +9,7 @@ onready var stats = $Stats
 onready var screen_verification = $VisibilityNotifier2D
 var can_shoot = true
 var state = NORMAL
+export var damage = 1
 var rng = RandomNumberGenerator.new()
 
 
@@ -25,6 +26,7 @@ func _physics_process(_delta):
 
 func try_aim_player_and_shoot():  # Função que tentará atirar no player. Só atirará quando tiver no range e sem obstaculos na frente.
 	if turret_range.player_aimed():
+		rotation = (turret_range.target.position - position).angle()
 		if can_shoot:
 			shoot(turret_range.target.position)
 

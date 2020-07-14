@@ -1,3 +1,4 @@
 extends Area2D
 
-export var DAMAGE = 1
+onready var DAMAGE = get_parent().damage
+

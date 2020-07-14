@@ -6,6 +6,7 @@ onready var wanderController = $Random_moviment
 onready var enemy_range = $Range
 onready var stats = $Stats
 onready var screen_verification = $VisibilityNotifier2D
+export var damage = 1
 var state = STOPED
 var velocity = Vector2.ZERO
 var target
@@ -71,6 +72,7 @@ func pick_random_state(state_list):  # Função que escolhe um estado aleatório
 
 func _on_HurtBox_area_entered(area):
 	var damage = area.DAMAGE
+	print(damage)
 	stats.Health -= damage
 
 
