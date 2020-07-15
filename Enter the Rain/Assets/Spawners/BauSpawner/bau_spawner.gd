@@ -1,12 +1,14 @@
 extends "res://Assets/Spawners/RandomSpawner.gd"
 
 onready var Chest = preload("res://Assets/Bau/Bau.tscn")
-onready var Sword1 = preload("res://Assets/Itens/Sword1.tscn")
-onready var Bow1 = preload("res://Assets/Itens/Bow1.tscn")
-onready var Diamond = preload("res://Assets/Itens/Diamond.tscn")
-onready var Staff = preload("res://Assets/Itens/Staff.tscn")
+onready var item_damage = preload("res://Assets/Itens/Item_damage.tscn")
+onready var item_atack_speed = preload("res://Assets/Itens/Item_atack_speed.tscn")
+onready var item_move_speed = preload("res://Assets/Itens/Item_move_speed.tscn")
+onready var item_stun_prob = preload("res://Assets/Itens/Item_stun_prob.tscn")
+onready var item_extra_shots = preload("res://Assets/Itens/Item_extra_shots.tscn")
 
-onready var lista_de_itens = [Sword1, Bow1, Diamond, Staff]
+onready var lista_de_itens = [item_damage, item_atack_speed, item_move_speed, item_stun_prob,
+							  item_extra_shots]
 onready var tamanho_lista = len(lista_de_itens)
 
 

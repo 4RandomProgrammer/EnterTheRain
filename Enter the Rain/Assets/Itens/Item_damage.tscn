@@ -1,12 +1,13 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Assets/Itens/Itens.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Assets/Itens/Staff.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Itens/Staff.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Itens/Itens_sprites/Sword1.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Itens/Item_damage.gd" type="Script" id=3]
+
 
 [node name="Item" instance=ExtResource( 1 )]
-script = ExtResource( 2 )
+script = ExtResource( 3 )
 
 [node name="Item_sprite" parent="." index="1"]
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

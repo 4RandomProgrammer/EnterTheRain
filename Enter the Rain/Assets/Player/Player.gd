@@ -16,6 +16,9 @@ export (int) var MAX_SPEED = 250
 export (float)var fire_rate = 0.5
 export (float)var cooldownP1 = 2
 export (float)var cooldownP2 = 3
+export var stun_probability = 0
+export var extra_shots_probability = 0
+onready var rng = RandomNumberGenerator.new()
 var moveDirection = Vector2(0,0)
 var moveAnt = Vector2.RIGHT
 var posAnt = Vector2.RIGHT
@@ -28,7 +31,8 @@ var can_fire = true
 var dano = 1
 
 
-
+func _ready():
+	rng.randomize()
 #Constantes
 const SHOT = preload("res://Assets/Shot/Shot.tscn")
 const POWERUP1 = preload("res://Assets/PowerUps/Granada.tscn")
@@ -60,7 +64,12 @@ func estado_base(delta):
 	
 	#Cond. tiro
 	if Input.is_action_pressed("Shoot") and can_fire:
-		shot(false)
+		if rng.randi_range(1, 100) <= stun_probability:
+			shot(true, 0)
+		if rng.randi_range(1, 100) <= extra_shots_probability:
+			shot(false, PI/6)
+			shot(false, -PI/6)
+		shot(false, 0)
 		can_fire = false
 		yield(get_tree().create_timer(fire_rate), "timeout")
 		can_fire = true
@@ -82,7 +91,7 @@ func estado_base(delta):
 		can_fire = false
 		Can_PowerUp2 = false
 		while i < 5:
-			shot(true)
+			shot(true, 0)
 			yield(get_tree().create_timer(0.2),"timeout")
 			i += 1
 		
@@ -99,13 +108,13 @@ func roll_state():
 #Fim das funções de estado
 
 #Func de tiro
-func shot(isStunBullet):
+func shot(isStunBullet, extra_angle):
 	var shots = SHOT.instance()
 	get_parent().add_child(shots)
 	shots.stunbullet = isStunBullet
 	shots.position = $Weapon/Position2D.global_position
-	shots.rotation_degrees = $Weapon.rotation_degrees
-	shots.apply_impulse(Vector2(), Vector2(shots.BULLET_SPEED, 0).rotated($Weapon.rotation))
+	shots.rotation_degrees = $Weapon.rotation_degrees + extra_angle
+	shots.apply_impulse(Vector2(), Vector2(shots.BULLET_SPEED, 0).rotated($Weapon.rotation + extra_angle))
 
 #Func de inputs
 func control_loop():
@@ -140,7 +149,12 @@ func die():
 
 func set_MaxHealth(value):
 	MaxHealth += value
-	emit_signal("maxhealthChanged", MaxHealth)
+	emit_signal("maxhealthChanged", value)
+
+func set_NewHealth(value):
+	Health += value
+	print(Health)
+	emit_signal("healthChanged", Health)
 
 func _on_AnimationPlayer_animation_finished(_Dash):
 	state = MOVE

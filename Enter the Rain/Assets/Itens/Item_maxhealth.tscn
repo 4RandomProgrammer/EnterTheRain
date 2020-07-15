@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/Itens/Itens_sprites/Diamond2.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Itens/Itens.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Itens/Item_maxhealth.gd" type="Script" id=3]
+
+[node name="Item" instance=ExtResource( 2 )]
+script = ExtResource( 3 )
+
+[node name="Item_sprite" parent="." index="1"]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 1 )
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
