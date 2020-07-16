@@ -4,7 +4,9 @@ extends KinematicBody2D
 
 enum {
 	MOVE,
-	ROLL
+	ROLL,
+	PW1,
+	PW2
 }
 
 #Variaveis
@@ -58,12 +60,24 @@ func estado_base(delta):
 	if Input.is_action_just_pressed("Roll"):
 		state = ROLL
 	
-	#Cond. tiro
-	if Input.is_action_pressed("Shoot") and can_fire:
-		shot(false)
+	if Input.is_action_just_pressed("PowerUp2") and Can_PowerUp2:
+		var i = 0
+		var test = 0
 		can_fire = false
-		yield(get_tree().create_timer(fire_rate), "timeout")
+		Can_PowerUp2 = false
+		while i < 5:
+			shot(true)
+			yield(get_tree().create_timer(0.2),"timeout")
+			i += 1
+		
 		can_fire = true
+		$PowerUp2CD.start(cooldownP2)
+	
+	#Cond. tiro
+	elif Input.is_action_pressed("Shoot") and can_fire:
+		can_fire = false
+		shot(false)
+		$ShotCD.start(fire_rate)
 	
 	#Cond. Granada
 	elif Input.is_action_just_pressed("PowerUp1") and Can_PowerUp1:
@@ -76,20 +90,8 @@ func estado_base(delta):
 		yield(get_tree().create_timer(cooldownP1), "timeout")
 		Can_PowerUp1 = true
 	
-	#Cond. Rajada stun
-	elif Input.is_action_just_pressed("PowerUp2") and Can_PowerUp2:
-		var i = 0
-		can_fire = false
-		Can_PowerUp2 = false
-		while i < 5:
-			shot(true)
-			yield(get_tree().create_timer(0.2),"timeout")
-			i += 1
-		
-		can_fire = true
-		
-		yield(get_tree().create_timer(cooldownP2),"timeout")
-		Can_PowerUp2 = true
+	
+	
 
 func roll_state():
 	$AnimationPlayer.play("Dash")
@@ -145,3 +147,12 @@ func set_MaxHealth(value):
 func _on_AnimationPlayer_animation_finished(_Dash):
 	state = MOVE
 	$HurtBox/CollisionShape2D.call_deferred("set","disabled", false)
+
+
+func _on_PowerUp2CD_timeout():
+	Can_PowerUp2 = true
+
+
+
+func _on_ShotCD_timeout():
+	can_fire = true

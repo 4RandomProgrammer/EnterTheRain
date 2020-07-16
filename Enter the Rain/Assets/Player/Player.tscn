@@ -86,9 +86,10 @@ one_shot = true
 one_shot = true
 
 [node name="ShotCD" type="Timer" parent="."]
+one_shot = true
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
-[connection signal="timeout" from="PowerUp1CD" to="." method="_on_PowerUp1CD_timeout"]
 [connection signal="timeout" from="PowerUp2CD" to="." method="_on_PowerUp2CD_timeout"]
+[connection signal="timeout" from="ShotCD" to="." method="_on_ShotCD_timeout"]
 
 [editable path="HurtBox"]
