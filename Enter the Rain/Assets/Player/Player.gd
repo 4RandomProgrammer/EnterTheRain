@@ -36,6 +36,7 @@ func _ready():
 #Constantes
 const SHOT = preload("res://Assets/Shot/Shot.tscn")
 const POWERUP1 = preload("res://Assets/PowerUps/Granada.tscn")
+const MISSILE_SHOT = preload("res://Assets/Enemy_bullet/MissileBullet.tscn")
 const FRICTION = 25
 const ROLL_SPEED = 450
 
@@ -70,6 +71,7 @@ func estado_base(delta):
 			shot(false, PI/6)
 			shot(false, -PI/6)
 		shot(false, 0)
+		missile()
 		can_fire = false
 		yield(get_tree().create_timer(fire_rate), "timeout")
 		can_fire = true
@@ -110,11 +112,18 @@ func roll_state():
 #Func de tiro
 func shot(isStunBullet, extra_angle):
 	var shots = SHOT.instance()
+	shots.damage = dano
 	get_parent().add_child(shots)
 	shots.stunbullet = isStunBullet
 	shots.position = $Weapon/Position2D.global_position
 	shots.rotation_degrees = $Weapon.rotation_degrees + extra_angle
 	shots.apply_impulse(Vector2(), Vector2(shots.BULLET_SPEED, 0).rotated($Weapon.rotation + extra_angle))
+
+func missile():
+	var missile = MISSILE_SHOT.instance()
+	missile.start(global_position, $Weapon.rotation)
+	get_parent().add_child(missile)
+
 
 #Func de inputs
 func control_loop():

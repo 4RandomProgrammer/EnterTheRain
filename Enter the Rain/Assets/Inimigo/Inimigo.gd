@@ -52,7 +52,7 @@ func movimentation():
 
 func try_aim_and_change_state():  # Tenta "mirar" no inimigo. Se conseguir, irá persegui-lo.
 	if state != STUNNED:
-		if enemy_range.player_aimed():
+		if enemy_range.entity_aimed():
 			state = CHASING
 		else:
 			if state != RANDOM_WALKING and state != STOPED:  # Trocar de estado quando o alvo se esconder atrás da parede.
@@ -71,8 +71,8 @@ func pick_random_state(state_list):  # Função que escolhe um estado aleatório
 
 
 func _on_HurtBox_area_entered(area):
-	var damage = area.DAMAGE
-	stats.Health -= damage
+	var damage_taken = area.DAMAGE
+	stats.Health -= damage_taken
 
 
 func _on_Stats_no_health():

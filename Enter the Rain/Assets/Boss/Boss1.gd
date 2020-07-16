@@ -99,7 +99,7 @@ func power_3():
 
 
 func try_aim_player():  # Tentar atirar no player se tiver no range e sem obstaculos na frente.
-	if boss_range.player_aimed():
+	if boss_range.entity_aimed():
 		if can_shoot:
 			shoot(boss_range.target.position)
 
@@ -128,8 +128,8 @@ func _on_Stats_no_health():
 
 func _on_HurtBox_area_entered(area):
 	if state != SPAWNING:
-		var dano = area.DAMAGE
-		stats.Health -= dano
+		var damage_taken = area.DAMAGE
+		stats.Health -= damage_taken
 
 
 func _on_Bullet_timer_timeout():

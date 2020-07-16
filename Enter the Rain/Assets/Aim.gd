@@ -1,7 +1,7 @@
 extends Area2D
 var target
 
-func player_aimed():
+func entity_aimed():
 	if target:
 		var space_state = get_world_2d().direct_space_state
 		var target_extents = target.get_node('CollisionShape2D').shape.extents - Vector2(5, 5)

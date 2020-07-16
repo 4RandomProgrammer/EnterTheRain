@@ -25,7 +25,7 @@ func _physics_process(_delta):
 
 
 func try_aim_player_and_shoot():  # Função que tentará atirar no player. Só atirará quando tiver no range e sem obstaculos na frente.
-	if turret_range.player_aimed():
+	if turret_range.entity_aimed():
 		rotation = (turret_range.target.position - position).angle()
 		if can_shoot:
 			shoot(turret_range.target.position)
@@ -45,8 +45,8 @@ func _on_ShootTimer_timeout():  # Quando acabar esse tempo, torreta pode atirar 
 
 
 func _on_HurtBox_area_entered(area):  # Torreta foi atingida.
-	var dano = area.DAMAGE
-	stats.Health -= dano
+	var damage_taken = area.DAMAGE
+	stats.Health -= damage_taken
 
 
 func _on_Stats_no_health():
