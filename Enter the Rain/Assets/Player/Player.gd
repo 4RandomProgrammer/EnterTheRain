@@ -18,6 +18,7 @@ export (float)var cooldownP1 = 2
 export (float)var cooldownP2 = 3
 export var stun_probability = 0
 export var extra_shots_probability = 0
+export var missile_probability = 0
 onready var rng = RandomNumberGenerator.new()
 var moveDirection = Vector2(0,0)
 var moveAnt = Vector2.RIGHT
@@ -70,8 +71,9 @@ func estado_base(delta):
 		if rng.randi_range(1, 100) <= extra_shots_probability:
 			shot(false, PI/6)
 			shot(false, -PI/6)
+		if rng.randi_range(1, 100) <= missile_probability:
+			missile()
 		shot(false, 0)
-		missile()
 		can_fire = false
 		yield(get_tree().create_timer(fire_rate), "timeout")
 		can_fire = true
@@ -162,7 +164,6 @@ func set_MaxHealth(value):
 
 func set_NewHealth(value):
 	Health += value
-	print(Health)
 	emit_signal("healthChanged", Health)
 
 func _on_AnimationPlayer_animation_finished(_Dash):

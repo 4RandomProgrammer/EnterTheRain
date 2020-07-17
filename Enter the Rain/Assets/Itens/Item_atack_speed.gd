@@ -1,4 +1,5 @@
 extends Node2D
+signal atack_speed
 
 var atack_speed = 1 / 1000
 

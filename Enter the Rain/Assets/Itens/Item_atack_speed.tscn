@@ -9,4 +9,11 @@ script = ExtResource( 3 )
 
 [node name="Item_sprite" parent="." index="1"]
 texture = ExtResource( 2 )
+
+[node name="Control" type="Control" parent="." index="2"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

@@ -23,29 +23,28 @@ func _physics_process(delta):
 			if result:
 				if not result.collider.name in lista_mapa:
 					velocity += chase()
+					rotation = velocity.angle()
+					
 
-func chase():
+func chase():  # Retorna vetor que corrigi a direção do missil
 	var desired_velocity = (target.position - position).normalized() * speed
 	var rotate_speed = (desired_velocity - velocity).normalized() * 10
 	return rotate_speed
-	
-	
 
 
-func _on_VisibilityNotifier2D_screen_exited():
+func _on_VisibilityNotifier2D_screen_exited():  # Saiu da tela
 	queue_free()
 
 
-func _on_Area2D_body_entered(_body):
+func _on_Area2D_body_entered(_body):  # acertou algum alvo
 	queue_free()
 
 
-func _on_Range_body_entered(body):
+func _on_Range_body_entered(body):  # inimigo no range
 	if not body.name in lista_mapa and not target:
 		target = body
 
 
-func _on_Range_body_exited(body):
+func _on_Range_body_exited(body):  # inimigo saiu do range
 	if target == body:
-		print('saiu')
 		target == null
