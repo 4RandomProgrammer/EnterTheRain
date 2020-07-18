@@ -1,19 +1,21 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Assets/Itens/Itens.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Itens/Itens_sprites/Bow1.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Itens/Item_atack_speed.gd" type="Script" id=3]
 
-[node name="Item" instance=ExtResource( 1 )]
+[sub_resource type="CircleShape2D" id=1]
+radius = 32.0
+
+[node name="Item" type="Node2D"]
 script = ExtResource( 3 )
 
-[node name="Item_sprite" parent="." index="1"]
-texture = ExtResource( 2 )
+[node name="AtackSpeed" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 2
 
-[node name="Control" type="Control" parent="." index="2"]
-margin_right = 40.0
-margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AtackSpeed"]
+shape = SubResource( 1 )
+
+[node name="Item_sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+[connection signal="body_entered" from="AtackSpeed" to="." method="_on_Area2D_body_entered"]

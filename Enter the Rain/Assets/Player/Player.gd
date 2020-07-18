@@ -169,3 +169,7 @@ func set_NewHealth(value):
 func _on_AnimationPlayer_animation_finished(_Dash):
 	state = MOVE
 	$HurtBox/CollisionShape2D.call_deferred("set","disabled", false)
+
+
+func _on_ItemCollectArea_area_entered(area):
+	print(area.name)

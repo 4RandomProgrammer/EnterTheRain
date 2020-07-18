@@ -10,8 +10,6 @@ radius = 71.6602
 extents = Vector2( 13.596, 10.7151 )
 
 [node name="Bau" type="KinematicBody2D"]
-collision_layer = 33
-collision_mask = 33
 script = ExtResource( 2 )
 
 [node name="Range_abrir" type="Area2D" parent="."]
