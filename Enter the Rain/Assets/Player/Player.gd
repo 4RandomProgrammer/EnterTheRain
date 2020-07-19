@@ -30,7 +30,7 @@ var Can_PowerUp1 = true
 var Can_PowerUp2 = true
 var can_fire = true
 var dano = 1
-
+var money = 0
 
 func _ready():
 	rng.randomize()
@@ -44,6 +44,7 @@ const ROLL_SPEED = 450
 #Sinais
 signal healthChanged(health)
 signal maxhealthChanged(value)
+signal moneyChanged(current_money)
 
 
 
@@ -166,10 +167,14 @@ func set_NewHealth(value):
 	Health += value
 	emit_signal("healthChanged", Health)
 
+func update_Money(money_value):
+	# Atualiza o dinheiro do player. Acontece ao matar inimigos(ganha dinheiro) e abrir baus(perde).
+	money += money_value
+	emit_signal("moneyChanged", money)
+
 func _on_AnimationPlayer_animation_finished(_Dash):
 	state = MOVE
 	$HurtBox/CollisionShape2D.call_deferred("set","disabled", false)
-
 
 func _on_ItemCollectArea_area_entered(area):
 	print(area.name)

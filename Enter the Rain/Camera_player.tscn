@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/Nova pasta/HealthBar.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Nova pasta/DinheiroCounter.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Nova pasta/AbilityButton.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Nova pasta/AbilityButton2.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Nova pasta/Pause.gd" type="Script" id=9]
+
+[node name="Camera2D" type="Camera2D"]
+position = Vector2( 79.8219, 64.8527 )
+current = true
+process_mode = 0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HealthBar" parent="CanvasLayer" instance=ExtResource( 2 )]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control"]
+margin_top = 32.0
+margin_right = 80.0
+margin_bottom = 64.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AbilityButton" parent="CanvasLayer/Control/HBoxContainer" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 32.0
+margin_bottom = 32.0
+
+[node name="AbilityButton2" parent="CanvasLayer/Control/HBoxContainer" instance=ExtResource( 5 )]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+cooldown = 4.0
+
+[node name="DinheiroCounter" parent="CanvasLayer/Control/HBoxContainer" instance=ExtResource( 3 )]
+
+[node name="Pause" type="Control" parent="CanvasLayer"]
+pause_mode = 2
+visible = false
+margin_right = 1024.0
+margin_bottom = 600.0
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackGround" type="ColorRect" parent="CanvasLayer/Pause"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0509804, 0.176471, 0.372549, 0.552941 )

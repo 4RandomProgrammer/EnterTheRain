@@ -52,8 +52,8 @@ func _on_HurtBox_area_entered(area):  # Torreta foi atingida.
 func _on_Stats_no_health():
 	# Chamada quando a torreta morrer, player receberá dinheiro e a torreta sumirá.
 	rng.randomize()
-	var money = get_parent().get_node("Sistema_Dinheiro")
-	money.aumenta_dinheiro(rng.randi_range(30, 60))
+	var player = get_parent().get_node("Player")
+	player.update_Money(rng.randi_range(30, 60))
 	queue_free()
 
 

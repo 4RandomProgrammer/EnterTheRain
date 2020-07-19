@@ -5,6 +5,7 @@ onready var min_money
 var player_in_range = false
 onready var item
 onready var moneySystem
+var player
 
 func _ready():
 	rng.randomize()
@@ -17,19 +18,18 @@ func _ready():
 
 func _process(_delta):
 	move_and_slide(Vector2.ZERO)
-	if player_in_range:
+	if player:
 		# Toda vez que o player entrar no "range", verificar se ele quer abrir o bau e tem o dinheiro necessário.
-		moneySystem = get_parent().get_node("Sistema_Dinheiro")
-		if Input.is_action_pressed("ui_select") and moneySystem.dinheiro >= min_money:
+		if Input.is_action_pressed("ui_select") and player.money >= min_money:
 			# Atualizar dinheiro atual, spawnar o item e desaparecer com o baú.
-			moneySystem.atualiza_dinheiro(min_money)
+			player.update_Money(-min_money)
 			get_parent().add_child(item)
 			queue_free()
 
 
-func _on_Range_abrir_body_entered(_body):
-	player_in_range = true
+func _on_Range_abrir_body_entered(body):
+	player = body
 
 
 func _on_Range_abrir_body_exited(_body):
-	player_in_range = false
+	player = null

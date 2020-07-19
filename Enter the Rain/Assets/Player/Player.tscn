@@ -1,9 +1,16 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Assets/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/Doomguy contornado.png" type="Texture" id=2]
 [ext_resource path="res://Engine/HurtBox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Engine/Weapon.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Nova pasta/HealthBar.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Nova pasta/DinheiroCounter.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Nova pasta/AbilityButton.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Nova pasta/AbilityButton2.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/Nova pasta/Pause.gd" type="Script" id=9]
+[ext_resource path="res://icon.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Player/Itens_popups.gd" type="Script" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 15 )
@@ -88,8 +95,101 @@ collision_mask = 32
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ItemCollectArea"]
 position = Vector2( -1, 0 )
 shape = SubResource( 5 )
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+remote_path = NodePath("../Camera2D")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
+layer = 2
+
+[node name="HealthBar" parent="Camera2D/CanvasLayer" instance=ExtResource( 5 )]
+
+[node name="Control" type="Control" parent="Camera2D/CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 33.0
+margin_right = 40.0
+margin_bottom = 73.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Camera2D/CanvasLayer/Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AbilityButton" parent="Camera2D/CanvasLayer/Control/HBoxContainer" instance=ExtResource( 7 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 32.0
+margin_bottom = 40.0
+
+[node name="AbilityButton2" parent="Camera2D/CanvasLayer/Control/HBoxContainer" instance=ExtResource( 8 )]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 40.0
+
+[node name="DinheiroCounter" parent="Camera2D/CanvasLayer/Control/HBoxContainer" instance=ExtResource( 6 )]
+margin_bottom = 40.0
+
+[node name="Pause" type="Control" parent="Camera2D/CanvasLayer"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="Camera2D/CanvasLayer/Pause"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Itens_UI" type="Control" parent="Camera2D/CanvasLayer"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite_popup" type="Sprite" parent="Camera2D/CanvasLayer/Itens_UI"]
+visible = false
+position = Vector2( 188.3, 440.891 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 10 )
+
+[node name="Label_popup" type="Label" parent="Camera2D/CanvasLayer/Itens_UI"]
+visible = false
+margin_left = 245.962
+margin_top = 437.392
+margin_right = 346.962
+margin_bottom = 451.392
+text = "Item description"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer_popup" type="Timer" parent="Camera2D/CanvasLayer/Itens_UI"]
+wait_time = 5.0
+one_shot = true
+[connection signal="healthChanged" from="." to="Camera2D/CanvasLayer/HealthBar" method="_on_Player_healthChanged"]
+[connection signal="maxhealthChanged" from="." to="Camera2D/CanvasLayer/HealthBar" method="_on_Player_maxhealthChanged"]
+[connection signal="moneyChanged" from="." to="Camera2D/CanvasLayer/Control/HBoxContainer/DinheiroCounter" method="_on_Player_moneyChanged"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="area_entered" from="ItemCollectArea" to="Camera2D/CanvasLayer/Itens_UI" method="_on_ItemCollectArea_area_entered"]
 [connection signal="area_entered" from="ItemCollectArea" to="." method="_on_ItemCollectArea_area_entered"]
+[connection signal="timeout" from="Camera2D/CanvasLayer/Itens_UI/Timer_popup" to="Camera2D/CanvasLayer/Itens_UI" method="_on_Timer_popup_timeout"]
 
 [editable path="HurtBox"]
