@@ -28,8 +28,8 @@ func _ready():
 func _on_ItemCollectArea_area_entered(item):
 	var item_sprite = itens_UI_dict[item.name]['sprite']
 	var item_description = itens_UI_dict[item.name]['description']
-	print(timer_popup.time_left)
 	if timer_popup.time_left == 0:
+		# Não há popups no momento, portanto, precisa voltar a visibilidade.
 		sprite_popup.texture = item_sprite
 		label_popup.text = item_description
 		sprite_popup.visible = true
@@ -40,12 +40,12 @@ func _on_ItemCollectArea_area_entered(item):
 
 func _on_Timer_popup_timeout():
 	itens_popups_queue.pop_front()
-	print(timer_popup.time_left)
-	print(itens_popups_queue)
 	if not itens_popups_queue:
+		# Acabou os itens da lista, popup deve ficar invisivel,
 		sprite_popup.visible = false
 		label_popup.visible = false
 	else:
+		# Ainda existem itens na lista, hora de mostrar o próximo.
 		sprite_popup.texture = itens_popups_queue[0][0]
 		label_popup.text = itens_popups_queue[0][1]
 		timer_popup.start()
