@@ -5,29 +5,19 @@ onready var label_popup = get_node('Label_popup')
 onready var timer_popup = get_node("Timer_popup")
 var itens_popups_queue = []
 var itens_UI_dict = {
-	'AtackSpeed': {'sprite':load("res://Assets/Itens/Itens_sprites/Bow1.png"),
-				   'description':'Aumenta a sua velocidade de ataque', 'count':0},
-	'Damage':     {'sprite':load("res://Assets/Itens/Itens_sprites/Sword1.png"), 
-				   'description':'Aumenta o seu dano', 'count':0},
-	'ExtraShots': {'sprite':load("res://Assets/Itens/Itens_sprites/Sword_2.png"), 
-				   'description':'Aumenta a probabilidade de atirar tiros extras', 'count':0},
-	'Missile':    {'sprite':load("res://Assets/Enemy_bullet/missile00.png"),
-				   'description':'Aumenta a probabilidade de soltar misseis teleguiados', 'count':0},
-	'MaxHealth':  {'sprite':load("res://Assets/Itens/Itens_sprites/Diamond2.png"),
-				   'description':'Aumenta a sua vida máxima', 'count':0},
-	'MoveSpeed':  {'sprite':load("res://Assets/Itens/Itens_sprites/Diamond1.png"),
-				   'description':'Aumenta a sua velocidade de movimento', 'count':0},
-	'StunProb':   {'sprite':load("res://Assets/Itens/Itens_sprites/Staff1.png"),
-				   'description':'Aumenta a probabilidade de atirar balas atordoantes', 'count':0}
+	'AtackSpeed':0,
+	'Damage':0,
+	'ExtraShots':0,
+	'Missile':0,
+	'MaxHealth':0,
+	'MoveSpeed':0,
+	'StunProb':0
 }
-
-func _ready():
-	pass # Replace with function body.
 
 
 func _on_ItemCollectArea_area_entered(item):
-	var item_sprite = itens_UI_dict[item.name]['sprite']
-	var item_description = itens_UI_dict[item.name]['description']
+	var item_sprite = item.get_parent().sprite
+	var item_description = item.get_parent().description
 	if timer_popup.time_left == 0:
 		# Não há popups no momento, portanto, precisa voltar a visibilidade.
 		sprite_popup.texture = item_sprite
