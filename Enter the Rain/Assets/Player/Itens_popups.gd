@@ -10,15 +10,18 @@ var itens_UI_dict = {}
 
 
 func update_itens_UI(item):
-	if item.name in itens_UI_dict:
-		itens_UI_dict[item.name][0] += 1
-		itens_UI_dict[item.name][1].get_node("Label").text = 'x' + str(itens_UI_dict[item.name][0])
-	else:
-		var itens_ui = itens_UI_panel.instance()
-		itens_UI_dict[item.name] = [1, itens_ui]
-		itens_ui.get_node("Sprite").texture = item.get_parent().sprite
-		itens_ui.get_node("Label").text = 'x1'
-		get_node("HBoxContainer").add_child(itens_ui)
+	if not item.name == "Life":
+		if item.name in itens_UI_dict:  # O item atual já foi coletado uma vez
+			itens_UI_dict[item.name][0] += 1  # Aumentar a quantidade do item coletado
+			# Atualizar texto
+			itens_UI_dict[item.name][1].get_node("Label").text = 'x' + str(itens_UI_dict[item.name][0])
+		else:  # Primeira vez que o item foi coletado
+			# Adiciona-lo ao dicionário e instanciar o item na UI.
+			var itens_ui = itens_UI_panel.instance()
+			itens_UI_dict[item.name] = [1, itens_ui]
+			itens_ui.get_node("Sprite").texture = item.get_parent().sprite
+			itens_ui.get_node("Label").text = 'x1'
+			get_node("HBoxContainer").add_child(itens_ui)
 
 
 func _on_ItemCollectArea_area_entered(item):

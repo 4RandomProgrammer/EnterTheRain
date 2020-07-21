@@ -4,28 +4,28 @@
 [ext_resource path="res://Assets/Itens/VCR_OSD_MONO_1.001.ttf" type="DynamicFontData" id=2]
 
 [sub_resource type="DynamicFont" id=1]
-size = 23
+size = 20
 font_data = ExtResource( 2 )
 
 [node name="Panel" type="Panel"]
-margin_right = 50.0
-margin_bottom = 50.0
+margin_right = 39.0
+margin_bottom = 37.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 25.1329, 24.8718 )
-scale = Vector2( 3, 3 )
+position = Vector2( 20.1962, 18.218 )
+scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
 
 [node name="Label" type="Label" parent="."]
-margin_left = -12.0
-margin_top = 28.0
-margin_right = 53.0
-margin_bottom = 50.0
+margin_left = -22.5173
+margin_top = 32.0716
+margin_right = 42.4827
+margin_bottom = 54.0716
 custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 1, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "x1"
 align = 2
 __meta__ = {
