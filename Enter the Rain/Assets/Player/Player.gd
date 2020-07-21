@@ -19,6 +19,8 @@ export (float)var cooldownP2 = 3
 export var stun_probability = 0
 export var extra_shots_probability = 0
 export var missile_probability = 0
+export var health_drop_probability = 0
+onready var health_item = load("res://Assets/Itens/Item_life_regen.tscn")
 onready var rng = RandomNumberGenerator.new()
 var moveDirection = Vector2(0,0)
 var moveAnt = Vector2.RIGHT
@@ -172,9 +174,14 @@ func update_Money(money_value):
 	money += money_value
 	emit_signal("moneyChanged", money)
 
+func player_killed_enemy(enemy_position):
+	update_Money(rng.randi_range(30, 60))
+	if rng.randi_range(1, 100) <= health_drop_probability:
+		var health_droped = health_item.instance()
+		health_droped.position = enemy_position
+		get_parent().add_child(health_droped)
+
+
 func _on_AnimationPlayer_animation_finished(_Dash):
 	state = MOVE
 	$HurtBox/CollisionShape2D.call_deferred("set","disabled", false)
-
-func _on_ItemCollectArea_area_entered(area):
-	print(area.name)

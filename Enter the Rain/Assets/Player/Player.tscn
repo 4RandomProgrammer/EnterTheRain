@@ -183,13 +183,19 @@ __meta__ = {
 [node name="Timer_popup" type="Timer" parent="Camera2D/CanvasLayer/Itens_UI"]
 wait_time = 5.0
 one_shot = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Camera2D/CanvasLayer/Itens_UI"]
+margin_left = 137.0
+margin_right = 855.0
+margin_bottom = 40.0
+custom_constants/separation = 45
 [connection signal="healthChanged" from="." to="Camera2D/CanvasLayer/HealthBar" method="_on_Player_healthChanged"]
 [connection signal="maxhealthChanged" from="." to="Camera2D/CanvasLayer/HealthBar" method="_on_Player_maxhealthChanged"]
 [connection signal="moneyChanged" from="." to="Camera2D/CanvasLayer/Control/HBoxContainer/DinheiroCounter" method="_on_Player_moneyChanged"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
-[connection signal="area_entered" from="ItemCollectArea" to="Camera2D/CanvasLayer/Itens_UI" method="_on_ItemCollectArea_area_entered"]
 [connection signal="area_entered" from="ItemCollectArea" to="." method="_on_ItemCollectArea_area_entered"]
+[connection signal="area_entered" from="ItemCollectArea" to="Camera2D/CanvasLayer/Itens_UI" method="_on_ItemCollectArea_area_entered"]
 [connection signal="timeout" from="Camera2D/CanvasLayer/Itens_UI/Timer_popup" to="Camera2D/CanvasLayer/Itens_UI" method="_on_Timer_popup_timeout"]
 
 [editable path="HurtBox"]

@@ -8,9 +8,10 @@ onready var item_stun_prob = preload("res://Assets/Itens/Item_stun_prob.tscn")
 onready var item_extra_shots = preload("res://Assets/Itens/Item_extra_shots.tscn")
 onready var item_maxhealth = preload("res://Assets/Itens/Item_maxhealth.tscn")
 onready var item_missile = preload("res://Assets/Itens/Item_missile.tscn")
+onready var item_life_steal = preload("res://Assets/Itens/Item_life_steal.tscn")
 
 onready var lista_de_itens = [item_damage, item_atack_speed, item_move_speed, item_stun_prob,
-							  item_extra_shots, item_maxhealth, item_missile]
+							  item_extra_shots, item_maxhealth, item_missile, item_life_steal]
 onready var tamanho_lista = len(lista_de_itens)
 
 

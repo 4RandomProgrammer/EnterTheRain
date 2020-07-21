@@ -29,7 +29,9 @@ func try_aim_player_and_shoot():  # Função que tentará atirar no player. Só 
 		rotation = (turret_range.target.position - position).angle()
 		if can_shoot:
 			shoot(turret_range.target.position)
-
+	else:  # Resetar o timer se o player não estiver na mira (faz com que a torre não atire imediatamente)
+		can_shoot = false
+		$ShootTimer.start()
 
 func shoot(pos):  # Função que atira na direção do player.
 	var bullet = Bullet.instance()
@@ -51,9 +53,7 @@ func _on_HurtBox_area_entered(area):  # Torreta foi atingida.
 
 func _on_Stats_no_health():
 	# Chamada quando a torreta morrer, player receberá dinheiro e a torreta sumirá.
-	rng.randomize()
-	var player = get_parent().get_node("Player")
-	player.update_Money(rng.randi_range(30, 60))
+	get_parent().get_node("Player").player_killed_enemy(position)
 	queue_free()
 
 
