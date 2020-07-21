@@ -188,7 +188,7 @@ one_shot = true
 margin_left = 137.0
 margin_right = 855.0
 margin_bottom = 40.0
-custom_constants/separation = 45
+custom_constants/separation = 60
 [connection signal="healthChanged" from="." to="Camera2D/CanvasLayer/HealthBar" method="_on_Player_healthChanged"]
 [connection signal="maxhealthChanged" from="." to="Camera2D/CanvasLayer/HealthBar" method="_on_Player_maxhealthChanged"]
 [connection signal="moneyChanged" from="." to="Camera2D/CanvasLayer/Control/HBoxContainer/DinheiroCounter" method="_on_Player_moneyChanged"]

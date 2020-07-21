@@ -1,25 +1,24 @@
 extends Control
 
 onready var player = get_parent().get_parent().get_parent()
-onready var painel_teste = load("res://Teste_painel.tscn")
+onready var itens_UI_panel = load("res://Assets/Itens/Itens_UI_panel.tscn")
 onready var sprite_popup = get_node("Sprite_popup")
 onready var label_popup = get_node('Label_popup')
 onready var timer_popup = get_node("Timer_popup")
 var itens_popups_queue = []
-var itens_UI_dict = {
-	'AtackSpeed':0,
-	'Damage':0,
-	'ExtraShots':0,
-	'Missile':0,
-	'MaxHealth':0,
-	'MoveSpeed':0,
-	'StunProb':0,
-	'LifeSteal':0
-}
+var itens_UI_dict = {}
+
 
 func update_itens_UI(item):
-	var teste = painel_teste.instance()
-	get_node("HBoxContainer").add_child(teste)
+	if item.name in itens_UI_dict:
+		itens_UI_dict[item.name][0] += 1
+		itens_UI_dict[item.name][1].get_node("Label").text = 'x' + str(itens_UI_dict[item.name][0])
+	else:
+		var itens_ui = itens_UI_panel.instance()
+		itens_UI_dict[item.name] = [1, itens_ui]
+		itens_ui.get_node("Sprite").texture = item.get_parent().sprite
+		itens_ui.get_node("Label").text = 'x1'
+		get_node("HBoxContainer").add_child(itens_ui)
 
 
 func _on_ItemCollectArea_area_entered(item):
