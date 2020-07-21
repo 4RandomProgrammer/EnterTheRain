@@ -1,7 +1,7 @@
 extends Control
 
 onready var player_character_one = preload("res://Assets/Player/Player.tscn")
-var player_character_two = -1
+onready var player_character_two = preload("res://Assets/Player/Player2.tscn")
 
 
 func _on_Button_pressed():
@@ -10,5 +10,5 @@ func _on_Button_pressed():
 
 
 func _on_Button2_pressed():
-	#player vai ser o personagem 2, a definir
-	pass # Replace with function body.
+	Mensageiro.setplayer(player_character_two)
+	get_tree().change_scene("res://Assets/Areas/Area1.tscn")
