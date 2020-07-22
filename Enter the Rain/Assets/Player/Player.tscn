@@ -195,7 +195,6 @@ shape = SubResource( 5 )
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="Camera2D/CanvasLayer/Itens_UI/Timer_popup" to="Camera2D/CanvasLayer/Itens_UI" method="_on_Timer_popup_timeout"]
-[connection signal="area_entered" from="ItemCollectArea" to="." method="_on_ItemCollectArea_area_entered"]
 [connection signal="area_entered" from="ItemCollectArea" to="Camera2D/CanvasLayer/Itens_UI" method="_on_ItemCollectArea_area_entered"]
 
 [editable path="HurtBox"]
