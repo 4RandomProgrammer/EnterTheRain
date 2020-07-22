@@ -66,7 +66,7 @@ autostart = true
 
 [node name="Alcance" parent="." instance=ExtResource( 6 )]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Alcance"]
+[node name="CollisionShape2D" parent="Alcance" index="0"]
 shape = SubResource( 4 )
 
 [node name="VisibilityNotifier2D" parent="." instance=ExtResource( 7 )]
@@ -86,3 +86,5 @@ one_shot = true
 [editable path="HurtBox"]
 
 [editable path="Hitbox"]
+
+[editable path="Alcance"]

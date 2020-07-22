@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=2]
+[gd_scene load_steps=71 format=2]
 
 [ext_resource path="res://Assets/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Spawners/BossSpawner/BossSpawner.tscn" type="PackedScene" id=2]
@@ -859,31 +859,34 @@ points = PoolVector2Array( 0, 9.44562, 16, 8.86691, 16, 16, 0, 16 )
 17/z_index = 0
 
 [sub_resource type="RectangleShape2D" id=50]
-extents = Vector2( 240.051, 97.2583 )
+extents = Vector2( 236.242, 94.9422 )
 
 [sub_resource type="RectangleShape2D" id=51]
-extents = Vector2( 221.968, 102.482 )
+extents = Vector2( 218.532, 101.431 )
 
 [sub_resource type="RectangleShape2D" id=52]
-extents = Vector2( 177.668, 82.1878 )
+extents = Vector2( 174.444, 79.0385 )
 
 [sub_resource type="RectangleShape2D" id=53]
-extents = Vector2( 92.0772, 50.9566 )
+extents = Vector2( 85.056, 48.1257 )
 
 [sub_resource type="RectangleShape2D" id=54]
-extents = Vector2( 338.753, 171.299 )
+extents = Vector2( 332.758, 163.287 )
 
 [sub_resource type="RectangleShape2D" id=55]
-extents = Vector2( 94.4917, 37.8217 )
+extents = Vector2( 108.545, 37.6981 )
 
 [sub_resource type="RectangleShape2D" id=56]
-extents = Vector2( 127.614, 42.9844 )
+extents = Vector2( 127.367, 44.1929 )
 
 [sub_resource type="RectangleShape2D" id=57]
-extents = Vector2( 891.993, 619.701 )
+extents = Vector2( 760.747, 760.993 )
 
 [sub_resource type="RectangleShape2D" id=58]
-extents = Vector2( 101.023, 93.0435 )
+extents = Vector2( 105.037, 96.2037 )
+
+[sub_resource type="RectangleShape2D" id=59]
+extents = Vector2( 105.545, 85.1533 )
 
 [node name="Area1" type="Node2D"]
 script = ExtResource( 9 )
@@ -923,7 +926,7 @@ position = Vector2( 1028.7, 920.164 )
 min_entities = 2
 max_entities = 5
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Arena"]
+[node name="CollisionShape2D" parent="Arena" index="0"]
 shape = SubResource( 50 )
 
 [node name="Arena2" parent="." instance=ExtResource( 5 )]
@@ -931,7 +934,7 @@ position = Vector2( -89.0154, 446.99 )
 min_entities = 2
 max_entities = 5
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Arena2"]
+[node name="CollisionShape2D" parent="Arena2" index="0"]
 shape = SubResource( 51 )
 
 [node name="Arena3" parent="." instance=ExtResource( 5 )]
@@ -939,7 +942,7 @@ position = Vector2( 684.441, 113.907 )
 min_entities = 2
 max_entities = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Arena3"]
+[node name="CollisionShape2D" parent="Arena3" index="0"]
 shape = SubResource( 52 )
 
 [node name="Arena4" parent="." instance=ExtResource( 5 )]
@@ -947,7 +950,7 @@ position = Vector2( 956.655, 82.9942 )
 min_entities = 2
 max_entities = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Arena4"]
+[node name="CollisionShape2D" parent="Arena4" index="0"]
 shape = SubResource( 53 )
 
 [node name="Arena5" parent="." instance=ExtResource( 5 )]
@@ -955,8 +958,7 @@ position = Vector2( -229.179, 1354.35 )
 min_entities = 8
 max_entities = 12
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Arena5"]
-position = Vector2( 5, 0 )
+[node name="CollisionShape2D" parent="Arena5" index="0"]
 shape = SubResource( 54 )
 
 [node name="Arena6" parent="." instance=ExtResource( 5 )]
@@ -964,8 +966,7 @@ position = Vector2( 1863.53, 1313.35 )
 min_entities = 1
 max_entities = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Arena6"]
-position = Vector2( -15, -1 )
+[node name="CollisionShape2D" parent="Arena6" index="0"]
 shape = SubResource( 55 )
 
 [node name="Arena7" parent="." instance=ExtResource( 5 )]
@@ -973,8 +974,7 @@ position = Vector2( 2091.8, 1175.8 )
 min_entities = 2
 max_entities = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Arena7"]
-position = Vector2( 6, 0 )
+[node name="CollisionShape2D" parent="Arena7" index="0"]
 shape = SubResource( 56 )
 
 [node name="Arena8" parent="." instance=ExtResource( 5 )]
@@ -982,8 +982,8 @@ position = Vector2( 1021.35, 1331.74 )
 min_entities = 20
 max_entities = 30
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Arena8"]
-position = Vector2( 0, 1 )
+[node name="CollisionShape2D" parent="Arena8" index="0"]
+position = Vector2( 7.34998, 0 )
 shape = SubResource( 57 )
 
 [node name="bau_spawner" parent="." instance=ExtResource( 11 )]
@@ -991,7 +991,7 @@ position = Vector2( 1397.98, 312.035 )
 min_entities = 8
 max_entities = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="bau_spawner"]
+[node name="CollisionShape2D" parent="bau_spawner" index="0"]
 shape = SubResource( 58 )
 
 [node name="bau_spawner2" parent="." instance=ExtResource( 11 )]
@@ -999,8 +999,8 @@ position = Vector2( 1925.8, 307.954 )
 min_entities = 8
 max_entities = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="bau_spawner2"]
-shape = SubResource( 58 )
+[node name="CollisionShape2D" parent="bau_spawner2" index="0"]
+shape = SubResource( 59 )
 
 [node name="BossSpawner" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1660.4, 80.8527 )
@@ -1019,5 +1019,25 @@ position = Vector2( -224.179, 134.072 )
 
 [node name="Item5" parent="." instance=ExtResource( 10 )]
 position = Vector2( -127.78, 163.989 )
+
+[editable path="Arena"]
+
+[editable path="Arena2"]
+
+[editable path="Arena3"]
+
+[editable path="Arena4"]
+
+[editable path="Arena5"]
+
+[editable path="Arena6"]
+
+[editable path="Arena7"]
+
+[editable path="Arena8"]
+
+[editable path="bau_spawner"]
+
+[editable path="bau_spawner2"]
 
 [editable path="BossSpawner"]

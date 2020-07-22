@@ -59,9 +59,8 @@ wait_time = 5.0
 one_shot = true
 
 [node name="Range" parent="." instance=ExtResource( 7 )]
-visible = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
+[node name="CollisionShape2D" parent="Range" index="0"]
 shape = SubResource( 4 )
 
 [node name="VisibilityNotifier2D" parent="." instance=ExtResource( 8 )]
@@ -69,3 +68,5 @@ visible = false
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="timeout" from="StunTimer" to="." method="_on_StunTimer_timeout"]
+
+[editable path="Range"]
