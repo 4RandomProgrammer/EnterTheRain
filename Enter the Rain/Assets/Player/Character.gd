@@ -1,6 +1,5 @@
 extends KinematicBody2D
 
-
 enum {
 	MOVE,
 	ROLL,
@@ -27,10 +26,12 @@ var dano = 1
 var moveDirection = Vector2.ZERO
 
 const FRICTION = 25
+const SHOT = preload("res://Assets/Shot/Shot.tscn")
 
 #Sinais
 signal healthChanged(health)
 signal maxhealthChanged(value)
+signal no_health
 
 func _physics_process(delta):
 	#Maquina de estados
@@ -39,7 +40,6 @@ func _physics_process(delta):
 			estado_base(delta)
 
 		ROLL:
-			print(MAX_SPEED)
 			roll_state()
 
 func roll_state():
@@ -47,6 +47,19 @@ func roll_state():
 
 func estado_base(delta):
 	pass
+
+func set_MaxHealth(value):
+	MaxHealth += value
+	emit_signal("maxhealthChanged", MaxHealth)
+
+#Func de tiro
+func shot(isStunBullet):
+	var shots = SHOT.instance()
+	get_parent().add_child(shots)
+	shots.stunbullet = isStunBullet
+	shots.position = $Weapon/Position2D.global_position
+	shots.rotation_degrees = $Weapon.rotation_degrees
+	shots.apply_impulse(Vector2(), Vector2(shots.BULLET_SPEED, 0).rotated($Weapon.rotation))
 
 func die():
 	queue_free()
@@ -68,3 +81,22 @@ func movement_loop(delta):
 
 func move():
 	moveDirection = move_and_slide(moveDirection)
+
+func _on_HurtBox_area_entered(area):
+	if InvunerabilityTimer.is_stopped():
+		InvunerabilityTimer.start(0.5)
+		$AnimationPlayer.play("Flash")
+		Health -= area.DAMAGE
+		emit_signal("healthChanged",Health)
+		if Health <= 0:
+			emit_signal("no_health")
+			die()
+
+func _on_PowerUp1CD_timeout():
+	Can_PowerUp1 = true
+
+func _on_PowerUP2CD_timeout():
+	Can_PowerUp2 = true
+
+func _on_ShotCD_timeout():
+	can_fire = true

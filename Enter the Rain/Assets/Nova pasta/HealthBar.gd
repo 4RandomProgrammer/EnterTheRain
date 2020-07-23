@@ -14,6 +14,6 @@ func _on_Player_healthChanged(health):
 	UpdateTween.start()
 
 
-func _on_Player_maxhealthChanged(_value):
+func _on_Player_maxhealthChanged(value):
 	Health_bar.max_value += 1
 	Heal_bar2.max_value += 1
