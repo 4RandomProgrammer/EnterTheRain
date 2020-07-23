@@ -1,5 +1,5 @@
 extends StaticBody2D
-onready var boss = load("res://Assets/Boss/Boss1.tscn")
+onready var boss = load("res://Assets/Enimies/Boss/Boss1.tscn")
 var can_start = false
 
 

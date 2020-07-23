@@ -1,10 +1,9 @@
-extends KinematicBody2D
+extends "res://Assets/Enimies/Enemy_base.gd"
 
 export (int) var velocidade = 100
 export (float) var arruma_posic = 4
 onready var wanderController = $Random_moviment
 onready var enemy_range = $Range
-onready var stats = $Stats
 onready var screen_verification = $VisibilityNotifier2D
 export var damage = 1
 var state = STOPED
@@ -63,22 +62,11 @@ func random_state_timer():  # Função que troca de estado após certo tempo.
 	if wanderController.get_time_left() == 0:
 		state = pick_random_state([STOPED, RANDOM_WALKING])
 		wanderController.start_wander_timer(rand_range(1, 3))
-		
+
 
 func pick_random_state(state_list):  # Função que escolhe um estado aleatório.
 	state_list.shuffle()
 	return state_list.pop_front()
-
-
-func _on_HurtBox_area_entered(area):
-	var damage_taken = area.DAMAGE
-	stats.Health -= damage_taken
-
-
-func _on_Stats_no_health():
-	# Chamada quando o inimigo morrer, player receberá dinheiro e o inimigo sumirá.
-	get_parent().get_node("Player").player_killed_enemy(position)
-	queue_free()
 
 
 func stun_state():
@@ -86,5 +74,5 @@ func stun_state():
 	$StunTimer.start(-1)
 
 
-func _on_StunTimer_timeout():
+func _on_Stun_timer_timeout():
 	state = pick_random_state([STOPED, RANDOM_WALKING])

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/missile00.png-088397b2ce5df8a809da62b1525225f4.stex"
+path="res://.import/Bullet1Vermelho.png-3fd81cc30b7599a12dde176a31bfce63.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Enemy_bullet/missile00.png"
-dest_files=[ "res://.import/missile00.png-088397b2ce5df8a809da62b1525225f4.stex" ]
+source_file="res://Assets/Enimies/Enemy_bullet/Bullet1Vermelho.png"
+dest_files=[ "res://.import/Bullet1Vermelho.png-3fd81cc30b7599a12dde176a31bfce63.stex" ]
 
 [params]
 

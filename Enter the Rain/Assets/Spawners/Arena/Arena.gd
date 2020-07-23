@@ -1,7 +1,7 @@
 extends "res://Assets/Spawners/RandomSpawner.gd"
 
-onready var Torreta = load("res://Assets/Torreta/Torreta.tscn")
-onready var Inimigo = load("res://Assets/Inimigo/Inimigo.tscn")
+onready var Torreta = load("res://Assets/Enimies/Torreta/Turret.tscn")
+onready var Inimigo = load("res://Assets/Enimies/Inimigo/Enemy.tscn")
 onready var enimies_list = [Torreta, Inimigo]
 
 func _ready():

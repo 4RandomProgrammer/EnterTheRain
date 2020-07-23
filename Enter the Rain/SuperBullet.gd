@@ -1,5 +1,6 @@
-extends "res://Assets/Enemy_bullet/EnemyBullet.gd"
-onready var bullet = load("res://Assets/Enemy_bullet/EnemyBullet.tscn")
+extends "res://Assets/Enimies/Enemy_bullet/EnemyBullet.gd"
+
+onready var bullet = load("res://Assets/Enimies/Enemy_bullet/EnemyBullet.tscn")
 
 func _ready():
 	$Timer.start(rand_range(0.5, 1.5))

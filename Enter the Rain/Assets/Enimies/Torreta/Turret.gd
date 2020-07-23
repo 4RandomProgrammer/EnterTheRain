@@ -1,11 +1,11 @@
-extends KinematicBody2D
+extends "res://Assets/Enimies/Enemy_base.gd"
+
 enum {
 	NORMAL,
 	STUNNED
 }
-var Bullet = load("res://Assets/Enemy_bullet/EnemyBullet.tscn")
+var Bullet = load("res://Assets/Enimies/Enemy_bullet/EnemyBullet.tscn")
 onready var turret_range = $Range
-onready var stats = $Stats
 onready var screen_verification = $VisibilityNotifier2D
 var can_shoot = true
 var state = NORMAL
@@ -46,17 +46,6 @@ func _on_ShootTimer_timeout():  # Quando acabar esse tempo, torreta pode atirar 
 	can_shoot = true
 
 
-func _on_HurtBox_area_entered(area):  # Torreta foi atingida.
-	var damage_taken = area.DAMAGE
-	stats.Health -= damage_taken
-
-
-func _on_Stats_no_health():
-	# Chamada quando a torreta morrer, player receberá dinheiro e a torreta sumirá.
-	get_parent().get_node("Player").player_killed_enemy(position)
-	queue_free()
-
-
 func stun_state():
 	state = STUNNED
 	$StunTimer.start(-1)
@@ -64,3 +53,4 @@ func stun_state():
 
 func _on_StunTimer_timeout():
 	state = NORMAL
+

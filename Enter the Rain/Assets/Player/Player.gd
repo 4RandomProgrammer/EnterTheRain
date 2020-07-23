@@ -39,7 +39,7 @@ func _ready():
 #Constantes
 const SHOT = preload("res://Assets/Shot/Shot.tscn")
 const POWERUP1 = preload("res://Assets/PowerUps/Granada.tscn")
-const MISSILE_SHOT = preload("res://Assets/Enemy_bullet/MissileBullet.tscn")
+const MISSILE_SHOT = preload("res://Assets/Shot/MissileBullet.tscn")
 const FRICTION = 25
 const ROLL_SPEED = 450
 

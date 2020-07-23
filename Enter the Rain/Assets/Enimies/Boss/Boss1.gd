@@ -7,8 +7,8 @@ onready var timer_stop = $Timer_parar
 onready var timer_walk = $Timer_andar
 onready var timer_pow_2 = $Power_2_timer
 onready var timer_pow_3 = $Power_3_timer
-onready var enemy_bullet = load("res://Assets/Enemy_bullet/EnemyBullet.tscn")
-onready var super_bullet = load("res://Assets/Enemy_bullet/SuperBullet.tscn")
+onready var enemy_bullet = load("res://Assets/Enimies/Enemy_bullet/EnemyBullet.tscn")
+onready var super_bullet = load("res://Assets/Enimies/Enemy_bullet/SuperBullet.tscn")
 onready var stats = $Stats
 onready var boss_range = $Alcance
 onready var screen_verification = $VisibilityNotifier2D
@@ -138,7 +138,3 @@ func _on_Bullet_timer_timeout():
 
 func _on_StunTimer_timeout():
 	state = WALKING
-
-
-func teste():
-	print('opa')
