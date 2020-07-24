@@ -18,7 +18,7 @@ export (float)var cooldownP1 = 2
 export (float)var cooldownP2 = 3
 export var stun_probability = 0
 export var extra_shots_probability = 0
-export var missile_probability = 0
+export var missile_probability = 100
 export var health_drop_probability = 0
 onready var health_item = load("res://Assets/Itens/Item_life_regen.tscn")
 onready var rng = RandomNumberGenerator.new()
@@ -35,6 +35,7 @@ var dano = 1
 var money = 0
 
 func _ready():
+	print(collision_layer)
 	rng.randomize()
 #Constantes
 const SHOT = preload("res://Assets/Shot/Shot.tscn")

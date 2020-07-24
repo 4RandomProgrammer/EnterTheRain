@@ -1,14 +1,15 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Assets/Shot/MissileBullet.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Enimies/Enemy_bullet/missile00.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Enimies/Enemy_bullet/EnemyBullet.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Aim.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 12.3077, 6.71944 )
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 250.0
+radius = 300.0
 
 [node name="EnemyBullet" instance=ExtResource( 3 )]
 collision_mask = 25
@@ -20,11 +21,10 @@ shape = SubResource( 1 )
 [node name="Sprite" parent="." index="1"]
 texture = ExtResource( 2 )
 
-[node name="Range" type="Area2D" parent="." index="3"]
-collision_layer = 0
+[node name="Range" parent="." index="3" instance=ExtResource( 4 )]
 collision_mask = 17
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Range" index="0"]
+[node name="CollisionShape2D" parent="Range" index="0"]
 shape = SubResource( 2 )
-[connection signal="body_entered" from="Range" to="." method="_on_Range_body_entered"]
-[connection signal="body_exited" from="Range" to="." method="_on_Range_body_exited"]
+
+[editable path="Range"]

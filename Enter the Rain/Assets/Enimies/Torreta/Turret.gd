@@ -14,6 +14,7 @@ var rng = RandomNumberGenerator.new()
 
 
 func _physics_process(_delta):
+	update()
 	if screen_verification.is_on_screen:
 		move_and_slide(Vector2.ZERO)
 		match state:
