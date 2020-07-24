@@ -1,5 +1,8 @@
 extends "res://Assets/Player/Character.gd"
 
+var turret_counter = 0
+var mine_counter = 0
+const POWERUP1 = preload("res://Assets/PowerUps/Mina.tscn")
 
 func estado_base(delta):
 	movement_loop(delta)
@@ -19,8 +22,13 @@ func estado_base(delta):
 	
 	#Mina, teus cabelo é daora, teu corpão violão....
 	elif Input.is_action_just_pressed("PowerUp2"):
-		pass
+		var Mouse = get_global_mouse_position()
+		var pw1 = POWERUP1.instance()
+		get_parent().add_child(pw1)
+		pw1.global_position = Mouse
+		mine_counter += 1
 
-#Dash que aumenta a speed :0
+#Dash que aumenta a speed :)
 func roll_state():
 	pass
+
