@@ -42,6 +42,10 @@ func shoot(pos):  # Função que atira na direção do player.
 	can_shoot = false  # Após um tiro, deve-se dar um delay para o próximo tiro.
 	$ShootTimer.start()
 
+func _draw():
+	if turret_range.positions:
+		for pos in turret_range.testes:
+			draw_circle((pos - position).rotated(-rotation), 3, ColorN('red'))
 
 func _on_ShootTimer_timeout():  # Quando acabar esse tempo, torreta pode atirar novamente.
 	can_shoot = true

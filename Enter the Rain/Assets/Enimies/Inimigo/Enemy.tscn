@@ -62,8 +62,8 @@ shape = SubResource( 4 )
 visible = false
 position = Vector2( -0.547119, 0.751026 )
 
-[node name="Stun_timer" type="Timer" parent="." index="8"]
-[connection signal="timeout" from="Stun_timer" to="." method="_on_Stun_timer_timeout"]
+[node name="StunTimer" type="Timer" parent="." index="8"]
+[connection signal="timeout" from="StunTimer" to="." method="_on_Stun_timer_timeout"]
 
 [editable path="HurtBox"]
 

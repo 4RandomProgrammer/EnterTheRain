@@ -13,7 +13,7 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-cooldown = 3.0
+cooldown = 4.0
 
 [node name="Sweep" type="TextureProgress" parent="."]
 modulate = Color( 0.352941, 0.352941, 0.352941, 0.87451 )

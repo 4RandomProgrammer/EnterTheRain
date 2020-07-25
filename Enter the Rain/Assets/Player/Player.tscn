@@ -12,8 +12,8 @@
 [ext_resource path="res://icon.png" type="Texture" id=10]
 [ext_resource path="res://Assets/Player/Itens_popups.gd" type="Script" id=11]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 15 )
+[sub_resource type="CapsuleShape2D" id=1]
+height = 13.2276
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 16, 16 )
@@ -187,7 +187,6 @@ collision_layer = 0
 collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ItemCollectArea"]
-position = Vector2( -1, 0 )
 shape = SubResource( 5 )
 [connection signal="healthChanged" from="." to="Camera2D/CanvasLayer/HealthBar" method="_on_Player_healthChanged"]
 [connection signal="maxhealthChanged" from="." to="Camera2D/CanvasLayer/HealthBar" method="_on_Player_maxhealthChanged"]

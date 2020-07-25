@@ -15,7 +15,7 @@ __meta__ = {
 "_edit_group_": true,
 "_edit_use_anchors_": false
 }
-cooldown = 3.0
+cooldown = 2.0
 
 [node name="Sweep" type="TextureProgress" parent="."]
 modulate = Color( 0.352941, 0.352941, 0.352941, 0.87451 )
