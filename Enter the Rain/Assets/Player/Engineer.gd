@@ -8,7 +8,6 @@ const POWERUP2 = preload("res://Assets/PowerUps/Mina.tscn")
 const POWERUP1 = preload("res://Assets/PowerUps/TorretaPlayer.tscn")
 
 func estado_base(delta):
-	print(turret_counter)
 	movement_loop(delta)
 	control_loop()
 	

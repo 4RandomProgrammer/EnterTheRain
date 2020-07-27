@@ -15,8 +15,8 @@ func update_itens_UI(item):
 			itens_UI_dict[item.name][0] += 1  # Aumentar a quantidade do item coletado
 			# Atualizar texto
 			itens_UI_dict[item.name][1].get_node("Label").text = 'x' + str(itens_UI_dict[item.name][0])
-		else:  # Primeira vez que o item foi coletado
-			# Adiciona-lo ao dicionário e instanciar o item na UI.
+		else:# Primeira vez que o item foi coletado
+			 # Adiciona-lo ao dicionário e instanciar o item na UI.
 			var itens_ui = itens_UI_panel.instance()
 			itens_UI_dict[item.name] = [1, itens_ui]
 			itens_ui.get_node("Sprite").texture = item.get_parent().sprite
@@ -25,7 +25,7 @@ func update_itens_UI(item):
 
 
 func _on_ItemCollectArea_area_entered(item):
-	if item.name != 'Life' or not player.Health != player.MaxHealth:
+	if item.name != 'Life' or player.Health != player.MaxHealth:
 		update_itens_UI(item)
 		var item_sprite = item.get_parent().sprite
 		var item_description = item.get_parent().description

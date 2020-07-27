@@ -19,7 +19,7 @@ func _physics_process(delta):
 	try_aim_player_and_shoot()
 
 func try_aim_player_and_shoot():
-	if turret_range.player_aimed():
+	if turret_range.entity_aimed():
 		rotation = (turret_range.target.position - position).angle()
 		if can_shoot:
 			shoot(turret_range.target.position)
