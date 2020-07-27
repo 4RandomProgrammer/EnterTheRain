@@ -16,7 +16,6 @@ radius = 200.0
 [node name="Player" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 MaxHealth = 4
-cooldownP2 = 3.0
 
 [node name="Sprite" parent="." index="0"]
 scale = Vector2( 0.25, 0.25 )

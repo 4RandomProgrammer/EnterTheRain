@@ -13,5 +13,5 @@ func _on_BlowTimer_timeout():
 func _on_AnimationPlayer_animation_finished(_Explosion):
 	queue_free()
 
-func _on_HurtBox_body_entered(body):
+func _on_HurtBox_body_entered(_body):
 	Anim.play("Explosion")
