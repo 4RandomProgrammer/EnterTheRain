@@ -16,6 +16,7 @@ radius = 200.0
 [node name="Player" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 MaxHealth = 4
+cooldownP2 = 3.0
 
 [node name="Sprite" parent="." index="0"]
 scale = Vector2( 0.25, 0.25 )
@@ -28,10 +29,14 @@ shape = SubResource( 1 )
 shape = SubResource( 2 )
 
 [node name="Range" type="Area2D" parent="." index="4"]
+visible = false
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Range" index="0"]
 shape = SubResource( 3 )
+
+[node name="AbilityButton2" parent="Camera2D/CanvasLayer/Control/HBoxContainer" index="1"]
+cooldown = 3.0
 
 [editable path="HurtBox"]
