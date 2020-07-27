@@ -1,0 +1,115 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Engine/HurtBox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Player/Character.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Nova pasta/AbilityButton2.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Nova pasta/HealthBar.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Nova pasta/AbilityButton.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Nova pasta/DinheiroCounter.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Nova pasta/Pause.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Engine/Weapon.tscn" type="PackedScene" id=14]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Dash"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Flash"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true, false, true ]
+}
+
+[node name="Player" type="KinematicBody2D"]
+collision_layer = 2
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="Weapon" parent="." instance=ExtResource( 14 )]
+
+[node name="HurtBox" parent="." instance=ExtResource( 1 )]
+collision_layer = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_process_mode = 0
+anims/Dash = SubResource( 1 )
+anims/Flash = SubResource( 2 )
+
+[node name="PowerUp1CD" type="Timer" parent="."]
+
+[node name="PowerUP2CD" type="Timer" parent="."]
+
+[node name="ShotCD" type="Timer" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+process_mode = 0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
+
+[node name="HealthBar" parent="Camera2D/CanvasLayer" instance=ExtResource( 4 )]
+
+[node name="Control" type="Control" parent="Camera2D/CanvasLayer"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Camera2D/CanvasLayer/Control"]
+margin_top = 32.0
+margin_right = 80.0
+margin_bottom = 64.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AbilityButton" parent="Camera2D/CanvasLayer/Control/HBoxContainer" instance=ExtResource( 5 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 32.0
+margin_bottom = 32.0
+
+[node name="AbilityButton2" parent="Camera2D/CanvasLayer/Control/HBoxContainer" instance=ExtResource( 3 )]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+cooldown = 4.0
+
+[node name="DinheiroCounter" parent="Camera2D/CanvasLayer/Control/HBoxContainer" instance=ExtResource( 6 )]
+
+[node name="Pause" parent="Camera2D/CanvasLayer" instance=ExtResource( 7 )]
+[connection signal="healthChanged" from="." to="Camera2D/CanvasLayer/HealthBar" method="_on_Player_healthChanged"]
+[connection signal="maxhealthChanged" from="." to="Camera2D/CanvasLayer/HealthBar" method="_on_Player_maxhealthChanged"]
+[connection signal="no_health" from="." to="Camera2D/CanvasLayer/Pause" method="_on_Player_no_health"]
+[connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
+[connection signal="timeout" from="PowerUp1CD" to="." method="_on_PowerUp1CD_timeout"]
+[connection signal="timeout" from="PowerUP2CD" to="." method="_on_PowerUP2CD_timeout"]
+[connection signal="timeout" from="ShotCD" to="." method="_on_ShotCD_timeout"]
+
+[editable path="HurtBox"]

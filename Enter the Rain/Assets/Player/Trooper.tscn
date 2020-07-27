@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/Player/Player.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Sprites/Doomguy contornado.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Player/Character.tscn" type="PackedScene" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 15 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 9, 16 )
+
+[node name="Player" instance=ExtResource( 3 )]
+script = ExtResource( 1 )
+MaxHealth = 4
+cooldownP1 = 3.0
+
+[node name="Sprite" parent="." index="0"]
+modulate = Color( 1, 1, 1, 1 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+shape = SubResource( 2 )
+
+[node name="PowerUp1CD" parent="." index="5"]
+process_mode = 0
+wait_time = 3.0
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+
+[editable path="HurtBox"]
