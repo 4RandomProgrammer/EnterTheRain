@@ -40,14 +40,12 @@ func movimentation():
 				state = pick_random_state([STOPED, RANDOM_WALKING])
 				wanderController.start_wander_timer(rand_range(1, 3))
 		CHASING:
-			if not enemy_range.target:  # Player saiu do range. Hora de mudar de estado
-				state = pick_random_state([STOPED, RANDOM_WALKING])
-			else:
-				direction = global_position.direction_to(enemy_range.target.global_position)
-				velocity = velocity.move_toward(direction * velocidade, velocidade / 2)
+			chase()
 		STUNNED:
 			velocity = Vector2.ZERO
 
+func chase():
+	pass
 
 func try_aim_and_change_state():  # Tenta "mirar" no inimigo. Se conseguir, irá persegui-lo.
 	if state != STUNNED:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=2]
+[gd_scene load_steps=76 format=2]
 
 [ext_resource path="res://Assets/Itens/Item_atack_speed.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Spawners/BossSpawner/BossSpawner.tscn" type="PackedScene" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://Assets/Itens/Item_stun_prob.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Assets/Itens/Item_missile.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Assets/Itens/Item_extra_shots.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Assets/Enimies/Perseguidores/Explosive.tscn" type="PackedScene" id=16]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 16, 0, 6.4851, 6.17368, 0, 16, 0, 16, 4.81062, 4.83408, 4.81062, 4.83408, 16 )
@@ -1033,6 +1034,9 @@ position = Vector2( -159.643, 0 )
 
 [node name="Item9" parent="." instance=ExtResource( 15 )]
 position = Vector2( -62.717, 80.8527 )
+
+[node name="Explosive" parent="." instance=ExtResource( 16 )]
+position = Vector2( 568.515, 463.691 )
 
 [editable path="Arena"]
 
