@@ -1,7 +1,6 @@
 extends "res://Assets/Player/Character.gd"
 
 #Me batendo com o git, scrr
-
 const POWERUP1 = preload("res://Assets/PowerUps/Granada.tscn")
 const ROLL_SPEED = 450
 
