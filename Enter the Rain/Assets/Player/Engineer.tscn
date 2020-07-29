@@ -35,7 +35,13 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Range" index="0"]
 shape = SubResource( 3 )
 
+[node name="DashCD" type="Timer" parent="." index="9"]
+one_shot = true
+
 [node name="AbilityButton2" parent="Camera2D/CanvasLayer/Control/HBoxContainer" index="1"]
 cooldown = 3.0
+
+[node name="Pause" parent="Camera2D/CanvasLayer" index="2"]
+visible = false
 
 [editable path="HurtBox"]
