@@ -42,10 +42,11 @@ func estado_base(delta):
 #Dash que aumenta a speed :)
 func roll_state():
 	if $DashCD.is_stopped():
-		var shield = DASH.instance()
-		get_parent().add_child(shield)
-		shield.global_position = global_position
-		$DashCD.start(15)
+		$Shield/CollisionShape2D.call_deferred("set","disabled",false)
+		$HurtBox/CollisionShape2D.call_deferred("set","disabled",true)
+		$Shield/Sprite.call_deferred("set","visible",true)
+		$Shield/DurationShield.start(5)
+		$DashCD.start(10)
 	else:
 		state = MOVE
 	
@@ -58,3 +59,9 @@ func turret_spawned():
 func turret_dead():
 	turrets_spawned -= 1
 	turret_counter -= 1
+
+
+func _on_DurationShield_timeout():
+	$Shield/CollisionShape2D.call_deferred("set","disabled",true)
+	$HurtBox/CollisionShape2D.call_deferred("set","disabled",false)
+	$Shield/Sprite.call_deferred("set","visible",false)

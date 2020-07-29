@@ -1,11 +1,15 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Assets/Player/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Player/Engineer.gd" type="Script" id=2]
 [ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://Assets/PowerUps/shield.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 16.0
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 8, 8 )
@@ -24,10 +28,28 @@ texture = ExtResource( 3 )
 [node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource( 1 )
 
+[node name="Shield" type="RigidBody2D" parent="." index="3"]
+collision_layer = 17
+collision_mask = 2147483665
+gravity_scale = 0.0
+contacts_reported = 1
+contact_monitor = true
+
+[node name="Sprite" type="Sprite" parent="Shield" index="0"]
+visible = false
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shield" index="1"]
+shape = SubResource( 4 )
+disabled = true
+
+[node name="DurationShield" type="Timer" parent="Shield" index="2"]
+one_shot = true
+
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 shape = SubResource( 2 )
 
-[node name="Range" type="Area2D" parent="." index="4"]
+[node name="Range" type="Area2D" parent="." index="5"]
 visible = false
 collision_layer = 0
 collision_mask = 2
@@ -35,7 +57,7 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Range" index="0"]
 shape = SubResource( 3 )
 
-[node name="DashCD" type="Timer" parent="." index="9"]
+[node name="DashCD" type="Timer" parent="." index="10"]
 one_shot = true
 
 [node name="AbilityButton2" parent="Camera2D/CanvasLayer/Control/HBoxContainer" index="1"]
@@ -43,5 +65,9 @@ cooldown = 3.0
 
 [node name="Pause" parent="Camera2D/CanvasLayer" index="2"]
 visible = false
+
+[node name="ItemCollectArea" parent="." index="12"]
+visible = false
+[connection signal="timeout" from="Shield/DurationShield" to="." method="_on_DurationShield_timeout"]
 
 [editable path="HurtBox"]
