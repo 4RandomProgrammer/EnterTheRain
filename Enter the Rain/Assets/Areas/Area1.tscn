@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=2]
+[gd_scene load_steps=78 format=2]
 
 [ext_resource path="res://Assets/Itens/Item_atack_speed.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Spawners/BossSpawner/BossSpawner.tscn" type="PackedScene" id=2]
@@ -16,6 +16,8 @@
 [ext_resource path="res://Assets/Itens/Item_missile.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Assets/Itens/Item_extra_shots.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Assets/Enimies/Perseguidores/Explosive.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Assets/Enimies/Perseguidores/Shooter_chaser.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Assets/Enimies/Torretas/Mortar.tscn" type="PackedScene" id=18]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 16, 0, 6.4851, 6.17368, 0, 16, 0, 16, 4.81062, 4.83408, 4.81062, 4.83408, 16 )
@@ -1037,6 +1039,12 @@ position = Vector2( -62.717, 80.8527 )
 
 [node name="Explosive" parent="." instance=ExtResource( 16 )]
 position = Vector2( 568.515, 463.691 )
+
+[node name="Chaser_shooter" parent="." instance=ExtResource( 17 )]
+position = Vector2( -535.985, 336.011 )
+
+[node name="Turret_base" parent="." instance=ExtResource( 18 )]
+position = Vector2( 208.136, -190.452 )
 
 [editable path="Arena"]
 

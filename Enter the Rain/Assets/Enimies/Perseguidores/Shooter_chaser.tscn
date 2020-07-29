@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/Enimies/Perseguidores/Enemy_chaser_base.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Enimies/Perseguidores/Shooter_chaser.gd" type="Script" id=2]
+[ext_resource path="res://icon.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16.9567, 18.531 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 250.0
+
+[node name="Chaser_shooter" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Sprite" parent="." index="0"]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D" parent="Range" index="0"]
+visible = false
+position = Vector2( 0.831234, -0.0240422 )
+shape = SubResource( 2 )
+
+[node name="ShootTimer" type="Timer" parent="." index="9"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]
+
+[editable path="HurtBox"]
+
+[editable path="Hitbox"]
+
+[editable path="Range"]
