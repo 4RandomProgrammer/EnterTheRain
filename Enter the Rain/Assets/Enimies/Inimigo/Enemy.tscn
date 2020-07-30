@@ -9,18 +9,18 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 14.3271
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 15.6061, 16.2397 )
+[sub_resource type="CircleShape2D" id=2]
+radius = 14.5
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 15.7722, 16.0736 )
+[sub_resource type="CircleShape2D" id=3]
+radius = 14.5
 
 [sub_resource type="CircleShape2D" id=4]
 radius = 250.0
 
 [node name="Enemy" instance=ExtResource( 3 )]
 collision_layer = 16
-collision_mask = 19
+collision_mask = 17
 script = ExtResource( 2 )
 
 [node name="Sprite" parent="." index="0"]
@@ -31,6 +31,7 @@ position = Vector2( -0.85437, 1.99353 )
 shape = SubResource( 1 )
 
 [node name="HurtBox" parent="." index="2"]
+visible = false
 collision_layer = 8
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
@@ -41,6 +42,7 @@ shape = SubResource( 2 )
 collision_mask = 4
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
+visible = false
 position = Vector2( -0.332165, 1.82691 )
 shape = SubResource( 3 )
 

@@ -57,7 +57,7 @@ func _physics_process(delta):
 func roll_state():
 	pass
 
-func estado_base(delta):
+func estado_base(_delta):
 	pass
 
 func set_MaxHealth(value):

@@ -9,7 +9,6 @@ signal Spawned
 signal dead
 
 func _ready():
-	connect("Spawned",get_parent().get_node("Player"),"turret_spawned")
 	connect("dead",get_parent().get_node("Player"),"turret_dead")
 	emit_signal("Spawned")
 	pass

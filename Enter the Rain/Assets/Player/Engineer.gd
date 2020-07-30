@@ -1,7 +1,6 @@
 extends "res://Assets/Player/Character.gd"
 
 var turret_counter = 0
-var turrets_spawned = 0
 var old_maxspeed
 var turret_ref1
 var turret_ref2
@@ -24,11 +23,27 @@ func estado_base(delta):
 	
 	#Tworretas
 	elif Input.is_action_just_pressed("PowerUp1") and Can_PowerUp1:
+		var pw1 = POWERUP1.instance()
 		if turret_counter < 2:
-			var pw1 = POWERUP1.instance()
+			turret_counter += 1
 			get_parent().add_child(pw1)
 			pw1.global_position = Mouse
-			$PowerUp1CD.start(cooldownP2)
+			$PowerUp1CD.start(cooldownP1)
+			Can_PowerUp1 = false
+			
+			if turret_counter == 1:
+				turret_ref1 = pw1
+			elif turret_counter == 2:
+				turret_ref2 = pw1
+		else:
+			turret_ref1.queue_free()
+			turret_ref1 = turret_ref2
+			turret_ref2 = pw1
+			get_parent().add_child(pw1)
+			pw1.global_position = Mouse
+			$PowerUp1CD.start(cooldownP1)
+			Can_PowerUp1 = false
+			
 	
 	#Mina, teus cabelo é daora, teu corpão violão....
 	elif Input.is_action_just_pressed("PowerUp2") and Can_PowerUp2:
@@ -51,17 +66,13 @@ func roll_state():
 		state = MOVE
 	
 	
-func turret_spawned():
-	turret_counter += 1
-	turrets_spawned += 1
-
-
 func turret_dead():
-	turrets_spawned -= 1
 	turret_counter -= 1
-
 
 func _on_DurationShield_timeout():
 	$Shield/CollisionShape2D.call_deferred("set","disabled",true)
 	$HurtBox/CollisionShape2D.call_deferred("set","disabled",false)
 	$Shield/Sprite.call_deferred("set","visible",false)
+
+
+
