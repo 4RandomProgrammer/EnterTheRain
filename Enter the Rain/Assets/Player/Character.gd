@@ -41,6 +41,8 @@ signal healthChanged(health)
 signal maxhealthChanged(value)
 signal no_health
 signal moneyChanged(current_money)
+signal PW1_used
+signal PW2_used
 
 func _ready():
 	rng.randomize()

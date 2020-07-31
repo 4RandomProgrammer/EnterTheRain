@@ -7,7 +7,7 @@
 [ext_resource path="res://Assets/Nova pasta/AbilityButton.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Nova pasta/DinheiroCounter.tscn" type="PackedScene" id=6]
 [ext_resource path="res://icon.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Nova pasta/Pause.gd" type="Script" id=11]
+[ext_resource path="res://Assets/Nova pasta/Pause.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Assets/Player/Itens_popups.gd" type="Script" id=12]
 [ext_resource path="res://Engine/Weapon.tscn" type="PackedScene" id=14]
 
@@ -109,22 +109,7 @@ margin_bottom = 40.0
 [node name="DinheiroCounter" parent="Camera2D/CanvasLayer/Control/HBoxContainer" instance=ExtResource( 6 )]
 margin_bottom = 40.0
 
-[node name="Pause" type="Control" parent="Camera2D/CanvasLayer"]
-pause_mode = 2
-anchor_right = 1.0
-anchor_bottom = 1.0
-script = ExtResource( 11 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect" type="ColorRect" parent="Camera2D/CanvasLayer/Pause"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color( 0, 0, 0, 0.2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Pause" parent="Camera2D/CanvasLayer" instance=ExtResource( 8 )]
 
 [node name="Itens_UI" type="Control" parent="Camera2D/CanvasLayer"]
 margin_right = 40.0
@@ -168,6 +153,8 @@ collision_mask = 32
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ItemCollectArea"]
 position = Vector2( -1, 0 )
 shape = SubResource( 3 )
+[connection signal="PW1_used" from="." to="Camera2D/CanvasLayer/Control/HBoxContainer/AbilityButton" method="_on_Player_PW1_used"]
+[connection signal="PW2_used" from="." to="Camera2D/CanvasLayer/Control/HBoxContainer/AbilityButton2" method="_on_Player_PW2_used"]
 [connection signal="healthChanged" from="." to="Camera2D/CanvasLayer/HealthBar" method="_on_Player_healthChanged"]
 [connection signal="maxhealthChanged" from="." to="Camera2D/CanvasLayer/HealthBar" method="_on_Player_maxhealthChanged"]
 [connection signal="moneyChanged" from="." to="Camera2D/CanvasLayer/Control/HBoxContainer/DinheiroCounter" method="_on_Player_moneyChanged"]

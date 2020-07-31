@@ -14,24 +14,21 @@ func _ready():
 
 
 func _process(_delta):
-	on_key_pressed()
-	if not can_use:
-		time_label.text = "%3.1f" % $Timer.time_left
-		$Sweep.value = int(($Timer.time_left / cooldown) * 100)
+	time_label.text = "%3.1f" % $Timer.time_left
+	$Sweep.value = int(($Timer.time_left / cooldown) * 100)
 
-
-func on_key_pressed():
-	if Input.is_action_just_pressed("PowerUp2") and can_use:
-		disabled = true
-		set_process(true)
-		$Timer.start()
-		time_label.show()
-		can_use = false
 
 func _on_Timer_timeout():
-	print("ability 2 ready")
 	$Sweep.value = 0
 	disabled = false
 	time_label.hide()
-	can_use = true
+	set_process(false)
 
+
+
+func _on_Player_PW2_used():
+	disabled = true
+	set_process(true)
+	$Timer.start()
+	time_label.show()
+	can_use = false

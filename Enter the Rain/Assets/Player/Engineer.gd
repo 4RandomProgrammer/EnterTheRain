@@ -24,6 +24,7 @@ func estado_base(delta):
 	#Tworretas
 	elif Input.is_action_just_pressed("PowerUp1") and Can_PowerUp1:
 		var pw1 = POWERUP1.instance()
+		emit_signal("PW1_used")
 		if turret_counter < 2:
 			turret_counter += 1
 			get_parent().add_child(pw1)
@@ -47,6 +48,7 @@ func estado_base(delta):
 	
 	#Mina, teus cabelo é daora, teu corpão violão....
 	elif Input.is_action_just_pressed("PowerUp2") and Can_PowerUp2:
+		emit_signal("PW2_used")
 		Can_PowerUp2 = false
 		var pw2 = POWERUP2.instance()
 		get_parent().add_child(pw2)

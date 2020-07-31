@@ -31,6 +31,7 @@ func estado_base(delta):
 	
 	#Cond. Granada
 	elif Input.is_action_just_pressed("PowerUp1") and Can_PowerUp1:
+		emit_signal("PW1_used")
 		var powerup1 = POWERUP1.instance()
 		get_parent().add_child(powerup1)
 		powerup1.position = $Weapon/Position2D.global_position
@@ -42,6 +43,7 @@ func estado_base(delta):
 	
 	#Cond. Rajada stun
 	elif Input.is_action_just_pressed("PowerUp2") and Can_PowerUp2:
+		emit_signal("PW2_used")
 		var i = 0
 		can_fire = false
 		Can_PowerUp2 = false
