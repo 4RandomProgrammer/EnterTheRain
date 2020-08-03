@@ -18,7 +18,9 @@ onready var tamanho_lista = len(lista_de_itens)
 func _ready():
 	rng.randomize()
 	var chests_quant = rng.randi_range(min_entities, max_entities)
-	for _i in range(chests_quant):
-		create_entity_in_range(Chest)  # Função que cria uma entidade com uma localização aleatória dentro da área.
-		entity.item = lista_de_itens[rng.randi_range(0, tamanho_lista - 1)]  # Escolher um item aleatório para o baú.
-		get_parent().call_deferred("add_child",entity)
+	while chests_quant != 0:
+		var entity = create_entity_in_range(Chest)  # Função que cria uma entidade com uma localização aleatória dentro da área.
+		if entity:
+			entity.item = lista_de_itens[rng.randi_range(0, tamanho_lista - 1)]  # Escolher um item aleatório para o baú.
+			get_parent().call_deferred("add_child",entity)
+			chests_quant -= 1

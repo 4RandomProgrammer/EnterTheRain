@@ -4,8 +4,3 @@ func chase():
 		direction = global_position.direction_to(enemy_range.target.global_position)
 		velocity = velocity.move_toward(direction * velocidade, velocidade / 2)
 
-
-#if not enemy_range.target:  # Player saiu do range. Hora de mudar de estado
-		#print('aaaaa')
-		#state = pick_random_state([STOPED, RANDOM_WALKING])
-	#else:

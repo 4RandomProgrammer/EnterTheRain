@@ -1046,6 +1046,24 @@ position = Vector2( -535.985, 336.011 )
 [node name="Turret_base" parent="." instance=ExtResource( 18 )]
 position = Vector2( 208.136, -190.452 )
 
+[node name="Turret_base2" parent="." instance=ExtResource( 18 )]
+position = Vector2( 208.136, -190.452 )
+
+[node name="Turret_base3" parent="." instance=ExtResource( 18 )]
+position = Vector2( 208.136, -190.452 )
+
+[node name="Turret_base4" parent="." instance=ExtResource( 18 )]
+position = Vector2( 208.136, -190.452 )
+
+[node name="Turret_base5" parent="." instance=ExtResource( 18 )]
+position = Vector2( 208.136, -190.452 )
+
+[node name="Turret_base6" parent="." instance=ExtResource( 18 )]
+position = Vector2( 208.136, -190.452 )
+
+[node name="Turret_base8" parent="." instance=ExtResource( 18 )]
+position = Vector2( -283.158, -106.935 )
+
 [editable path="Arena"]
 
 [editable path="Arena2"]
