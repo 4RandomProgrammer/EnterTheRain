@@ -21,6 +21,7 @@ script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 0.0534716, 0 )
 scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 1 )
 
@@ -34,6 +35,7 @@ scale = Vector2( 0.3, 0.3 )
 [node name="Node" type="Node" parent="."]
 
 [node name="Line2D" type="Line2D" parent="Node"]
+default_color = Color( 0.4, 0.501961, 1, 1 )
 script = ExtResource( 3 )
 trail_length = 4
 

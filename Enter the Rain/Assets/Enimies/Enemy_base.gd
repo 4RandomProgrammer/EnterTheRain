@@ -12,3 +12,4 @@ func _on_Stats_no_health():
 func _on_HurtBox_area_entered(area):
 	var damage_taken = area.DAMAGE
 	stats.Health -= damage_taken
+

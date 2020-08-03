@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=2]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0.0222222, 0.296296, 0.651852, 1 )
+colors = PoolColorArray( 0.738281, 0.721271, 0.302811, 1, 0.917969, 0.732739, 0.100403, 1, 0.929688, 0.339213, 0.0508423, 1, 0.871094, 0.0476379, 0.0476379, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="Curve" id=3]
+max_value = 5.0
+_data = [ Vector2( 0, 4.68182 ), 0.0, 0.0, 0, 0, Vector2( 0.21519, 2.31818 ), 0.0, 0.0, 0, 0, Vector2( 0.436709, 1.22727 ), 0.0, 0.0, 0, 0, Vector2( 0.905063, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+emission_shape = 1
+emission_sphere_radius = 2.0
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 100.0
+initial_velocity_random = 0.5
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 4.0
+scale_random = 0.5
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 2 )
+
+[node name="Explosion_animation" type="Node2D"]
+
+[node name="Particles2D" type="Particles2D" parent="."]
+scale = Vector2( 2, 2 )
+amount = 150
+lifetime = 0.6
+explosiveness = 1.0
+process_material = SubResource( 5 )

@@ -7,8 +7,9 @@
 [sub_resource type="CapsuleShape2D" id=1]
 height = 9.38423
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 9, 16 )
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 11.0
+height = 9.31782
 
 [node name="Player" instance=ExtResource( 3 )]
 script = ExtResource( 1 )
@@ -23,6 +24,7 @@ texture = ExtResource( 2 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2( 0, -0.220366 )
 shape = SubResource( 2 )
 
 [node name="PowerUp1CD" parent="." index="5"]
@@ -30,7 +32,7 @@ process_mode = 0
 wait_time = 3.0
 
 [node name="CollisionShape2D" parent="ItemCollectArea" index="0"]
-position = Vector2( 0.0769348, 0.269234 )
+position = Vector2( 0.00890923, -0.0941588 )
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 
 [editable path="HurtBox"]
