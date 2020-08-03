@@ -4,6 +4,8 @@ var turret_counter = 0
 var old_maxspeed
 var turret_ref1
 var turret_ref2
+var dx
+var dy
 const POWERUP2 = preload("res://Assets/PowerUps/Mina.tscn")
 const POWERUP1 = preload("res://Assets/PowerUps/TorretaPlayer.tscn")
 const DASH = preload("res://Assets/PowerUps/Shield.tscn")
@@ -12,6 +14,8 @@ func estado_base(delta):
 	var Mouse = get_global_mouse_position()
 	movement_loop(delta)
 	control_loop()
+	dx = Mouse.x - global_position.x
+	dy = Mouse.y - global_position.y
 	
 	if Input.is_action_just_pressed("Roll"):
 		state = ROLL
@@ -22,7 +26,7 @@ func estado_base(delta):
 		$ShotCD.start(fire_rate)
 	
 	#Tworretas
-	elif Input.is_action_just_pressed("PowerUp1") and Can_PowerUp1:
+	elif Input.is_action_just_pressed("PowerUp1") and Can_PowerUp1 and sqrt(dx * dx + dy * dy) <= 200:
 		var pw1 = POWERUP1.instance()
 		emit_signal("PW1_used")
 		if turret_counter < 2:
@@ -47,7 +51,7 @@ func estado_base(delta):
 			
 	
 	#Mina, teus cabelo é daora, teu corpão violão....
-	elif Input.is_action_just_pressed("PowerUp2") and Can_PowerUp2:
+	elif Input.is_action_just_pressed("PowerUp2") and Can_PowerUp2 and sqrt(dx * dx + dy * dy) <= 200:
 		emit_signal("PW2_used")
 		Can_PowerUp2 = false
 		var pw2 = POWERUP2.instance()
