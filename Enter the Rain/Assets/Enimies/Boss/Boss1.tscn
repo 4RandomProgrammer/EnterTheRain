@@ -8,13 +8,13 @@
 [ext_resource path="res://Assets/Aim.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/ScreenVerificator.tscn" type="PackedScene" id=7]
 
-[sub_resource type="CircleShape2D" id=5]
+[sub_resource type="CircleShape2D" id=1]
 radius = 32.0
 
-[sub_resource type="CircleShape2D" id=6]
+[sub_resource type="CircleShape2D" id=2]
 radius = 32.0
 
-[sub_resource type="CircleShape2D" id=7]
+[sub_resource type="CircleShape2D" id=3]
 radius = 32.0
 
 [sub_resource type="CircleShape2D" id=4]
@@ -33,7 +33,7 @@ scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 5 )
+shape = SubResource( 1 )
 
 [node name="Timer_parar" type="Timer" parent="."]
 wait_time = 5.0
@@ -48,13 +48,13 @@ one_shot = true
 collision_layer = 8
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
-shape = SubResource( 6 )
+shape = SubResource( 2 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 3 )]
 collision_mask = 4
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
-shape = SubResource( 7 )
+shape = SubResource( 3 )
 
 [node name="Stats" parent="." instance=ExtResource( 5 )]
 MaxHealth = 20

@@ -18,7 +18,7 @@ export var rotation_speed_pow1 = 100
 var final_ang = 2 * PI
 var current_dir
 var angle_pat_1 = 0
-onready var damage = 1
+export var damage = 1
 enum {
 	WALKING
 	POWER_1

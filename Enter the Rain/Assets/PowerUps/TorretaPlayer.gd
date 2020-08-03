@@ -13,7 +13,7 @@ func _ready():
 	emit_signal("Spawned")
 	pass
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	update()
 	try_aim_player_and_shoot()
 

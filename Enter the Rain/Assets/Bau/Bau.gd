@@ -17,7 +17,6 @@ func _ready():
 
 
 func _process(_delta):
-	move_and_slide(Vector2.ZERO)
 	if player:
 		# Toda vez que o player entrar no "range", verificar se ele quer abrir o bau e tem o dinheiro necessário.
 		if Input.is_action_pressed("ui_select") and player.money >= min_money:
