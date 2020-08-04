@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Assets/Player/Player.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Sprites/Doomguy contornado.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Player/Character.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
@@ -16,9 +15,6 @@ script = ExtResource( 1 )
 MaxHealth = 4
 MAX_SPEED = 150
 cooldownP1 = 3.0
-
-[node name="Sprite" parent="." index="0"]
-texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource( 1 )
