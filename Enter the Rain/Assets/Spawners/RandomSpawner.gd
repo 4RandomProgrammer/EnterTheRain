@@ -13,9 +13,7 @@ func create_entity_in_range(Entity):  # Criar entidade com coordenadas aleatóri
 	var entity_pos = Vector2(random_x, random_y)
 	var space_state = get_world_2d().direct_space_state
 	var result = space_state.intersect_point(entity_pos)
-	print(result)
 	if result:
-		print(result)
 		return false
 	else:
 		entity.global_position = Vector2(random_x, random_y)

@@ -1,13 +1,16 @@
 extends Area2D
 var target
+var target_list = []
 var dist = 5
 var positions
-var testes = []
 
 func entity_aimed():
-	if target:
+	if target_list:
+		target = target_list[0]
 		update()
-		testes = []
+		if not weakref(target).get_ref():  # Alvo acabou de morrer...
+			target_list.remove(0)
+			return
 		var space_state = get_world_2d().direct_space_state
 		if "RectangleShape" in target.get_node('CollisionShape2D').shape.to_string():
 			positions = aim_rectangle_borders()
@@ -22,7 +25,6 @@ func entity_aimed():
 			var result = space_state.intersect_ray(global_position,
 					pos, [self], collision_mask)
 			if result:
-				testes.append(result.position)
 				if result.collider.collision_layer != 1:  # Se alguns do raios acertar o player:
 					return true
 
@@ -67,11 +69,9 @@ func aim_general_borders():
 	return positions_list
 
 func _on_Area2D_body_entered(body):  # Player entrou no range.
-	if target:
-		return
 	if body.collision_layer != 1:
-		target = body
+		target_list.append(body)
 
 func _on_Area2D_body_exited(body):  # Player saiu do range.
 	if body == target:
-		target = null
+		target_list.erase(body)
