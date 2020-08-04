@@ -14,7 +14,7 @@ export (float)var cooldownP1 = 2
 export (float)var cooldownP2 = 3
 onready var InvunerabilityTimer = $HurtBox/Timer
 onready var hurtbox = $HurtBox
-onready var Health = MaxHealth
+var Health
 var posAnt = Vector2.RIGHT
 export var stun_probability = 0
 export var extra_shots_probability = 0
@@ -39,6 +39,7 @@ onready var health_item = load("res://Assets/Itens/Item_life_regen.tscn")
 #Sinais
 signal healthChanged(health)
 signal maxhealthChanged(value)
+signal set_maxhealth(value)
 signal no_health
 signal moneyChanged(current_money)
 signal PW1_used
@@ -46,6 +47,8 @@ signal PW2_used
 
 func _ready():
 	rng.randomize()
+	Health = MaxHealth
+	emit_signal("set_maxhealth",Health)
 
 func _physics_process(delta):
 	#Maquina de estados
@@ -122,7 +125,7 @@ func move():
 
 func _on_HurtBox_area_entered(area):
 	if InvunerabilityTimer.is_stopped():
-		InvunerabilityTimer.start(0.5)
+		hurtbox.start_invincibility(0.5)
 		$AnimationPlayer.play("Flash")
 		Health -= area.DAMAGE
 		emit_signal("healthChanged",Health)

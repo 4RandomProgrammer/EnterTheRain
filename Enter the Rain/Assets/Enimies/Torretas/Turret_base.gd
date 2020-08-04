@@ -27,7 +27,7 @@ func _physics_process(_delta):
 func try_aim_player_and_shoot():  # Função que tentará atirar no player. Só atirará quando tiver no range e sem obstaculos na frente.
 	pass
 
-func shoot(pos):  # Função que atira na direção do player.
+func shoot(_pos):  # Função que atira na direção do player.
 	pass
 
 func _on_ShootTimer_timeout():  # Quando acabar esse tempo, torreta pode atirar novamente.

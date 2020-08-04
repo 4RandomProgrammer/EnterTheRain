@@ -22,8 +22,8 @@ func _on_Timer_timeout():
 
 
 func _on_HurtBox_inv_ended():
-	set_deferred("monitorable",true)
+	call_deferred("set","monitorable",true)
 
 
 func _on_HurtBox_inv_started():
-	set_deferred("monitorable",false)
+	call_deferred("set","monitorable",false)

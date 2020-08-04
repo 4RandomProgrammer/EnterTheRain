@@ -158,6 +158,7 @@ shape = SubResource( 3 )
 [connection signal="healthChanged" from="." to="Camera2D/CanvasLayer/HealthBar" method="_on_Player_healthChanged"]
 [connection signal="maxhealthChanged" from="." to="Camera2D/CanvasLayer/HealthBar" method="_on_Player_maxhealthChanged"]
 [connection signal="moneyChanged" from="." to="Camera2D/CanvasLayer/Control/HBoxContainer/DinheiroCounter" method="_on_Player_moneyChanged"]
+[connection signal="set_maxhealth" from="." to="Camera2D/CanvasLayer/HealthBar" method="_on_Player_set_maxhealth"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="timeout" from="PowerUp1CD" to="." method="_on_PowerUp1CD_timeout"]
 [connection signal="timeout" from="PowerUP2CD" to="." method="_on_PowerUP2CD_timeout"]
