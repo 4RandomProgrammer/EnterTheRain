@@ -1,9 +1,8 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://Assets/tilesets Enter the Rain/ashlands_tileset.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Player/Trooper.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/Enimies/Boss/Boss2.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Assets/Enimies/Enemy_missile.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Spawners/BossSpawner/BossSpawner.tscn" type="PackedScene" id=3]
 
 [sub_resource type="TileSet" id=1]
 
@@ -395,15 +394,6 @@ tile_data = PoolIntArray( -3801176, 2, 65537, -3801175, 2, 65537, -3801174, 2, 6
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 45.0947, 35.0737 )
 
-[node name="KinematicBody2D" parent="." instance=ExtResource( 3 )]
-position = Vector2( 1759.84, -116.033 )
-
-[node name="MissileBullet" parent="." instance=ExtResource( 4 )]
-position = Vector2( -40.7021, 199.041 )
-collision_layer = 0
-DAMAGE = 1
-
-[node name="MissileBullet2" parent="." instance=ExtResource( 4 )]
-position = Vector2( -212.73, 60.4161 )
-collision_layer = 0
-DAMAGE = 1
+[node name="BossSpawner" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1768.48, -58.4958 )
+choosen_boss = 2

@@ -2,7 +2,7 @@ extends Area2D
 
 var velocity = Vector2()
 export var DAMAGE = 1
-var speed
+export var speed = 300
 onready var missile_range = $Range
 export(Resource) onready var explosion
 
@@ -10,7 +10,6 @@ export(Resource) onready var explosion
 func start(pos, dir):
 	position = pos
 	rotation = dir
-	speed = 300
 	velocity = Vector2(speed, 0).rotated(dir)
 
 func _physics_process(delta):

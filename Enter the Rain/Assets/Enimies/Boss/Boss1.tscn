@@ -22,7 +22,6 @@ radius = 300.0
 
 [node name="Boss1" type="KinematicBody2D"]
 collision_layer = 16
-collision_mask = 33
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true

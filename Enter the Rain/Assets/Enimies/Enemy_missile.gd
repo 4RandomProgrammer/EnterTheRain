@@ -8,4 +8,3 @@ func _on_HurtBox_body_entered(body):
 	create_explosion()
 	body.queue_free()
 	queue_free()
-
