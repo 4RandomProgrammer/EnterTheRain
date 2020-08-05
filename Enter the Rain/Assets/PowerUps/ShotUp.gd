@@ -2,8 +2,7 @@ extends Area2D
 
 export var damage = 1
 
-func _ready():
-	$ActivateTimer.start(-1)
+
 
 func _on_ActivateTimer_timeout():
 	$Hitbox/CollisionShape2D.call_deferred("set","disabled",false)
