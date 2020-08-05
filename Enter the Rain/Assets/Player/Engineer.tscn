@@ -19,6 +19,7 @@ radius = 8.0
 [node name="Player" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 MaxHealth = 4
+fire_rate = 0.8
 
 [node name="Sprite" parent="." index="0"]
 scale = Vector2( 0.25, 0.25 )
@@ -28,6 +29,7 @@ texture = ExtResource( 3 )
 shape = SubResource( 1 )
 
 [node name="Range" type="Area2D" parent="." index="2"]
+modulate = Color( 0.027451, 0.576471, 0.596078, 1 )
 collision_layer = 0
 collision_mask = 2
 
