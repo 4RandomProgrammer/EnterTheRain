@@ -1,7 +1,7 @@
 extends "res://Assets/Player/Character.gd"
 
 const POWERUP1 = preload("res://Assets/PowerUps/ShotUp.tscn")
-const POWERUP2 = preload("res://Assets/PowerUps/AOE Damage.tscn")
+const POWERUP2 = 0
 
 func estado_base(delta):
 	movement_loop(delta)
@@ -9,7 +9,7 @@ func estado_base(delta):
 	var Mouse = get_global_mouse_position()
 	
 	#shoot
-	if Input.is_action_pressed("Shoot") and can_fire:
+	if Input.is_action_just_pressed("Shoot"):
 		shot(false)
 		can_fire = false
 		$ShotCD.start(fire_rate)
@@ -24,14 +24,9 @@ func estado_base(delta):
 		Can_PowerUp1 = false
 	
 	#pw2: Cria uma area de dano por segundo?
-	if Input.is_action_just_pressed("PowerUp2") and Can_PowerUp2:
+	if Input.is_action_just_pressed("PowerUp2") and Can_PowerUp1:
 		emit_signal("PW2_used")
-		var pw2 = POWERUP2.instance()
-		pw2.global_position = Mouse
-		get_parent().add_child(pw2)
-		$PowerUP2CD.start(cooldownP2)
-		Can_PowerUp2 = false
-		
+		pass
 
 #da tp pra uma posição
 func roll_state():

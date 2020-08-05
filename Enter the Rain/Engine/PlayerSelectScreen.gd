@@ -2,7 +2,7 @@ extends Control
 
 onready var player_character_one = preload("res://Assets/Player/Trooper.tscn")
 onready var player_character_two = preload("res://Assets/Player/Engineer.tscn")
-onready var player_character_three = preload("res://Assets/Player/Archer.tscn")
+onready var player_character_three = preload("res://Assets/Player/Unnamed.tscn")
 
 
 func _on_Button_pressed():
