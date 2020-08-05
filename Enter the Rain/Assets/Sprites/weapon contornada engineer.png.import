@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/granada.png-37c00e2271928a40ea1e7ed653ed45ad.stex"
+path="res://.import/weapon contornada engineer.png-0f16220aff5cb0fb6b825947d3ac9ea7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/granada.png"
-dest_files=[ "res://.import/granada.png-37c00e2271928a40ea1e7ed653ed45ad.stex" ]
+source_file="res://Assets/Sprites/weapon contornada engineer.png"
+dest_files=[ "res://.import/weapon contornada engineer.png-0f16220aff5cb0fb6b825947d3ac9ea7.stex" ]
 
 [params]
 
