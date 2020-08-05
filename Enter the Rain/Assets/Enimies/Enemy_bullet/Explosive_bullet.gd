@@ -1,6 +1,6 @@
 extends "res://Assets/Enimies/Enemy_bullet/EnemyBullet.gd"
 
-onready var explosion = load("res://Assets/Enimies/Explosion.tscn")
+export (Resource) var explosion
 
 func on_collision():
 	var Explosion = explosion.instance()
