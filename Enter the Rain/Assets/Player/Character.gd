@@ -18,9 +18,8 @@ onready var Health = MaxHealth
 var posAnt = Vector2.RIGHT
 export var stun_probability = 0
 export var extra_shots_probability = 0
-export var missile_probability = 100
-const MISSILE_SHOT = preload("res://Assets/Shot/MissileBullet.tscn")
-const EXPLOSIVE_SHOT = preload("res://Assets/Enimies/Enemy_bullet/ExplosiveBulletPlayer.tscn")
+export var missile_probability = 0
+var MISSILE_SHOT = load("res://Assets/Shot/MissileBullet.tscn")
 export var health_drop_probability = 0
 var roll_vector = Vector2.DOWN
 var Mouse = Vector2.ZERO
@@ -96,12 +95,10 @@ func extra_shots():
 		get_parent().add_child(extra_shot)
 
 func missile():
-	#var missile = MISSILE_SHOT.instance()
-	#missile.start(global_position, $Weapon.rotation)
-	#get_parent().add_child(missile)
-	var explosive = EXPLOSIVE_SHOT.instance()
-	explosive.start(global_position, $Weapon.rotation)
-	get_parent().add_child(explosive)
+	var missile = MISSILE_SHOT.instance()
+	missile.start(global_position, $Weapon.rotation)
+	get_parent().add_child(missile)
+
 
 func die():
 	queue_free()

@@ -1,10 +1,12 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Assets/Enimies/Explosion_target.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/Explosion_target.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Enimies/Explosion.tscn" type="PackedScene" id=3]
 
 [node name="Explosion_target" type="Node2D"]
 script = ExtResource( 1 )
+Spawn = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
