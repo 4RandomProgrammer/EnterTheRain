@@ -24,8 +24,13 @@ shape = SubResource( 1 )
 shape = SubResource( 2 )
 
 [node name="DashCD" type="Timer" parent="." index="8"]
+one_shot = true
 
-[node name="ItemCollectArea" parent="." index="10"]
+[node name="DurationStealth" type="Timer" parent="." index="9"]
+wait_time = 5.0
+
+[node name="ItemCollectArea" parent="." index="11"]
 visible = false
+[connection signal="timeout" from="DurationStealth" to="." method="_on_DurationStealth_timeout"]
 
 [editable path="HurtBox"]

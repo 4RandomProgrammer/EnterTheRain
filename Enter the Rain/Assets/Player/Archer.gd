@@ -3,11 +3,17 @@ extends "res://Assets/Player/Character.gd"
 const POWERUP1 = preload("res://Assets/PowerUps/ShotUp.tscn")
 const POWERUP2 = preload("res://Assets/PowerUps/AOE Damage.tscn")
 
+
+export var DashCooldown = 10
+
 func estado_base(delta):
 	movement_loop(delta)
 	control_loop()
 	var Mouse = get_global_mouse_position()
 	
+	if Input.is_action_just_pressed("Roll"):
+		state = ROLL
+
 	#shoot
 	if Input.is_action_pressed("Shoot") and can_fire:
 		shot(false)
@@ -32,8 +38,21 @@ func estado_base(delta):
 		$PowerUP2CD.start(cooldownP2)
 		Can_PowerUp2 = false
 		
+		
 
-#da tp pra uma posição
+#stealth
 func roll_state():
-	pass
+	if $DashCD.is_stopped():
+		$DashCD.start(DashCooldown)
+		$DurationStealth.start(-1)
+		$HurtBox/CollisionShape2D.set_deferred("disabled",true)
+		$CollisionShape2D.set_deferred("disabled",true)
+		can_fire = false
+	else:
+		state = MOVE
+		
 
+func _on_DurationStealth_timeout():
+	$HurtBox/CollisionShape2D.set_deferred("disabled",false)
+	$CollisionShape2D.set_deferred("disabled",false)
+	can_fire = true

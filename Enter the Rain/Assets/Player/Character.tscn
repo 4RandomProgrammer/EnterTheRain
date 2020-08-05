@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Engine/HurtBox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Player/Character.gd" type="Script" id=2]
@@ -9,7 +9,6 @@
 [ext_resource path="res://icon.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Nova pasta/Pause.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Assets/Sprites/weapon futurista contornada.png" type="Texture" id=9]
-[ext_resource path="res://Assets/Sprites/Doomguy sem arma skin2 2.png" type="Texture" id=10]
 [ext_resource path="res://Assets/Player/Itens_popups.gd" type="Script" id=12]
 [ext_resource path="res://Engine/Weapon.tscn" type="PackedScene" id=14]
 
@@ -53,7 +52,6 @@ collision_layer = 2
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 10 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
