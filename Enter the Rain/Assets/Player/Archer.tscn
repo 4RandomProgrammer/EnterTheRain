@@ -26,11 +26,11 @@ shape = SubResource( 2 )
 [node name="DashCD" type="Timer" parent="." index="8"]
 one_shot = true
 
-[node name="DurationStealth" type="Timer" parent="." index="9"]
+[node name="DurationFireRate" type="Timer" parent="." index="9"]
 wait_time = 5.0
 
 [node name="ItemCollectArea" parent="." index="11"]
 visible = false
-[connection signal="timeout" from="DurationStealth" to="." method="_on_DurationStealth_timeout"]
+[connection signal="timeout" from="DurationFireRate" to="." method="_on_DurationFireRate_timeout"]
 
 [editable path="HurtBox"]

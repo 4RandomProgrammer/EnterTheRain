@@ -3,12 +3,16 @@ extends "res://Assets/Player/Character.gd"
 const POWERUP1 = preload("res://Assets/PowerUps/ShotUp.tscn")
 const POWERUP2 = preload("res://Assets/PowerUps/AOE Damage.tscn")
 
+var old_fire_rate
+
 
 export var DashCooldown = 10
+export var DurationDash = 5
 
 func estado_base(delta):
 	movement_loop(delta)
 	control_loop()
+	print(fire_rate)
 	var Mouse = get_global_mouse_position()
 	
 	if Input.is_action_just_pressed("Roll"):
@@ -44,15 +48,12 @@ func estado_base(delta):
 func roll_state():
 	if $DashCD.is_stopped():
 		$DashCD.start(DashCooldown)
-		$DurationStealth.start(-1)
-		$HurtBox/CollisionShape2D.set_deferred("disabled",true)
-		$CollisionShape2D.set_deferred("disabled",true)
-		can_fire = false
+		$DurationFireRate.start(DurationDash)
+		old_fire_rate = fire_rate
+		fire_rate /= 2
 	else:
 		state = MOVE
 		
 
-func _on_DurationStealth_timeout():
-	$HurtBox/CollisionShape2D.set_deferred("disabled",false)
-	$CollisionShape2D.set_deferred("disabled",false)
-	can_fire = true
+func _on_DurationFireRate_timeout():
+	fire_rate = old_fire_rate
