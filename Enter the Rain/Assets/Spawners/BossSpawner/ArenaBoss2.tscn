@@ -12,5 +12,11 @@ script = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
+[node name="Timer_end" type="Timer" parent="."]
+wait_time = 30.0
 autostart = true
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="Timer_end" to="." method="_on_Timer_end_timeout"]

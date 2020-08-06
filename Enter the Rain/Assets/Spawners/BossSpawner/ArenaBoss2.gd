@@ -4,7 +4,7 @@ var explosion_target = load("res://Assets/Enimies/Explosion_target.tscn")
 
 
 func _on_Timer_timeout():
-	if rng.randi_range(1, 100) <= 70:
+	if rng.randi_range(1, 100) <= 90:
 		var Explosion_target = create_entity_in_range(explosion_target)
 		if Explosion_target:
 			get_parent().call_deferred('add_child', Explosion_target)
@@ -12,3 +12,7 @@ func _on_Timer_timeout():
 		var Target_spawn_explosive = create_entity_in_range(target_spawn_explosive)
 		if Target_spawn_explosive:
 			get_parent().call_deferred('add_child', Target_spawn_explosive)
+
+
+func _on_Timer_end_timeout():
+	queue_free()
