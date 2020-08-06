@@ -12,6 +12,8 @@ extents = Vector2( 8, 8 )
 
 [node name="Player" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
+MaxHealth = 4
+cooldownP1 = 6.0
 
 [node name="Sprite" parent="." index="0"]
 scale = Vector2( 0.25, 0.25 )
@@ -28,6 +30,9 @@ one_shot = true
 
 [node name="DurationFireRate" type="Timer" parent="." index="9"]
 wait_time = 5.0
+
+[node name="AbilityButton" parent="Camera2D/CanvasLayer/Control/HBoxContainer" index="0"]
+cooldown = 6.0
 
 [node name="ItemCollectArea" parent="." index="11"]
 visible = false
