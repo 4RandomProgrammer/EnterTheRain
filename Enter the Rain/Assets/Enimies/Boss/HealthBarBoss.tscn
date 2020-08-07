@@ -1,38 +1,20 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/Enimies/Boss/HealthBarBoss.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Nova pasta/HealthBarC.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Nova pasta/HealthBarOver.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Nova pasta/HealthBarUnder.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Nova pasta/HealthBarBossOver.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Nova pasta/HealthBarBossUnder.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Nova pasta/HealthBar.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Nova pasta/HealthBarBossC.png" type="Texture" id=5]
 
-[node name="HealthBarBoss" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="HealthBarBoss" instance=ExtResource( 4 )]
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="TextureProgress2" type="TextureProgress" parent="."]
-margin_right = 128.0
-margin_bottom = 32.0
-value = 50.0
-texture_under = ExtResource( 4 )
-texture_progress = ExtResource( 3 )
+[node name="TextureProgress2" parent="." index="0"]
+margin_right = 500.0
+texture_under = ExtResource( 3 )
+texture_progress = ExtResource( 2 )
 tint_progress = Color( 0.898039, 0.368627, 0.368627, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="TextureProgress" type="TextureProgress" parent="."]
-margin_right = 128.0
-margin_bottom = 32.0
-value = 50.0
-texture_over = ExtResource( 2 )
-texture_progress = ExtResource( 3 )
-tint_progress = Color( 0, 1, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Tween" type="Tween" parent="."]
+[node name="TextureProgress" parent="." index="1"]
+texture_over = ExtResource( 5 )
+texture_progress = ExtResource( 2 )

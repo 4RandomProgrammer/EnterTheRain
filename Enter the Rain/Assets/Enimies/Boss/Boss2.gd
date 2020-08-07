@@ -30,13 +30,21 @@ enum {
 }
 var state = SPAWNING
 
-signal healthChanged
+signal healthChanged(health)
+signal Spawning(maxHealth)
+signal Died
 
 
 func _ready():
 	rng.randomize()
+	var bossHealthBar = get_parent().get_node('Player').get_node('Camera2D').get_node('CanvasLayer').get_node('HealthBarBoss')
 	arena_pos = Vector2(position.x, position.y + 100)
 	boss_2 = get_node('.')
+	boss_2.connect("Spawning", bossHealthBar, "_on_Boss_Spawning")
+	boss_2.connect("Died", bossHealthBar, "_on_Boss_Died")
+	boss_2.connect("healthChanged", bossHealthBar, "_on_Boss_healthChanged")
+	emit_signal("Spawning", $Stats.MaxHealth)
+
 
 func _physics_process(delta):
 	match state:
@@ -136,6 +144,7 @@ func shoot(pos):  # Atirar no player.
 	shoot_timer.start()
 
 func _on_Stats_no_health():
+	emit_signal("Died")
 	queue_free()
 
 
@@ -152,8 +161,6 @@ func _on_Timer_power_timeout():
 		$Timer_pow2.start()
 		state = POWER2
 
-func on_comeback():  # Executada após boss voltar para a arena
-	pass
 
 func _on_Timer_spawning_timeout():
 	state = WALKING

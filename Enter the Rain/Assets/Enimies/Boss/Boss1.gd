@@ -30,12 +30,21 @@ var state = SPAWNING
 var target
 var can_shoot = true
 
-signal healthChanged
+signal healthChanged(health)
+signal Spawning(maxHealth)
+signal Died
 
 
 func _ready():
 	rng.randomize()
 	velocity = directions[rng.randi_range(0, 3)]
+	var bossHealthBar = get_parent().get_node('Player').get_node('Camera2D').get_node('CanvasLayer').get_node('HealthBarBoss')
+	var boss_1 = get_node('.')
+	boss_1 = get_node('.')
+	boss_1.connect("Spawning", bossHealthBar, "_on_Boss_Spawning")
+	boss_1.connect("Died", bossHealthBar, "_on_Boss_Died")
+	boss_1.connect("healthChanged", bossHealthBar, "_on_Boss_healthChanged")
+	emit_signal("Spawning", $Stats.MaxHealth)
 
 
 func _physics_process(delta):
@@ -125,6 +134,7 @@ func _on_Timer_andar_timeout():  # Parar por 5s.
 
 
 func _on_Stats_no_health():
+	emit_signal('Died')
 	queue_free()
 
 
