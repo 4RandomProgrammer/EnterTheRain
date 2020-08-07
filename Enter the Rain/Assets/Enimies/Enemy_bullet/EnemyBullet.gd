@@ -1,8 +1,10 @@
 extends Area2D
 
-export var speed = 700
+export (int)var speed
 var velocity = Vector2()
 export var DAMAGE = 1
+var collision_body
+var can_disapear = true
 
 func start(pos, dir):
 	position = pos
@@ -17,9 +19,11 @@ func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
 
 
-func _on_Area2D_body_entered(_body):
+func _on_Area2D_body_entered(body):
+	collision_body = body  # Salvando o colisor em uma variavel(sera utilizado para o superbullet)
 	on_collision()
-	queue_free()
+	if can_disapear:
+		queue_free()
 
 
 func on_collision():

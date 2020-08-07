@@ -30,6 +30,8 @@ var state = SPAWNING
 var target
 var can_shoot = true
 
+signal healthChanged
+
 
 func _ready():
 	rng.randomize()
@@ -130,6 +132,7 @@ func _on_HurtBox_area_entered(area):
 	if state != SPAWNING:
 		var damage_taken = area.DAMAGE
 		stats.Health -= damage_taken
+		emit_signal('healthChanged', stats.Health)
 
 
 func _on_Bullet_timer_timeout():

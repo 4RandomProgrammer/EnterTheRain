@@ -18,7 +18,7 @@ extents = Vector2( 31.5339, 31.7131 )
 [sub_resource type="CircleShape2D" id=4]
 radius = 500.0
 
-[node name="Boss_2" instance=ExtResource( 1 )]
+[node name="Boss" instance=ExtResource( 1 )]
 collision_layer = 16
 script = ExtResource( 2 )
 
@@ -51,7 +51,6 @@ scale = Vector2( 2.30658, 2.31578 )
 alcance_posic_aleatoria = 300
 
 [node name="Missile_timer" type="Timer" parent="." index="7"]
-autostart = true
 
 [node name="Range" parent="." index="8" instance=ExtResource( 5 )]
 
@@ -61,8 +60,25 @@ shape = SubResource( 4 )
 
 [node name="Shoot_timer" type="Timer" parent="." index="9"]
 wait_time = 1.5
+
+[node name="Timer_power" type="Timer" parent="." index="10"]
+wait_time = 0.5
+
+[node name="Timer_spawning" type="Timer" parent="." index="11"]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="Timer_pow1" type="Timer" parent="." index="12"]
+wait_time = 2.0
+one_shot = true
+
+[node name="Timer_pow2" type="Timer" parent="." index="13"]
+one_shot = true
 [connection signal="timeout" from="Missile_timer" to="." method="_on_Missile_timer_timeout"]
 [connection signal="timeout" from="Shoot_timer" to="." method="_on_Shoot_timer_timeout"]
+[connection signal="timeout" from="Timer_power" to="." method="_on_Timer_power_timeout"]
+[connection signal="timeout" from="Timer_spawning" to="." method="_on_Timer_spawning_timeout"]
 
 [editable path="HurtBox"]
 

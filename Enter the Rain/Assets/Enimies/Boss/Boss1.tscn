@@ -20,7 +20,7 @@ radius = 32.0
 [sub_resource type="CircleShape2D" id=4]
 radius = 300.0
 
-[node name="Boss1" type="KinematicBody2D"]
+[node name="Boss" type="KinematicBody2D"]
 collision_layer = 16
 script = ExtResource( 1 )
 __meta__ = {

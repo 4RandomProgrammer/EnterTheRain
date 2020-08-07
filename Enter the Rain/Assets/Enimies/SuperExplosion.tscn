@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Assets/Enimies/Explosion.tscn" type="PackedScene" id=1]
+
+[node name="Explosion" instance=ExtResource( 1 )]
+DAMAGE = 2
+
+[node name="Explosion_animation" parent="." index="3"]
+scale = Vector2( 1.5, 1.5 )
