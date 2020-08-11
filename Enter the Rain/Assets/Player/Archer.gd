@@ -5,14 +5,14 @@ const POWERUP2 = preload("res://Assets/PowerUps/AOE Damage.tscn")
 
 var old_fire_rate
 
-
+onready var rayCast = $RayCast2D
 export var DashCooldown = 10
 export var DurationDash = 5
 
 func estado_base(delta):
 	movement_loop(delta)
 	control_loop()
-	var Mouse = get_global_mouse_position()
+	Mouse = get_global_mouse_position()
 	
 	if Input.is_action_just_pressed("Roll"):
 		state = ROLL
@@ -24,7 +24,7 @@ func estado_base(delta):
 		$ShotCD.start(fire_rate)
 	
 	#PW1: atira pra cima e cai depois de um tempo
-	if Input.is_action_just_pressed("PowerUp1") and Can_PowerUp1:
+	if Input.is_action_just_pressed("PowerUp1") and Can_PowerUp1 and raycast_pos(Mouse):
 		emit_signal("PW1_used")
 		var pw1 = POWERUP1.instance()
 		pw1.global_position = Mouse
@@ -33,7 +33,7 @@ func estado_base(delta):
 		Can_PowerUp1 = false
 	
 	#pw2: Cria uma area de dano por segundo?
-	if Input.is_action_just_pressed("PowerUp2") and Can_PowerUp2:
+	if Input.is_action_just_pressed("PowerUp2") and Can_PowerUp2 and raycast_pos(Mouse):
 		emit_signal("PW2_used")
 		var pw2 = POWERUP2.instance()
 		pw2.global_position = Mouse
@@ -52,7 +52,15 @@ func roll_state():
 		fire_rate /= 2
 	else:
 		state = MOVE
-		
+
+func raycast_pos(mouse):
+	rayCast.cast_to = mouse - global_position
+	rayCast.force_raycast_update()
+
+	if !rayCast.is_colliding():
+		return true
+	else:
+		return false
 
 func _on_DurationFireRate_timeout():
 	fire_rate = old_fire_rate

@@ -22,19 +22,21 @@ texture = ExtResource( 2 )
 [node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource( 1 )
 
+[node name="RayCast2D" type="RayCast2D" parent="." index="3"]
+
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 shape = SubResource( 2 )
 
-[node name="DashCD" type="Timer" parent="." index="8"]
+[node name="DashCD" type="Timer" parent="." index="9"]
 one_shot = true
 
-[node name="DurationFireRate" type="Timer" parent="." index="9"]
+[node name="DurationFireRate" type="Timer" parent="." index="10"]
 wait_time = 5.0
 
 [node name="AbilityButton" parent="Camera2D/CanvasLayer/Control/HBoxContainer" index="0"]
 cooldown = 6.0
 
-[node name="ItemCollectArea" parent="." index="11"]
+[node name="ItemCollectArea" parent="." index="12"]
 visible = false
 [connection signal="timeout" from="DurationFireRate" to="." method="_on_DurationFireRate_timeout"]
 
