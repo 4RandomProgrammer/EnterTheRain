@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Shot/MissileBullet.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Enimies/Explosion.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Enimies/Enemy_missile.gd" type="Script" id=3]
+[ext_resource path="res://Engine/HurtBox.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Enimies/Enemy_bullet/missile00.png" type="Texture" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 12.5245, 6.91622 )
+
+[node name="EnemyMissile" instance=ExtResource( 1 )]
+collision_mask = 3
+script = ExtResource( 3 )
+speed = 300
+explosion = ExtResource( 2 )
+
+[node name="Sprite" parent="." index="1"]
+texture = ExtResource( 5 )
+
+[node name="Range" parent="." index="3"]
+collision_mask = 3
+
+[node name="Timer" type="Timer" parent="." index="4"]
+wait_time = 5.0
+autostart = true
+
+[node name="HurtBox" parent="." index="5" instance=ExtResource( 4 )]
+collision_layer = 8
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+shape = SubResource( 1 )
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="body_entered" from="HurtBox" to="." method="_on_HurtBox_body_entered"]
+
+[editable path="Range"]
+
+[editable path="HurtBox"]

@@ -8,7 +8,7 @@
 [ext_resource path="res://Assets/Nova pasta/DinheiroCounter.tscn" type="PackedScene" id=6]
 [ext_resource path="res://icon.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Nova pasta/Pause.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Assets/Sprites/weapon futurista contornada.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Enimies/Boss/HealthBarBoss.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Player/Itens_popups.gd" type="Script" id=12]
 [ext_resource path="res://Engine/Weapon.tscn" type="PackedScene" id=14]
 
@@ -56,7 +56,6 @@ script = ExtResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
 [node name="Weapon" parent="." instance=ExtResource( 14 )]
-texture = ExtResource( 9 )
 
 [node name="HurtBox" parent="." instance=ExtResource( 1 )]
 collision_layer = 4
@@ -83,9 +82,10 @@ layer = 2
 [node name="Control" type="Control" parent="Camera2D/CanvasLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 33.0
-margin_right = 40.0
-margin_bottom = 73.0
+margin_left = 18.9473
+margin_top = 30.8947
+margin_right = 58.9473
+margin_bottom = 70.8948
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -147,6 +147,13 @@ margin_left = 137.0
 margin_right = 855.0
 margin_bottom = 40.0
 custom_constants/separation = 60
+
+[node name="HealthBarBoss" parent="Camera2D/CanvasLayer" instance=ExtResource( 9 )]
+visible = false
+margin_left = 275.434
+margin_top = 548.877
+margin_right = 275.434
+margin_bottom = 548.877
 
 [node name="ItemCollectArea" type="Area2D" parent="."]
 collision_layer = 0

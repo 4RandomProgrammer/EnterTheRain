@@ -7,8 +7,6 @@ func _ready():
 	add_child(player)
 	move_child(player,2)
 	player.global_position = Vector2(80,65)
-	#player.connect("healthChanged",$SeguePlayer/Camera2D/CanvasLayer/HealthBar,"_on_Player_healthChanged")
-	#player.connect("maxhealthChanged",$SeguePlayer/Camera2D/CanvasLayer/HealthBar,"_on_Player_maxhealthChanged")
 
 
 func _physics_process(_delta):

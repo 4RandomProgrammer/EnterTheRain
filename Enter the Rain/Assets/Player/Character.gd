@@ -19,7 +19,7 @@ var posAnt = Vector2.RIGHT
 export var stun_probability = 0
 export var extra_shots_probability = 0
 export var missile_probability = 0
-const MISSILE_SHOT = preload("res://Assets/Shot/MissileBullet.tscn")
+var MISSILE_SHOT = load("res://Assets/Shot/MissileBullet.tscn")
 export var health_drop_probability = 0
 var roll_vector = Vector2.DOWN
 var Mouse = Vector2.ZERO
@@ -101,6 +101,7 @@ func missile():
 	var missile = MISSILE_SHOT.instance()
 	missile.start(global_position, $Weapon.rotation)
 	get_parent().add_child(missile)
+
 
 func die():
 	queue_free()

@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/Shot/MissileBullet.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Enimies/Enemy_bullet/missile00.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Sprites/missile01.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Enimies/Enemy_bullet/EnemyBullet.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Aim.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Shot/Friendly_explosion.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 12.3077, 6.71944 )
@@ -11,9 +12,11 @@ extents = Vector2( 12.3077, 6.71944 )
 [sub_resource type="CircleShape2D" id=2]
 radius = 300.0
 
-[node name="EnemyBullet" instance=ExtResource( 3 )]
-collision_mask = 25
+[node name="MissileBullet" instance=ExtResource( 3 )]
+collision_mask = 17
 script = ExtResource( 1 )
+speed = 400
+explosion = ExtResource( 5 )
 
 [node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource( 1 )
