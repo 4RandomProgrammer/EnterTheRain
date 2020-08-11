@@ -12,7 +12,6 @@ export var DurationDash = 5
 func estado_base(delta):
 	movement_loop(delta)
 	control_loop()
-	print(fire_rate)
 	var Mouse = get_global_mouse_position()
 	
 	if Input.is_action_just_pressed("Roll"):

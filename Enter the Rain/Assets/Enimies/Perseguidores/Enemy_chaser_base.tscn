@@ -18,6 +18,7 @@ extents = Vector2( 15.2111, 17.5488 )
 collision_layer = 16
 collision_mask = 19
 script = ExtResource( 2 )
+velocidade = 125
 
 [node name="CollisionShape2D" parent="." index="1"]
 position = Vector2( -0.85437, 1.99353 )
@@ -49,7 +50,12 @@ position = Vector2( 0.831234, 0.179861 )
 position = Vector2( -0.547119, 0.751026 )
 
 [node name="StunTimer" type="Timer" parent="." index="8"]
+
+[node name="SlowTimer" type="Timer" parent="." index="9"]
+wait_time = 1.5
+one_shot = true
 [connection signal="timeout" from="StunTimer" to="." method="_on_Stun_timer_timeout"]
+[connection signal="timeout" from="SlowTimer" to="." method="_on_SlowTimer_timeout"]
 
 [editable path="HurtBox"]
 

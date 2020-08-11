@@ -15,3 +15,14 @@ func _on_Hitbox_area_entered(area):
 
 func _on_Timer_timeout():
 	$Hitbox/CollisionShape2D.set_deferred("disabled",false)
+	pass
+
+
+func _on_Hitbox_body_entered(body):
+	if body.has_method("slowed"):
+		body.slowed()
+
+
+func _on_AOE_Damage_body_entered(body):
+	if body.has_method("slowed"):
+		body.slowed()

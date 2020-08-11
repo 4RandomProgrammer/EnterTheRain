@@ -12,5 +12,5 @@ func _on_ActivateTimer_timeout():
 	
 
 
-func _on_AnimationPlayer_animation_finished(FadeAway):
+func _on_AnimationPlayer_animation_finished(_FadeAway):
 	queue_free()

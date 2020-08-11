@@ -11,6 +11,8 @@ var velocity = Vector2.ZERO
 var target
 var hit_pos
 var direction
+var old_velocidade
+var is_slowed = true
 enum {
 	STOPED
 	RANDOM_WALKING
@@ -43,6 +45,10 @@ func movimentation():
 			chase()
 		STUNNED:
 			velocity = Vector2.ZERO
+		
+		
+			
+			
 
 func chase():
 	pass
@@ -74,6 +80,16 @@ func stun_state():
 	state = STUNNED
 	$StunTimer.start(-1)
 
+func slowed():
+	if $SlowTimer.is_stopped():
+		old_velocidade = velocidade
+		$SlowTimer.start(-1)
+		velocidade /= 2
+
 
 func _on_Stun_timer_timeout():
 	state = pick_random_state([STOPED, RANDOM_WALKING])
+
+
+func _on_SlowTimer_timeout():
+	velocidade = old_velocidade

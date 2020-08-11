@@ -6,6 +6,7 @@ var turret_ref1
 var turret_ref2
 var dx
 var dy
+onready var rayCast = $RayCast2D
 const POWERUP2 = preload("res://Assets/PowerUps/Mina.tscn")
 const POWERUP1 = preload("res://Assets/PowerUps/TorretaPlayer.tscn")
 const DASH = preload("res://Assets/PowerUps/Shield.tscn")
@@ -14,6 +15,9 @@ func estado_base(delta):
 	var Mouse = get_global_mouse_position()
 	movement_loop(delta)
 	control_loop()
+	range_control()
+	var space_state = get_world_2d().direct_space_state
+	var result = space_state.intersect_ray(global_position, Mouse, [self], collision_mask)
 	dx = Mouse.x - global_position.x
 	dy = Mouse.y - global_position.y
 	
@@ -26,16 +30,11 @@ func estado_base(delta):
 		$ShotCD.start(fire_rate)
 	
 	#Tworretas
-	elif Input.is_action_just_pressed("PowerUp1") and Can_PowerUp1 and sqrt(dx * dx + dy * dy) <= 200:
+	elif Input.is_action_just_released("PowerUp1") and Can_PowerUp1 and sqrt(dx * dx + dy * dy) <= 200:
 		var pw1 = POWERUP1.instance()
-		emit_signal("PW1_used")
+	
 		if turret_counter < 2:
 			turret_counter += 1
-			get_parent().add_child(pw1)
-			pw1.global_position = Mouse
-			$PowerUp1CD.start(cooldownP1)
-			Can_PowerUp1 = false
-			
 			if turret_counter == 1:
 				turret_ref1 = pw1
 			elif turret_counter == 2:
@@ -44,21 +43,28 @@ func estado_base(delta):
 			turret_ref1.queue_free()
 			turret_ref1 = turret_ref2
 			turret_ref2 = pw1
-			get_parent().add_child(pw1)
-			pw1.global_position = Mouse
-			$PowerUp1CD.start(cooldownP1)
-			Can_PowerUp1 = false
-			
+			turret_counter += 1
+		
+		pw1.global_position = ray_pos(Mouse)
+		
+		emit_signal("PW1_used")
+		$PowerUp1CD.start(cooldownP1)
+		Can_PowerUp1 = false
+		get_parent().add_child(pw1)
+		$Range.visible = false
+		
 	
 	#Mina, teus cabelo é daora, teu corpão violão....
-	elif Input.is_action_just_pressed("PowerUp2") and Can_PowerUp2 and sqrt(dx * dx + dy * dy) <= 200:
+	elif Input.is_action_just_released("PowerUp2") and Can_PowerUp2 and sqrt(dx * dx + dy * dy) <= 200:
+		var pw2 = POWERUP2.instance()
+		
+		pw2.global_position = ray_pos(Mouse)
+		
+		$PowerUP2CD.start(cooldownP2)
+		$Range.visible = false
 		emit_signal("PW2_used")
 		Can_PowerUp2 = false
-		var pw2 = POWERUP2.instance()
 		get_parent().add_child(pw2)
-		pw2.global_position = Mouse
-		$PowerUP2CD.start(cooldownP2)
-			
 
 #Dash que aumenta a speed :)
 func roll_state():
@@ -80,5 +86,18 @@ func _on_DurationShield_timeout():
 	$HurtBox/CollisionShape2D.call_deferred("set","disabled",false)
 	$Shield/Sprite.call_deferred("set","visible",false)
 
+func range_control():
+	if Input.is_action_just_pressed("PowerUp1") and Can_PowerUp1:
+		$Range.visible = true
+	elif Input.is_action_just_pressed("PowerUp2") and Can_PowerUp2:
+		$Range.visible = true
+		
+func ray_pos(mouse):
+	rayCast.cast_to = Mouse - global_position
+	rayCast.force_raycast_update()
 
-
+	if !rayCast.is_colliding():
+		return mouse
+	else:
+		var turret_radius = $HurtBox/CollisionShape2D.get_shape().radius
+		return rayCast.get_collision_point() + rayCast.get_collision_normal() * turret_radius
