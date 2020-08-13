@@ -3,7 +3,7 @@
 [ext_resource path="res://Assets/Enimies/Boss/Boss_1_2.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Enimies/Boss/Corpo_boss_1_2.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Engine/Stats.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Assets/Sprites/Circulo - Copia.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Sprites/Cabeca-cobra.png" type="Texture" id=4]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -94,6 +94,10 @@ wait_time = 6.2
 
 [node name="Stats" parent="." instance=ExtResource( 3 )]
 MaxHealth = 42
+
+[node name="Timer_veneno_corpo" type="Timer" parent="."]
+
+[node name="Timer_poison_shot" type="Timer" parent="."]
 [connection signal="body_exploded" from="Path2D/PathFollow2D/Corpo" to="." method="_on_Corpo_body_exploded"]
 [connection signal="area_entered" from="Path2D/PathFollow2D/Corpo/HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="body_exploded" from="Path2D/PathFollow2D2/Corpo" to="." method="_on_Corpo_body_exploded"]
@@ -110,6 +114,8 @@ MaxHealth = 42
 [connection signal="area_entered" from="Path2D/PathFollow2D7/Corpo/HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="timeout" from="Path2D/PathFollow2D7/Corpo/Timer" to="." method="_on_Timer_timeout"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
+[connection signal="timeout" from="Timer_veneno_corpo" to="." method="_on_Timer_veneno_corpo_timeout"]
+[connection signal="timeout" from="Timer_poison_shot" to="." method="_on_Timer_poison_shot_timeout"]
 
 [editable path="Path2D/PathFollow2D/Corpo"]
 
