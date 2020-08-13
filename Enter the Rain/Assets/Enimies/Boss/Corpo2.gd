@@ -1,40 +1,54 @@
 extends KinematicBody2D
-var velocity = Vector2(175, 0)
+onready var path_follow = get_parent()
+onready var main_node = get_parent().get_parent().get_parent()
+onready var stats = get_parent().get_parent().get_parent().get_node('Stats')
+export(int) var health_to_explode
+onready var explosion = load('res://Assets/Enimies/Explosion.tscn')
+onready var bullet = load('res://Assets/Enimies/Enemy_bullet/EnemyBullet.tscn')
+onready var super_bullet = load('res://Assets/Enimies/Enemy_bullet/SuperBullet.tscn')
+var rng = RandomNumberGenerator.new()
 var damage = 1
-var angle = 90
-var slowing = false
 var started = false
-var velocity_snake_body = Vector2.ZERO
-var change_dir = false
+signal body_exploded
 
+func ready():
+	rng.randomize()
+	
 func _physics_process(delta):
-	move_and_collide(-get_parent().velocity_snake_mov.rotated(get_parent().angle) * delta)
+	rng.randomize()
+	var speed = main_node.speed
 	if started:
-		if slowing:
-			velocity_snake_body -= velocity * 0.02
-		else:
-			velocity_snake_body += velocity * 0.02
-	move_and_collide(velocity_snake_body.rotated(angle) * delta)
+		path_follow.set_offset(path_follow.get_offset() + speed * delta)
+	if stats.Health <= health_to_explode:
+		explode()
+	
 
-
-func _on_Timer_start_timeout():
+func _on_Timer_timeout():  # Iniciar a locomoção
 	started = true
-	$Timer_mov_body.start()
-	$Timer_parar_body.start()
+	$Timer_shot.start(rng.randf_range(main_node.min_timer, main_node.max_timer))
+
+func explode():
+	# Explodir a parte do corpo
+	var Explosion = explosion.instance()
+	Explosion.position = global_position
+	main_node.get_parent().call_deferred('add_child', Explosion)
+	# Atirar algumas bullets
+	var direction = 0
+	while direction < 2 * PI:
+		var bullet_spawn = bullet.instance()
+		bullet_spawn.start(global_position, direction)
+		main_node.get_parent().call_deferred('add_child', bullet_spawn)
+		direction += PI / 5
+	emit_signal("body_exploded")
+	queue_free()
 
 
-func _on_Timer_mov_body_timeout():
-	velocity_snake_body = Vector2.ZERO
-	if change_dir:
-		angle = 90
-		change_dir = false
+func _on_Timer_shot_timeout():  # Shoot to a random location
+	var Bullet
+	if rng.randi_range(0, 100) <= main_node.probability_super_bullet:
+		Bullet = super_bullet.instance()
 	else:
-		angle = -90
-		change_dir = true
-
-
-func _on_Timer_parar_body_timeout():
-	if slowing:
-		slowing = false
-	else:
-		slowing = true
+		Bullet = bullet.instance()
+	Bullet.start(global_position, rng.randf_range(0, 360))
+	main_node.get_parent().call_deferred('add_child', Bullet)
+	$Timer_shot.start(rng.randf_range(main_node.min_timer, main_node.max_timer))

@@ -47,34 +47,33 @@ MaxHealth = 30
 position = Vector2( 0.920132, -1.01214 )
 scale = Vector2( 2.30658, 2.31578 )
 
-[node name="Movimento_aletorio" parent="." index="6" instance=ExtResource( 3 )]
-alcance_posic_aleatoria = 300
+[node name="Missile_timer" type="Timer" parent="." index="6"]
 
-[node name="Missile_timer" type="Timer" parent="." index="7"]
-
-[node name="Range" parent="." index="8" instance=ExtResource( 5 )]
+[node name="Range" parent="." index="7" instance=ExtResource( 5 )]
 
 [node name="CollisionShape2D" parent="Range" index="0"]
 position = Vector2( 0, 0.193714 )
 shape = SubResource( 4 )
 
-[node name="Shoot_timer" type="Timer" parent="." index="9"]
+[node name="Shoot_timer" type="Timer" parent="." index="8"]
 wait_time = 1.5
 
-[node name="Timer_power" type="Timer" parent="." index="10"]
+[node name="Timer_power" type="Timer" parent="." index="9"]
 wait_time = 0.5
 
-[node name="Timer_spawning" type="Timer" parent="." index="11"]
+[node name="Timer_spawning" type="Timer" parent="." index="10"]
 wait_time = 5.0
 one_shot = true
 autostart = true
 
-[node name="Timer_pow1" type="Timer" parent="." index="12"]
+[node name="Timer_pow1" type="Timer" parent="." index="11"]
 wait_time = 2.0
 one_shot = true
 
-[node name="Timer_pow2" type="Timer" parent="." index="13"]
+[node name="Timer_pow2" type="Timer" parent="." index="12"]
 one_shot = true
+
+[node name="Movimento_aletorio" parent="." index="13" instance=ExtResource( 3 )]
 [connection signal="timeout" from="Missile_timer" to="." method="_on_Missile_timer_timeout"]
 [connection signal="timeout" from="Shoot_timer" to="." method="_on_Shoot_timer_timeout"]
 [connection signal="timeout" from="Timer_power" to="." method="_on_Timer_power_timeout"]
@@ -84,6 +83,6 @@ one_shot = true
 
 [editable path="Hitbox"]
 
-[editable path="Movimento_aletorio"]
-
 [editable path="Range"]
+
+[editable path="Movimento_aletorio"]
