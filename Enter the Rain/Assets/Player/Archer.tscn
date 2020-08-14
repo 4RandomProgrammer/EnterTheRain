@@ -16,6 +16,7 @@ MaxHealth = 4
 cooldownP1 = 6.0
 
 [node name="Sprite" parent="." index="0"]
+modulate = Color( 0, 0, 0, 1 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
 

@@ -16,8 +16,6 @@ func estado_base(delta):
 	movement_loop(delta)
 	control_loop()
 	range_control()
-	var space_state = get_world_2d().direct_space_state
-	var result = space_state.intersect_ray(global_position, Mouse, [self], collision_mask)
 	dx = Mouse.x - global_position.x
 	dy = Mouse.y - global_position.y
 	

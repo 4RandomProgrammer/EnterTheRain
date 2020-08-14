@@ -4,7 +4,8 @@ enum {
 	MOVE,
 	ROLL,
 	PW1,
-	PW2
+	PW2,
+	KNOCKBACK
 }
 
 export(int) var  MaxHealth = 1

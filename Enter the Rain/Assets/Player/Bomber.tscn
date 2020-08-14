@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Assets/Player/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://icon2.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Player/Bomber.gd" type="Script" id=3]
 [ext_resource path="res://Engine/Hitbox.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Sprites/ohwell.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
@@ -14,9 +15,26 @@ extents = Vector2( 8, 8 )
 [sub_resource type="CircleShape2D" id=3]
 radius = 64.0
 
+[sub_resource type="Animation" id=4]
+resource_name = "DashB"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.25, 0.25 ), Vector2( 0.4, 0.4 ), Vector2( 0.25, 0.25 ) ]
+}
+
 [node name="Player" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 MaxHealth = 4
+cooldownP1 = 15.0
 
 [node name="Sprite" parent="." index="0"]
 scale = Vector2( 0.25, 0.25 )
@@ -34,7 +52,29 @@ shape = SubResource( 2 )
 shape = SubResource( 3 )
 disabled = true
 
-[node name="DashCD" type="Timer" parent="." index="9"]
+[node name="AnimationPlayer" parent="." index="5"]
+anims/DashB = SubResource( 4 )
+
+[node name="DurationPw1" type="Timer" parent="." index="9"]
+one_shot = true
+
+[node name="DashCD" type="Timer" parent="." index="10"]
+one_shot = true
+
+[node name="Knockback_Duration" type="Timer" parent="." index="11"]
+one_shot = true
+
+[node name="AbilityButton" parent="Camera2D/CanvasLayer/Control/HBoxContainer" index="0"]
+cooldown = 15.0
+
+[node name="BarraTeste" type="Sprite" parent="." index="14"]
+position = Vector2( 0, 32 )
+texture = ExtResource( 5 )
+hframes = 100
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="timeout" from="DurationPw1" to="." method="_on_DurationPw1_timeout"]
+[connection signal="timeout" from="DashCD" to="." method="_on_DashCD_timeout"]
+[connection signal="timeout" from="Knockback_Duration" to="." method="_on_Knockback_Duration_timeout"]
 
 [editable path="HurtBox"]
 
