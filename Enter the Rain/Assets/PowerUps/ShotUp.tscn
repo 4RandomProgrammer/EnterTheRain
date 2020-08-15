@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Engine/Hitbox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/PowerUps/ShotUp.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Sprites/shotup.png" type="Texture" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 75.0
@@ -48,6 +49,9 @@ disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/FadeAway = SubResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 3 )
 [connection signal="timeout" from="ActivateTimer" to="." method="_on_ActivateTimer_timeout"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 
