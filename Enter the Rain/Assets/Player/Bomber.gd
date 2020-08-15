@@ -112,7 +112,7 @@ func _on_DurationPw1_timeout():
 	state = MOVE
 
 
-func _on_AnimationPlayer_animation_finished(DashB):
+func _on_AnimationPlayer_animation_finished(_DashB):
 	$Hitbox/CollisionShape2D.call_deferred("set","disabled",false)
 	yield(get_tree().create_timer(0.2),"timeout")
 	state = MOVE
