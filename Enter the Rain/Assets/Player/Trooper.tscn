@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Assets/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/Doomguy sem arma skin2 2.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Player/Character.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Sprites/weapon futurista contornada.png" type="Texture" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
 height = 9.38423
@@ -21,6 +22,12 @@ texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource( 1 )
+
+[node name="Weapon" parent="." index="2"]
+texture = ExtResource( 4 )
+
+[node name="Position2D" parent="Weapon" index="0"]
+position = Vector2( 27, -1 )
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 position = Vector2( 0, -0.220366 )

@@ -5,15 +5,6 @@ const POWERUP1 = preload("res://Assets/PowerUps/Granada.tscn")
 const ROLL_SPEED = 450
 
 
-func _physics_process(delta):
-	#Maquina de estados
-	match state:
-		MOVE:
-			estado_base(delta)
-
-		ROLL:
-			roll_state()
-
 #Func para os estados
 func estado_base(delta):
 	control_loop()
