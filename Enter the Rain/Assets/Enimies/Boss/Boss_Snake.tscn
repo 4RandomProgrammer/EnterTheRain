@@ -15,8 +15,8 @@ curve = null
 script = ExtResource( 6 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
-position = Vector2( 1.6113, -1.76486 )
-rotation = 0.268928
+position = Vector2( 0.847687, 0.949677 )
+rotation = 0.904614
 
 [node name="Corpo" parent="Path2D/PathFollow2D" instance=ExtResource( 2 )]
 
@@ -24,7 +24,7 @@ rotation = 0.268928
 texture = ExtResource( 4 )
 
 [node name="PathFollow2D2" type="PathFollow2D" parent="Path2D"]
-position = Vector2( 1.6113, -1.76486 )
+position = Vector2( 0.847687, 0.949677 )
 rotation = 0.904614
 rotate = false
 
@@ -35,7 +35,7 @@ health_to_explode = 6
 wait_time = 5.2
 
 [node name="PathFollow2D3" type="PathFollow2D" parent="Path2D"]
-position = Vector2( 1.6113, -1.76486 )
+position = Vector2( 0.847687, 0.949677 )
 rotation = 0.904614
 rotate = false
 
@@ -46,7 +46,7 @@ health_to_explode = 12
 wait_time = 5.4
 
 [node name="PathFollow2D4" type="PathFollow2D" parent="Path2D"]
-position = Vector2( 1.6113, -1.76486 )
+position = Vector2( 0.847687, 0.949677 )
 rotation = 0.904614
 rotate = false
 
@@ -57,7 +57,7 @@ health_to_explode = 18
 wait_time = 5.6
 
 [node name="PathFollow2D5" type="PathFollow2D" parent="Path2D"]
-position = Vector2( 1.6113, -1.76486 )
+position = Vector2( 0.847687, 0.949677 )
 rotation = 0.904614
 rotate = false
 
@@ -68,7 +68,7 @@ health_to_explode = 24
 wait_time = 5.8
 
 [node name="PathFollow2D6" type="PathFollow2D" parent="Path2D"]
-position = Vector2( 1.6113, -1.76486 )
+position = Vector2( 0.847687, 0.949677 )
 rotation = 0.904614
 rotate = false
 
@@ -79,7 +79,7 @@ health_to_explode = 30
 wait_time = 6.0
 
 [node name="PathFollow2D7" type="PathFollow2D" parent="Path2D"]
-position = Vector2( 1.6113, -1.76486 )
+position = Vector2( 0.847687, 0.949677 )
 rotation = 0.904614
 rotate = false
 
