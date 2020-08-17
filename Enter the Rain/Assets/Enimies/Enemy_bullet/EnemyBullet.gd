@@ -28,3 +28,6 @@ func _on_Area2D_body_entered(body):
 
 func on_collision():
 	pass
+
+func _on_Timer_duration_timeout():
+	queue_free()

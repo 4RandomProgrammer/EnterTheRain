@@ -18,8 +18,9 @@ shape = SubResource( 1 )
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-position = Vector2( 0.105592, -0.00242379 )
-scale = Vector2( 0.407045, 0.410307 )
+[node name="Timer_duration" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+autostart = true
 [connection signal="body_entered" from="." to="." method="_on_Area2D_body_entered"]
-[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="timeout" from="Timer_duration" to="." method="_on_Timer_duration_timeout"]
