@@ -17,11 +17,11 @@ signal healthChanged
 
 func _ready():
 	var bossHealthBar = get_parent().get_node('Player').get_node('Camera2D').get_node('CanvasLayer').get_node('HealthBarBoss')
-	var boss_1_2 = get_node('.')
-	boss_1_2 = get_node('.')
-	boss_1_2.connect("Spawning", bossHealthBar, "_on_Boss_Spawning")
-	boss_1_2.connect("Died", bossHealthBar, "_on_Boss_Died")
-	boss_1_2.connect("healthChanged", bossHealthBar, "_on_Boss_healthChanged")
+	var boss_snake = get_node('.')
+	boss_snake = get_node('.')
+	boss_snake.connect("Spawning", bossHealthBar, "_on_Boss_Spawning")
+	boss_snake.connect("Died", bossHealthBar, "_on_Boss_Died")
+	boss_snake.connect("healthChanged", bossHealthBar, "_on_Boss_healthChanged")
 	emit_signal("Spawning", $Stats.MaxHealth)
 
 

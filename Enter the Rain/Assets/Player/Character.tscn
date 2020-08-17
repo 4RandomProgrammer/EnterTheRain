@@ -48,6 +48,7 @@ tracks/0/keys = {
 height = 9.97371
 
 [node name="Player" type="KinematicBody2D"]
+z_index = 1
 collision_layer = 2
 script = ExtResource( 2 )
 

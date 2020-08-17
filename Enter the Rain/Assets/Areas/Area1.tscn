@@ -1,7 +1,9 @@
-[gd_scene load_steps=66 format=2]
+[gd_scene load_steps=68 format=2]
 
+[ext_resource path="res://Assets/Enimies/Teia.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Spawners/BossSpawner/BossSpawner.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/tilesets Enter the Rain/ashlands_tileset.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Enimies/Boss/Boss_spider_minion.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Spawners/Arena/Arena.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Engine/Restart.gd" type="Script" id=9]
 [ext_resource path="res://Assets/Sistema_Dinheiro.tscn" type="PackedScene" id=10]
@@ -902,6 +904,7 @@ format = 1
 tile_data = PoolIntArray( -1310646, 5, 0, -1310645, 5, 1, -1310644, 5, 1, -1310643, 5, 1, -1310642, 5, 1, -1310641, 5, 1, -1310640, 5, 1, -1310639, 5, 1, -1310638, 5, 1, -1310637, 5, 1, -1310636, 5, 1, -1310635, 5, 1, -1310634, 5, 1, -1310633, 5, 1, -1310632, 5, 1, -1310631, 5, 1, -1310630, 5, 1, -1310629, 5, 1, -1310628, 5, 1, -1310627, 5, 1, -1310626, 5, 1, -1310625, 5, 1, -1310624, 5, 1, -1310623, 5, 1, -1310622, 5, 1, -1310621, 5, 1, -1310620, 5, 1, -1310619, 5, 1, -1310618, 5, 1, -1310617, 5, 1, -1310616, 5, 1, -1310615, 5, 1, -1310614, 5, 1, -1310613, 5, 1, -1310612, 5, 1, -1310611, 5, 1, -1310610, 5, 1, -1310609, 5, 1, -1310608, 5, 1, -1310607, 5, 1, -1310606, 5, 1, -1310605, 5, 1, -1310604, 5, 1, -1310603, 5, 1, -1310602, 5, 1, -1310601, 5, 1, -1310600, 5, 1, -1310599, 5, 1, -1310598, 5, 1, -1310597, 5, 1, -1310596, 5, 1, -1310595, 5, 1, -1310594, 5, 1, -1310593, 5, 1, -1310592, 5, 1, -1310591, 5, 1, -1310590, 5, 1, -1310589, 5, 1, -1310588, 5, 1, -1310587, 5, 1, -1310586, 5, 2, 0, 5, 0, 9, 5, 2, 65567, 5, 0, 65601, 5, 2, 852048, 5, 0, 852095, 5, 2, 1441772, 5, 0, 1376264, 5, 2, 3211290, 5, 0, 3211296, 5, 2, 3342385, 5, 0, 3342415, 5, 2, 4587642, 5, 0, 4587659, 5, 2, 4849628, 5, 0, 4784135, 5, 2, 5177453, 5, 0, 7209004, 4, 0 )
 
 [node name="Objects" type="TileMap" parent="."]
+z_index = 1
 tile_set = SubResource( 49 )
 cell_size = Vector2( 16, 16 )
 format = 1
@@ -994,6 +997,12 @@ shape = SubResource( 59 )
 
 [node name="BossSpawner" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1660, 81 )
+
+[node name="Area2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 99.9651, 172 )
+
+[node name="KinematicBody2D" parent="." instance=ExtResource( 4 )]
+position = Vector2( 56.6013, 222.73 )
 
 [editable path="Arena"]
 
