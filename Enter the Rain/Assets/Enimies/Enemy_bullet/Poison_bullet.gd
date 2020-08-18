@@ -1,14 +1,14 @@
 extends 'res://Assets/Enimies/Enemy_bullet/EnemyBullet.gd'
-onready var poison = load('res://Assets/Enimies/Veneno.tscn')
+onready var Poison = load('res://Assets/Enimies/Poison.tscn')
 
 func on_collision():
-	var Poison = poison.instance()
-	Poison.position = position
-	get_parent().call_deferred('add_child', Poison)
+	var poison = Poison.instance()
+	poison.position = position
+	get_parent().call_deferred('add_child', poison)
 
 
 func _on_Timer_explode_poison_timeout():
-	var Poison = poison.instance()
-	Poison.position = position
-	get_parent().call_deferred('add_child', Poison)
+	var poison = Poison.instance()
+	poison.position = position
+	get_parent().call_deferred('add_child', poison)
 	queue_free()

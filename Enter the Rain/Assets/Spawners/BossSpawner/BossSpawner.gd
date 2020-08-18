@@ -2,7 +2,8 @@ extends StaticBody2D
 onready var boss_1_1 = load("res://Assets/Enimies/Boss/Boss1.tscn")
 onready var boss_2_1 = load('res://Assets/Enimies/Boss/Boss2.tscn')
 onready var boss_1_2 = load('res://Assets/Enimies/Boss/Boss_Snake.tscn')
-onready var boss_list = [[boss_1_1, boss_1_2], [boss_2_1]]
+onready var boss_2_2 = load('res://Assets/Enimies/Boss/Boss_spider.tscn')
+onready var boss_list = [[boss_1_1, boss_1_2], [ boss_2_2]]
 export var choosen_boss = 1
 onready var altar = get_node('.')
 var can_start = false

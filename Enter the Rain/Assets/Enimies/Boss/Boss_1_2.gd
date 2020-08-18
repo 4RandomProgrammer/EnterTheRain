@@ -6,14 +6,14 @@ var min_timer = 1
 var max_timer = 3
 var timer_poison = 5
 var probability_super_bullet = 5
-onready var poison = load('res://Assets/Enimies/Veneno.tscn')
+onready var poison = load('res://Assets/Enimies/Poison.tscn')
 onready var snake_head = get_node("Path2D/PathFollow2D/Corpo")
 onready var poison_bullet = load('res://Assets/Enimies/Enemy_bullet/Poison_bullet.tscn')
 var timer_poison_bullet = 4
 
-signal Spawning
+signal Spawning(MaxHealth)
 signal Died
-signal healthChanged
+signal healthChanged(health)
 
 func _ready():
 	var bossHealthBar = get_parent().get_node('Player').get_node('Camera2D').get_node('CanvasLayer').get_node('HealthBarBoss')

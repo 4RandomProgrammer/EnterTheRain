@@ -59,7 +59,6 @@ shape = SubResource( 1 )
 
 [node name="HurtBox" parent="." instance=ExtResource( 3 )]
 modulate = Color( 0, 0.721569, 0.0196078, 1 )
-collision_layer = 4
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 shape = SubResource( 2 )

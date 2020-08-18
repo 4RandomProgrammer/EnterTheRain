@@ -30,4 +30,8 @@ func on_collision():
 	pass
 
 func _on_Timer_duration_timeout():
+	timer_finished()
 	queue_free()
+
+func timer_finished():
+	pass
