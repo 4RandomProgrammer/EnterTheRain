@@ -31,6 +31,8 @@ var can_fire = true
 var dano = 1
 var moveDirection = Vector2.ZERO
 var rng = RandomNumberGenerator.new()
+var quant_poison = 0
+var timer_poison = 0
 var money = 0
 
 const FRICTION = 25
@@ -43,6 +45,7 @@ signal maxhealthChanged(value)
 signal set_maxhealth(value)
 signal no_health
 signal moneyChanged(current_money)
+signal poisonChanged
 signal PW1_used
 signal PW2_used
 
@@ -52,6 +55,7 @@ func _ready():
 	emit_signal("set_maxhealth",Health)
 
 func _physics_process(delta):
+	poison_verifications(delta)
 	#Maquina de estados
 	match state:
 		MOVE:
@@ -66,6 +70,17 @@ func roll_state():
 func estado_base(_delta):
 	pass
 
+func poison_verifications(delta):
+	emit_signal("poisonChanged", timer_poison)
+	if quant_poison > 0:  # O player está em uma poça de veneno. O timer deve aumentar
+		timer_poison += 1 * delta
+		if timer_poison > 1:  # Quando o timer chegar em 1, dar dano ao player
+			timer_poison = 0
+			set_NewHealth(-1)
+	elif timer_poison > 0:  # O player não está em nehuma poça de veneno, diminuir o timer...
+		timer_poison -= 1 * delta
+
+
 func set_MaxHealth(value):
 	MaxHealth += value
 	emit_signal("maxhealthChanged", value)
@@ -73,6 +88,9 @@ func set_MaxHealth(value):
 func set_NewHealth(value):
 	Health += value
 	emit_signal("healthChanged", Health)
+	if Health <= 0:
+		emit_signal("no_health")
+		die()
 
 #Func de tiro
 func shot(isStunBullet):
@@ -129,11 +147,8 @@ func _on_HurtBox_area_entered(area):
 	if InvunerabilityTimer.is_stopped():
 		hurtbox.start_invincibility(0.5)
 		$AnimationPlayer.play("Flash")
-		Health -= area.DAMAGE
-		emit_signal("healthChanged",Health)
-		if Health <= 0:
-			emit_signal("no_health")
-			die()
+		set_NewHealth(- area.DAMAGE)
+		
 
 func update_Money(money_value):
 	# Atualiza o dinheiro do player. Acontece ao matar inimigos(ganha dinheiro) e abrir baus(perde).

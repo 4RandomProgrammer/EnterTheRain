@@ -3,7 +3,8 @@ extends KinematicBody2D
 var damage = 1
 enum {
 	SPAWNING,
-	WALKING
+	WALKING,
+	MOVE_POWER
 }
 var speed = 150
 var state = SPAWNING
@@ -28,6 +29,9 @@ func _physics_process(delta):
 			pass
 		WALKING:
 			movimentation(delta)
+		MOVE_POWER:
+			pass
+		
 
 func movimentation(delta):
 	direction = global_position.direction_to(random_moviment.target_position)
@@ -93,3 +97,16 @@ func _on_Timer_delay_shoot_timeout():
 		bullet_list.pop_front()
 		get_parent().call_deferred('add_child', current_bullet)
 		$Timer_delay_shoot.start()
+
+
+func _on_Timer_spider_up_timeout():
+	state = MOVE_POWER
+	$AnimationPlayer.play("GoUp")
+
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == 'GoUp':
+		position = player.position
+		$AnimationPlayer.play("GoDown")
+	else:
+		state = WALKING

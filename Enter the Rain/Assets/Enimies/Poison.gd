@@ -3,19 +3,14 @@ extends Area2D
 var damage = 1
 
 
-func _on_Timer_dano_timeout():
-	print('dar dano')
-	$Hitbox.get_node("CollisionShape2D").set_deferred('disabled', false)
-
-
 func _on_Veneno_body_entered(body):
-	print('entrou')
-	$Timer_dano.start()
+	if body.name == 'Player':
+		body.quant_poison += 1
 
 
 func _on_Veneno_body_exited(body):
-	$Timer_dano.stop()
-	$Hitbox.get_node("CollisionShape2D").set_deferred('disabled', true)
+	if body.name == 'Player':
+		body.quant_poison -= 1
 
 
 func _on_Timer_sumir_timeout():
