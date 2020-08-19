@@ -11,6 +11,8 @@ var damage = 1
 var Can_Roll = true
 var charge = 0
 var area_transform
+var dx
+var dy
 
 
 func _physics_process(delta):
@@ -48,7 +50,8 @@ func estado_base(delta):
 	#Charge, explosão que joga longe
 	elif Input.is_action_pressed("PowerUp2") and Can_PowerUp2:
 		state = PW2
-		 
+		$Range.visible = true
+
 
 #Salto que na queda faz queda dar dano em área
 func roll_state():
@@ -72,6 +75,8 @@ func state_powerup2(delta):
 	control_loop()
 	var pw2 = POWERUP2.instance()
 	Mouse = get_global_mouse_position()
+	dx = Mouse.x - global_position.x
+	dy = Mouse.y - global_position.y
 	
 	charge += 1
 	if $BarraTeste.frame != 99:
@@ -79,7 +84,11 @@ func state_powerup2(delta):
 	charge = clamp(charge,0,100)
 	
 	
-	if Input.is_action_just_released("PowerUp2"):
+	if Input.is_action_just_pressed("PowerUp2") and sqrt(dx * dx + dy * dy) <= 200:
+		$PowerUP2CD.start(cooldownP2)
+		emit_signal("PW2_used")
+		Can_PowerUp2 = false
+		$Range.visible = false
 		if charge >= 0 and charge < 50:
 			pw2.global_position = Mouse
 			get_parent().add_child(pw2)
@@ -105,7 +114,7 @@ func to_knockback(area_pos):
 	state = KNOCKBACK
 	area_transform = area_pos
 	if $Knockback_Duration.is_stopped():
-		$Knockback_Duration.start()
+		$Knockback_Duration.start(0.6)
 	
 
 func _on_DurationPw1_timeout():
@@ -114,7 +123,6 @@ func _on_DurationPw1_timeout():
 
 func _on_AnimationPlayer_animation_finished(_DashB):
 	$Hitbox/CollisionShape2D.call_deferred("set","disabled",false)
-	yield(get_tree().create_timer(0.2),"timeout")
 	state = MOVE
 	$Hitbox/CollisionShape2D.call_deferred("set","disabled",true)
 

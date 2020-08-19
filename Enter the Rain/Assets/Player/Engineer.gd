@@ -12,6 +12,7 @@ const POWERUP1 = preload("res://Assets/PowerUps/TorretaPlayer.tscn")
 const DASH = preload("res://Assets/PowerUps/Shield.tscn")
 
 func estado_base(delta):
+	print(turret_counter)
 	Mouse = get_global_mouse_position()
 	movement_loop(delta)
 	control_loop()
@@ -41,7 +42,6 @@ func estado_base(delta):
 			turret_ref1.queue_free()
 			turret_ref1 = turret_ref2
 			turret_ref2 = pw1
-			turret_counter += 1
 		
 		pw1.global_position = ray_pos(Mouse)
 		

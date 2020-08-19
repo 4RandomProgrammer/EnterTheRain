@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Assets/Player/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://icon2.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Player/Bomber.gd" type="Script" id=3]
 [ext_resource path="res://Engine/Hitbox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Sprites/ohwell.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Sprites/range.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
@@ -17,7 +18,7 @@ radius = 64.0
 
 [sub_resource type="Animation" id=4]
 resource_name = "DashB"
-length = 0.5
+length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:scale")
 tracks/0/interp = 1
@@ -29,6 +30,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0.25, 0.25 ), Vector2( 0.4, 0.4 ), Vector2( 0.25, 0.25 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
 }
 
 [node name="Player" instance=ExtResource( 1 )]
@@ -71,6 +84,10 @@ cooldown = 15.0
 position = Vector2( 0, 32 )
 texture = ExtResource( 5 )
 hframes = 100
+
+[node name="Range" type="Sprite" parent="." index="15"]
+visible = false
+texture = ExtResource( 6 )
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="DurationPw1" to="." method="_on_DurationPw1_timeout"]
 [connection signal="timeout" from="DashCD" to="." method="_on_DashCD_timeout"]

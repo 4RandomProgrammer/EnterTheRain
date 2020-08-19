@@ -73,6 +73,9 @@ func set_MaxHealth(value):
 func set_NewHealth(value):
 	Health += value
 	emit_signal("healthChanged", Health)
+	if Health <= 0:
+		emit_signal("no_health")
+		die()
 
 #Func de tiro
 func shot(isStunBullet):
