@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Engine/HurtBox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Enimies/Boss/Boss_spider.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://icon.png" type="Texture" id=4]
 [ext_resource path="res://Engine/Stats.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Movimento_aletorio.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Sprites/Explosion_target.png" type="Texture" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 30.1372, 31.2287 )
@@ -16,7 +17,7 @@ extents = Vector2( 28.9908, 31.2457 )
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 30.1588, 31.2457 )
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 resource_name = "GoDown"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Hitbox/CollisionShape2D:disabled")
@@ -64,11 +65,58 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 0.732043, 1 ),
 "update": 0,
+"values": [ Vector2( 0, 1000 ), Vector2( 0, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Line2D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.732043, 1 ),
+"update": 0,
 "values": [ Vector2( 0, -1000 ), Vector2( 0, 0 ) ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("Line2D:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Target:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Sprite:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 180.0, 180.0, 0.0 ]
+}
 
-[sub_resource type="Animation" id=4]
-resource_name = "GoUp"
+[sub_resource type="Animation" id=5]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Hitbox/CollisionShape2D:disabled")
 tracks/0/interp = 1
@@ -115,10 +163,47 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 0.757858, 1 ),
 "update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 1000 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Line2D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.757858, 1 ),
+"update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 0, -1000 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Line2D:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sprite:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 180.0, 180.0 ]
 }
 
 [node name="Boss" type="KinematicBody2D"]
+z_index = 1
 collision_layer = 16
 collision_mask = 3
 script = ExtResource( 2 )
@@ -162,12 +247,22 @@ wait_time = 0.2
 one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/GoDown = SubResource( 5 )
-anims/GoUp = SubResource( 4 )
+anims/GoDown = SubResource( 4 )
+anims/GoUp = SubResource( 5 )
 
 [node name="Timer_spider_up" type="Timer" parent="."]
 wait_time = 10.0
 autostart = true
+
+[node name="Line2D" type="Line2D" parent="."]
+visible = false
+points = PoolVector2Array( -0.0354309, -31.2337, 0.256561, -629.854, -0.00140381, -922.347 )
+width = 3.0
+default_color = Color( 1, 1, 1, 1 )
+
+[node name="Target" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 7 )
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="timeout" from="Timer_spawn" to="." method="_on_Timer_spawn_timeout"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]

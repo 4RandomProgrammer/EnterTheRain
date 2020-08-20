@@ -10,6 +10,7 @@ enum {
 
 export(int) var  MaxHealth = 1
 export (int) var MAX_SPEED = 250
+var current_speed = 250
 export (float)var fire_rate = 0.5
 export (float)var cooldownP1 = 2
 export (float)var cooldownP2 = 3
@@ -134,7 +135,7 @@ func control_loop():
 #Func de movimento, aqui se adiciona knockback se quiser
 func movement_loop(delta):
 	if moveDirection != Vector2.ZERO:
-		moveDirection += moveDirection.normalized() * MAX_SPEED
+		moveDirection += moveDirection.normalized() * current_speed
 		roll_vector = moveDirection.normalized()
 	else:
 		moveDirection = moveDirection.move_toward(Vector2.ZERO, FRICTION * delta)
