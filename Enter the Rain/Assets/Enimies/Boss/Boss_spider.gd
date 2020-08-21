@@ -16,6 +16,7 @@ onready var random_moviment = $Movimento_aletorio
 onready var Bullet = load("res://Assets/Enimies/Enemy_bullet/EnemyBullet.tscn")
 onready var Super_bullet = load("res://Assets/Enimies/Enemy_bullet/SuperBullet.tscn")
 onready var Cobweb_bullet = load("res://Assets/Enimies/Enemy_bullet/Cobweb_bullet.tscn")
+onready var Power_cobweb = load('res://Assets/Enimies/Enemy_bullet/Cobweb_bul_power.tscn')
 onready var Explosion = load("res://Assets/Enimies/Explosion.tscn")
 var bullet_list = []
 var direction
@@ -117,7 +118,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		get_parent().call_deferred('add_child', explosion)
 		var angle = 0
 		while angle < 2 * PI:
-			var cobweb_bullet = Cobweb_bullet.instance()
+			var cobweb_bullet = Power_cobweb.instance()
 			cobweb_bullet.start(global_position, angle)
 			get_parent().call_deferred('add_child', cobweb_bullet)
 			angle += PI / 4

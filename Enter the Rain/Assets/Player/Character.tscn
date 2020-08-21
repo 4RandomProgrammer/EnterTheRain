@@ -9,9 +9,11 @@
 [ext_resource path="res://icon.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Nova pasta/Pause.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Assets/Enimies/Boss/HealthBarBoss.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Poison_bar.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Assets/Player/Poison_bar.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Assets/Player/Itens_popups.gd" type="Script" id=12]
 [ext_resource path="res://Engine/Weapon.tscn" type="PackedScene" id=14]
+
+
 
 [sub_resource type="Animation" id=1]
 resource_name = "Dash"
