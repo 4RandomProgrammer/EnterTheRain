@@ -1,8 +1,10 @@
 extends RigidBody2D
 
-onready var explosion = $Explosion/ExplosionArea
+onready var explosion = $Hitbox/CollisionShape2D
 
 const BULLETSPEED = 200
+
+var damage = 1
 
 func _ready():
 	$Timer.start()

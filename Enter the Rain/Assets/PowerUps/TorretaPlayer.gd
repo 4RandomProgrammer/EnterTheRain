@@ -11,7 +11,6 @@ signal dead
 func _ready():
 	connect("dead",get_parent().get_node("Player"),"turret_dead")
 	emit_signal("Spawned")
-	pass
 
 func _physics_process(_delta):
 	update()

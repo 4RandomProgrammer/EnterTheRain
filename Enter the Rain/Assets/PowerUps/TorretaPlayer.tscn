@@ -16,7 +16,6 @@ extents = Vector2( 16, 16 )
 radius = 200.0
 
 [node name="TorretaPlayer" type="KinematicBody2D"]
-collision_layer = 2
 script = ExtResource( 5 )
 
 [node name="Stats" parent="." instance=ExtResource( 3 )]

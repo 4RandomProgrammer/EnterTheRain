@@ -28,7 +28,8 @@ var state = MOVE
 var Can_PowerUp1 = true
 var Can_PowerUp2 = true
 var can_fire = true
-var dano = 1
+var damage_modifier = 1
+var dano = 0
 var moveDirection = Vector2.ZERO
 var rng = RandomNumberGenerator.new()
 var money = 0
@@ -88,6 +89,7 @@ func shot(isStunBullet):
 			extra_shots()
 		if rng.randi_range(1, 100) <= missile_probability:
 			missile()
+	shots.damage = damage_modifier * (shots.damage + dano)
 	get_parent().add_child(shots)
 	shots.position = $Weapon/Position2D.global_position
 	shots.rotation_degrees = $Weapon.rotation_degrees
@@ -127,6 +129,10 @@ func movement_loop(delta):
 
 func move():
 	moveDirection = move_and_slide(moveDirection)
+
+func apply_buff(what_buff):
+	$Buffs_Controller.apply_doubleDamage()
+
 
 func _on_HurtBox_area_entered(area):
 	if InvunerabilityTimer.is_stopped():

@@ -32,7 +32,7 @@ func _process(delta):
 			player.update_Money(moneyXTimes * money)
 
 func _on_RangeParaAbrir_body_entered(body):
-	player = body
+		player = body
 
 
 func _on_RangeParaAbrir_body_exited(body):

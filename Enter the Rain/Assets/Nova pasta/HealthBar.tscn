@@ -36,3 +36,12 @@ __meta__ = {
 }
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="Label" type="Label" parent="."]
+margin_left = 47.2176
+margin_top = 9.79988
+margin_right = 87.2176
+margin_bottom = 23.7999
+__meta__ = {
+"_edit_use_anchors_": false
+}
