@@ -17,6 +17,8 @@ extents = Vector2( 15.6987, 15.6194 )
 collision_layer = 16
 collision_mask = 2
 script = ExtResource( 3 )
+min_money = 0
+max_money = 0
 
 [node name="Sprite" parent="." index="0"]
 scale = Vector2( 0.5, 0.5 )

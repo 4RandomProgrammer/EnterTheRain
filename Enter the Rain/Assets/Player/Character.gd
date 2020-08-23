@@ -156,8 +156,8 @@ func update_Money(money_value):
 	money += money_value
 	emit_signal("moneyChanged", money)
 
-func player_killed_enemy(enemy_position):
-	update_Money(rng.randi_range(30, 60))
+func player_killed_enemy(enemy_position, min_money, max_money):
+	update_Money(rng.randi_range(min_money, max_money))
 	if rng.randi_range(1, 100) <= health_drop_probability:
 		var health_droped = health_item.instance()
 		health_droped.position = enemy_position
