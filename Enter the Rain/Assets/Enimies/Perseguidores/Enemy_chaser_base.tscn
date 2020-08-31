@@ -9,10 +9,10 @@
 radius = 16.1625
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 16.2684, 17.9944 )
+extents = Vector2( 32.0791, 31.4578 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 15.2111, 17.5488 )
+extents = Vector2( 32.6114, 31.2576 )
 
 [node name="Enemy" instance=ExtResource( 3 )]
 collision_layer = 16

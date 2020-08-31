@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/Enimies/Perseguidores/Enemy_chaser_base.tscn" type="PackedScene" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Enimies/Perseguidores/Super_bee.gd" type="Script" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 250.0
+
+[node name="Super_bee" instance=ExtResource( 1 )]
+collision_layer = 0
+script = ExtResource( 3 )
+velocidade = 100
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2( 0.078091, 0.07371 )
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+position = Vector2( 0.522442, -0.00437927 )
+
+[node name="Stats" parent="." index="4"]
+MaxHealth = 5
+
+[node name="VisibilityNotifier2D" parent="." index="5"]
+position = Vector2( 0.122086, 0 )
+
+[node name="CollisionShape2D" parent="Range" index="0"]
+shape = SubResource( 1 )
+
+[node name="Timer_spawn" type="Timer" parent="." index="10"]
+wait_time = 5.0
+autostart = true
+[connection signal="timeout" from="Timer_spawn" to="." method="_on_Timer_spawn_timeout"]
+
+[editable path="HurtBox"]
+
+[editable path="Hitbox"]
+
+[editable path="Range"]

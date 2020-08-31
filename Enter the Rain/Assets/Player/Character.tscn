@@ -9,7 +9,7 @@
 [ext_resource path="res://icon.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Nova pasta/Pause.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Assets/Enimies/Boss/HealthBarBoss.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Engine/Buffs_Controller.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Assets/Player/Poison_bar.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Assets/Player/Itens_popups.gd" type="Script" id=12]
 [ext_resource path="res://Engine/Weapon.tscn" type="PackedScene" id=14]
 
@@ -49,6 +49,7 @@ tracks/0/keys = {
 height = 9.97371
 
 [node name="Player" type="KinematicBody2D"]
+z_index = 1
 collision_layer = 2
 script = ExtResource( 2 )
 
@@ -156,6 +157,12 @@ margin_top = 548.877
 margin_right = 275.434
 margin_bottom = 548.877
 
+[node name="Poison_bar" parent="Camera2D/CanvasLayer" instance=ExtResource( 10 )]
+margin_left = 502.941
+margin_top = 255.414
+margin_right = 502.941
+margin_bottom = 255.414
+
 [node name="ItemCollectArea" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 32
@@ -163,16 +170,12 @@ collision_mask = 32
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ItemCollectArea"]
 position = Vector2( -1, 0 )
 shape = SubResource( 3 )
-
-[node name="Buffs_Controller" parent="." instance=ExtResource( 10 )]
-
-[node name="CollisionShape2D" parent="Buffs_Controller/Spikes" index="1"]
-disabled = true
 [connection signal="PW1_used" from="." to="Camera2D/CanvasLayer/Control/HBoxContainer/AbilityButton" method="_on_Player_PW1_used"]
 [connection signal="PW2_used" from="." to="Camera2D/CanvasLayer/Control/HBoxContainer/AbilityButton2" method="_on_Player_PW2_used"]
 [connection signal="healthChanged" from="." to="Camera2D/CanvasLayer/HealthBar" method="_on_Player_healthChanged"]
 [connection signal="maxhealthChanged" from="." to="Camera2D/CanvasLayer/HealthBar" method="_on_Player_maxhealthChanged"]
 [connection signal="moneyChanged" from="." to="Camera2D/CanvasLayer/Control/HBoxContainer/DinheiroCounter" method="_on_Player_moneyChanged"]
+[connection signal="poisonChanged" from="." to="Camera2D/CanvasLayer/Poison_bar" method="_on_Player_poisonChanged"]
 [connection signal="set_maxhealth" from="." to="Camera2D/CanvasLayer/HealthBar" method="_on_Player_set_maxhealth"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="timeout" from="PowerUp1CD" to="." method="_on_PowerUp1CD_timeout"]
@@ -182,7 +185,3 @@ disabled = true
 [connection signal="area_entered" from="ItemCollectArea" to="Camera2D/CanvasLayer/Itens_UI" method="_on_ItemCollectArea_area_entered"]
 
 [editable path="HurtBox"]
-
-[editable path="Buffs_Controller"]
-
-[editable path="Buffs_Controller/Spikes"]

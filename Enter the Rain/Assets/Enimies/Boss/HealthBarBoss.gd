@@ -12,7 +12,6 @@ func _on_Boss_healthChanged(health):
 
 
 func _on_Boss_Spawning(maxHealth):
-	print('oi')
 	Health_bar.max_value = maxHealth
 	Health_bar.value = maxHealth
 	Heal_bar2.max_value = maxHealth
