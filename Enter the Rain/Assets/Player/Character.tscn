@@ -165,6 +165,9 @@ position = Vector2( -1, 0 )
 shape = SubResource( 3 )
 
 [node name="Buffs_Controller" parent="." instance=ExtResource( 10 )]
+
+[node name="CollisionShape2D" parent="Buffs_Controller/Spikes" index="1"]
+disabled = true
 [connection signal="PW1_used" from="." to="Camera2D/CanvasLayer/Control/HBoxContainer/AbilityButton" method="_on_Player_PW1_used"]
 [connection signal="PW2_used" from="." to="Camera2D/CanvasLayer/Control/HBoxContainer/AbilityButton2" method="_on_Player_PW2_used"]
 [connection signal="healthChanged" from="." to="Camera2D/CanvasLayer/HealthBar" method="_on_Player_healthChanged"]

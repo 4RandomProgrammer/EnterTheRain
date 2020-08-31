@@ -3,7 +3,9 @@ extends Node
 #tipos de buffs: DoubleDamage, Spikes
 onready var player = get_parent()
 var spikes = 0
+var TBActive = false
 
+#Buffs Stackaveis
 func apply_doubleDamage():
 	player.set_MaxHealth(-player.MaxHealth/2)
 	player.damage_modifier *= 2
@@ -14,3 +16,11 @@ func apply_Spikes():
 	$Spikes/CollisionShape2D.set_deferred("disabled",false)
 	spikes += 0.5
 	player.MAX_SPEED -= player.MAX_SPEED * 0.1
+
+
+#BuffsTemporários
+#Como vou controlar os buffs temporários?
+#Fazendo um geral
+func temp_buff_control():
+	if !TBActive:
+		pass
