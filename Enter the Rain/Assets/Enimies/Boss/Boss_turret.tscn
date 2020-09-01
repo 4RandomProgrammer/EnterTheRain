@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Assets/Enimies/Boss/Boss_turret.gd" type="Script" id=1]
 [ext_resource path="res://Engine/Hitbox.tscn" type="PackedScene" id=2]
@@ -16,7 +16,12 @@ extents = Vector2( 30.4538, 30.8815 )
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 30.9783, 31.2311 )
 
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 498.659, 6.45739 )
+
 [node name="Boss" type="KinematicBody2D"]
+collision_layer = 16
+collision_mask = 3
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -46,13 +51,6 @@ wait_time = 5.0
 one_shot = true
 autostart = true
 
-[node name="Laser" type="Node2D" parent="."]
-
-[node name="Sprite" type="Sprite" parent="Laser"]
-position = Vector2( 514.267, -0.850861 )
-rotation = 1.5708
-texture = ExtResource( 6 )
-
 [node name="Timer_change_pow" type="Timer" parent="."]
 wait_time = 10.0
 autostart = true
@@ -60,12 +58,32 @@ autostart = true
 [node name="Timer_laser" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
+
+[node name="Laser_sprite" type="Sprite" parent="."]
+visible = false
+position = Vector2( 514.267, -0.850861 )
+rotation = 1.5708
+texture = ExtResource( 6 )
+
+[node name="Laser_hitbox" parent="." instance=ExtResource( 2 )]
+collision_mask = 4
+
+[node name="CollisionShape2D" parent="Laser_hitbox" index="0"]
+position = Vector2( 515.6, -1.35835 )
+shape = SubResource( 4 )
+disabled = true
+
+[node name="Timer_missile_laser" type="Timer" parent="."]
+one_shot = true
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="timeout" from="Timer_spawn" to="." method="_on_Timer_spawn_timeout"]
 [connection signal="timeout" from="Timer_change_pow" to="." method="_on_Timer_change_pow_timeout"]
 [connection signal="timeout" from="Timer_laser" to="." method="_on_Timer_laser_timeout"]
+[connection signal="timeout" from="Timer_missile_laser" to="." method="_on_Timer_missile_laser_timeout"]
 
 [editable path="Hitbox"]
 
 [editable path="HurtBox"]
+
+[editable path="Laser_hitbox"]

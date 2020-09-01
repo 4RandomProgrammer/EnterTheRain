@@ -19,7 +19,6 @@ extents = Vector2( 31.5339, 31.7131 )
 radius = 500.0
 
 [node name="Boss" instance=ExtResource( 1 )]
-collision_layer = 16
 script = ExtResource( 2 )
 
 [node name="Sprite" parent="." index="0"]
@@ -28,14 +27,8 @@ texture = ExtResource( 4 )
 [node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource( 1 )
 
-[node name="HurtBox" parent="." index="2"]
-collision_layer = 8
-
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 shape = SubResource( 2 )
-
-[node name="Hitbox" parent="." index="3"]
-collision_mask = 4
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource( 3 )
