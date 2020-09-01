@@ -29,7 +29,8 @@ var state = MOVE
 var Can_PowerUp1 = true
 var Can_PowerUp2 = true
 var can_fire = true
-var damage_modifier = 1
+var shot_damage_modifier = 1
+var skill_damage_modifier = 1
 var dano = 0
 var moveDirection = Vector2.ZERO
 var rng = RandomNumberGenerator.new()
@@ -105,7 +106,7 @@ func shot(isStunBullet):
 			extra_shots()
 		if rng.randi_range(1, 100) <= missile_probability:
 			missile()
-	shots.damage = damage_modifier * (shots.damage + dano)
+	shots.damage = shot_damage_modifier * (shots.damage + dano)
 	get_parent().add_child(shots)
 	shots.position = $Weapon/Position2D.global_position
 	shots.rotation_degrees = $Weapon.rotation_degrees

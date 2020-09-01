@@ -57,7 +57,7 @@ func estado_base(delta):
 		var pw2 = POWERUP2.instance()
 		
 		pw2.global_position = ray_pos(Mouse)
-		
+		pw2.damage = skill_damage_modifier * (dano + pw2.damage)
 		$PowerUP2CD.start(cooldownP2)
 		$Range.visible = false
 		emit_signal("PW2_used")
