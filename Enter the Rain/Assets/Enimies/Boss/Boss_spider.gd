@@ -94,7 +94,7 @@ func _on_Timer_start_shoot_timeout():
 
 
 func _on_Timer_delay_shoot_timeout():  # Atirar as bullets criadas.
-	if bullet_list:  # Se ainda não tiver atirado todos os tiros, continuar atirando...
+	if bullet_list and is_instance_valid(player):  # Se ainda não tiver atirado todos os tiros, continuar atirando...
 		var current_bullet = bullet_list[0]
 		current_bullet.start(global_position, (player.position - position).angle())
 		bullet_list.pop_front()
