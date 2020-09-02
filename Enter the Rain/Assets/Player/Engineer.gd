@@ -12,7 +12,6 @@ const POWERUP1 = preload("res://Assets/PowerUps/TorretaPlayer.tscn")
 const DASH = preload("res://Assets/PowerUps/Shield.tscn")
 
 func estado_base(delta):
-	print(turret_counter)
 	Mouse = get_global_mouse_position()
 	movement_loop(delta)
 	control_loop()

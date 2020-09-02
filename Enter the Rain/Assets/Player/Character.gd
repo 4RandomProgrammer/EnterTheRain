@@ -148,7 +148,7 @@ func move():
 	moveDirection = move_and_slide(moveDirection)
 
 func apply_buff(what_buff):
-	$Buffs_Controller.apply_doubleDamage()
+	$Buffs_Controller.apply_Spikes()
 
 
 func _on_HurtBox_area_entered(area):

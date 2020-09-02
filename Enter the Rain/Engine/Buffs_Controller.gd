@@ -1,4 +1,7 @@
-extends Node
+extends Node2D
+
+signal CD_PW1(cooler1)
+signal CD_PW2(cooler2)
 
 #tipos de buffs: DoubleDamage, Spikes
 onready var player = get_parent()
@@ -13,9 +16,22 @@ func apply_doubleDamage():
 	if player.Health > player.MaxHealth:
 		player.set_NewHealth(player.MaxHealth - player.Health)
 
+func cd_changer():
+	player.cooldownP1 = player.cooldownP1 * 1.5
+	player.cooldownP2 = player.cooldownP2 * 1.5
+	player.skill_damage_modifier *= 1.5
+	emit_signal("CD_PW1", player.cooldownP1)
+	emit_signal("CD_PW2", player.cooldownP2)
+
+#TODO
 func apply_Spikes():
-	$Spikes/CollisionShape2D.set_deferred("disabled",false)
-	spikes += 0.5
+	$Spikes/C1.visible = true
+	$Spikes/C1/Hitbox/CollisionShape2D.set_deferred("disabled",true)
+	$Spikes/C2.visible = true
+	$Spikes/C2/Hitbox/CollisionShape2D.set_deferred("disabled",true)
+	$Spikes/C3.visible = true
+	$Spikes/C3/Hitbox/CollisionShape2D.set_deferred("disabled",true)
+	$Spikes.damage = 0.5
 	player.MAX_SPEED -= player.MAX_SPEED * 0.1
 
 func apply_skilldamge():

@@ -1,6 +1,5 @@
-[gd_scene load_steps=67 format=2]
+[gd_scene load_steps=66 format=2]
 
-[ext_resource path="res://Assets/Enimies/Teia.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Spawners/BossSpawner/BossSpawner.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/tilesets Enter the Rain/ashlands_tileset.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Spawners/Arena/Arena.tscn" type="PackedScene" id=5]
@@ -996,9 +995,6 @@ shape = SubResource( 59 )
 
 [node name="BossSpawner" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1660, 81 )
-
-[node name="Area2D" parent="." instance=ExtResource( 1 )]
-position = Vector2( 99.9651, 172 )
 
 [editable path="Arena"]
 

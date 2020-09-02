@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Assets/Player/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Player/Archer.gd" type="Script" id=3]
+[ext_resource path="res://Engine/Buffs_Controller.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
@@ -28,17 +29,22 @@ shape = SubResource( 1 )
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 shape = SubResource( 2 )
 
-[node name="DashCD" type="Timer" parent="." index="9"]
-one_shot = true
-
-[node name="DurationFireRate" type="Timer" parent="." index="10"]
-wait_time = 5.0
-
 [node name="AbilityButton" parent="Camera2D/CanvasLayer/Control/HBoxContainer" index="0"]
 cooldown = 6.0
 
+[node name="DashCD" type="Timer" parent="." index="10"]
+one_shot = true
+
+[node name="DurationFireRate" type="Timer" parent="." index="11"]
+wait_time = 5.0
+
 [node name="ItemCollectArea" parent="." index="12"]
 visible = false
+
+[node name="Buffs_Controller" parent="." index="13"]
+script = ExtResource( 4 )
 [connection signal="timeout" from="DurationFireRate" to="." method="_on_DurationFireRate_timeout"]
 
 [editable path="HurtBox"]
+
+[editable path="Buffs_Controller"]
