@@ -38,7 +38,7 @@ collision_layer = 8
 shape = SubResource( 3 )
 
 [node name="Stats" parent="." instance=ExtResource( 4 )]
-MaxHealth = 4
+MaxHealth = 2
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 

@@ -75,6 +75,10 @@ disabled = true
 
 [node name="Timer_missile_laser" type="Timer" parent="."]
 one_shot = true
+
+[node name="Timer_shoot" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="timeout" from="Timer_spawn" to="." method="_on_Timer_spawn_timeout"]

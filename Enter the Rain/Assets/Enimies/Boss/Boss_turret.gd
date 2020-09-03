@@ -7,11 +7,14 @@ onready var laser_sprite = $Laser_sprite
 onready var laser_hitbox = $Laser_hitbox/CollisionShape2D
 onready var laser_timer = $Timer_laser
 onready var laser_missile_timer = $Timer_missile_laser
+onready var shoot_timer = $Timer_shoot
 onready var player = get_parent().get_node('Player')
 onready var Missile_shot = load('res://Assets/Enimies/Enemy_missile.tscn')
 onready var Shield_machine = load('res://Assets/Enimies/Boss/Shield_machine.tscn')
+onready var Big_bullet = load("res://Assets/Enimies/Enemy_bullet/SlowBigBullet.tscn")
 var player_positions_list = []
 var displaying_laser = false
+var ang_player
 var shield_machine_count = 0
 # Lista das posições das maquinas protetoras (relativas à posição do Boss).
 var shield_machines_positions = [
@@ -33,17 +36,27 @@ signal Died
 
 func _physics_process(delta):
 	update()
-	match state:
-		SPAWNING:
-			pass
-		NORMAL:
-			pass
-		LASER:
-			if is_instance_valid(player):
+	if is_instance_valid(player):
+		match state:
+			SPAWNING:
+				pass
+			NORMAL:
+				ang_player = (player.position - position).angle()
+				rotation = ang_player
+				shoot()
+			LASER:
 				player_positions_list.append(player.global_position)
 				if displaying_laser:
 					rotation = (player_positions_list[0] - global_position).angle()
 					player_positions_list.pop_front()
+
+func shoot():
+	# Atirar na direção do player. As bullets recebem um incremento de -30° até 30° de angulo (pi / 6).
+	if shoot_timer.time_left == 0:
+		var big_bullet = Big_bullet.instance()
+		big_bullet.start(global_position, ang_player + rng.randf_range(-PI / 6, PI / 6))
+		get_parent().call_deferred('add_child', big_bullet)
+		shoot_timer.start()
 
 func _ready():
 	position.y -= 125
@@ -66,12 +79,14 @@ func _on_HurtBox_area_entered(area):
 		stats.Health -= damage_taken
 		emit_signal("healthChanged", stats.Health)
 
+
 func _on_Stats_no_health():
 	emit_signal('Died')
 	queue_free()
 
 
 func _on_Timer_spawn_timeout():
+	shoot_timer.start()
 	state = NORMAL
 
 func _on_Timer_change_pow_timeout():
