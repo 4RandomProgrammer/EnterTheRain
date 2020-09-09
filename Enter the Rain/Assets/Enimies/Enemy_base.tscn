@@ -7,6 +7,7 @@
 [ext_resource path="res://Assets/ScreenVerificator.tscn" type="PackedScene" id=5]
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
+collision_layer = 16
 script = ExtResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -14,8 +15,10 @@ script = ExtResource( 4 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
 [node name="HurtBox" parent="." instance=ExtResource( 3 )]
+collision_layer = 8
 
 [node name="Hitbox" parent="." instance=ExtResource( 1 )]
+collision_mask = 4
 
 [node name="Stats" parent="." instance=ExtResource( 2 )]
 

@@ -1,10 +1,8 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://Assets/tilesets Enter the Rain/ashlands_tileset.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Player/Trooper.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Spawners/BossSpawner/BossSpawner.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Assets/Enimies/Poison.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Assets/Enimies/Perseguidores/Super_bee.tscn" type="PackedScene" id=5]
 
 [sub_resource type="TileSet" id=1]
 
@@ -399,18 +397,3 @@ position = Vector2( 1362.16, -42.5332 )
 [node name="BossSpawner" parent="." instance=ExtResource( 3 )]
 position = Vector2( 1658.29, 79.7441 )
 choosen_boss = 2
-
-[node name="Veneno" parent="." instance=ExtResource( 4 )]
-position = Vector2( 1304.11, 6.09503 )
-
-[node name="Veneno2" parent="." instance=ExtResource( 4 )]
-position = Vector2( 1360.68, -45.1107 )
-
-[node name="Veneno3" parent="." instance=ExtResource( 4 )]
-position = Vector2( 1363.12, 3.65665 )
-
-[node name="Veneno4" parent="." instance=ExtResource( 4 )]
-position = Vector2( 1304.11, -49.0121 )
-
-[node name="Super_bee" parent="." instance=ExtResource( 5 )]
-position = Vector2( 1296.23, -254.594 )
