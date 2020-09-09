@@ -27,15 +27,13 @@ func cd_changer():
 func apply_Spikes():
 	$Spikes/C1.visible = true
 	$Spikes/C1/Hitbox/CollisionShape2D.set_deferred("disabled",true)
+	$Spikes/C1/Hitbox.DAMAGE += 0.5
 	$Spikes/C2.visible = true
 	$Spikes/C2/Hitbox/CollisionShape2D.set_deferred("disabled",true)
 	$Spikes/C3.visible = true
 	$Spikes/C3/Hitbox/CollisionShape2D.set_deferred("disabled",true)
-	$Spikes.damage = 0.5
+	$Spikes.DAMAGE += 0.5
 	player.MAX_SPEED -= player.MAX_SPEED * 0.1
-
-func apply_skilldamge():
-	pass
 
 #BuffsTemporários
 #Como vou controlar os buffs temporários?

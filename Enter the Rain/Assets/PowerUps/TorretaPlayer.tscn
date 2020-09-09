@@ -16,6 +16,7 @@ extents = Vector2( 16, 16 )
 radius = 200.0
 
 [node name="TorretaPlayer" type="KinematicBody2D"]
+collision_mask = 17
 script = ExtResource( 5 )
 
 [node name="Stats" parent="." instance=ExtResource( 3 )]
@@ -36,10 +37,13 @@ collision_layer = 4
 shape = SubResource( 2 )
 
 [node name="Range" parent="." instance=ExtResource( 4 )]
-collision_mask = 17
+collision_mask = 16
 
 [node name="CollisionShape2D" parent="Range" index="0"]
 shape = SubResource( 3 )
+
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 28.8064, -0.159103 )
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]

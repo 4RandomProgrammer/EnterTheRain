@@ -1,19 +1,19 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Assets/Player/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Player/Engineer.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Sprites/Engineer sem arma 2.png" type="Texture" id=3]
 [ext_resource path="res://Assets/PowerUps/shield.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Sprites/weapon contornada engineer.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Sprites/range.png" type="Texture" id=6]
 
-[sub_resource type="CircleShape2D" id=1]
-radius = 7.75001
+[sub_resource type="CapsuleShape2D" id=1]
+height = 12.0
 
 [sub_resource type="CircleShape2D" id=2]
 
-[sub_resource type="CircleShape2D" id=3]
-radius = 8.0
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 11.0
+height = 12.0
 
 [sub_resource type="CapsuleShape2D" id=4]
 height = 12.0
@@ -35,9 +35,6 @@ visible = false
 modulate = Color( 0.027451, 0.576471, 0.596078, 1 )
 texture = ExtResource( 6 )
 
-[node name="Weapon" parent="." index="3"]
-texture = ExtResource( 5 )
-
 [node name="Shield" type="RigidBody2D" parent="." index="4"]
 collision_layer = 0
 collision_mask = 2147483648
@@ -56,14 +53,14 @@ disabled = true
 [node name="DurationShield" type="Timer" parent="Shield" index="2"]
 one_shot = true
 
-[node name="HurtBox" parent="." index="5"]
-visible = false
-
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 shape = SubResource( 3 )
 
 [node name="DashCD" type="Timer" parent="." index="10"]
 one_shot = true
+
+[node name="Camera2D" parent="." index="11"]
+visible = false
 
 [node name="AbilityButton2" parent="Camera2D/CanvasLayer/Control/HBoxContainer" index="1"]
 cooldown = 3.0
@@ -73,10 +70,12 @@ visible = false
 
 [node name="RayCast2D" type="RayCast2D" parent="." index="13"]
 
-[node name="CollisionShape2D" parent="Buffs_Controller/Spikes" index="1"]
+[node name="CollisionShape2D" parent="Buffs_Controller/Spikes" index="0"]
 shape = SubResource( 4 )
 disabled = true
 [connection signal="timeout" from="Shield/DurationShield" to="." method="_on_DurationShield_timeout"]
+
+[editable path="Weapon"]
 
 [editable path="HurtBox"]
 

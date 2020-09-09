@@ -192,6 +192,8 @@ shape = SubResource( 3 )
 [connection signal="CD_PW1" from="Buffs_Controller" to="Camera2D/CanvasLayer/Control/HBoxContainer/AbilityButton" method="_on_Buffs_Controller_CD_PW1"]
 [connection signal="CD_PW2" from="Buffs_Controller" to="Camera2D/CanvasLayer/Control/HBoxContainer/AbilityButton2" method="_on_Buffs_Controller_CD_PW2"]
 
+[editable path="Weapon"]
+
 [editable path="HurtBox"]
 
 [editable path="Buffs_Controller"]

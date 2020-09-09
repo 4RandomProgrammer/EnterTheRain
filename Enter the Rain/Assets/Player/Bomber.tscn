@@ -93,6 +93,10 @@ texture = ExtResource( 6 )
 [connection signal="timeout" from="DashCD" to="." method="_on_DashCD_timeout"]
 [connection signal="timeout" from="Knockback_Duration" to="." method="_on_Knockback_Duration_timeout"]
 
+[editable path="Weapon"]
+
 [editable path="HurtBox"]
 
 [editable path="Hitbox"]
+
+[editable path="Buffs_Controller"]
