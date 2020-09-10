@@ -32,3 +32,7 @@ func _on_Player_PW2_used():
 	$Timer.start()
 	time_label.show()
 	can_use = false
+
+
+func _on_Buffs_Controller_CD_PW2(cooler2):
+	$Timer.wait_time = cooler2

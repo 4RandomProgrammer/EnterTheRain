@@ -28,6 +28,7 @@ func estado_base(delta):
 		emit_signal("PW1_used")
 		var pw1 = POWERUP1.instance()
 		pw1.global_position = Mouse
+		pw1.damage = skill_damage_modifier * (dano + pw1.damage)
 		get_parent().add_child(pw1)
 		$PowerUp1CD.start(cooldownP1)
 		Can_PowerUp1 = false
@@ -37,6 +38,7 @@ func estado_base(delta):
 		emit_signal("PW2_used")
 		var pw2 = POWERUP2.instance()
 		pw2.global_position = Mouse
+		pw2.damage = skill_damage_modifier * (dano + pw2.damage)
 		get_parent().add_child(pw2)
 		$PowerUP2CD.start(cooldownP2)
 		Can_PowerUp2 = false

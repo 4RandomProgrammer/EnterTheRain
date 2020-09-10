@@ -12,7 +12,6 @@ const POWERUP1 = preload("res://Assets/PowerUps/TorretaPlayer.tscn")
 const DASH = preload("res://Assets/PowerUps/Shield.tscn")
 
 func estado_base(delta):
-	print(turret_counter)
 	Mouse = get_global_mouse_position()
 	movement_loop(delta)
 	control_loop()
@@ -57,7 +56,7 @@ func estado_base(delta):
 		var pw2 = POWERUP2.instance()
 		
 		pw2.global_position = ray_pos(Mouse)
-		
+		pw2.damage = skill_damage_modifier * (dano + pw2.damage)
 		$PowerUP2CD.start(cooldownP2)
 		$Range.visible = false
 		emit_signal("PW2_used")

@@ -28,17 +28,21 @@ shape = SubResource( 1 )
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 shape = SubResource( 2 )
 
-[node name="DashCD" type="Timer" parent="." index="9"]
-one_shot = true
-
-[node name="DurationFireRate" type="Timer" parent="." index="10"]
-wait_time = 5.0
-
 [node name="AbilityButton" parent="Camera2D/CanvasLayer/Control/HBoxContainer" index="0"]
 cooldown = 6.0
+
+[node name="DashCD" type="Timer" parent="." index="10"]
+one_shot = true
+
+[node name="DurationFireRate" type="Timer" parent="." index="11"]
+wait_time = 5.0
 
 [node name="ItemCollectArea" parent="." index="12"]
 visible = false
 [connection signal="timeout" from="DurationFireRate" to="." method="_on_DurationFireRate_timeout"]
 
+[editable path="Weapon"]
+
 [editable path="HurtBox"]
+
+[editable path="Buffs_Controller"]

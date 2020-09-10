@@ -75,6 +75,19 @@ margin_left = 482.0
 margin_right = 566.0
 margin_bottom = 20.0
 text = "Character 4"
+
+[node name="Controles" type="Label" parent="MarginContainer/VBoxContainer"]
+margin_top = 82.0
+margin_right = 784.0
+margin_bottom = 215.0
+text = "Controles:
+Mouse Direito - Dash
+Mouse Esquerdo - Tiro
+Q e E - Habilidades 1 e 2
+WASD - Movimentação
+P - Pause
+ESC - Restart Rápido
+ "
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/Button" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/Button2" to="." method="_on_Button2_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/Button3" to="." method="_on_Button3_pressed"]

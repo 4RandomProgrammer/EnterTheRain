@@ -7,7 +7,7 @@ var used = true
 
 func _ready():
 	rng.randomize()
-	min_money = rng.randi_range(100,200)
+	min_money = 0
 	$Label.text = str(min_money)
 
 func _process(delta):
