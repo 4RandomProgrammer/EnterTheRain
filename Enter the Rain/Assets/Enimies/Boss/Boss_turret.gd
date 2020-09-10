@@ -109,6 +109,9 @@ func choose_power():
 			shield_machine_count = 4
 		else:  # As maquinas protetoras ainda estão vivas... Escolher outro poder.
 			choose_power()
+	elif power_choosen == 3:
+		# Poder 3: Puxao e explosoes. Ação: começar a puxar o player para a direção da torre e fazer algumas explosões.
+		player.position += (player.position - position).normalized()
 
 
 func _on_Timer_laser_timeout():
