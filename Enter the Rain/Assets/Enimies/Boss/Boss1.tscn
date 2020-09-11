@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Assets/Enimies/Boss/Boss1.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/BossArea1.png" type="Texture" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://Engine/HurtBox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Engine/Stats.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Aim.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Assets/ScreenVerificator.tscn" type="PackedScene" id=7]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 32.0
@@ -18,14 +17,11 @@ radius = 32.0
 radius = 32.0
 
 [sub_resource type="CircleShape2D" id=4]
-radius = 300.0
+radius = 1457.08
 
 [node name="Boss" type="KinematicBody2D"]
 collision_layer = 16
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 2, 2 )
@@ -59,7 +55,7 @@ shape = SubResource( 3 )
 MaxHealth = 20
 
 [node name="Bullet_timer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.4
 one_shot = true
 autostart = true
 
@@ -67,8 +63,6 @@ autostart = true
 
 [node name="CollisionShape2D" parent="Alcance" index="0"]
 shape = SubResource( 4 )
-
-[node name="VisibilityNotifier2D" parent="." instance=ExtResource( 7 )]
 
 [node name="Power_2_timer" type="Timer" parent="."]
 one_shot = true
