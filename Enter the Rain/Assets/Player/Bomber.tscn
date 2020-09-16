@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Assets/Player/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://icon2.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Engine/Hitbox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Sprites/ohwell.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Sprites/range.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Sprites/explosion-try.png" type="Texture" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
@@ -18,7 +19,7 @@ radius = 64.0
 
 [sub_resource type="Animation" id=4]
 resource_name = "DashB"
-length = 0.6
+step = 0.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:scale")
 tracks/0/interp = 1
@@ -38,10 +39,34 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.5, 0.6 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ false, true ]
+"values": [ true, false, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Explosion:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Explosion:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.5, 0.537462, 0.591752, 0.639604, 0.686817, 0.748539, 0.811394, 0.87098, 0.92622 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ]
 }
 
 [node name="Player" instance=ExtResource( 1 )]
@@ -54,16 +79,17 @@ scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" parent="." index="1"]
+visible = false
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 shape = SubResource( 2 )
 
 [node name="Hitbox" parent="." index="4" instance=ExtResource( 4 )]
+collision_mask = 25
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource( 3 )
-disabled = true
 
 [node name="AnimationPlayer" parent="." index="5"]
 anims/DashB = SubResource( 4 )
@@ -80,6 +106,9 @@ one_shot = true
 [node name="AbilityButton" parent="Camera2D/CanvasLayer/Control/HBoxContainer" index="0"]
 cooldown = 15.0
 
+[node name="ItemCollectArea" parent="." index="13"]
+visible = false
+
 [node name="BarraTeste" type="Sprite" parent="." index="14"]
 position = Vector2( 0, 32 )
 texture = ExtResource( 5 )
@@ -88,6 +117,15 @@ hframes = 100
 [node name="Range" type="Sprite" parent="." index="15"]
 visible = false
 texture = ExtResource( 6 )
+
+[node name="Explosion" type="Sprite" parent="." index="17"]
+visible = false
+scale = Vector2( 1.6, 1.6 )
+texture = ExtResource( 7 )
+vframes = 2
+hframes = 5
+frame = 3
+[connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="DurationPw1" to="." method="_on_DurationPw1_timeout"]
 [connection signal="timeout" from="DashCD" to="." method="_on_DashCD_timeout"]

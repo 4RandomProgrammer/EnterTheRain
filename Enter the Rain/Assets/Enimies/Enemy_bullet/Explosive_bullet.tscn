@@ -13,7 +13,3 @@ explosion = ExtResource( 4 )
 [node name="Sprite" parent="." index="1"]
 scale = Vector2( 2, 2 )
 texture = ExtResource( 3 )
-
-[node name="VisibilityNotifier2D" parent="." index="2"]
-position = Vector2( -0.739653, -0.251024 )
-scale = Vector2( 1.66497, 0.783209 )

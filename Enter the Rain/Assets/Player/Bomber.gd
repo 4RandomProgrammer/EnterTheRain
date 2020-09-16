@@ -1,7 +1,7 @@
 extends "res://Assets/Player/Character.gd"
 
 const ROLL_SPEED = 450
-const EXPLOSIVE_BULLET = preload("res://Assets/Enimies/Enemy_bullet/Explosive_bullet.tscn")
+const EXPLOSIVE_BULLET = preload("res://Assets/Enimies/Enemy_bullet/ExplosiveBulletPlayer.tscn")
 const POWERUP2 = preload("res://Assets/PowerUps/Fly.tscn")
 
 export var DurationPW1 = 5
@@ -13,6 +13,7 @@ var charge = 0
 var area_transform
 var dx
 var dy
+var direction = 0
 
 
 func _physics_process(delta):
@@ -30,8 +31,10 @@ func estado_base(delta):
 	Mouse = get_global_mouse_position()
 	
 	if Input.is_action_just_pressed("Roll") and Can_Roll:
+		direction = Mouse - global_position
 		state = ROLL
 		$DashCD.start(CoolDown_Dash)
+		$AnimationPlayer.play("DashB")
 	
 	#tiro normal
 	if Input.is_action_pressed("Shoot") and can_fire:
@@ -55,10 +58,9 @@ func estado_base(delta):
 
 #Salto que na queda faz queda dar dano em área
 func roll_state():
-	moveDirection = (Mouse - global_position).normalized() * ROLL_SPEED
+	moveDirection = direction.normalized() * ROLL_SPEED
 	move()
-	$DashCD.start()
-	$AnimationPlayer.play("DashB")
+	$HurtBox/CollisionShape2D.set_deferred("disabled", true)
 
 func state_powerup1(delta):
 	control_loop()
@@ -122,9 +124,8 @@ func _on_DurationPw1_timeout():
 
 
 func _on_AnimationPlayer_animation_finished(_DashB):
-	$Hitbox/CollisionShape2D.call_deferred("set","disabled",false)
 	state = MOVE
-	$Hitbox/CollisionShape2D.call_deferred("set","disabled",true)
+	$HurtBox/CollisionShape2D.set_deferred("disabled", false)
 
 
 func _on_DashCD_timeout():
@@ -133,3 +134,8 @@ func _on_DashCD_timeout():
 
 func _on_Knockback_Duration_timeout():
 	state = MOVE
+
+
+func _on_Hitbox_body_entered(body):
+	if body.has_method("stun_state"):
+		body.stun_state()

@@ -14,7 +14,6 @@ extents = Vector2( 32.0914, 33.7916 )
 extents = Vector2( 30.9617, 33.5657 )
 
 [node name="Turret_base" instance=ExtResource( 2 )]
-collision_layer = 16
 collision_mask = 19
 script = ExtResource( 3 )
 
@@ -24,14 +23,8 @@ scale = Vector2( 2, 2 )
 [node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource( 1 )
 
-[node name="HurtBox" parent="." index="2"]
-collision_layer = 8
-
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 shape = SubResource( 2 )
-
-[node name="Hitbox" parent="." index="3"]
-collision_mask = 4
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource( 3 )
@@ -40,6 +33,7 @@ shape = SubResource( 3 )
 MaxHealth = 2
 
 [node name="StunTimer" type="Timer" parent="." index="5"]
+one_shot = true
 
 [node name="Range" parent="." index="6" instance=ExtResource( 1 )]
 

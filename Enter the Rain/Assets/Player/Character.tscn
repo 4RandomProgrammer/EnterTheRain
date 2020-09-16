@@ -72,10 +72,13 @@ anims/Dash = SubResource( 1 )
 anims/Flash = SubResource( 2 )
 
 [node name="PowerUp1CD" type="Timer" parent="."]
+one_shot = true
 
 [node name="PowerUP2CD" type="Timer" parent="."]
+one_shot = true
 
 [node name="ShotCD" type="Timer" parent="."]
+one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true

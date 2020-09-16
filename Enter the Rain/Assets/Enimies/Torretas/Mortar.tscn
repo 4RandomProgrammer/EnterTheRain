@@ -18,7 +18,7 @@ texture = ExtResource( 2 )
 visible = true
 shape = SubResource( 1 )
 
-[node name="ShootTimer" parent="." index="8"]
+[node name="ShootTimer" parent="." index="7"]
 wait_time = 2.0
 
 [editable path="HurtBox"]

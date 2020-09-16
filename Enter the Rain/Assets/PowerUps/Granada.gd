@@ -16,7 +16,6 @@ func _on_Granada_body_entered(_body):
 func _on_AnimationPlayer_animation_finished(_Explosion):
 	queue_free()
 
-
 func _on_Timer_timeout():
 	explosion.call_deferred("set","disabled", false)
 	$AnimationPlayer.play("Explosion")

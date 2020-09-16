@@ -15,7 +15,6 @@ extents = Vector2( 32.0791, 31.4578 )
 extents = Vector2( 32.6114, 31.2576 )
 
 [node name="Enemy" instance=ExtResource( 3 )]
-collision_layer = 16
 collision_mask = 19
 script = ExtResource( 2 )
 velocidade = 125
@@ -24,15 +23,9 @@ velocidade = 125
 position = Vector2( -0.85437, 1.99353 )
 shape = SubResource( 1 )
 
-[node name="HurtBox" parent="." index="2"]
-collision_layer = 8
-
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 position = Vector2( -0.166084, 1.66083 )
 shape = SubResource( 2 )
-
-[node name="Hitbox" parent="." index="3"]
-collision_mask = 4
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 position = Vector2( -0.332165, 1.82691 )
@@ -50,6 +43,7 @@ position = Vector2( 0.831234, 0.179861 )
 position = Vector2( -0.547119, 0.751026 )
 
 [node name="StunTimer" type="Timer" parent="." index="8"]
+one_shot = true
 
 [node name="SlowTimer" type="Timer" parent="." index="9"]
 wait_time = 1.5
