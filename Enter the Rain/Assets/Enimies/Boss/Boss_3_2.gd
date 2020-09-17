@@ -40,3 +40,4 @@ func _on_Timer_revive_timeout():  # O player nao matou o outro boss a tempo.
 	else:
 		boss_range_knocked = false
 		Boss_range.revive()
+

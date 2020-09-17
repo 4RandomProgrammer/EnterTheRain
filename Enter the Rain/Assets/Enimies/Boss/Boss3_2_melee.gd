@@ -9,12 +9,13 @@ enum {
 	NORMAL,
 	KNOCKED
 }
-var hit_delay_time = 0.3
+var initial_x_pos
+var hit_delay_time = 0.5
 var sword_hit_duration = 0.3
 var atacking = false
 var damage = 1
 var state = SPAWNING
-var speed = 100
+var speed = 250
 var velocity = Vector2.ZERO
 
 signal Spawning
@@ -23,6 +24,7 @@ signal Died
 
 
 func _ready():
+	initial_x_pos = position.x - 75
 	# Conectando os sinais:
 	var bossHealthBar1 = get_parent().get_parent().get_node('Player').get_node('Camera2D').get_node('CanvasLayer').get_node('HealthBarBoss')
 	connect("Spawning", bossHealthBar1, "_on_Boss_Spawning")
