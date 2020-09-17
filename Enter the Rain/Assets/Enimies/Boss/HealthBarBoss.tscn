@@ -13,7 +13,6 @@ script = ExtResource( 1 )
 margin_right = 500.0
 texture_under = ExtResource( 3 )
 texture_progress = ExtResource( 2 )
-tint_progress = Color( 0.898039, 0.368627, 0.368627, 1 )
 
 [node name="TextureProgress" parent="." index="1"]
 texture_over = ExtResource( 5 )

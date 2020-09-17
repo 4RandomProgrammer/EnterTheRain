@@ -50,12 +50,10 @@ tracks/0/keys = {
 height = 9.97371
 
 [node name="Player" type="KinematicBody2D"]
+position = Vector2( -7.36639, 1.22778 )
 z_index = 1
 collision_layer = 2
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="Sprite" type="Sprite" parent="."]
 
@@ -91,10 +89,10 @@ layer = 2
 [node name="Control" type="Control" parent="Camera2D/CanvasLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 18.9473
-margin_top = 30.8947
-margin_right = 58.9473
-margin_bottom = 70.8948
+margin_left = 19.1455
+margin_top = 32.5462
+margin_right = 59.1455
+margin_bottom = 72.5463
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -159,16 +157,23 @@ custom_constants/separation = 60
 
 [node name="HealthBarBoss" parent="Camera2D/CanvasLayer" instance=ExtResource( 9 )]
 visible = false
-margin_left = 275.434
-margin_top = 548.877
-margin_right = 275.434
-margin_bottom = 548.877
+margin_left = 259.491
+margin_top = 527.955
+margin_right = 86.4907
+margin_bottom = 527.955
+
+[node name="HealthBarBoss2" parent="Camera2D/CanvasLayer" instance=ExtResource( 9 )]
+visible = false
+margin_left = 258.507
+margin_top = 565.614
+margin_right = 85.507
+margin_bottom = 565.614
 
 [node name="Poison_bar" parent="Camera2D/CanvasLayer" instance=ExtResource( 10 )]
-margin_left = 502.941
-margin_top = 255.414
-margin_right = 502.941
-margin_bottom = 255.414
+margin_left = 478.392
+margin_top = 241.106
+margin_right = 478.392
+margin_bottom = 241.106
 
 [node name="ItemCollectArea" type="Area2D" parent="."]
 collision_layer = 0

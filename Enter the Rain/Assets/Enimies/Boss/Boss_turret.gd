@@ -79,10 +79,9 @@ func _ready():
 	rng.randomize()
 	# Conectando os sinais do HealthBar do boss
 	var bossHealthBar = get_parent().get_node('Player').get_node('Camera2D').get_node('CanvasLayer').get_node('HealthBarBoss')
-	var boss_turret = get_node('.')
-	boss_turret.connect("Spawning", bossHealthBar, "_on_Boss_Spawning")
-	boss_turret.connect("Died", bossHealthBar, "_on_Boss_Died")
-	boss_turret.connect("healthChanged", bossHealthBar, "_on_Boss_healthChanged")
+	connect("Spawning", bossHealthBar, "_on_Boss_Spawning")
+	connect("Died", bossHealthBar, "_on_Boss_Died")
+	connect("healthChanged", bossHealthBar, "_on_Boss_healthChanged")
 	emit_signal("Spawning", $Stats.MaxHealth)
 
 func _draw():
