@@ -43,15 +43,15 @@ func estado_base(delta):
 		$ShotCD.start(fire_rate)
 	
 	#tiros explosivos
-	elif Input.is_action_pressed("PowerUp1") and Can_PowerUp1:
-		Can_PowerUp1 = false
+	elif Input.is_action_pressed("PowerUp1") and onemoretimeP1 < maxtimes:
+		onemoretimeP1 += 1
 		$DurationPw1.start(DurationPW1)
 		emit_signal("PW1_used")
 		$PowerUp1CD.start(cooldownP1)
 		state = PW1
 	
 	#Charge, explosão que joga longe
-	elif Input.is_action_pressed("PowerUp2") and Can_PowerUp2:
+	elif Input.is_action_pressed("PowerUp2") and onemoretimeP2 < maxtimes:
 		state = PW2
 		$Range.visible = true
 
@@ -89,7 +89,7 @@ func state_powerup2(delta):
 	if Input.is_action_just_pressed("PowerUp2") and sqrt(dx * dx + dy * dy) <= 200:
 		$PowerUP2CD.start(cooldownP2)
 		emit_signal("PW2_used")
-		Can_PowerUp2 = false
+		onemoretimeP2 += 1
 		$Range.visible = false
 		if charge >= 0 and charge < 50:
 			pw2.global_position = Mouse

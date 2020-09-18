@@ -19,7 +19,6 @@ height = 12.0
 script = ExtResource( 1 )
 MaxHealth = 4
 cooldownP1 = 3.0
-cooldownP2 = 3.0
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )

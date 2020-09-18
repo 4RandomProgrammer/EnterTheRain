@@ -21,22 +21,23 @@ func estado_base(delta):
 		$ShotCD.start(fire_rate)
 	
 	#Cond. Granada
-	elif Input.is_action_just_pressed("PowerUp1") and Can_PowerUp1:
+	elif Input.is_action_just_pressed("PowerUp1") and onemoretimeP1 < maxtimes:
 		var powerup1 = POWERUP1.instance()
 		get_parent().add_child(powerup1)
 		powerup1.position = $Weapon/Position2D.global_position
 		powerup1.rotation_degrees = $Weapon.rotation_degrees
 		powerup1.apply_impulse(Vector2(), Vector2(powerup1.BULLETSPEED, 0).rotated($Weapon.rotation))
 		
-		Can_PowerUp1 = false
+		onemoretimeP1 += 1
 		$PowerUp1CD.start(cooldownP1)
 		emit_signal("PW1_used")
 	
 	#Cond. Rajada stun
-	elif Input.is_action_just_pressed("PowerUp2") and Can_PowerUp2:
+	elif Input.is_action_just_pressed("PowerUp2") and onemoretimeP2 < maxtimes:
 		var i = 0
-		
 		emit_signal("PW2_used")
+		
+		onemoretimeP2 += maxtimes
 		
 		can_fire = false
 		Can_PowerUp2 = false
@@ -49,6 +50,7 @@ func estado_base(delta):
 		
 		can_fire = true
 		$PowerUP2CD.start(cooldownP2)
+		
 
 func roll_state():
 	$AnimationPlayer.play("Dash")

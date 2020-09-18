@@ -10,7 +10,7 @@ var moneyXTimes
 
 func _ready():
 	rng.randomize()
-	choice = rng.randi_range(1,9) % 3
+	choice = rng.randi() % 3
 	money = rng.randi_range(50,200)
 	print(money)
 	match choice:

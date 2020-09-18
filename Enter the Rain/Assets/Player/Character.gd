@@ -37,6 +37,9 @@ var rng = RandomNumberGenerator.new()
 var quant_poison = 0
 var timer_poison = 0
 var money = 0
+var onemoretimeP1 = 0
+var onemoretimeP2 = 0
+var maxtimes = 1
 
 const FRICTION = 25
 const SHOT = preload("res://Assets/Shot/Shot.tscn")
@@ -148,7 +151,7 @@ func move():
 	moveDirection = move_and_slide(moveDirection)
 
 func apply_buff(what_buff):
-	$Buffs_Controller.cd_changer()
+	$Buffs_Controller.one_more_skill()
 
 
 func _on_HurtBox_area_entered(area):
@@ -172,10 +175,17 @@ func player_killed_enemy(enemy_position, min_money, max_money):
 
 
 func _on_PowerUp1CD_timeout():
-	Can_PowerUp1 = true
+	onemoretimeP1 -= 1
+	if onemoretimeP1 > 0:
+		$PowerUP2CD.start(cooldownP1)
+		emit_signal("PW1_used")
 
 func _on_PowerUP2CD_timeout():
-	Can_PowerUp2 = true
+	onemoretimeP2 -= 1
+	print_debug(onemoretimeP2)
+	if onemoretimeP2 > 0:
+		$PowerUP2CD.start(cooldownP2)
+		emit_signal("PW2_used")
 
 func _on_ShotCD_timeout():
 	can_fire = true

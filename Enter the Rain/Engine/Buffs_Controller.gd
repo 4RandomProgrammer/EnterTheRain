@@ -35,6 +35,10 @@ func apply_Spikes():
 	$Spikes.DAMAGE += 0.5
 	player.MAX_SPEED -= player.MAX_SPEED * 0.1
 
+func one_more_skill():
+	player.maxtimes += 1
+	player.skill_damage_modifier /= 1.5
+
 #BuffsTemporários
 #Como vou controlar os buffs temporários?
 #Fazendo um geral

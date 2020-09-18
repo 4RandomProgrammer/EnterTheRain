@@ -24,26 +24,24 @@ func estado_base(delta):
 		$ShotCD.start(fire_rate)
 	
 	#PW1: atira pra cima e cai depois de um tempo
-	if Input.is_action_just_pressed("PowerUp1") and Can_PowerUp1 and raycast_pos(Mouse):
+	if Input.is_action_just_pressed("PowerUp1") and onemoretimeP1 < maxtimes and raycast_pos(Mouse):
 		emit_signal("PW1_used")
 		var pw1 = POWERUP1.instance()
 		pw1.global_position = Mouse
 		pw1.damage = skill_damage_modifier * (dano + pw1.damage)
 		get_parent().add_child(pw1)
 		$PowerUp1CD.start(cooldownP1)
-		Can_PowerUp1 = false
+		onemoretimeP1 += 1
 	
 	#pw2: Cria uma area de dano por segundo?
-	if Input.is_action_just_pressed("PowerUp2") and Can_PowerUp2 and raycast_pos(Mouse):
+	if Input.is_action_just_pressed("PowerUp2") and onemoretimeP2 < maxtimes and raycast_pos(Mouse):
 		emit_signal("PW2_used")
 		var pw2 = POWERUP2.instance()
 		pw2.global_position = Mouse
 		pw2.damage = skill_damage_modifier * (dano + pw2.damage)
 		get_parent().add_child(pw2)
 		$PowerUP2CD.start(cooldownP2)
-		Can_PowerUp2 = false
-		
-		
+		onemoretimeP2 += 1
 
 #stealth
 func roll_state():

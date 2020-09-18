@@ -6,6 +6,7 @@ var turret_ref1
 var turret_ref2
 var dx
 var dy
+var rangeSkills
 onready var rayCast = $RayCast2D
 const POWERUP2 = preload("res://Assets/PowerUps/Mina.tscn")
 const POWERUP1 = preload("res://Assets/PowerUps/TorretaPlayer.tscn")
@@ -28,7 +29,7 @@ func estado_base(delta):
 		$ShotCD.start(fire_rate)
 	
 	#Tworretas
-	elif Input.is_action_just_released("PowerUp1") and Can_PowerUp1 and sqrt(dx * dx + dy * dy) <= 200:
+	elif Input.is_action_just_released("PowerUp1") and onemoretimeP1 < maxtimes and sqrt(dx * dx + dy * dy) >= 40 and sqrt(dx * dx + dy * dy) <= 240:
 		var pw1 = POWERUP1.instance()
 	
 		if turret_counter < 2:
@@ -46,13 +47,13 @@ func estado_base(delta):
 		
 		emit_signal("PW1_used")
 		$PowerUp1CD.start(cooldownP1)
-		Can_PowerUp1 = false
+		onemoretimeP1 += 1
 		get_parent().add_child(pw1)
 		$Range.visible = false
 		
 	
 	#Mina, teus cabelo é daora, teu corpão violão....
-	elif Input.is_action_just_released("PowerUp2") and Can_PowerUp2 and sqrt(dx * dx + dy * dy) <= 200:
+	elif Input.is_action_just_released("PowerUp2") and onemoretimeP2 < maxtimes and sqrt(dx * dx + dy * dy) >= 40 and sqrt(dx * dx + dy * dy) <= 240:
 		var pw2 = POWERUP2.instance()
 		
 		pw2.global_position = ray_pos(Mouse)
@@ -60,7 +61,7 @@ func estado_base(delta):
 		$PowerUP2CD.start(cooldownP2)
 		$Range.visible = false
 		emit_signal("PW2_used")
-		Can_PowerUp2 = false
+		onemoretimeP2 += 1
 		get_parent().add_child(pw2)
 
 #Dash que aumenta a speed :)

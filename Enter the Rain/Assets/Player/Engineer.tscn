@@ -4,7 +4,7 @@
 [ext_resource path="res://Assets/Player/Engineer.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Sprites/Engineer sem arma 2.png" type="Texture" id=3]
 [ext_resource path="res://Assets/PowerUps/shield.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Sprites/range.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Sprites/range2.png" type="Texture" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
 height = 12.0
@@ -33,7 +33,7 @@ shape = SubResource( 1 )
 [node name="Range" type="Sprite" parent="." index="2"]
 visible = false
 modulate = Color( 0.027451, 0.576471, 0.596078, 1 )
-texture = ExtResource( 6 )
+texture = ExtResource( 5 )
 
 [node name="Shield" type="RigidBody2D" parent="." index="4"]
 collision_layer = 0
