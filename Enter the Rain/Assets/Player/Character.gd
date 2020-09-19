@@ -97,20 +97,23 @@ func set_NewHealth(value):
 
 #Func de tiro
 func shot(isStunBullet):
-	var shots = SHOT.instance()
-	shots.stunbullet = isStunBullet
-	if not isStunBullet:  # O tiro atual é um tiro comum
-		if rng.randi_range(1, 100) <= stun_probability:
-			shots.stunbullet = true
-		if rng.randi_range(1, 100) <= extra_shots_probability:
-			extra_shots()
-		if rng.randi_range(1, 100) <= missile_probability:
-			missile()
-	shots.damage = shot_damage_modifier * (shots.damage + dano)
-	get_parent().add_child(shots)
-	shots.position = $Weapon/Position2D.global_position
-	shots.rotation_degrees = $Weapon.rotation_degrees
-	shots.apply_impulse(Vector2(), Vector2(shots.BULLET_SPEED, 0).rotated($Weapon.rotation))
+	var space_state = get_world_2d().direct_space_state
+	var colision = space_state.intersect_ray(global_position, $Weapon/Position2D.global_position, [self], collision_mask)
+	if not colision:  # Só atirar se não tiver nenhuma parede na frente.
+		var shots = SHOT.instance()
+		shots.stunbullet = isStunBullet
+		if not isStunBullet:  # O tiro atual é um tiro comum
+			if rng.randi_range(1, 100) <= stun_probability:
+				shots.stunbullet = true
+			if rng.randi_range(1, 100) <= extra_shots_probability:
+				extra_shots()
+			if rng.randi_range(1, 100) <= missile_probability:
+				missile()
+		shots.damage = shot_damage_modifier * (shots.damage + dano)
+		get_parent().add_child(shots)
+		shots.position = $Weapon/Position2D.global_position
+		shots.rotation_degrees = $Weapon.rotation_degrees
+		shots.apply_impulse(Vector2(), Vector2(shots.BULLET_SPEED, 0).rotated($Weapon.rotation))
 
 func extra_shots():
 	for angle in [PI / 6, -PI / 6]:
