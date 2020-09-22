@@ -1,0 +1,87 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="StreamTexture" id=1]
+flags = 4
+load_path = "res://.import/UiButtonTest.png-617985f07ef984ba2703cbf9d2280c93.stex"
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends TextureButton
+
+onready var time_label = $Counter/Value
+
+export var cooldown = 1.0
+
+var can_use = true
+
+func _ready():
+	time_label.hide()
+	$Sweep.value = 0
+	$Sweep.texture_progress = texture_normal
+	$Timer.wait_time = cooldown
+
+
+func _process(_delta):
+	time_label.text = \"%3.1f\" % $Timer.time_left
+	$Sweep.value = int(($Timer.time_left / cooldown) * 100)
+
+
+func _on_Timer_timeout():
+	$Sweep.value = 0
+	disabled = false
+	time_label.hide()
+	set_process(false)
+
+
+
+func _on_Player_PW2_used():
+	disabled = true
+	set_process(true)
+	$Timer.start()
+	time_label.show()
+	can_use = false
+
+
+func _on_Buffs_Controller_CD_PW2(cooler2):
+	$Timer.wait_time = cooler2
+"
+
+[node name="AbilityButton2" type="TextureButton"]
+margin_right = -31.0
+margin_bottom = -12.0
+toggle_mode = true
+action_mode = 0
+texture_normal = SubResource( 1 )
+script = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+cooldown = 4.0
+
+[node name="Sweep" type="TextureProgress" parent="."]
+modulate = Color( 0.352941, 0.352941, 0.352941, 0.87451 )
+margin_right = 32.0
+margin_bottom = 32.0
+fill_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Counter" type="MarginContainer" parent="."]
+margin_top = 19.0
+margin_right = 32.0
+margin_bottom = 32.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Value" type="Label" parent="Counter"]
+margin_right = 32.0
+margin_bottom = 14.0
+text = "0.0"
+align = 2
+valign = 2
+clip_text = true
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

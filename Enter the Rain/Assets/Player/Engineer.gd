@@ -8,9 +8,13 @@ var dx
 var dy
 var rangeSkills
 onready var rayCast = $RayCast2D
+export var DashCooldown = 10
+export var DashDuration = 5
+
 const POWERUP2 = preload("res://Assets/PowerUps/Mina.tscn")
 const POWERUP1 = preload("res://Assets/PowerUps/TorretaPlayer.tscn")
 const DASH = preload("res://Assets/PowerUps/Shield.tscn")
+const MAXTURRETS = 2
 
 func estado_base(delta):
 	Mouse = get_global_mouse_position()
@@ -29,7 +33,7 @@ func estado_base(delta):
 		$ShotCD.start(fire_rate)
 	
 	#Tworretas
-	elif Input.is_action_just_released("PowerUp1") and onemoretimeP1 < maxtimes and sqrt(dx * dx + dy * dy) >= 40 and sqrt(dx * dx + dy * dy) <= 240:
+	elif Input.is_action_just_released("PowerUp1") and onemoretimeP1 < MAXTURRETS and sqrt(dx * dx + dy * dy) >= 40 and sqrt(dx * dx + dy * dy) <= 240:
 		var pw1 = POWERUP1.instance()
 	
 		if turret_counter < 2:
@@ -67,11 +71,11 @@ func estado_base(delta):
 #Dash que aumenta a speed :)
 func roll_state():
 	if $DashCD.is_stopped():
-		$Shield/CollisionShape2D.call_deferred("set","disabled",false)
+		$Shield.visible = true
 		$HurtBox/CollisionShape2D.call_deferred("set","disabled",true)
-		$Shield/Sprite.call_deferred("set","visible",true)
-		$Shield/DurationShield.start(5)
-		$DashCD.start(10)
+		$Shield/DurationShield.start(DashDuration)
+		$DashCD.start(DashCooldown)
+		emit_signal("Dash_used")
 	else:
 		state = MOVE
 	
@@ -80,9 +84,8 @@ func turret_dead():
 	turret_counter -= 1
 
 func _on_DurationShield_timeout():
-	$Shield/CollisionShape2D.call_deferred("set","disabled",true)
 	$HurtBox/CollisionShape2D.call_deferred("set","disabled",false)
-	$Shield/Sprite.call_deferred("set","visible",false)
+	$Shield.visible = false
 
 func range_control():
 	if Input.is_action_just_pressed("PowerUp1") and Can_PowerUp1:

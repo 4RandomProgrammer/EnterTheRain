@@ -11,12 +11,13 @@ func estado_base(delta):
 	movement_loop(delta)
 	
 	if Input.is_action_just_pressed("Roll"):
+		emit_signal("Dash_used")
 		state = ROLL
 	
 	#Cond. tiro
 	if Input.is_action_pressed("Shoot") and can_fire:
 		shot(false)
-		
+	
 		can_fire = false
 		$ShotCD.start(fire_rate)
 	

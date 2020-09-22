@@ -1,10 +1,11 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/Enimies/Boss/HealthBarBoss.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Nova pasta/HealthBarBossOver.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Nova pasta/HealthBarBossUnder.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Nova pasta/HealthBar.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Assets/Nova pasta/HealthBarBossC.png" type="Texture" id=5]
+[ext_resource path="res://Assets/UI/HealthBarBossOver.png" type="Texture" id=2]
+[ext_resource path="res://Assets/UI/HealthBarBossUnder.png" type="Texture" id=3]
+[ext_resource path="res://Assets/UI/HealthBar.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/UI/HealthBarBossC.png" type="Texture" id=5]
+
 
 [node name="HealthBarBoss" instance=ExtResource( 4 )]
 script = ExtResource( 1 )

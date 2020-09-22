@@ -54,6 +54,7 @@ signal moneyChanged(current_money)
 signal poisonChanged
 signal PW1_used
 signal PW2_used
+signal Dash_used
 
 func _ready():
 	rng.randomize()

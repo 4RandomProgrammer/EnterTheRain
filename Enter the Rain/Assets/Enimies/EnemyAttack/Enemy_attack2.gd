@@ -2,10 +2,12 @@ extends "res://Assets/Enimies/Enemy_base.gd"
 
 export (int) var velocidade = 100
 export (float) var arruma_posic = 4
+
 onready var wanderController = $Random_moviment
 onready var enemy_range = $Range
 onready var screen_verification = $VisibilityNotifier2D
 export var damage = 1
+
 var state = STOPED
 var velocity = Vector2.ZERO
 var target
@@ -13,6 +15,9 @@ var hit_pos
 var direction
 var old_velocidade
 var is_slowed = true
+var player
+var can_attack
+
 enum {
 	ATTACK
 	STOPED
@@ -21,14 +26,12 @@ enum {
 	STUNNED
 }
 
-
 func _physics_process(_delta):  # Loop principal da torreta.
 	update()
 	if screen_verification.is_on_screen:
 		try_aim_and_change_state()
 		movimentation()
 		velocity = move_and_slide(velocity)
-
 
 func movimentation():
 	match state:
@@ -46,18 +49,19 @@ func movimentation():
 			chase()
 		STUNNED:
 			velocity = Vector2.ZERO
-		
-		
-			
-			
+		ATTACK:
+			attack()
 
 func chase():
-	pass
+	direction = global_position.direction_to(enemy_range.target.global_position)
+	velocity = velocity.move_toward(direction * velocidade, velocidade / 2)
 
 func try_aim_and_change_state():  # Tenta "mirar" no inimigo. Se conseguir, irá persegui-lo.
 	if state != STUNNED:
 		if enemy_range.entity_aimed():
 			state = CHASING
+			if player != null:
+				state = ATTACK;
 		else:
 			if state != RANDOM_WALKING and state != STOPED:  # Trocar de estado quando o alvo se esconder atrás da parede.
 				player_exited_range()
@@ -87,10 +91,27 @@ func slowed():
 		$SlowTimer.start(-1)
 		velocidade /= 2
 
+func attack():
+	move_and_slide(Vector2.ZERO)
+	if enemy_range.entity_aimed():
+		rotation = (enemy_range.target.position - position).angle()
+		if can_attack:
+			print("a")
+			$Hitbox2/CollisionShape2D.set_deferred("disabled", false)
+			$AttackDuration.start()
 
-func _on_Stun_timer_timeout():
-	state = pick_random_state([STOPED, RANDOM_WALKING])
+func _on_Attack_Range_body_entered(body):
+	player = body
 
 
-func _on_SlowTimer_timeout():
-	velocidade = old_velocidade
+func _on_Attack_Range_body_exited(_body):
+	player = null
+
+
+func _on_AttackDuration_timeout():
+	can_attack = false
+	$Attack_CD.start()
+
+
+func _on_Attack_CD_timeout():
+	can_attack = true

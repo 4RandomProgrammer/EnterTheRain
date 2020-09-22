@@ -4,7 +4,7 @@
 [ext_resource path="res://Assets/Player/Engineer.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Sistema_Dinheiro.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Altares/Life Altar.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Assets/Enimies/Perseguidores/Bee_enemy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Enimies/EnemyAttack/Enemy_attack2.tscn" type="PackedScene" id=5]
 
 [node name="Node2D" type="Node2D"]
 
@@ -15,7 +15,7 @@
 [node name="Life Altar" parent="." instance=ExtResource( 4 )]
 position = Vector2( -197.06, 104.887 )
 
-[node name="Bee" parent="." instance=ExtResource( 5 )]
-position = Vector2( -380.926, -78.2034 )
-
 [node name="Player" parent="." instance=ExtResource( 2 )]
+
+[node name="Enemy" parent="." instance=ExtResource( 5 )]
+position = Vector2( -267, -53 )

@@ -47,6 +47,7 @@ func estado_base(delta):
 func roll_state():
 	if $DashCD.is_stopped():
 		$DashCD.start(DashCooldown)
+		emit_signal("Dash_used")
 		$DurationFireRate.start(DurationDash)
 		old_fire_rate = fire_rate
 		fire_rate /= 2

@@ -34,6 +34,7 @@ func estado_base(delta):
 		direction = Mouse - global_position
 		state = ROLL
 		$DashCD.start(CoolDown_Dash)
+		emit_signal("Dash_used")
 		$AnimationPlayer.play("DashB")
 	
 	#tiro normal

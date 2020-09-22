@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Assets/Player/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Player/Engineer.gd" type="Script" id=2]
@@ -8,8 +8,6 @@
 
 [sub_resource type="CapsuleShape2D" id=1]
 height = 12.0
-
-[sub_resource type="CircleShape2D" id=2]
 
 [sub_resource type="CapsuleShape2D" id=3]
 radius = 11.0
@@ -35,22 +33,11 @@ visible = false
 modulate = Color( 0.027451, 0.576471, 0.596078, 1 )
 texture = ExtResource( 5 )
 
-[node name="Shield" type="RigidBody2D" parent="." index="4"]
-collision_layer = 0
-collision_mask = 2147483648
-gravity_scale = 0.0
-contacts_reported = 1
-contact_monitor = true
-
-[node name="Sprite" type="Sprite" parent="Shield" index="0"]
+[node name="Shield" type="Sprite" parent="." index="4"]
 visible = false
 texture = ExtResource( 4 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Shield" index="1"]
-shape = SubResource( 2 )
-disabled = true
-
-[node name="DurationShield" type="Timer" parent="Shield" index="2"]
+[node name="DurationShield" type="Timer" parent="Shield" index="0"]
 one_shot = true
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
@@ -64,6 +51,9 @@ visible = false
 
 [node name="AbilityButton2" parent="Camera2D/CanvasLayer/Control/HBoxContainer" index="1"]
 cooldown = 3.0
+
+[node name="DashButton" parent="Camera2D/CanvasLayer/Control/HBoxContainer" index="2"]
+cooldown = 10.0
 
 [node name="ItemCollectArea" parent="." index="12"]
 visible = false
