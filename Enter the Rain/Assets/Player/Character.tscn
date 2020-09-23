@@ -15,7 +15,7 @@
 [ext_resource path="res://Assets/UI/DashButton.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Engine/Weapon.tscn" type="PackedScene" id=14]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 resource_name = "Flash"
 length = 0.4
 tracks/0/type = "value"
@@ -31,16 +31,13 @@ tracks/0/keys = {
 "values": [ true, false, true, false, true ]
 }
 
-[sub_resource type="CapsuleShape2D" id=3]
+[sub_resource type="CapsuleShape2D" id=2]
 height = 9.97371
 
 [node name="Player" type="KinematicBody2D"]
 z_index = 1
 collision_layer = 2
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="Sprite" type="Sprite" parent="."]
 
@@ -53,7 +50,7 @@ collision_layer = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_process_mode = 0
-anims/Flash = SubResource( 2 )
+anims/Flash = SubResource( 1 )
 
 [node name="PowerUp1CD" type="Timer" parent="."]
 one_shot = true
@@ -75,8 +72,9 @@ layer = 2
 [node name="Control" type="Control" parent="Camera2D/CanvasLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -0.126129
 margin_top = 32.0
-margin_right = 40.0
+margin_right = 39.8739
 margin_bottom = 72.0001
 __meta__ = {
 "_edit_use_anchors_": false
@@ -149,16 +147,24 @@ custom_constants/separation = 60
 
 [node name="HealthBarBoss" parent="Camera2D/CanvasLayer" instance=ExtResource( 9 )]
 visible = false
-margin_left = 275.434
-margin_top = 548.877
-margin_right = 275.434
-margin_bottom = 548.877
+margin_left = 282.621
+margin_top = 565.812
+margin_right = 282.621
+margin_bottom = 565.812
+
+[node name="HealthBarBoss2" parent="Camera2D/CanvasLayer" instance=ExtResource( 9 )]
+visible = false
+margin_left = 283.455
+margin_top = 531.518
+margin_right = 283.455
+margin_bottom = 531.517
 
 [node name="Poison_bar" parent="Camera2D/CanvasLayer" instance=ExtResource( 10 )]
-margin_left = 502.941
-margin_top = 255.414
-margin_right = 502.941
-margin_bottom = 255.414
+visible = false
+margin_left = 501.991
+margin_top = 255.122
+margin_right = 501.991
+margin_bottom = 255.122
 
 [node name="ItemCollectArea" type="Area2D" parent="."]
 collision_layer = 0
@@ -166,7 +172,7 @@ collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ItemCollectArea"]
 position = Vector2( -1, 0 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="Buffs_Controller" parent="." instance=ExtResource( 11 )]
 [connection signal="Dash_used" from="." to="Camera2D/CanvasLayer/Control/HBoxContainer/DashButton" method="_on_Player_Dash_used"]

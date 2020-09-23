@@ -1,0 +1,153 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Engine/Hitbox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Engine/HurtBox.tscn" type="PackedScene" id=2]
+[ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://Engine/Stats.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Sprites/Hit_sword.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Enimies/Boss/Boss3_2_melee.gd" type="Script" id=6]
+[ext_resource path="res://Assets/Enimies/Boss/Boss3_2_range.gd" type="Script" id=7]
+[ext_resource path="res://Assets/Enimies/Boss/Boss_3_2.gd" type="Script" id=8]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 30.8656, 31.2272 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 31.4543, 31.3992 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 30.7732, 31.7398 )
+
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 41.3753
+height = 34.0822
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 30.2875, 31.296 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 30.2875, 31.7141 )
+
+[sub_resource type="CircleShape2D" id=7]
+radius = 300.0
+
+[node name="Boss_3_2" type="Node2D"]
+script = ExtResource( 8 )
+
+[node name="Timer_spawn" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="Timer_revive" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="Boss_melee" type="KinematicBody2D" parent="."]
+position = Vector2( -75, 0 )
+collision_layer = 16
+collision_mask = 3
+script = ExtResource( 6 )
+
+[node name="Sprite" type="Sprite" parent="Boss_melee"]
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boss_melee"]
+shape = SubResource( 1 )
+
+[node name="Hitbox" parent="Boss_melee" instance=ExtResource( 1 )]
+collision_mask = 4
+
+[node name="CollisionShape2D" parent="Boss_melee/Hitbox" index="0"]
+shape = SubResource( 2 )
+
+[node name="HurtBox" parent="Boss_melee" instance=ExtResource( 2 )]
+collision_layer = 8
+
+[node name="CollisionShape2D" parent="Boss_melee/HurtBox" index="0"]
+shape = SubResource( 3 )
+
+[node name="Stats_melee" parent="Boss_melee" instance=ExtResource( 4 )]
+MaxHealth = 30
+
+[node name="Sprite_hit_sword" type="Sprite" parent="Boss_melee"]
+visible = false
+position = Vector2( 54.8524, 0.329434 )
+scale = Vector2( 2.16243, 2.26725 )
+texture = ExtResource( 5 )
+
+[node name="Sword_hitbox" parent="Boss_melee" instance=ExtResource( 1 )]
+collision_mask = 4
+
+[node name="CollisionShape2D" parent="Boss_melee/Sword_hitbox" index="0"]
+position = Vector2( 59.3775, 0.429126 )
+shape = SubResource( 4 )
+disabled = true
+
+[node name="Timer_hit" type="Timer" parent="Boss_melee"]
+one_shot = true
+
+[node name="Boss_range" type="KinematicBody2D" parent="."]
+position = Vector2( 75, 0 )
+collision_layer = 16
+collision_mask = 3
+script = ExtResource( 7 )
+
+[node name="Sprite" type="Sprite" parent="Boss_range"]
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boss_range"]
+shape = SubResource( 1 )
+
+[node name="Hitbox" parent="Boss_range" instance=ExtResource( 1 )]
+collision_mask = 4
+
+[node name="CollisionShape2D" parent="Boss_range/Hitbox" index="0"]
+shape = SubResource( 5 )
+
+[node name="HurtBox" parent="Boss_range" instance=ExtResource( 2 )]
+collision_layer = 8
+
+[node name="CollisionShape2D" parent="Boss_range/HurtBox" index="0"]
+shape = SubResource( 6 )
+
+[node name="Stats_range" parent="Boss_range" instance=ExtResource( 4 )]
+MaxHealth = 30
+
+[node name="Area_find_player" type="Area2D" parent="Boss_range"]
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boss_range/Area_find_player"]
+shape = SubResource( 7 )
+
+[node name="Timer_teleport" type="Timer" parent="Boss_range"]
+one_shot = true
+
+[node name="Timer_shot" type="Timer" parent="Boss_range"]
+wait_time = 0.3
+one_shot = true
+autostart = true
+[connection signal="timeout" from="Timer_spawn" to="Boss_range" method="_on_Timer_spawn_timeout"]
+[connection signal="timeout" from="Timer_spawn" to="Boss_melee" method="_on_Timer_spawn_timeout"]
+[connection signal="timeout" from="Timer_revive" to="." method="_on_Timer_revive_timeout"]
+[connection signal="area_entered" from="Boss_melee/HurtBox" to="Boss_melee" method="_on_HurtBox_area_entered"]
+[connection signal="no_health" from="Boss_melee/Stats_melee" to="Boss_melee" method="_on_Stats_melee_no_health"]
+[connection signal="no_health" from="Boss_melee/Stats_melee" to="." method="_on_Stats_melee_no_health"]
+[connection signal="timeout" from="Boss_melee/Timer_hit" to="Boss_melee" method="_on_Timer_hit_timeout"]
+[connection signal="area_entered" from="Boss_range/HurtBox" to="Boss_range" method="_on_HurtBox_area_entered"]
+[connection signal="no_health" from="Boss_range/Stats_range" to="Boss_range" method="_on_Stats_range_no_health"]
+[connection signal="no_health" from="Boss_range/Stats_range" to="." method="_on_Stats_range_no_health"]
+[connection signal="body_entered" from="Boss_range/Area_find_player" to="Boss_range" method="_on_Area_find_player_body_entered"]
+[connection signal="body_exited" from="Boss_range/Area_find_player" to="Boss_range" method="_on_Area_find_player_body_exited"]
+[connection signal="timeout" from="Boss_range/Timer_teleport" to="Boss_range" method="_on_Timer_teleport_timeout"]
+
+[editable path="Boss_melee/Hitbox"]
+
+[editable path="Boss_melee/HurtBox"]
+
+[editable path="Boss_melee/Sword_hitbox"]
+
+[editable path="Boss_range/Hitbox"]
+
+[editable path="Boss_range/HurtBox"]
