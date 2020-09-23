@@ -103,7 +103,7 @@ func set_NewHealth(value):
 func shot(isStunBullet):
 	var space_state = get_world_2d().direct_space_state
 	var colision = space_state.intersect_ray(global_position, $Weapon/Position2D.global_position, [self], collision_mask)
-	if not colision:  # Só atirar se não tiver nenhuma parede na frente.
+	if not colision:
 		var shots = SHOT.instance()
 		shots.stunbullet = isStunBullet
 		if not isStunBullet:  # O tiro atual é um tiro comum
