@@ -15,7 +15,7 @@ var hit_pos
 var direction
 var old_velocidade
 var is_slowed = true
-var player
+var player1
 var can_attack = true
 
 enum {
@@ -60,7 +60,7 @@ func try_aim_and_change_state():  # Tenta "mirar" no inimigo. Se conseguir, irá
 	if state != STUNNED and state != ATTACK:
 		if enemy_range.entity_aimed():
 			state = CHASING
-			if player != null:
+			if player1 != null:
 				state = ATTACK;
 		else:
 			if state != RANDOM_WALKING and state != STOPED:  # Trocar de estado quando o alvo se esconder atrás da parede.
@@ -93,18 +93,18 @@ func slowed():
 
 func attack():
 	velocity = move_and_slide(Vector2.ZERO)
-	if enemy_range.entity_aimed():
+	if player1 != null:
 		rotation = (enemy_range.target.position - position).angle()
 		if can_attack and $AttackDuration.is_stopped():
 			$Hitbox2/CollisionShape2D.set_deferred("disabled", false)
 			$AttackDuration.start()
 
 func _on_Attack_Range_body_entered(body):
-	player = body
+	player1 = body
 
 
 func _on_Attack_Range_body_exited(_body):
-	player = null
+	player1 = null
 
 
 func _on_AttackDuration_timeout():
