@@ -46,10 +46,6 @@ func movimentation():
 			chase()
 		STUNNED:
 			velocity = Vector2.ZERO
-		
-		
-			
-			
 
 func chase():
 	pass

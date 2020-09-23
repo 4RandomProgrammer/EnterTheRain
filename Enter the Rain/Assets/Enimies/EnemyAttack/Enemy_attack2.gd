@@ -16,7 +16,7 @@ var direction
 var old_velocidade
 var is_slowed = true
 var player
-var can_attack
+var can_attack = true
 
 enum {
 	ATTACK
@@ -57,7 +57,7 @@ func chase():
 	velocity = velocity.move_toward(direction * velocidade, velocidade / 2)
 
 func try_aim_and_change_state():  # Tenta "mirar" no inimigo. Se conseguir, irá persegui-lo.
-	if state != STUNNED:
+	if state != STUNNED and state != ATTACK:
 		if enemy_range.entity_aimed():
 			state = CHASING
 			if player != null:
@@ -92,11 +92,10 @@ func slowed():
 		velocidade /= 2
 
 func attack():
-	move_and_slide(Vector2.ZERO)
+	velocity = move_and_slide(Vector2.ZERO)
 	if enemy_range.entity_aimed():
 		rotation = (enemy_range.target.position - position).angle()
-		if can_attack:
-			print("a")
+		if can_attack and $AttackDuration.is_stopped():
 			$Hitbox2/CollisionShape2D.set_deferred("disabled", false)
 			$AttackDuration.start()
 
@@ -110,7 +109,9 @@ func _on_Attack_Range_body_exited(_body):
 
 func _on_AttackDuration_timeout():
 	can_attack = false
+	$Hitbox2/CollisionShape2D.set_deferred("disabled", true)
 	$Attack_CD.start()
+	state = CHASING
 
 
 func _on_Attack_CD_timeout():

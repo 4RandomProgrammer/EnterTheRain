@@ -14,7 +14,6 @@ script = ExtResource( 2 )
 texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" parent="Range" index="0"]
-visible = true
 shape = SubResource( 1 )
 
 [editable path="HurtBox"]
