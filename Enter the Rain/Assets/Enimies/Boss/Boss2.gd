@@ -40,9 +40,9 @@ func _ready():
 	var bossHealthBar = get_parent().get_node('Player').get_node('Camera2D').get_node('CanvasLayer').get_node('HealthBarBoss')
 	arena_pos = Vector2(position.x, position.y + 100)
 	boss_2 = get_node('.')
-	connect("Spawning", bossHealthBar, "_on_Boss_Spawning")
-	connect("Died", bossHealthBar, "_on_Boss_Died")
-	connect("healthChanged", bossHealthBar, "_on_Boss_healthChanged")
+	boss_2.connect("Spawning", bossHealthBar, "_on_Boss_Spawning")
+	boss_2.connect("Died", bossHealthBar, "_on_Boss_Died")
+	boss_2.connect("healthChanged", bossHealthBar, "_on_Boss_healthChanged")
 	emit_signal("Spawning", $Stats.MaxHealth)
 
 
@@ -114,7 +114,6 @@ func _on_HurtBox_area_entered(area):
 		stats.Health -= damage_taken
 		emit_signal('healthChanged', stats.Health)
 		if stats.Health <= stats.MaxHealth / 2 and not already_used_power1:
-			# Metade da vida... Sumir e começar a explodir a arena toda por um tempo !
 			var Arena = arena_boss_2.instance()
 			Arena.position = arena_pos
 			Arena.boss_2 = boss_2
