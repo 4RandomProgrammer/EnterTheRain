@@ -2,18 +2,33 @@
 
 [ext_resource path="res://Engine/HurtBox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Player/Character.gd" type="Script" id=2]
-[ext_resource path="res://Assets/UI/AbilityButton2.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Assets/UI/HealthBar.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Assets/UI/AbilityButton.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Assets/UI/DinheiroCounter.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Nova pasta/AbilityButton2.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Nova pasta/HealthBar.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Nova pasta/AbilityButton.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Nova pasta/DinheiroCounter.tscn" type="PackedScene" id=6]
 [ext_resource path="res://icon.png" type="Texture" id=7]
-[ext_resource path="res://Assets/UI/Pause.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/Nova pasta/Pause.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Assets/Enimies/Boss/HealthBarBoss.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Player/Poison_bar.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Engine/Buffs_Controller.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Assets/Player/Itens_popups.gd" type="Script" id=12]
-[ext_resource path="res://Assets/UI/DashButton.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Engine/Weapon.tscn" type="PackedScene" id=14]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Dash"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "Flash"
@@ -35,12 +50,10 @@ tracks/0/keys = {
 height = 9.97371
 
 [node name="Player" type="KinematicBody2D"]
+position = Vector2( -7.36639, 1.22778 )
 z_index = 1
 collision_layer = 2
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="Sprite" type="Sprite" parent="."]
 
@@ -53,6 +66,7 @@ collision_layer = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_process_mode = 0
+anims/Dash = SubResource( 1 )
 anims/Flash = SubResource( 2 )
 
 [node name="PowerUp1CD" type="Timer" parent="."]
@@ -75,9 +89,10 @@ layer = 2
 [node name="Control" type="Control" parent="Camera2D/CanvasLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 32.0
-margin_right = 40.0
-margin_bottom = 72.0001
+margin_left = 19.1455
+margin_top = 32.5462
+margin_right = 59.1455
+margin_bottom = 72.5463
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -100,14 +115,7 @@ margin_left = 36.0
 margin_right = 68.0
 margin_bottom = 40.0
 
-[node name="DashButton" parent="Camera2D/CanvasLayer/Control/HBoxContainer" instance=ExtResource( 13 )]
-margin_left = 72.0
-margin_right = 104.0
-margin_bottom = 40.0
-
 [node name="DinheiroCounter" parent="Camera2D/CanvasLayer/Control/HBoxContainer" instance=ExtResource( 6 )]
-margin_left = 108.0
-margin_right = 116.0
 margin_bottom = 40.0
 
 [node name="Pause" parent="Camera2D/CanvasLayer" instance=ExtResource( 8 )]
@@ -149,16 +157,23 @@ custom_constants/separation = 60
 
 [node name="HealthBarBoss" parent="Camera2D/CanvasLayer" instance=ExtResource( 9 )]
 visible = false
-margin_left = 275.434
-margin_top = 548.877
-margin_right = 275.434
-margin_bottom = 548.877
+margin_left = 259.491
+margin_top = 527.955
+margin_right = 86.4907
+margin_bottom = 527.955
+
+[node name="HealthBarBoss2" parent="Camera2D/CanvasLayer" instance=ExtResource( 9 )]
+visible = false
+margin_left = 258.507
+margin_top = 565.614
+margin_right = 85.507
+margin_bottom = 565.614
 
 [node name="Poison_bar" parent="Camera2D/CanvasLayer" instance=ExtResource( 10 )]
-margin_left = 502.941
-margin_top = 255.414
-margin_right = 502.941
-margin_bottom = 255.414
+margin_left = 478.392
+margin_top = 241.106
+margin_right = 478.392
+margin_bottom = 241.106
 
 [node name="ItemCollectArea" type="Area2D" parent="."]
 collision_layer = 0
@@ -169,7 +184,6 @@ position = Vector2( -1, 0 )
 shape = SubResource( 3 )
 
 [node name="Buffs_Controller" parent="." instance=ExtResource( 11 )]
-[connection signal="Dash_used" from="." to="Camera2D/CanvasLayer/Control/HBoxContainer/DashButton" method="_on_Player_Dash_used"]
 [connection signal="PW1_used" from="." to="Camera2D/CanvasLayer/Control/HBoxContainer/AbilityButton" method="_on_Player_PW1_used"]
 [connection signal="PW2_used" from="." to="Camera2D/CanvasLayer/Control/HBoxContainer/AbilityButton2" method="_on_Player_PW2_used"]
 [connection signal="healthChanged" from="." to="Camera2D/CanvasLayer/HealthBar" method="_on_Player_healthChanged"]
