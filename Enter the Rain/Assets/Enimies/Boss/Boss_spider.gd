@@ -46,11 +46,9 @@ func _ready():
 	randomize()
 	# Conectando os sinais:
 	var bossHealthBar = get_parent().get_node('Player').get_node('Camera2D').get_node('CanvasLayer').get_node('HealthBarBoss')
-	var boss_spider = get_node('.')
-	boss_spider = get_node('.')
-	boss_spider.connect("Spawning", bossHealthBar, "_on_Boss_Spawning")
-	boss_spider.connect("Died", bossHealthBar, "_on_Boss_Died")
-	boss_spider.connect("healthChanged", bossHealthBar, "_on_Boss_healthChanged")
+	connect("Spawning", bossHealthBar, "_on_Boss_Spawning")
+	connect("Died", bossHealthBar, "_on_Boss_Died")
+	connect("healthChanged", bossHealthBar, "_on_Boss_healthChanged")
 	emit_signal("Spawning", $Stats.MaxHealth)
 
 func _on_HurtBox_area_entered(area):
