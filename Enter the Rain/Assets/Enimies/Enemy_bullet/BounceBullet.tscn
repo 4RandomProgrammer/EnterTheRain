@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/Enimies/Enemy_bullet/AreaBounceBullet.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Sprites/Bounce_bullet.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Enimies/Enemy_bullet/BounceBullet.gd" type="Script" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 11.9119
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 11.8997
+
+[node name="BounceBullet" type="KinematicBody2D"]
+z_index = 1
+collision_layer = 16
+collision_mask = 7
+script = ExtResource( 3 )
+speed = 400
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( -0.855694, -0.767517 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="Area2D"]
+scale = Vector2( 2, 2 )
+z_index = 1
+texture = ExtResource( 2 )
+
+[node name="Timer_duration" type="Timer" parent="Area2D"]
+wait_time = 6.0
+one_shot = true
+autostart = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.610435, -0.732521 )
+shape = SubResource( 2 )
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="timeout" from="Area2D/Timer_duration" to="." method="_on_Timer_duration_timeout"]

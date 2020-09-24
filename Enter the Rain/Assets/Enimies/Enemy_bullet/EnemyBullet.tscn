@@ -4,7 +4,7 @@
 [ext_resource path="res://Assets/Enimies/Enemy_bullet/Bullet1Azul.png" type="Texture" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 4.05647
+radius = 11.9119
 
 [node name="EnemyBullet" type="Area2D"]
 z_index = 1

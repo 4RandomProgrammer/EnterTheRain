@@ -3,7 +3,9 @@ extends KinematicBody2D
 onready var player = get_parent().get_parent().get_node('Player')
 onready var stats = $Stats_range
 onready var timer_shot = $Timer_shot
+onready var timer_power1 = $Timer_power_1
 onready var Bullet = load("res://Assets/Enimies/Enemy_bullet/SlowBigBullet.tscn")
+onready var Bounce_bullet = load("res://Assets/Enimies/Enemy_bullet/BounceBullet.tscn")
 enum {
 	SPAWNING,
 	NORMAL,
@@ -16,6 +18,8 @@ var player_is_near = false
 var damage = 1
 var speed = 200
 var velocity = Vector2.ZERO
+var delay_min_p1 = 8
+var delay_max_p1 = 12
 
 signal Spawning
 signal healthChanged
@@ -62,6 +66,7 @@ func _on_HurtBox_area_entered(area):
 
 func _on_Timer_spawn_timeout():
 	state = NORMAL
+	timer_power1.start(rand_range(delay_min_p1, delay_max_p1))
 
 func _on_Stats_range_no_health():
 	state = KNOCKED
@@ -83,7 +88,21 @@ func _on_Area_find_player_body_exited(body):
 func _on_Timer_teleport_timeout():
 	if position.x < initial_pos.x:  # Boss bateu na parede mais a esquerda
 		position = Vector2(initial_pos.x + 50 + rand_range(0, 50), initial_pos.y + rand_range(-25, 50))
-	else:
+	else:  # Bateu na parede mais a direita
 		position = Vector2(initial_pos.x - 50 - rand_range(0, 50), initial_pos.y + rand_range(-25, 50))
-	state = NORMAL
+	if state != KNOCKED:
+		state = NORMAL
 		
+
+func _on_Timer_power_1_timeout(): # Atirar tiros que ricocheteam na parede
+	if is_instance_valid(player):
+		if state == NORMAL:
+			var angle = - PI / 3  # Em um cone de 120°
+			while angle < PI / 3:
+				var bounce_bullet = Bounce_bullet.instance()
+				bounce_bullet.start(global_position, (player.position - global_position).angle() + angle)
+				angle += PI / 12  # Atirar a cada 15° nesse cone
+				get_parent().get_parent().call_deferred('add_child', bounce_bullet)
+			timer_power1.start(rand_range(delay_min_p1, delay_max_p1))
+		else:
+			timer_power1.start(5)
