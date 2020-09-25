@@ -52,14 +52,10 @@ disabled = true
 wait_time = 0.5
 one_shot = true
 
-[node name="Attack_CD" type="Timer" parent="." index="10"]
-one_shot = true
-
-[node name="Random_moviment" parent="." index="11" instance=ExtResource( 6 )]
+[node name="Random_moviment" parent="." index="10" instance=ExtResource( 6 )]
 [connection signal="body_entered" from="Attack_Range" to="." method="_on_Attack_Range_body_entered"]
 [connection signal="body_exited" from="Attack_Range" to="." method="_on_Attack_Range_body_exited"]
 [connection signal="timeout" from="AttackDuration" to="." method="_on_AttackDuration_timeout"]
-[connection signal="timeout" from="Attack_CD" to="." method="_on_Attack_CD_timeout"]
 
 [editable path="Range"]
 

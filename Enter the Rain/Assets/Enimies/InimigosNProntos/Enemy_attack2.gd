@@ -5,6 +5,8 @@ export (float) var arruma_posic = 4
 
 onready var wanderController = $Random_moviment
 onready var enemy_range = $Range
+onready var attackduration = $AttackDuration
+
 onready var screen_verification = $VisibilityNotifier2D
 export var damage = 1
 
@@ -24,7 +26,6 @@ enum {
 	RANDOM_WALKING
 	CHASING
 	STUNNED
-	DELAY
 }
 
 func _physics_process(_delta):  # Loop principal da torreta.
@@ -50,10 +51,8 @@ func movimentation():
 			chase()
 		STUNNED:
 			velocity = Vector2.ZERO
-		DELAY:
-			pass
 		ATTACK:
-			attack()
+			pass
 
 func chase():
 	direction = global_position.direction_to(enemy_range.target.global_position)
@@ -98,7 +97,7 @@ func attack():
 	if player1 != null:
 		rotation = (enemy_range.target.position - position).angle()
 		if can_attack:
-			$Hitbox2/CollisionShape2D.set_deferred("disabled", false)
+			
 			$AttackDuration.start()
 		elif $Attack_CD.is_stopped():
 			$Attack_CD.start()
@@ -112,14 +111,16 @@ func _on_Attack_Range_body_exited(_body):
 
 
 func _on_AttackDuration_timeout():
-	can_attack = false
-	$Hitbox2/CollisionShape2D.set_deferred("disabled", true)
-	$Attack_CD.start()
-	
-	if enemy_range.entity_aimed():
-		state = CHASING
+	if not can_attack:
+		$Hitbox2/CollisionShape2D.set_deferred("disabled", false)
+		can_attack = true
+		attackduration.start(0,5)
 	else:
-		state = RANDOM_WALKING
+		$Hitbox2/CollisionShape2D.set_deferred("disabled", true)
+		can_attack = false
+		
+		if enemy_range.entity_aimed():
+			state = CHASING
+		else:
+			state = RANDOM_WALKING
 
-func _on_Attack_CD_timeout():
-	can_attack = true
