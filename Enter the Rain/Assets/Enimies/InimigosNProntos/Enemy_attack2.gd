@@ -64,7 +64,6 @@ func try_aim_and_change_state():  # Tenta "mirar" no inimigo. Se conseguir, irá
 				state = ATTACK;
 		else:
 			if state != RANDOM_WALKING and state != STOPED:  # Trocar de estado quando o alvo se esconder atrás da parede.
-				player_exited_range()
 				state = pick_random_state([STOPED, RANDOM_WALKING])
 
 func player_exited_range():

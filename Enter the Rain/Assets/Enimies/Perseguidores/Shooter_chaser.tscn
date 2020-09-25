@@ -5,7 +5,7 @@
 [ext_resource path="res://icon.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 16.9567, 18.531 )
+extents = Vector2( 16, 16 )
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 250.0
@@ -18,7 +18,14 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" parent="." index="1"]
+position = Vector2( 0, 0 )
 shape = SubResource( 1 )
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2( 0, 0 )
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+position = Vector2( 0, 0 )
 
 [node name="CollisionShape2D" parent="Range" index="0"]
 visible = false

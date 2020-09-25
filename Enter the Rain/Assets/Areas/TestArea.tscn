@@ -4,8 +4,8 @@
 [ext_resource path="res://Assets/Player/Engineer.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Sistema_Dinheiro.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Altares/Life Altar.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Assets/Enimies/EnemyAttack/Enemy_shooter.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Assets/Enimies/EnemyAttack/Enemy_attack2.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Enimies/InimigosNProntos/Enemy_shooter.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Enimies/InimigosNProntos/Enemy_shooter_reverse.tscn" type="PackedScene" id=6]
 
 [node name="Node2D" type="Node2D"]
 
@@ -20,10 +20,7 @@ position = Vector2( -197.06, 104.887 )
 position = Vector2( -12.193, 13.0339 )
 
 [node name="Enemy" parent="." instance=ExtResource( 5 )]
-position = Vector2( -307, -31 )
+position = Vector2( 309.799, 53.8782 )
 
 [node name="Enemy2" parent="." instance=ExtResource( 6 )]
-position = Vector2( 283, 54 )
-
-[node name="Enemy3" parent="." instance=ExtResource( 5 )]
-position = Vector2( -36, 300 )
+position = Vector2( -345.718, -267.146 )
