@@ -33,6 +33,7 @@ position = Vector2( 0.831234, -0.0240422 )
 shape = SubResource( 2 )
 
 [node name="ShootTimer" type="Timer" parent="." index="9"]
+one_shot = true
 [connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]
 
 [editable path="HurtBox"]

@@ -7,7 +7,6 @@
 [ext_resource path="res://icon.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Movimento_aletorio.tscn" type="PackedScene" id=6]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
 
@@ -50,6 +49,7 @@ shape = SubResource( 4 )
 disabled = true
 
 [node name="AttackDuration" type="Timer" parent="." index="9"]
+wait_time = 0.5
 one_shot = true
 
 [node name="Attack_CD" type="Timer" parent="." index="10"]

@@ -16,8 +16,15 @@ func shoot(pos):
 	var bullet = Bullet.instance()
 	var angle = (pos - global_position).angle()
 	bullet.start(global_position, angle + rand_range(-0.05, 0.05))
+	extra_shoot(angle)
 	get_parent().add_child(bullet)
 	can_shoot = false
+
+func extra_shoot(baseAngle):
+	for angle in [PI/6 , -PI/6]:
+		var extra_bullet = Bullet.instance()
+		extra_bullet.start(global_position, angle + baseAngle)
+		get_parent().add_child(extra_bullet)
 
 func player_exited_range():
 	# Player saiu do range. Parar o timer do tiro, para que o inimigo nao atire instantaneamente quando o player voltar.
