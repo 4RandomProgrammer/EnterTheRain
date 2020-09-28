@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Enimies/InimigosNProntos/Enemy_attack_base.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Enimies/InimigosNProntos/Basic_melee_enemy.gd" type="Script" id=2]
+
+[node name="Enemy" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[editable path="Range"]
+
+[editable path="Hitbox2"]

@@ -52,11 +52,10 @@ func movimentation():
 		STUNNED:
 			velocity = Vector2.ZERO
 		ATTACK:
-			pass
+			velocity = Vector2.ZERO
 
 func chase():
-	direction = global_position.direction_to(enemy_range.target.global_position)
-	velocity = velocity.move_toward(direction * velocidade, velocidade / 2)
+	pass
 
 func try_aim_and_change_state():  # Tenta "mirar" no inimigo. Se conseguir, irá persegui-lo.
 	if state != STUNNED and state != ATTACK:
@@ -64,6 +63,7 @@ func try_aim_and_change_state():  # Tenta "mirar" no inimigo. Se conseguir, irá
 			state = CHASING
 			if player1 != null:
 				state = ATTACK;
+				attackduration.start(0.5)
 		else:
 			if state != RANDOM_WALKING and state != STOPED:  # Trocar de estado quando o alvo se esconder atrás da parede.
 				state = pick_random_state([STOPED, RANDOM_WALKING])
@@ -92,15 +92,6 @@ func slowed():
 		$SlowTimer.start(-1)
 		velocidade /= 2
 
-func attack():
-	velocity = move_and_slide(Vector2.ZERO)
-	if player1 != null:
-		rotation = (enemy_range.target.position - position).angle()
-		if can_attack:
-			
-			$AttackDuration.start()
-		elif $Attack_CD.is_stopped():
-			$Attack_CD.start()
 
 func _on_Attack_Range_body_entered(body):
 	player1 = body
@@ -113,8 +104,9 @@ func _on_Attack_Range_body_exited(_body):
 func _on_AttackDuration_timeout():
 	if not can_attack:
 		$Hitbox2/CollisionShape2D.set_deferred("disabled", false)
+		rotation = (enemy_range.target.position - position).angle()
 		can_attack = true
-		attackduration.start(0,5)
+		attackduration.start(0.5)
 	else:
 		$Hitbox2/CollisionShape2D.set_deferred("disabled", true)
 		can_attack = false

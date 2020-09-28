@@ -9,11 +9,11 @@
 [sub_resource type="CapsuleShape2D" id=1]
 height = 12.0
 
-[sub_resource type="CapsuleShape2D" id=3]
+[sub_resource type="CapsuleShape2D" id=2]
 radius = 11.0
 height = 12.0
 
-[sub_resource type="CapsuleShape2D" id=4]
+[sub_resource type="CapsuleShape2D" id=3]
 height = 12.0
 
 [node name="Player" instance=ExtResource( 1 )]
@@ -41,7 +41,7 @@ texture = ExtResource( 4 )
 one_shot = true
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="DashCD" type="Timer" parent="." index="10"]
 one_shot = true
@@ -55,13 +55,13 @@ cooldown = 3.0
 [node name="DashButton" parent="Camera2D/CanvasLayer/Control/HBoxContainer" index="2"]
 cooldown = 10.0
 
-[node name="ItemCollectArea" parent="." index="12"]
-visible = false
+[node name="Poison_bar" parent="Camera2D/CanvasLayer" index="6"]
+visible = true
 
 [node name="RayCast2D" type="RayCast2D" parent="." index="13"]
 
 [node name="CollisionShape2D" parent="Buffs_Controller/Spikes" index="0"]
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 disabled = true
 [connection signal="timeout" from="Shield/DurationShield" to="." method="_on_DurationShield_timeout"]
 
