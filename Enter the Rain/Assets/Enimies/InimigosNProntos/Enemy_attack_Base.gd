@@ -2,9 +2,12 @@ extends "res://Assets/Enimies/Enemy_base.gd"
 
 export (int) var velocidade = 100
 export (float) var arruma_posic = 4
+export (float)var attack_cooldown = 0.5
 
 onready var wanderController = $Random_moviment
 onready var enemy_range = $Range
+onready var attackduration = $AttackDuration
+
 onready var screen_verification = $VisibilityNotifier2D
 export var damage = 1
 
@@ -16,7 +19,7 @@ var direction
 var old_velocidade
 var is_slowed = true
 var player1
-var can_attack = true
+var can_attack = false
 
 enum {
 	ATTACK
@@ -50,11 +53,10 @@ func movimentation():
 		STUNNED:
 			velocity = Vector2.ZERO
 		ATTACK:
-			attack()
+			velocity = Vector2.ZERO
 
 func chase():
-	direction = global_position.direction_to(enemy_range.target.global_position)
-	velocity = velocity.move_toward(direction * velocidade, velocidade / 2)
+	pass
 
 func try_aim_and_change_state():  # Tenta "mirar" no inimigo. Se conseguir, irá persegui-lo.
 	if state != STUNNED and state != ATTACK:
@@ -62,9 +64,9 @@ func try_aim_and_change_state():  # Tenta "mirar" no inimigo. Se conseguir, irá
 			state = CHASING
 			if player1 != null:
 				state = ATTACK;
+				attackduration.start(0.5)
 		else:
 			if state != RANDOM_WALKING and state != STOPED:  # Trocar de estado quando o alvo se esconder atrás da parede.
-				player_exited_range()
 				state = pick_random_state([STOPED, RANDOM_WALKING])
 
 func player_exited_range():
@@ -91,13 +93,6 @@ func slowed():
 		$SlowTimer.start(-1)
 		velocidade /= 2
 
-func attack():
-	velocity = move_and_slide(Vector2.ZERO)
-	if player1 != null:
-		rotation = (enemy_range.target.position - position).angle()
-		if can_attack and $AttackDuration.is_stopped():
-			$Hitbox2/CollisionShape2D.set_deferred("disabled", false)
-			$AttackDuration.start()
 
 func _on_Attack_Range_body_entered(body):
 	player1 = body
@@ -108,11 +103,17 @@ func _on_Attack_Range_body_exited(_body):
 
 
 func _on_AttackDuration_timeout():
-	can_attack = false
-	$Hitbox2/CollisionShape2D.set_deferred("disabled", true)
-	$Attack_CD.start()
-	state = CHASING
+	if not can_attack:
+		$Hitbox2/CollisionShape2D.set_deferred("disabled", false)
+		rotation = (enemy_range.target.position - position).angle()
+		can_attack = true
+		attackduration.start(attack_cooldown)
+	else:
+		$Hitbox2/CollisionShape2D.set_deferred("disabled", true)
+		can_attack = false
+		
+		if enemy_range.entity_aimed():
+			state = CHASING
+		else:
+			state = RANDOM_WALKING
 
-
-func _on_Attack_CD_timeout():
-	can_attack = true
