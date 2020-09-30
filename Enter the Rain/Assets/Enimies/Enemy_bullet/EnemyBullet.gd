@@ -15,10 +15,6 @@ func _physics_process(delta):
 	position += velocity * delta
 
 
-func _on_VisibilityNotifier2D_screen_exited():
-	queue_free()
-
-
 func _on_Area2D_body_entered(body):
 	collision_body = body  # Salvando o colisor em uma variavel(sera utilizado para o superbullet)
 	on_collision()
