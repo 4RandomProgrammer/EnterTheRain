@@ -1,7 +1,6 @@
 extends "res://Assets/Enimies/InimigosNProntos/Enemy_attack_Base.gd"
 
 var attacking = false
-export (float)var attack_cooldown = 0.5
 
 const VENENO = preload("res://Assets/Enimies/Poison.tscn")
 

@@ -1,16 +1,19 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/Altares/Buff Shrine.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Player/Engineer.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Sistema_Dinheiro.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Altares/Life Altar.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Enimies/InimigosNProntos/TP_and_Attack.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Enimies/InimigosNProntos/Enemy_shooter_reverse.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Enimies/InimigosNProntos/ShootNAttack.tscn" type="PackedScene" id=8]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Sistema_Dinheiro" parent="." instance=ExtResource( 3 )]
 
 [node name="Buff Shrine" parent="." instance=ExtResource( 1 )]
+position = Vector2( 364.335, -171.785 )
 
 [node name="Life Altar" parent="." instance=ExtResource( 4 )]
 position = Vector2( -197.06, 104.887 )
@@ -20,3 +23,9 @@ position = Vector2( -12.193, 13.0339 )
 
 [node name="Enemy" parent="." instance=ExtResource( 5 )]
 position = Vector2( 534.896, 277.187 )
+
+[node name="Enemy3" parent="." instance=ExtResource( 8 )]
+position = Vector2( -70.4981, 521.398 )
+
+[node name="Enemy2" parent="." instance=ExtResource( 7 )]
+position = Vector2( -562.382, 266.576 )
