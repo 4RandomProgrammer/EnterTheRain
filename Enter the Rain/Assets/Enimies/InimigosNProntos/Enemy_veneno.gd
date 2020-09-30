@@ -1,6 +1,7 @@
 extends "res://Assets/Enimies/InimigosNProntos/Enemy_attack_Base.gd"
 
 var attacking = false
+export (float)var attack_cooldown = 0.5
 
 const VENENO = preload("res://Assets/Enimies/Poison.tscn")
 
@@ -10,7 +11,7 @@ func _on_AttackDuration_timeout():
 		rotation = (enemy_range.target.position - position).angle()
 		poison.position = enemy_range.target.position
 		can_attack = true
-		attackduration.start(0.5)
+		attackduration.start(attack_cooldown)
 		get_parent().add_child(poison)
 	else:
 		

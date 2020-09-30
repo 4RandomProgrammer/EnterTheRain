@@ -2,6 +2,7 @@ extends "res://Assets/Enimies/Enemy_base.gd"
 
 export (int) var velocidade = 100
 export (float) var arruma_posic = 4
+export (float)var attack_cooldown = 0.5
 
 onready var wanderController = $Random_moviment
 onready var enemy_range = $Range
@@ -106,7 +107,7 @@ func _on_AttackDuration_timeout():
 		$Hitbox2/CollisionShape2D.set_deferred("disabled", false)
 		rotation = (enemy_range.target.position - position).angle()
 		can_attack = true
-		attackduration.start(0.5)
+		attackduration.start(attack_cooldown)
 	else:
 		$Hitbox2/CollisionShape2D.set_deferred("disabled", true)
 		can_attack = false

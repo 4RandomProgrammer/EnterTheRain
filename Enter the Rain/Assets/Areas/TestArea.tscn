@@ -4,7 +4,7 @@
 [ext_resource path="res://Assets/Player/Engineer.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Sistema_Dinheiro.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Altares/Life Altar.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Assets/Enimies/InimigosNProntos/Enemy_veneno.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Enimies/InimigosNProntos/TP_and_Attack.tscn" type="PackedScene" id=5]
 
 [node name="Node2D" type="Node2D"]
 
@@ -19,4 +19,4 @@ position = Vector2( -197.06, 104.887 )
 position = Vector2( -12.193, 13.0339 )
 
 [node name="Enemy" parent="." instance=ExtResource( 5 )]
-position = Vector2( 486.95, 215.756 )
+position = Vector2( 534.896, 277.187 )
