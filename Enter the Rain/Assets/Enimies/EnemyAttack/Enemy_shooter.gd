@@ -12,7 +12,7 @@ func shoot(pos):  # Função que atira na direção do player.
 	var bullet = Bullet.instance()
 	var angle = (pos - global_position).angle()
 	bullet.start(global_position, angle + rand_range(-0.05, 0.05))
-	get_parent().add_child(bullet)
+	get_parent().call_deferred('add_child', bullet)
 	can_shoot = false  # Após um tiro, deve-se dar um delay para o próximo tiro.
 	$ShootTimer.start()
 
