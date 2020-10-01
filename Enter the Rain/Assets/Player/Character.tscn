@@ -161,7 +161,6 @@ margin_right = 283.455
 margin_bottom = 531.517
 
 [node name="Poison_bar" parent="Camera2D/CanvasLayer" instance=ExtResource( 10 )]
-visible = false
 margin_left = 501.991
 margin_top = 255.122
 margin_right = 501.991
