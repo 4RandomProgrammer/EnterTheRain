@@ -11,6 +11,9 @@ speed = 250
 [node name="Sprite" parent="." index="1"]
 texture = ExtResource( 3 )
 
+[node name="Timer_duration" parent="." index="2"]
+wait_time = 7.0
+
 [node name="Timer_teia" type="Timer" parent="." index="3"]
 wait_time = 0.1
 autostart = true
