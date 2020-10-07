@@ -15,10 +15,12 @@ func _on_Timer_spawn_timeout():
 	$Timer_pow1.start(rand_range(5, 12))
 
 func _on_Timer_pow1_timeout():
-	if not powered:
+	if not powered:  # Ativar bullets venenosas
 		powered = true
 		Bullet = Poison_bullet
-	else:
+		bullet_reload_time = 0.6
+	else:  # Ativar bullets normais
 		powered = false
 		Bullet = Big_bullet
+		bullet_reload_time = 0.4
 	$Timer_pow1.start(rand_range(5, 12))
