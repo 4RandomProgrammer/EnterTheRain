@@ -1,14 +1,15 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Assets/Player/Character.tscn" type="PackedScene" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Sprites/arqueira 2.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Player/Archer.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Sprites/arco arqueira 3.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 8 )
+extents = Vector2( 14, 14 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 8, 8 )
+extents = Vector2( 14, 14 )
 
 [node name="Player" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
@@ -16,12 +17,13 @@ MaxHealth = 4
 cooldownP1 = 6.0
 
 [node name="Sprite" parent="." index="0"]
-modulate = Color( 0, 0, 0, 1 )
-scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource( 1 )
+
+[node name="Weapon" parent="." index="2"]
+texture = ExtResource( 4 )
 
 [node name="RayCast2D" type="RayCast2D" parent="." index="3"]
 

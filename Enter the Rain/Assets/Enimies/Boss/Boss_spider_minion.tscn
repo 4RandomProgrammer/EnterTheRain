@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Assets/Enimies/Enemy_base.tscn" type="PackedScene" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Sprites/miniaranhas.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Enimies/Boss/Boss_spider_minion.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -14,27 +14,19 @@ extents = Vector2( 15.6987, 15.9192 )
 extents = Vector2( 15.6987, 15.6194 )
 
 [node name="KinematicBody2D" instance=ExtResource( 1 )]
-collision_layer = 16
 collision_mask = 2
 script = ExtResource( 3 )
 min_money = 0
 max_money = 0
 
 [node name="Sprite" parent="." index="0"]
-scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource( 1 )
 
-[node name="HurtBox" parent="." index="2"]
-collision_layer = 8
-
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 shape = SubResource( 2 )
-
-[node name="Hitbox" parent="." index="3"]
-collision_mask = 4
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource( 3 )
