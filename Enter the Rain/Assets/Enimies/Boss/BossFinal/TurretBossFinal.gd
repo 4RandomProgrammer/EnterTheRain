@@ -5,6 +5,8 @@ onready var Timer_shot = $Timer_shoot
 onready var Bullet = load("res://Assets/Enimies/Enemy_bullet/SlowBigBullet.tscn")
 onready var Stats = $Stats
 onready var Explosion = load("res://Assets/Enimies/Explosion.tscn")
+onready var Boss_cientista_pos = get_parent().get_node('Cientista').global_position
+
 var bullet_reload_time = 0.4
 enum {
 	SPAWNING,
@@ -17,6 +19,7 @@ var velocity = Vector2.ZERO
 signal Turret_damaged(health)
 
 func _physics_process(delta):
+	update()
 	match state:
 		NORMAL:
 			movimentation(delta)
@@ -24,6 +27,8 @@ func _physics_process(delta):
 		POWER_1:
 			power_1()
 
+func _draw():  # Desenhar linha ligando boss e torre (proteção)
+	draw_line(Vector2.ZERO, (Boss_cientista_pos - global_position).rotated(-rotation), ColorN('Green'))
 
 func shoot():
 	if Timer_shot.time_left == 0:

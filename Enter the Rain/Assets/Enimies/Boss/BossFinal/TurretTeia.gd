@@ -16,7 +16,6 @@ func _on_Timer_spawn_timeout():
 func _on_Timer_pow1_timeout():
 	var extra_angle = - PI / 3
 	while extra_angle < PI / 3:
-		print('oi')
 		var cobweb_bullet = Cobweb_bullet.instance()
 		cobweb_bullet.start(global_position, rotation + extra_angle)
 		get_parent().get_parent().call_deferred('add_child', cobweb_bullet)
