@@ -12,6 +12,7 @@ func start(pos, dir):
 	velocity = Vector2(speed, 0).rotated(dir)
 
 func _physics_process(delta):
+	on_pysics_loop(delta)
 	position += velocity * delta
 
 
@@ -30,4 +31,7 @@ func _on_Timer_duration_timeout():
 	queue_free()
 
 func timer_finished():
+	pass
+
+func on_pysics_loop(delta):
 	pass
