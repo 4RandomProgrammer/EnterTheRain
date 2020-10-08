@@ -1,9 +1,10 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://Assets/tilesets Enter the Rain/ashlands_tileset.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Player/Trooper.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/ParedeInvisivel.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Enimies/Boss/BossFinal/BossFinal.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Enimies/Enemy_bullet/CirclePatternBullets.tscn" type="PackedScene" id=5]
 
 [sub_resource type="TileSet" id=1]
 
@@ -438,3 +439,6 @@ position = Vector2( -741.139, 737.381 )
 
 [node name="BossFinal" parent="." instance=ExtResource( 4 )]
 position = Vector2( -5.83838, -1.17334 )
+
+[node name="CirclePatternBullets" parent="." instance=ExtResource( 5 )]
+position = Vector2( -180.48, -12.4283 )

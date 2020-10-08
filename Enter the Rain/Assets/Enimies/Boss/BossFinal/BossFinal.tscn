@@ -46,6 +46,11 @@ autostart = true
 wait_time = 5.0
 one_shot = true
 
+[node name="Timer_change_pos" type="Timer" parent="Cientista"]
+wait_time = 75.0
+one_shot = true
+autostart = true
+
 [node name="HurtBox" parent="Cientista" instance=ExtResource( 7 )]
 collision_layer = 8
 
@@ -71,6 +76,7 @@ autostart = true
 [connection signal="no_health" from="Cientista/Stats" to="." method="_on_Stats_no_health"]
 [connection signal="timeout" from="Cientista/Timer_power" to="Cientista" method="_on_Timer_power_timeout"]
 [connection signal="timeout" from="Cientista/Timer_pow1" to="Cientista" method="_on_Timer_pow1_timeout"]
+[connection signal="timeout" from="Cientista/Timer_change_pos" to="Cientista" method="_on_Timer_change_pos_timeout"]
 [connection signal="area_entered" from="Cientista/HurtBox" to="Cientista" method="_on_HurtBox_area_entered"]
 [connection signal="Turret_damaged" from="TurretVeneno" to="." method="_on_TurretVeneno_Turret_damaged"]
 [connection signal="no_health" from="TurretVeneno/Stats" to="Cientista" method="_on_Stats_no_health"]
@@ -78,10 +84,10 @@ autostart = true
 [connection signal="no_health" from="TurretTeia/Stats" to="Cientista" method="_on_Stats_no_health"]
 [connection signal="Turret_damaged" from="TurretExplosivo" to="." method="_on_TurretExplosivo_Turret_damaged"]
 [connection signal="no_health" from="TurretExplosivo/Stats" to="Cientista" method="_on_Stats_no_health"]
-[connection signal="timeout" from="Timer_spawn" to="TurretVeneno" method="_on_Timer_spawn_timeout"]
-[connection signal="timeout" from="Timer_spawn" to="TurretTeia" method="_on_Timer_spawn_timeout"]
 [connection signal="timeout" from="Timer_spawn" to="TurretExplosivo" method="_on_Timer_spawn_timeout"]
 [connection signal="timeout" from="Timer_spawn" to="Cientista" method="_on_Timer_spawn_timeout"]
+[connection signal="timeout" from="Timer_spawn" to="TurretTeia" method="_on_Timer_spawn_timeout"]
+[connection signal="timeout" from="Timer_spawn" to="TurretVeneno" method="_on_Timer_spawn_timeout"]
 
 [editable path="Cientista/HurtBox"]
 

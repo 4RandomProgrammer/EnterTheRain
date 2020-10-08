@@ -7,8 +7,13 @@ onready var Timer_power = $Timer_power
 onready var Final_boss_bullet = load("res://Assets/Enimies/Enemy_bullet/FinalBossBullet.tscn")
 onready var Bullet = load("res://Assets/Enimies/Enemy_bullet/SlowBigBullet.tscn")
 onready var Missile = load("res://Assets/Enimies/Enemy_missile.tscn")
+onready var Bullet_circle_pat = load("res://Assets/Enimies/Enemy_bullet/CirclePatternBullets.tscn")
+onready var Player = get_parent().get_parent().get_node('Player')
 onready var Current_bullet = Bullet
 onready var rng = RandomNumberGenerator.new()
+onready var teleport_positions = [get_parent().get_node("TurretExplosivo").global_position,
+								  get_parent().get_node("TurretTeia").global_position,
+								  get_parent().get_node("TurretVeneno").global_position]
 
 enum {
 	SPAWNING,
@@ -33,7 +38,7 @@ func _physics_process(delta):
 func shoot():
 	if Timer_shoot.time_left == 0:
 		var bullet = Current_bullet.instance()
-		bullet.start(global_position, PI / 2 + rand_range(-PI/3, PI/3))
+		bullet.start(global_position, (Player.position - global_position).angle() + rand_range(-PI/3, PI/3))
 		get_parent().get_parent().call_deferred('add_child', bullet)
 		Timer_shoot.start(reload_time)
 
@@ -44,7 +49,7 @@ func _draw():
 
 
 func _on_HurtBox_area_entered(area):
-	if not protected:
+	if not protected:  # Só pode tomar dano quando todas as torres morreren
 		var damage_taken = area.DAMAGE
 		Stats.Health -= damage_taken
 		emit_signal("Cientista_damaged", Stats.Health)
@@ -62,7 +67,7 @@ func _on_Stats_no_health():  # Buffar boss quando alguma torre morrer
 
 
 func _on_Timer_power_timeout():
-	var poder_selecionado = rng.randi_range(1, 2)
+	var poder_selecionado = rng.randi_range(1, 3)
 	if poder_selecionado == 1:
 		# Trocar os tiros comuns por tiros explosivos com bullets que voltam, por 5 secs.
 		Current_bullet = Final_boss_bullet
@@ -71,6 +76,9 @@ func _on_Timer_power_timeout():
 		# Soltar os misseis
 		for i in range(quant_misseis):
 			spawn_missile()
+	elif poder_selecionado == 3:
+		# Soltar o pattern de circulo de bullets.
+		spawn_circle_pattern()
 	Timer_power.start(rand_range(power_min_reload, power_max_reload))
 
 func _on_Timer_pow1_timeout():
@@ -80,3 +88,20 @@ func spawn_missile():
 	var missile = Missile.instance()
 	missile.start(global_position, rand_range(-PI/3, PI/3))
 	get_parent().get_parent().call_deferred('add_child', missile)
+
+func spawn_circle_pattern():
+	print('oi')
+	var circle_pat = Bullet_circle_pat.instance()
+	circle_pat.start(global_position, (Player.global_position - global_position).angle())
+	get_parent().get_parent().call_deferred('add_child', circle_pat)
+
+
+func _on_Timer_change_pos_timeout(): # Poder 4: mudar de posição se as torres estiverem mortas
+	if not protected:
+		var current_pos = global_position
+		var tp_pos = teleport_positions[0]
+		teleport_positions.pop_front()
+		teleport_positions.append(current_pos)
+		global_position = tp_pos
+		teleport_positions.shuffle()
+	$Timer_change_pos.start(rand_range(7, 20))
