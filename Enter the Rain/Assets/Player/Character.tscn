@@ -148,23 +148,23 @@ custom_constants/separation = 60
 
 [node name="HealthBarBoss" parent="Camera2D/CanvasLayer" instance=ExtResource( 9 )]
 visible = false
-margin_left = 282.621
-margin_top = 565.812
-margin_right = 282.621
-margin_bottom = 565.812
+margin_left = 278.915
+margin_top = 547.744
+margin_right = 278.915
+margin_bottom = 547.744
 
 [node name="HealthBarBoss2" parent="Camera2D/CanvasLayer" instance=ExtResource( 9 )]
 visible = false
-margin_left = 283.455
-margin_top = 531.518
-margin_right = 283.455
-margin_bottom = 531.517
+margin_left = 279.141
+margin_top = 494.066
+margin_right = 279.141
+margin_bottom = 494.065
 
 [node name="Poison_bar" parent="Camera2D/CanvasLayer" instance=ExtResource( 10 )]
-margin_left = 501.991
-margin_top = 255.122
-margin_right = 501.991
-margin_bottom = 255.122
+margin_left = 519.229
+margin_top = 256.921
+margin_right = 519.229
+margin_bottom = 256.921
 
 [node name="ItemCollectArea" type="Area2D" parent="."]
 collision_layer = 0

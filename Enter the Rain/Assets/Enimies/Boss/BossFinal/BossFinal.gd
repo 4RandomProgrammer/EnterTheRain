@@ -14,7 +14,7 @@ func _ready():
 	connect("Spawning", bossHealthBar, "_on_Boss_Spawning")
 	connect("Died", bossHealthBar, "_on_Boss_Died")
 	connect("healthChanged", bossHealthBar, "_on_Boss_healthChanged")
-	emit_signal("Spawning", TurretExplosivo_life + TurretTeia_life + TurretVeneno_life)
+	emit_signal("Spawning", TurretExplosivo_life + TurretTeia_life + TurretVeneno_life, 'Torretas')
 
 
 func _on_TurretVeneno_Turret_damaged(health):
@@ -34,7 +34,7 @@ func update_turret_HealthBar():
 	if TurretExplosivo_life + TurretTeia_life + TurretVeneno_life == 0:
 		# Todas as torres morreram.
 		Cientista.protected = false
-		emit_signal("Spawning", Cientista.Stats.MaxHealth)
+		emit_signal("Spawning", Cientista.Stats.MaxHealth, 'Cientista')
 	else:
 		emit_signal("healthChanged", TurretExplosivo_life + TurretTeia_life + TurretVeneno_life)
 

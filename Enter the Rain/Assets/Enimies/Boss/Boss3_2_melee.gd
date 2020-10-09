@@ -37,7 +37,7 @@ func _ready():
 	var bossHealthBar1 = get_parent().get_parent().get_node('Player').get_node('Camera2D').get_node('CanvasLayer').get_node('HealthBarBoss')
 	connect("Spawning", bossHealthBar1, "_on_Boss_Spawning")
 	connect("healthChanged", bossHealthBar1, "_on_Boss_healthChanged")
-	emit_signal("Spawning", stats.MaxHealth)
+	emit_signal("Spawning", stats.MaxHealth, 'Guerreiro')
 
 func _physics_process(delta):
 	if is_instance_valid(player):
