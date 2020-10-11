@@ -7,7 +7,7 @@ onready var Timer_power = $Timer_power
 onready var Final_boss_bullet = load("res://Assets/Enimies/Enemy_bullet/FinalBossBullet.tscn")
 onready var Bullet = load("res://Assets/Enimies/Enemy_bullet/SlowBigBullet.tscn")
 onready var Missile = load("res://Assets/Enimies/Enemy_missile.tscn")
-onready var Bullet_circle_pat = load("res://Assets/Enimies/Enemy_bullet/CirclePatternBullets.tscn")
+onready var Bullet_circle_pat = load("res://Assets/Enimies/Enemy_bullet/CircleBulletPat2.tscn")
 onready var Player = get_parent().get_parent().get_node('Player')
 onready var Current_bullet = Bullet
 onready var rng = RandomNumberGenerator.new()
@@ -25,6 +25,8 @@ var protected = true
 var power_max_reload = 20
 var power_min_reload = 10
 var quant_misseis = 1
+var reload_time_circle_pat = 0.4
+var quant_bullets_circle_pat = 10
 
 signal Cientista_damaged(health)
 
@@ -64,6 +66,8 @@ func _on_Stats_no_health():  # Buffar boss quando alguma torre morrer
 	power_min_reload -= 0.2
 	power_max_reload -= 0.2
 	quant_misseis += 1
+	quant_bullets_circle_pat += 5
+	reload_time_circle_pat -= 0.1
 
 
 func _on_Timer_power_timeout():
@@ -86,13 +90,14 @@ func _on_Timer_pow1_timeout():
 
 func spawn_missile():
 	var missile = Missile.instance()
-	missile.start(global_position, rand_range(-PI/3, PI/3))
+	missile.start(global_position, (Player.position - global_position).angle() + rand_range(-0.05, 0.05))
 	get_parent().get_parent().call_deferred('add_child', missile)
 
 func spawn_circle_pattern():
-	print('oi')
 	var circle_pat = Bullet_circle_pat.instance()
 	circle_pat.start(global_position, (Player.global_position - global_position).angle())
+	circle_pat.quant_bullets = quant_bullets_circle_pat
+	circle_pat.time_reload = reload_time_circle_pat
 	get_parent().get_parent().call_deferred('add_child', circle_pat)
 
 

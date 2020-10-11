@@ -5,6 +5,7 @@ var velocity = Vector2()
 export var DAMAGE = 1
 var collision_body
 var can_disapear = true
+onready var timer_duration = $Timer_duration
 
 func start(pos, dir):
 	position = pos

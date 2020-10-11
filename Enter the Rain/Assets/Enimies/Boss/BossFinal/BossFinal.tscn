@@ -84,9 +84,9 @@ autostart = true
 [connection signal="no_health" from="TurretTeia/Stats" to="Cientista" method="_on_Stats_no_health"]
 [connection signal="Turret_damaged" from="TurretExplosivo" to="." method="_on_TurretExplosivo_Turret_damaged"]
 [connection signal="no_health" from="TurretExplosivo/Stats" to="Cientista" method="_on_Stats_no_health"]
-[connection signal="timeout" from="Timer_spawn" to="TurretExplosivo" method="_on_Timer_spawn_timeout"]
 [connection signal="timeout" from="Timer_spawn" to="Cientista" method="_on_Timer_spawn_timeout"]
 [connection signal="timeout" from="Timer_spawn" to="TurretVeneno" method="_on_Timer_spawn_timeout"]
+[connection signal="timeout" from="Timer_spawn" to="TurretExplosivo" method="_on_Timer_spawn_timeout"]
 [connection signal="timeout" from="Timer_spawn" to="TurretTeia" method="_on_Timer_spawn_timeout"]
 
 [editable path="Cientista/HurtBox"]
