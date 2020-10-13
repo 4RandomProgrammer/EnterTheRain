@@ -3,15 +3,19 @@ extends "res://Assets/Enimies/Enemy_base.gd"
 export (int) var velocidade = 100
 export (float) var arruma_posic = 4
 export var stealth_time = 2
+export var attack_cooldown = 0.5
 onready var wanderController = $Random_Moviment
 onready var enemy_range = $Range
 onready var screen_verification = $VisibilityNotifier2D
 onready var stealthTimer = $StealthTimer
+onready var attackduration = $AttackDuration
 export var damage = 1
 var state = STOPED
+var can_attack = false
 var velocity = Vector2.ZERO
 var target
 var hit_pos
+var player = null
 var direction
 var old_velocidade
 var is_slowed = true
@@ -63,6 +67,10 @@ func stealth():
 func try_aim_and_change_state():  # Tenta "mirar" no inimigo. Se conseguir, irá persegui-lo.
 	if state == STOPED or state == RANDOM_WALKING:
 		if enemy_range.entity_aimed():
+			if player != null:
+				attackduration.start(attack_cooldown)
+				state = ATTACK
+			
 			state = CHASING
 		else:
 			if state != RANDOM_WALKING and state != STOPED:  # Trocar de estado quando o alvo se esconder atrás da parede.
@@ -104,3 +112,30 @@ func _on_SlowTimer_timeout():
 
 func _on_StealthTimer_timeout():
 	can_stealth = true
+
+
+func _on_Attack_range_body_entered(body):
+	player = body
+
+func _on_Attack_range_body_exited(body):
+	player = null
+
+
+func _on_AttackDuration_timeout():
+	if not can_attack:
+		$Hitbox2/CollisionShape2D.set_deferred("disabled", false)
+		rotation = (enemy_range.target.position - position).angle()
+		can_attack = true
+		attackduration.start(attack_cooldown)
+	else:
+		$Hitbox2/CollisionShape2D.set_deferred("disabled", true)
+		can_attack = false
+		
+		if enemy_range.entity_aimed():
+			state = CHASING
+		else:
+			state = RANDOM_WALKING
+
+
+func _on_StealthDuration_timeout():
+	pass # Replace with function body.
