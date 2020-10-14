@@ -33,7 +33,7 @@ var target
 var can_shoot = true
 
 signal healthChanged(health)
-signal Spawning(maxHealth)
+signal Spawning(maxHealth, boss_name)
 signal Died
 
 
@@ -44,7 +44,7 @@ func _ready():
 	connect("Spawning", bossHealthBar, "_on_Boss_Spawning")
 	connect("Died", bossHealthBar, "_on_Boss_Died")
 	connect("healthChanged", bossHealthBar, "_on_Boss_healthChanged")
-	emit_signal("Spawning", $Stats.MaxHealth)
+	emit_signal("Spawning", $Stats.MaxHealth, 'Boss 1')
 
 
 func _physics_process(delta):

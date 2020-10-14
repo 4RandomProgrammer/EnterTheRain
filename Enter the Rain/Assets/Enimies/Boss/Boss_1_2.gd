@@ -11,7 +11,7 @@ onready var snake_head = get_node("Path2D/PathFollow2D/Corpo")
 onready var poison_bullet = load('res://Assets/Enimies/Enemy_bullet/Poison_bullet.tscn')
 var timer_poison_bullet = 4
 
-signal Spawning(MaxHealth)
+signal Spawning(MaxHealth, boss_name)
 signal Died
 signal healthChanged(health)
 
@@ -21,7 +21,7 @@ func _ready():
 	connect("Spawning", bossHealthBar, "_on_Boss_Spawning")
 	connect("Died", bossHealthBar, "_on_Boss_Died")
 	connect("healthChanged", bossHealthBar, "_on_Boss_healthChanged")
-	emit_signal("Spawning", $Stats.MaxHealth)
+	emit_signal("Spawning", $Stats.MaxHealth, 'Cobra')
 
 
 func _on_HurtBox_area_entered(area):

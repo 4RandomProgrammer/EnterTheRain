@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/Enimies/Enemy_bullet/EnemyBullet.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Sprites/FinalBossMiniBull.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Enimies/Enemy_bullet/BossMiniBullet.gd" type="Script" id=3]
+
+[node name="BossMiniBullet" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+speed = 300
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2( -0.584282, -0.553646 )
+
+[node name="Sprite" parent="." index="1"]
+position = Vector2( 0, -0.0415783 )
+texture = ExtResource( 2 )
+
+[node name="Timer_duration" parent="." index="2"]
+wait_time = 2.0

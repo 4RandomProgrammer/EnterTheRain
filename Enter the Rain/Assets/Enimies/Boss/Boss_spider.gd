@@ -21,6 +21,7 @@ onready var Explosion = load("res://Assets/Enimies/Explosion.tscn")
 var bullet_list = []
 var direction
 var velocity = Vector2.ZERO
+
 signal Spawning
 signal Died
 signal healthChanged
@@ -49,7 +50,7 @@ func _ready():
 	connect("Spawning", bossHealthBar, "_on_Boss_Spawning")
 	connect("Died", bossHealthBar, "_on_Boss_Died")
 	connect("healthChanged", bossHealthBar, "_on_Boss_healthChanged")
-	emit_signal("Spawning", $Stats.MaxHealth)
+	emit_signal("Spawning", $Stats.MaxHealth, 'Aranha')
 
 func _on_HurtBox_area_entered(area):
 	if state != SPAWNING:

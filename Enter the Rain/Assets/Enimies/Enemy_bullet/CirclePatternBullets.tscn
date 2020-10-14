@@ -1,0 +1,146 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Enimies/Enemy_bullet/SlowBigBullet.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Enimies/Enemy_bullet/CirclePatternBullets.gd" type="Script" id=2]
+
+[node name="CirclePatternBullets" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="EnemyBullet" parent="." instance=ExtResource( 1 )]
+position = Vector2( -0.161766, -60.138 )
+
+[node name="Timer_duration" parent="EnemyBullet" index="2"]
+wait_time = 100.0
+
+[node name="EnemyBullet2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 60.7523, 0.0457993 )
+
+[node name="Timer_duration" parent="EnemyBullet2" index="2"]
+wait_time = 100.0
+
+[node name="EnemyBullet3" parent="." instance=ExtResource( 1 )]
+position = Vector2( -0.0272369, 60.3628 )
+
+[node name="Timer_duration" parent="EnemyBullet3" index="2"]
+wait_time = 100.0
+
+[node name="EnemyBullet4" parent="." instance=ExtResource( 1 )]
+position = Vector2( -60.2036, 0.370468 )
+
+[node name="Timer_duration" parent="EnemyBullet4" index="2"]
+wait_time = 100.0
+
+[node name="EnemyBullet5" parent="." instance=ExtResource( 1 )]
+position = Vector2( -55.2664, -21.4778 )
+
+[node name="Timer_duration" parent="EnemyBullet5" index="2"]
+wait_time = 100.0
+
+[node name="EnemyBullet6" parent="." instance=ExtResource( 1 )]
+position = Vector2( -43.6078, -41.3419 )
+
+[node name="Timer_duration" parent="EnemyBullet6" index="2"]
+wait_time = 100.0
+
+[node name="EnemyBullet7" parent="." instance=ExtResource( 1 )]
+position = Vector2( -24.3894, -54.761 )
+
+[node name="Timer_duration" parent="EnemyBullet7" index="2"]
+wait_time = 100.0
+
+[node name="EnemyBullet8" parent="." instance=ExtResource( 1 )]
+position = Vector2( 23.3377, -54.9358 )
+
+[node name="Sprite" parent="EnemyBullet8" index="1"]
+position = Vector2( 0, -0.15778 )
+
+[node name="Timer_duration" parent="EnemyBullet8" index="2"]
+wait_time = 100.0
+
+[node name="EnemyBullet9" parent="." instance=ExtResource( 1 )]
+position = Vector2( 43.0928, -41.9988 )
+
+[node name="Timer_duration" parent="EnemyBullet9" index="2"]
+wait_time = 100.0
+
+[node name="EnemyBullet10" parent="." instance=ExtResource( 1 )]
+position = Vector2( 54.9809, 22.3365 )
+
+[node name="Timer_duration" parent="EnemyBullet10" index="2"]
+wait_time = 100.0
+
+[node name="EnemyBullet11" parent="." instance=ExtResource( 1 )]
+position = Vector2( 56.5543, -23.1178 )
+
+[node name="Timer_duration" parent="EnemyBullet11" index="2"]
+wait_time = 100.0
+
+[node name="EnemyBullet12" parent="." instance=ExtResource( 1 )]
+position = Vector2( 42.3936, 41.7421 )
+
+[node name="Timer_duration" parent="EnemyBullet12" index="2"]
+wait_time = 100.0
+
+[node name="EnemyBullet13" parent="." instance=ExtResource( 1 )]
+position = Vector2( 24.2118, 55.0287 )
+
+[node name="Timer_duration" parent="EnemyBullet13" index="2"]
+wait_time = 100.0
+
+[node name="EnemyBullet14" parent="." instance=ExtResource( 1 )]
+position = Vector2( -43.2704, 42.2665 )
+
+[node name="Timer_duration" parent="EnemyBullet14" index="2"]
+wait_time = 100.0
+
+[node name="EnemyBullet15" parent="." instance=ExtResource( 1 )]
+position = Vector2( -23.6901, 56.0777 )
+
+[node name="Timer_duration" parent="EnemyBullet15" index="2"]
+wait_time = 100.0
+
+[node name="EnemyBullet16" parent="." instance=ExtResource( 1 )]
+position = Vector2( -55.5081, 23.2107 )
+
+[node name="Timer_duration" parent="EnemyBullet16" index="2"]
+wait_time = 100.0
+
+[node name="Timer_stop" type="Timer" parent="."]
+one_shot = true
+
+[node name="Timer_shoot" type="Timer" parent="."]
+wait_time = 0.5
+[connection signal="timeout" from="Timer_stop" to="." method="_on_Timer_stop_timeout"]
+[connection signal="timeout" from="Timer_shoot" to="." method="_on_Timer_shoot_timeout"]
+
+[editable path="EnemyBullet"]
+
+[editable path="EnemyBullet2"]
+
+[editable path="EnemyBullet3"]
+
+[editable path="EnemyBullet4"]
+
+[editable path="EnemyBullet5"]
+
+[editable path="EnemyBullet6"]
+
+[editable path="EnemyBullet7"]
+
+[editable path="EnemyBullet8"]
+
+[editable path="EnemyBullet9"]
+
+[editable path="EnemyBullet10"]
+
+[editable path="EnemyBullet11"]
+
+[editable path="EnemyBullet12"]
+
+[editable path="EnemyBullet13"]
+
+[editable path="EnemyBullet14"]
+
+[editable path="EnemyBullet15"]
+
+[editable path="EnemyBullet16"]
