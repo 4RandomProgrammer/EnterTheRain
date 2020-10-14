@@ -3,7 +3,7 @@
 [ext_resource path="res://Engine/HurtBox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Enimies/Boss/Boss_spider.gd" type="Script" id=2]
 [ext_resource path="res://Engine/Hitbox.tscn" type="PackedScene" id=3]
-[ext_resource path="res://icon.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Sprites/bossaranha.png" type="Texture" id=4]
 [ext_resource path="res://Engine/Stats.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Movimento_aletorio.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Sprites/Explosion_target.png" type="Texture" id=7]
@@ -209,6 +209,7 @@ collision_mask = 3
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 2, 2 )
 texture = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
