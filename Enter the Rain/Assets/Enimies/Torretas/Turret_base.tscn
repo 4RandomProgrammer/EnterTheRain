@@ -17,9 +17,6 @@ extents = Vector2( 30.9617, 33.5657 )
 collision_mask = 19
 script = ExtResource( 3 )
 
-[node name="Sprite" parent="." index="0"]
-scale = Vector2( 2, 2 )
-
 [node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource( 1 )
 

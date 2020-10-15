@@ -4,8 +4,8 @@
 [ext_resource path="res://Assets/Player/Engineer.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Sistema_Dinheiro.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Altares/Life Altar.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Assets/Enimies/InimigosNProntos/Meelee_Rusher.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Assets/Enimies/Perseguidores/Rusher_Shooter.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Enimies/Torretas/PoisonAndExplosion.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Enimies/Perseguidores/Snail.tscn" type="PackedScene" id=6]
 
 [node name="Node2D" type="Node2D"]
 
@@ -20,8 +20,9 @@ position = Vector2( -197.06, 104.887 )
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( -12.193, 13.0339 )
 
-[node name="Enemy" parent="." instance=ExtResource( 5 )]
-position = Vector2( -532.345, -179.336 )
+[node name="Turret_base" parent="." instance=ExtResource( 5 )]
+position = Vector2( -600, -104 )
+collision_layer = 16
 
-[node name="Enemy2" parent="." instance=ExtResource( 6 )]
-position = Vector2( 453.06, 92.4997 )
+[node name="Enemy" parent="." instance=ExtResource( 6 )]
+position = Vector2( 442, 108 )
