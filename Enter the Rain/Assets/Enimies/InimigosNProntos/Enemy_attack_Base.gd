@@ -62,7 +62,7 @@ func try_aim_and_change_state():  # Tenta "mirar" no inimigo. Se conseguir, irá
 	if state != STUNNED and state != ATTACK:
 		if enemy_range.entity_aimed():
 			state = CHASING
-			if player1 != null:
+			if player1 != null and attackduration.is_stopped():
 				state = ATTACK;
 				attackduration.start(0.5)
 		else:

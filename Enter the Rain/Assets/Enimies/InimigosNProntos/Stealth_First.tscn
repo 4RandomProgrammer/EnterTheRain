@@ -9,8 +9,6 @@ script = ExtResource( 2 )
 [node name="ShootTimer" type="Timer" parent="." index="12"]
 wait_time = 0.1
 one_shot = true
-[connection signal="timeout" from="StealthDuration" to="." method="_on_StealthDuration_timeout"]
-[connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]
 
 [editable path="HurtBox"]
 

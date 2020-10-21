@@ -154,9 +154,20 @@ func movement_loop(delta):
 func move():
 	moveDirection = move_and_slide(moveDirection)
 
-func apply_buff(what_buff):
-	$Buffs_Controller.one_more_skill()
-
+func apply_buff():
+	rng.randomize()
+	
+	var choice = rng.randi % 4
+	
+	match choice:
+		0:
+			$Buffs_Controller.apply_doubleDamage()
+		1:
+			$Buffs_Controller.cd_changer()
+		2:
+			$Buffs_Controller.apply_Spikes()
+		3:
+			$Buffs_Controller.one_more_skill()
 
 func _on_HurtBox_area_entered(area):
 	if InvunerabilityTimer.is_stopped():

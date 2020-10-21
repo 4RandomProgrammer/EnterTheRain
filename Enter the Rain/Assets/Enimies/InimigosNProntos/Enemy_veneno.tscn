@@ -12,6 +12,10 @@ script = ExtResource( 2 )
 [node name="CollisionShape2D" parent="Range" index="0"]
 shape = SubResource( 1 )
 
+[editable path="HurtBox"]
+
+[editable path="Hitbox"]
+
 [editable path="Range"]
 
 [editable path="Hitbox2"]
