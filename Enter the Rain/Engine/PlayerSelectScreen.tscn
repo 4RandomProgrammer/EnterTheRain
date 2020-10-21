@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Engine/PlayerSelectScreen.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Sprites/card-bomber.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Sprites/CONFIRM.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Sprites/card-base.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Sprites/card-engi.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Sprites/card-archer.png" type="Texture" id=6]
 
 [node name="PlayerSelectScreen" type="Control"]
 margin_right = 1024.0
@@ -88,7 +93,40 @@ WASD - Movimentação
 P - Pause
 ESC - Restart Rápido
  "
+
+[node name="Sprite" type="Sprite" parent="MarginContainer/VBoxContainer"]
+visible = false
+position = Vector2( 390, 250 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 4 )
+
+[node name="Sprite2" type="Sprite" parent="MarginContainer/VBoxContainer"]
+visible = false
+position = Vector2( 390, 250 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 5 )
+
+[node name="Sprite3" type="Sprite" parent="MarginContainer/VBoxContainer"]
+visible = false
+position = Vector2( 390, 250 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 6 )
+
+[node name="Sprite4" type="Sprite" parent="MarginContainer/VBoxContainer"]
+visible = false
+position = Vector2( 390, 250 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 2 )
+
+[node name="TextureButton" type="TextureButton" parent="."]
+visible = false
+margin_left = 924.0
+margin_top = 550.0
+margin_right = 1024.0
+margin_bottom = 600.0
+texture_normal = ExtResource( 3 )
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/Button" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/Button2" to="." method="_on_Button2_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/Button3" to="." method="_on_Button3_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/Button4" to="." method="_on_Button4_pressed"]
+[connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]

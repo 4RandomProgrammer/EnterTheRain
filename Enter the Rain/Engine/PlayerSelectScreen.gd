@@ -8,20 +8,35 @@ onready var player_character_four = preload("res://Assets/Player/Bomber.tscn")
 
 func _on_Button_pressed():
 	Mensageiro.setplayer(player_character_one)
-	get_tree().change_scene("res://Assets/Areas/Area1.tscn")
-
+	$MarginContainer/VBoxContainer/Sprite.visible = true
+	$MarginContainer/VBoxContainer/Sprite2.visible = false
+	$MarginContainer/VBoxContainer/Sprite3.visible = false
+	$MarginContainer/VBoxContainer/Sprite4.visible = false
+	$TextureButton.visible = true
 
 func _on_Button2_pressed():
 	Mensageiro.setplayer(player_character_two)
-	get_tree().change_scene("res://Assets/Areas/Area1.tscn")
-
+	$MarginContainer/VBoxContainer/Sprite.visible = false
+	$MarginContainer/VBoxContainer/Sprite2.visible = true
+	$MarginContainer/VBoxContainer/Sprite3.visible = false
+	$MarginContainer/VBoxContainer/Sprite4.visible = false
+	$TextureButton.visible = true
 
 func _on_Button3_pressed():
 	Mensageiro.setplayer(player_character_three)
-	get_tree().change_scene("res://Assets/Areas/Area1.tscn")
-
+	$MarginContainer/VBoxContainer/Sprite.visible = false
+	$MarginContainer/VBoxContainer/Sprite2.visible = false
+	$MarginContainer/VBoxContainer/Sprite3.visible = true
+	$MarginContainer/VBoxContainer/Sprite4.visible = false
+	$TextureButton.visible = true
 
 func _on_Button4_pressed():
 	Mensageiro.setplayer(player_character_four)
-	get_tree().change_scene("res://Assets/Areas/Area1.tscn")
+	$MarginContainer/VBoxContainer/Sprite.visible = false
+	$MarginContainer/VBoxContainer/Sprite2.visible = false
+	$MarginContainer/VBoxContainer/Sprite3.visible = false
+	$MarginContainer/VBoxContainer/Sprite4.visible = true
+	$TextureButton.visible = true
 
+func _on_TextureButton_pressed():
+	get_tree().change_scene("res://Assets/Areas/Area1.tscn")

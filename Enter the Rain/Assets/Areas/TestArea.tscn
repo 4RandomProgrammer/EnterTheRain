@@ -22,7 +22,6 @@ position = Vector2( -12.193, 13.0339 )
 
 [node name="Turret_base" parent="." instance=ExtResource( 5 )]
 position = Vector2( -600, -104 )
-collision_layer = 16
 
 [node name="Enemy" parent="." instance=ExtResource( 6 )]
 position = Vector2( 442, 108 )
