@@ -38,7 +38,7 @@ signal Died
 func _ready():
 	rng.randomize()
 	var bossHealthBar = get_parent().get_node('Player').get_node('Camera2D').get_node('CanvasLayer').get_node('HealthBarBoss')
-	arena_pos = Vector2(position.x, position.y + 100)
+	arena_pos = Vector2(position.x, position.y - 100)
 	boss_2 = get_node('.')
 	connect("Spawning", bossHealthBar, "_on_Boss_Spawning")
 	connect("Died", bossHealthBar, "_on_Boss_Died")
