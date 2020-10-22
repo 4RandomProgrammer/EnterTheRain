@@ -3,7 +3,7 @@ extends Control
 
 
 func _on_Start_pressed():
-	get_tree().change_scene("res://Engine/PlayerSelectScreen.tscn")
+	get_tree().change_scene("res://Engine/Main.tscn")
 
 
 func _on_Quit_pressed():

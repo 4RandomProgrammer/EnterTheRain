@@ -14,6 +14,7 @@ func _process(delta):
 	if player and used:
 		if Input.is_action_just_pressed("ui_select") and player.money >= min_money and used:
 			player.apply_buff()
+			player.update_Money(-min_money)
 			used = false
 			$Label.visible = false
 

@@ -4,10 +4,12 @@ onready var player_character_one = preload("res://Assets/Player/Trooper.tscn")
 onready var player_character_two = preload("res://Assets/Player/Engineer.tscn")
 onready var player_character_three = preload("res://Assets/Player/Archer.tscn")
 onready var player_character_four = preload("res://Assets/Player/Bomber.tscn")
+onready var main = get_parent()
 
+var player_selected = null
 
 func _on_Button_pressed():
-	Mensageiro.setplayer(player_character_one)
+	player_selected = player_character_one
 	$MarginContainer/VBoxContainer/Sprite.visible = true
 	$MarginContainer/VBoxContainer/Sprite2.visible = false
 	$MarginContainer/VBoxContainer/Sprite3.visible = false
@@ -15,7 +17,7 @@ func _on_Button_pressed():
 	$TextureButton.visible = true
 
 func _on_Button2_pressed():
-	Mensageiro.setplayer(player_character_two)
+	player_selected = player_character_two
 	$MarginContainer/VBoxContainer/Sprite.visible = false
 	$MarginContainer/VBoxContainer/Sprite2.visible = true
 	$MarginContainer/VBoxContainer/Sprite3.visible = false
@@ -23,7 +25,7 @@ func _on_Button2_pressed():
 	$TextureButton.visible = true
 
 func _on_Button3_pressed():
-	Mensageiro.setplayer(player_character_three)
+	player_selected = player_character_three
 	$MarginContainer/VBoxContainer/Sprite.visible = false
 	$MarginContainer/VBoxContainer/Sprite2.visible = false
 	$MarginContainer/VBoxContainer/Sprite3.visible = true
@@ -31,7 +33,7 @@ func _on_Button3_pressed():
 	$TextureButton.visible = true
 
 func _on_Button4_pressed():
-	Mensageiro.setplayer(player_character_four)
+	player_selected = player_character_four
 	$MarginContainer/VBoxContainer/Sprite.visible = false
 	$MarginContainer/VBoxContainer/Sprite2.visible = false
 	$MarginContainer/VBoxContainer/Sprite3.visible = false
@@ -39,4 +41,8 @@ func _on_Button4_pressed():
 	$TextureButton.visible = true
 
 func _on_TextureButton_pressed():
-	get_tree().change_scene("res://Assets/Areas/Area1.tscn")
+	player_selected = player_selected.instance()
+	main.setPlayer(player_selected)
+	main.add_child(player_selected)
+	main.instanciarlevel()
+	main.sumirUi()
