@@ -5,7 +5,7 @@ onready var boss_1_2 = load('res://Assets/Enimies/Boss/Boss_Snake.tscn')
 onready var boss_2_2 = load('res://Assets/Enimies/Boss/Boss_spider.tscn')
 onready var boss_3_1 = load('res://Assets/Enimies/Boss/Boss_turret.tscn')
 onready var boss_3_2 = load('res://Assets/Enimies/Boss/Boss_3_2.tscn')
-onready var boss_list = [[boss_1_1, boss_1_2, boss_2_1, boss_2_2], [boss_3_2]]
+onready var boss_list = [[boss_1_1, boss_2_1], [boss_1_2, boss_2_2], [boss_3_1, boss_3_2]]
 export var choosen_boss = 1
 onready var altar = get_node('.')
 var can_start = false
@@ -15,6 +15,7 @@ func _ready():
 
 func _process(_delta):
 	if can_start and Input.is_action_just_pressed("ui_accept"):  # Player apertou para spawnar o boss (escolher um aleatorio dependendo da fase)
+		randomize()
 		var entities_list = boss_list[choosen_boss - 1]
 		entities_list.shuffle()
 		var entity = entities_list[0].instance()

@@ -20,6 +20,9 @@ var final_ang = 2 * PI
 var current_dir
 var angle_pat_1 = 0
 var bullet_reload = 0.4
+var power_reload_time = 8
+var power_min_duration = 3
+var power_max_duration = 5
 export var damage = 1
 enum {
 	WALKING
@@ -117,12 +120,12 @@ func try_aim_player():  # Tentar atirar no player se tiver no range e sem obstac
 func _on_Timer_parar_timeout():  # Começar a andar novamente por 10s.
 	velocity = directions[rng.randi_range(0, 3)]
 	$Sprite.self_modulate.r = 1
-	timer_walk.start(10)
+	timer_walk.start(power_reload_time)
 	state = WALKING
 
 
 func _on_Timer_andar_timeout():  # Parar por 5s.
-	timer_stop.start(5)
+	timer_stop.start(rand_range(power_min_duration, power_max_duration))
 	var power = rng.randi_range(1, 3)
 	if power == 1:
 		state = POWER_1
@@ -140,7 +143,10 @@ func _on_Stats_no_health():
 func _on_HurtBox_area_entered(area):
 	if state != SPAWNING:
 		extra_speed += 0.05 * area.DAMAGE
-		bullet_reload -= 0.01
+		bullet_reload -= 0.01 * area.DAMAGE
+		power_reload_time -= 0.2 * area.DAMAGE
+		power_min_duration -= 0.05 * area.DAMAGE
+		power_max_duration -= 0.05 * area.DAMAGE
 		var damage_taken = area.DAMAGE
 		stats.Health -= damage_taken
 		emit_signal('healthChanged', stats.Health)

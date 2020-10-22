@@ -157,7 +157,7 @@ func move():
 func apply_buff():
 	rng.randomize()
 	
-	var choice = rng.randi % 4
+	var choice = rng.randi() % 4
 	
 	match choice:
 		0:

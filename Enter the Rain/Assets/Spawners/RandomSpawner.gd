@@ -18,3 +18,13 @@ func create_entity_in_range(Entity):  # Criar entidade com coordenadas aleatóri
 	else:
 		entity.global_position = Vector2(random_x, random_y)
 		return entity
+
+func spawn_entities(entities_list):
+	rng.randomize()
+	var entities_quant = rng.randi_range(min_entities, max_entities)  # Escolher quantidade aleatoria no range de inimigos para spawnar
+	while entities_quant != 0:
+		var entity_index = rng.randi_range(0, len(entities_list) - 1)  # Escolher um dos 2 inimigos para spawnar.
+		var entity = create_entity_in_range(entities_list[entity_index])
+		if entity:
+			get_parent().call_deferred("add_child", entity)
+			entities_quant -= 1
