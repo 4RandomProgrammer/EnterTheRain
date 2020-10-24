@@ -1,7 +1,7 @@
 extends StaticBody2D
 onready var boss_1_1 = load("res://Assets/Enimies/Boss/Boss1.tscn")
-onready var boss_2_1 = load('res://Assets/Enimies/Boss/Boss2.tscn')
-onready var boss_1_2 = load('res://Assets/Enimies/Boss/Boss_Snake.tscn')
+onready var boss_1_2 = load('res://Assets/Enimies/Boss/Boss2.tscn')
+onready var boss_2_1 = load('res://Assets/Enimies/Boss/Boss_Snake.tscn')
 onready var boss_2_2 = load('res://Assets/Enimies/Boss/Boss_spider.tscn')
 onready var boss_3_1 = load('res://Assets/Enimies/Boss/Boss_turret.tscn')
 onready var boss_3_2 = load('res://Assets/Enimies/Boss/Boss_3_2.tscn')

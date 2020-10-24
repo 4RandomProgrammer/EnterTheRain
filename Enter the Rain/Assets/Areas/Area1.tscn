@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=2]
+[gd_scene load_steps=69 format=2]
 
 [ext_resource path="res://Assets/Spawners/AltarSpawner/AltarSpawner.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Spawners/BossSpawner/BossSpawner.tscn" type="PackedScene" id=2]
@@ -887,6 +887,9 @@ extents = Vector2( 95.1479, 86.4229 )
 [sub_resource type="RectangleShape2D" id=60]
 extents = Vector2( 1285.99, 809.971 )
 
+[sub_resource type="RectangleShape2D" id=61]
+extents = Vector2( 1156.79, 755.009 )
+
 [node name="Area1" type="Node2D"]
 script = ExtResource( 9 )
 
@@ -983,16 +986,17 @@ shape = SubResource( 57 )
 
 [node name="bau_spawner" parent="." instance=ExtResource( 11 )]
 position = Vector2( 1397.98, 312.035 )
-min_entities = 8
-max_entities = 8
+min_entities = 1
+max_entities = 3
 
 [node name="CollisionShape2D" parent="bau_spawner" index="0"]
 shape = SubResource( 58 )
 
 [node name="bau_spawner2" parent="." instance=ExtResource( 11 )]
-position = Vector2( 1925.8, 307.954 )
-min_entities = 8
-max_entities = 8
+position = Vector2( 1925.8, 312.035 )
+scale = Vector2( 1.14862, 1.03193 )
+min_entities = 1
+max_entities = 3
 
 [node name="CollisionShape2D" parent="bau_spawner2" index="0"]
 shape = SubResource( 59 )
@@ -1007,6 +1011,14 @@ max_entities = 1
 
 [node name="CollisionShape2D" parent="AltarSpawner" index="0"]
 shape = SubResource( 60 )
+
+[node name="Bau_spawner" parent="." instance=ExtResource( 11 )]
+position = Vector2( 697.946, 1220.94 )
+min_entities = 7
+max_entities = 13
+
+[node name="CollisionShape2D" parent="Bau_spawner" index="0"]
+shape = SubResource( 61 )
 
 [editable path="Arena"]
 
@@ -1031,3 +1043,5 @@ shape = SubResource( 60 )
 [editable path="BossSpawner"]
 
 [editable path="AltarSpawner"]
+
+[editable path="Bau_spawner"]

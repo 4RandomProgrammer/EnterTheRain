@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Enimies/Boss/BossFinal/TurretVeneno.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Enimies/Boss/BossFinal/TurretTeia.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Enimies/Boss/BossFinal/TurretExplosivo.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Enimies/Boss/BossFinal/BossFinal.gd" type="Script" id=5]
+[ext_resource path="res://Assets/Enimies/Boss/Itens_drop_boss.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Engine/HurtBox.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Engine/Stats.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Assets/Enimies/Boss/BossFinal/Cientista.gd" type="Script" id=9]
@@ -15,7 +16,7 @@ extents = Vector2( 31.5595, 31.3946 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 32.9521, 32.2786 )
 
-[node name="BossFinal" type="Node2D"]
+[node name="Boss" type="Node2D"]
 script = ExtResource( 5 )
 
 [node name="Cientista" type="KinematicBody2D" parent="."]
@@ -72,6 +73,9 @@ rotation = -1.5708
 wait_time = 5.0
 one_shot = true
 autostart = true
+
+[node name="Itens_drop" parent="." instance=ExtResource( 6 )]
+[connection signal="Died" from="." to="Itens_drop" method="_on_Boss_Died"]
 [connection signal="Cientista_damaged" from="Cientista" to="." method="_on_Cientista_Cientista_damaged"]
 [connection signal="no_health" from="Cientista/Stats" to="." method="_on_Stats_no_health"]
 [connection signal="timeout" from="Cientista/Timer_power" to="Cientista" method="_on_Timer_power_timeout"]
@@ -84,10 +88,10 @@ autostart = true
 [connection signal="no_health" from="TurretTeia/Stats" to="Cientista" method="_on_Stats_no_health"]
 [connection signal="Turret_damaged" from="TurretExplosivo" to="." method="_on_TurretExplosivo_Turret_damaged"]
 [connection signal="no_health" from="TurretExplosivo/Stats" to="Cientista" method="_on_Stats_no_health"]
-[connection signal="timeout" from="Timer_spawn" to="Cientista" method="_on_Timer_spawn_timeout"]
-[connection signal="timeout" from="Timer_spawn" to="TurretVeneno" method="_on_Timer_spawn_timeout"]
 [connection signal="timeout" from="Timer_spawn" to="TurretExplosivo" method="_on_Timer_spawn_timeout"]
+[connection signal="timeout" from="Timer_spawn" to="TurretVeneno" method="_on_Timer_spawn_timeout"]
 [connection signal="timeout" from="Timer_spawn" to="TurretTeia" method="_on_Timer_spawn_timeout"]
+[connection signal="timeout" from="Timer_spawn" to="Cientista" method="_on_Timer_spawn_timeout"]
 
 [editable path="Cientista/HurtBox"]
 

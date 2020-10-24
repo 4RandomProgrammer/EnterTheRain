@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/Enimies/Boss/Boss_1_2.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Enimies/Boss/Corpo_boss_1_2.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Assets/Sprites/snakecabeca.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Sprites/snakecorpo.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Enimies/Boss/Boss_snake_paths.gd" type="Script" id=6]
+[ext_resource path="res://Assets/Enimies/Boss/Itens_drop_boss.tscn" type="PackedScene" id=7]
 
 [node name="Boss" type="Node2D"]
 script = ExtResource( 1 )
@@ -114,6 +115,9 @@ MaxHealth = 42
 [node name="Timer_veneno_corpo" type="Timer" parent="."]
 
 [node name="Timer_poison_shot" type="Timer" parent="."]
+
+[node name="Itens_drop" parent="." instance=ExtResource( 7 )]
+[connection signal="Died" from="." to="Itens_drop" method="_on_Boss_Died"]
 [connection signal="body_exploded" from="Path2D/PathFollow2D/Corpo" to="." method="_on_Corpo_body_exploded"]
 [connection signal="area_entered" from="Path2D/PathFollow2D/Corpo/HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="body_exploded" from="Path2D/PathFollow2D2/Corpo" to="." method="_on_Corpo_body_exploded"]

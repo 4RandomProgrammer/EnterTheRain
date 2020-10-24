@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Assets/Enimies/Boss/Boss1.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/BossArea1.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Engine/HurtBox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Engine/Stats.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Aim.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Enimies/Boss/Itens_drop_boss.tscn" type="PackedScene" id=7]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 32.0
@@ -17,7 +18,7 @@ radius = 32.0
 radius = 32.0
 
 [sub_resource type="CircleShape2D" id=4]
-radius = 1457.08
+radius = 1347.04
 
 [node name="Boss" type="KinematicBody2D"]
 collision_layer = 16
@@ -70,6 +71,9 @@ one_shot = true
 [node name="Power_3_timer" type="Timer" parent="."]
 wait_time = 0.4
 one_shot = true
+
+[node name="Itens_drop" parent="." instance=ExtResource( 7 )]
+[connection signal="Died" from="." to="Itens_drop" method="_on_Boss_Died"]
 [connection signal="timeout" from="Timer_parar" to="." method="_on_Timer_parar_timeout"]
 [connection signal="timeout" from="Timer_andar" to="." method="_on_Timer_andar_timeout"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
