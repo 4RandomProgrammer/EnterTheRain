@@ -38,7 +38,7 @@ func _physics_process(delta):
 			shoot()
 
 func shoot():
-	if Timer_shoot.time_left == 0:
+	if Timer_shoot.time_left == 0 and is_instance_valid(Player):
 		var bullet = Current_bullet.instance()
 		bullet.start(global_position, (Player.position - global_position).angle() + rand_range(-PI/3, PI/3))
 		get_parent().get_parent().call_deferred('add_child', bullet)
