@@ -18,10 +18,9 @@ func playmusic(whatmusic):
 		0:
 			Music = wastelandLv
 			Music.play()
-
-			
 		1:
 			Music = wastelandBoss
+			Music.play()
 
 func fade_out(stream_player):
 	# tween music volume down to 0
@@ -38,6 +37,7 @@ func fade_in(stream_player):
 func _on_TweenOut_tween_completed(object, key):
 	# stop the music -- otherwise it continues to run at silent volume
 	object.stop()
+	object.volume_db = 0 # reset volume
 
 
 func _on_TweenIn_tween_completed(object, key):
