@@ -1,5 +1,7 @@
 extends Control
 
+onready var main = get_parent().get_parent().get_parent().get_parent()
+
 func _input(event):
 	if event.is_action_pressed("Pause"):
 		var new_pause_state = not get_tree().paused
@@ -13,7 +15,7 @@ func _on_Player_no_health():
 
 func _on_CharSelect_pressed():
 	get_tree().paused = not get_tree().paused
-	get_tree().change_scene("res://Engine/PlayerSelectScreen.tscn")
+	main.select()
 
 
 func _on_Menu_pressed():

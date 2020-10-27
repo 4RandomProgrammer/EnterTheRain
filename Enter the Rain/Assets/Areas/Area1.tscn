@@ -1,10 +1,9 @@
-[gd_scene load_steps=66 format=2]
+[gd_scene load_steps=65 format=2]
 
-[ext_resource path="res://Engine/LvChanger.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Spawners/BossSpawner/BossSpawner.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/tilesets Enter the Rain/ashlands_tileset.png" type="Texture" id=3]
+[ext_resource path="res://Engine/Restart.gd" type="Script" id=4]
 [ext_resource path="res://Assets/Spawners/Arena/Arena.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Assets/Sistema_Dinheiro.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Assets/Spawners/BauSpawner/bau_spawner.tscn" type="PackedScene" id=11]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
@@ -884,6 +883,7 @@ extents = Vector2( 101.729, 93.3678 )
 extents = Vector2( 95.1479, 86.4229 )
 
 [node name="Area1" type="Node2D"]
+script = ExtResource( 4 )
 
 [node name="Background" type="TileMap" parent="."]
 tile_set = SubResource( 30 )
@@ -909,8 +909,6 @@ tile_data = PoolIntArray( -1966038, 3, 0, -1966034, 3, 0, -1966033, 3, 0, -19005
 __meta__ = {
 "_edit_lock_": true
 }
-
-[node name="Sistema_Dinheiro" parent="." instance=ExtResource( 10 )]
 
 [node name="Arena" parent="." instance=ExtResource( 5 )]
 position = Vector2( 1028.7, 920.164 )
@@ -994,9 +992,6 @@ shape = SubResource( 59 )
 
 [node name="BossSpawner" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1660, 81 )
-
-[node name="LvChanger" parent="." instance=ExtResource( 1 )]
-position = Vector2( -176.842, 199.916 )
 
 [editable path="Arena"]
 
