@@ -12,9 +12,10 @@ func _ready():
 	shoot_timer.start(rand_range(1, 4))
 
 func _physics_process(delta):
-	var direction = global_position.direction_to(player.global_position)
-	velocity = velocity.move_toward(direction * velocidade * delta, velocidade / 2 * delta)
-	move_and_collide(velocity)
+	if is_instance_valid(player):
+		var direction = global_position.direction_to(player.global_position)
+		velocity = velocity.move_toward(direction * velocidade * delta, velocidade / 2 * delta)
+		move_and_collide(velocity)
 
 func _on_Shoot_timer_timeout():
 	if is_instance_valid(player):

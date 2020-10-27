@@ -1,9 +1,11 @@
-[gd_scene load_steps=65 format=2]
+[gd_scene load_steps=69 format=2]
 
+[ext_resource path="res://Assets/Spawners/AltarSpawner/AltarSpawner.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Spawners/BossSpawner/BossSpawner.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/tilesets Enter the Rain/ashlands_tileset.png" type="Texture" id=3]
-[ext_resource path="res://Engine/Restart.gd" type="Script" id=4]
-[ext_resource path="res://Assets/Spawners/Arena/Arena.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Spawners/Fase1/EnemySpawner1.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Engine/Restart.gd" type="Script" id=9]
+[ext_resource path="res://Assets/Sistema_Dinheiro.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Assets/Spawners/BauSpawner/bau_spawner.tscn" type="PackedScene" id=11]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
@@ -882,8 +884,14 @@ extents = Vector2( 101.729, 93.3678 )
 [sub_resource type="RectangleShape2D" id=59]
 extents = Vector2( 95.1479, 86.4229 )
 
+[sub_resource type="RectangleShape2D" id=60]
+extents = Vector2( 1285.99, 809.971 )
+
+[sub_resource type="RectangleShape2D" id=61]
+extents = Vector2( 1156.79, 755.009 )
+
 [node name="Area1" type="Node2D"]
-script = ExtResource( 4 )
+script = ExtResource( 9 )
 
 [node name="Background" type="TileMap" parent="."]
 tile_set = SubResource( 30 )
@@ -909,6 +917,8 @@ tile_data = PoolIntArray( -1966038, 3, 0, -1966034, 3, 0, -1966033, 3, 0, -19005
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="Sistema_Dinheiro" parent="." instance=ExtResource( 10 )]
 
 [node name="Arena" parent="." instance=ExtResource( 5 )]
 position = Vector2( 1028.7, 920.164 )
@@ -976,22 +986,39 @@ shape = SubResource( 57 )
 
 [node name="bau_spawner" parent="." instance=ExtResource( 11 )]
 position = Vector2( 1397.98, 312.035 )
-min_entities = 8
-max_entities = 8
+min_entities = 1
+max_entities = 3
 
 [node name="CollisionShape2D" parent="bau_spawner" index="0"]
 shape = SubResource( 58 )
 
 [node name="bau_spawner2" parent="." instance=ExtResource( 11 )]
-position = Vector2( 1925.8, 307.954 )
-min_entities = 8
-max_entities = 8
+position = Vector2( 1925.8, 312.035 )
+scale = Vector2( 1.14862, 1.03193 )
+min_entities = 1
+max_entities = 3
 
 [node name="CollisionShape2D" parent="bau_spawner2" index="0"]
 shape = SubResource( 59 )
 
 [node name="BossSpawner" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1660, 81 )
+
+[node name="AltarSpawner" parent="." instance=ExtResource( 1 )]
+position = Vector2( 684.441, 975.585 )
+min_entities = 1
+max_entities = 1
+
+[node name="CollisionShape2D" parent="AltarSpawner" index="0"]
+shape = SubResource( 60 )
+
+[node name="Bau_spawner" parent="." instance=ExtResource( 11 )]
+position = Vector2( 697.946, 1220.94 )
+min_entities = 7
+max_entities = 13
+
+[node name="CollisionShape2D" parent="Bau_spawner" index="0"]
+shape = SubResource( 61 )
 
 [editable path="Arena"]
 
@@ -1014,3 +1041,7 @@ position = Vector2( 1660, 81 )
 [editable path="bau_spawner2"]
 
 [editable path="BossSpawner"]
+
+[editable path="AltarSpawner"]
+
+[editable path="Bau_spawner"]

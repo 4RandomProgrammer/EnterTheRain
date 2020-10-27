@@ -409,6 +409,8 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 
 [node name="Node2D" type="Node2D"]
 
+[node name="Player" parent="." instance=ExtResource( 2 )]
+
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 1 )
 format = 1
@@ -435,5 +437,3 @@ position = Vector2( -741.139, 737.381 )
 
 [node name="BossFinal" parent="." instance=ExtResource( 4 )]
 position = Vector2( -5.83838, -1.17334 )
-
-[node name="Player" parent="." instance=ExtResource( 2 )]

@@ -60,8 +60,9 @@ func _on_Timer_veneno_corpo_timeout():
 
 
 func _on_Timer_poison_shot_timeout():
-	var poison_shot = poison_bullet.instance()
-	var direction = (get_parent().get_node('Player').global_position - snake_head.global_position).angle()
-	poison_shot.start(snake_head.global_position, direction)
-	get_parent().call_deferred('add_child', poison_shot)
-	$Timer_poison_shot.start(timer_poison_bullet)
+	if is_instance_valid(get_parent().get_node('Player')):
+		var poison_shot = poison_bullet.instance()
+		var direction = (get_parent().get_node('Player').global_position - snake_head.global_position).angle()
+		poison_shot.start(snake_head.global_position, direction)
+		get_parent().call_deferred('add_child', poison_shot)
+		$Timer_poison_shot.start(timer_poison_bullet)
