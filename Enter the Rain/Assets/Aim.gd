@@ -60,7 +60,6 @@ func aim_circle_borders():
 	return positions_list
 
 func aim_general_borders():
-	var dist = 5
 	var positions_list = []
 	positions_list.append(target.position + Vector2(-dist, -dist))  # canto superior esquerdo
 	positions_list.append(target.position + Vector2(-dist, dist)) # canto inferior direito

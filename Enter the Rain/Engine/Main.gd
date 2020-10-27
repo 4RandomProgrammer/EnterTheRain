@@ -24,6 +24,7 @@ func instanciarlevel():
 	self.add_child(fase)
 
 func select():
+	Mensageiro.stop_music()
 	fase.queue_free()
 	id = 0
 	get_tree().change_scene("res://Engine/Main.tscn")

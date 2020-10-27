@@ -13,7 +13,7 @@ onready var lista_de_itens = [item_damage, item_atack_speed, item_move_speed, it
 							  item_extra_shots, item_maxhealth, item_missile, item_life_steal]
 
 onready var spawn_position = get_parent().global_position
-onready var Player = get_parent().get_parent().get_node('Player')
+onready var Player = get_parent().get_parent().get_parent().get_node('Player')
 onready var player_initial_life = Player.Health
 
 func spawn_bossReward_itens():

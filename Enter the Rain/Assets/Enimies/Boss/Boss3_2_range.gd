@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-onready var player = get_parent().get_parent().get_node('Player')
+onready var player = get_parent().get_parent().get_parent().get_node('Player')
 onready var stats = $Stats_range
 onready var timer_shot = $Timer_shot
 onready var timer_power1 = $Timer_power_1
@@ -29,7 +29,7 @@ signal Died
 func _ready():
 	initial_pos = Vector2(position.x - 75, position.y)
 	# Conectando os sinais:
-	var bossHealthBar2 = get_parent().get_parent().get_node('Player').get_node('Camera2D').get_node('CanvasLayer').get_node('HealthBarBoss2')
+	var bossHealthBar2 = get_parent().get_parent().get_parent().get_node('Player').get_node('Camera2D').get_node('CanvasLayer').get_node('HealthBarBoss2')
 	connect("Spawning", bossHealthBar2, "_on_Boss_Spawning")
 	connect("healthChanged", bossHealthBar2, "_on_Boss_healthChanged")
 	emit_signal("Spawning", stats.MaxHealth, 'Ranger')
@@ -79,10 +79,10 @@ func revive():
 	state = NORMAL
 
 
-func _on_Area_find_player_body_entered(body):
+func _on_Area_find_player_body_entered(_body):
 	player_is_near = true
 
-func _on_Area_find_player_body_exited(body):
+func _on_Area_find_player_body_exited(_body):
 	player_is_near = false
 
 func _on_Timer_teleport_timeout():

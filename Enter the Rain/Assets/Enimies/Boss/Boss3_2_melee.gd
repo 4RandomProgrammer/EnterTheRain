@@ -4,7 +4,7 @@ onready var stats = $Stats_melee
 onready var timer_sword_hit = $Timer_hit
 onready var timer_power1 = $Timer_power_1
 onready var timer_shot_p1 = $Timer_shot_p1
-onready var player = get_parent().get_parent().get_node('Player')
+onready var player = get_parent().get_parent().get_parent().get_node('Player')
 onready var Bullet = load("res://Assets/Enimies/Enemy_bullet/SlowBigBullet.tscn")
 enum {
 	SPAWNING,
@@ -34,7 +34,7 @@ signal Died
 func _ready():
 	initial_x_pos = position.x - 75
 	# Conectando os sinais:
-	var bossHealthBar1 = get_parent().get_parent().get_node('Player').get_node('Camera2D').get_node('CanvasLayer').get_node('HealthBarBoss')
+	var bossHealthBar1 = get_parent().get_parent().get_parent().get_node('Player').get_node('Camera2D').get_node('CanvasLayer').get_node('HealthBarBoss')
 	connect("Spawning", bossHealthBar1, "_on_Boss_Spawning")
 	connect("healthChanged", bossHealthBar1, "_on_Boss_healthChanged")
 	emit_signal("Spawning", stats.MaxHealth, 'Guerreiro')

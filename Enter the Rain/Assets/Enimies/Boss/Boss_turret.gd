@@ -8,7 +8,7 @@ onready var laser_hitbox = $Laser_hitbox/CollisionShape2D
 onready var laser_timer = $Timer_laser
 onready var laser_missile_timer = $Timer_missile_laser
 onready var shoot_timer = $Timer_shoot
-onready var player = get_parent().get_node('Player')
+onready var player = get_parent().get_parent().get_node('Player')
 onready var Missile_shot = load('res://Assets/Enimies/Enemy_missile.tscn')
 onready var Shield_machine = load('res://Assets/Enimies/Boss/Shield_machine.tscn')
 onready var Big_bullet = load("res://Assets/Enimies/Enemy_bullet/SlowBigBullet.tscn")
@@ -39,7 +39,7 @@ signal healthChanged(health)
 signal Spawning(maxHealth)
 signal Died
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	update()
 	if is_instance_valid(player):
 		match state:
@@ -78,7 +78,7 @@ func _ready():
 	position.y -= 125
 	rng.randomize()
 	# Conectando os sinais do HealthBar do boss
-	var bossHealthBar = get_parent().get_node('Player').get_node('Camera2D').get_node('CanvasLayer').get_node('HealthBarBoss')
+	var bossHealthBar = get_parent().get_parent().get_node('Player').get_node('Camera2D').get_node('CanvasLayer').get_node('HealthBarBoss')
 	connect("Spawning", bossHealthBar, "_on_Boss_Spawning")
 	connect("Died", bossHealthBar, "_on_Boss_Died")
 	connect("healthChanged", bossHealthBar, "_on_Boss_healthChanged")

@@ -17,7 +17,7 @@ signal healthChanged(health)
 
 func _ready():
 	# Conectar os sinais com a healthBar do boss.
-	var bossHealthBar = get_parent().get_node('Player').get_node('Camera2D').get_node('CanvasLayer').get_node('HealthBarBoss')
+	var bossHealthBar = get_parent().get_parent().get_node('Player').get_node('Camera2D').get_node('CanvasLayer').get_node('HealthBarBoss')
 	connect("Spawning", bossHealthBar, "_on_Boss_Spawning")
 	connect("Died", bossHealthBar, "_on_Boss_Died")
 	connect("healthChanged", bossHealthBar, "_on_Boss_healthChanged")
@@ -60,7 +60,7 @@ func _on_Timer_veneno_corpo_timeout():
 
 
 func _on_Timer_poison_shot_timeout():
-	if is_instance_valid(get_parent().get_node('Player')):
+	if is_instance_valid(get_parent().get_parent().get_node('Player')):
 		var poison_shot = poison_bullet.instance()
 		var direction = (get_parent().get_node('Player').global_position - snake_head.global_position).angle()
 		poison_shot.start(snake_head.global_position, direction)

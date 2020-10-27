@@ -25,7 +25,7 @@ func _ready():
 			moneyXTimes = 3
 	$Label2.text = str(percent*100)
 
-func _process(delta):
+func _process(_delta):
 	if player:
 		if Input.is_action_just_pressed("ui_select"):
 			player.set_NewHealth(-percent * player.MaxHealth)
@@ -35,5 +35,5 @@ func _on_RangeParaAbrir_body_entered(body):
 		player = body
 
 
-func _on_RangeParaAbrir_body_exited(body):
+func _on_RangeParaAbrir_body_exited(_body):
 	player = null

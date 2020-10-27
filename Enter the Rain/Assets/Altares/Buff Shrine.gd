@@ -10,7 +10,7 @@ func _ready():
 	min_money = rng.randi_range(50,200)
 	$Label.text = str(min_money)
 
-func _process(delta):
+func _process(_delta):
 	if player and used:
 		if Input.is_action_just_pressed("ui_select") and player.money >= min_money and used:
 			player.apply_buff()
@@ -21,5 +21,5 @@ func _process(delta):
 func _on_Area2D_body_entered(body):
 	player = body
 
-func _on_Area2D_body_exited(body):
+func _on_Area2D_body_exited(_body):
 	player = null

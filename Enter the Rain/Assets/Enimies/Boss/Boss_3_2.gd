@@ -9,8 +9,8 @@ signal Died
 
 func _ready():
 	# Conectando os sinais de "morte" à barra de vida.
-	var health_bar_1 = get_parent().get_node('Player').get_node('Camera2D').get_node('CanvasLayer').get_node('HealthBarBoss')
-	var health_bar_2 = get_parent().get_node('Player').get_node('Camera2D').get_node('CanvasLayer').get_node('HealthBarBoss2')
+	var health_bar_1 = get_parent().get_parent().get_node('Player').get_node('Camera2D').get_node('CanvasLayer').get_node('HealthBarBoss')
+	var health_bar_2 = get_parent().get_parent().get_node('Player').get_node('Camera2D').get_node('CanvasLayer').get_node('HealthBarBoss2')
 	connect('Died', health_bar_1, '_on_Boss_Died')
 	connect('Died', health_bar_2, '_on_Boss_Died')
 
