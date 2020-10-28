@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Engine/HurtBox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Player/Character.gd" type="Script" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://Assets/Player/Itens_popups.gd" type="Script" id=12]
 [ext_resource path="res://Assets/UI/DashButton.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Engine/Weapon.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Assets/UI/DeathScene.tscn" type="PackedScene" id=15]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Flash"
@@ -166,6 +167,9 @@ margin_top = 256.921
 margin_right = 519.229
 margin_bottom = 256.921
 
+[node name="DeathScene" parent="Camera2D/CanvasLayer" instance=ExtResource( 15 )]
+visible = false
+
 [node name="ItemCollectArea" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 32
@@ -195,5 +199,7 @@ shape = SubResource( 2 )
 [editable path="Weapon"]
 
 [editable path="HurtBox"]
+
+[editable path="Camera2D/CanvasLayer/DeathScene"]
 
 [editable path="Buffs_Controller"]

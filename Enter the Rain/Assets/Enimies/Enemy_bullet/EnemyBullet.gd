@@ -34,5 +34,5 @@ func _on_Timer_duration_timeout():
 func timer_finished():
 	pass
 
-func on_pysics_loop(delta):
+func on_pysics_loop(_delta):
 	pass

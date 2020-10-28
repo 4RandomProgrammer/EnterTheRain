@@ -7,7 +7,7 @@ func _on_Duration_timeout():
 	queue_free()
 
 
-func _on_Hitbox_area_entered(area):
+func _on_Hitbox_area_entered(_area):
 	$Hitbox/CollisionShape2D.set_deferred("disabled",true)
 	$DamageTimer.start(-1)
 

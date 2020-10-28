@@ -134,7 +134,7 @@ func missile():
 
 
 func die():
-	queue_free()
+	$Camera2D/CanvasLayer/DeathScene.visible = true
 
 #Func de inputs
 func control_loop():
@@ -197,7 +197,6 @@ func _on_PowerUp1CD_timeout():
 
 func _on_PowerUP2CD_timeout():
 	onemoretimeP2 -= 1
-	print_debug(onemoretimeP2)
 	if onemoretimeP2 > 0:
 		$PowerUP2CD.start(cooldownP2)
 		emit_signal("PW2_used")

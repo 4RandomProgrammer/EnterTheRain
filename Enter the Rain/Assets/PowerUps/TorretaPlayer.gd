@@ -9,7 +9,7 @@ signal Spawned
 signal dead
 
 func _ready():
-	connect("dead",get_parent().get_node("Player"),"turret_dead")
+	assert(connect("dead",get_parent().get_node("Player"),"turret_dead") == OK)
 	emit_signal("Spawned")
 
 func _physics_process(_delta):

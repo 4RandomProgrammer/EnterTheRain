@@ -27,7 +27,7 @@ func select():
 	Mensageiro.stop_music()
 	fase.queue_free()
 	id = 0
-	get_tree().change_scene("res://Engine/Main.tscn")
+	assert(get_tree().change_scene("res://Engine/Main.tscn") == OK)
 	player.queue_free()
 
 func setPlayer(new):
