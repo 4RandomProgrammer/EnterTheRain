@@ -4,6 +4,9 @@ var player = null
 signal changeLv
 
 
+func _ready():
+	connect('changeLv', get_parent(), '_on_LvChanger_changeLv')
+
 func _physics_process(_delta):
 	if player != null and Input.is_action_just_pressed("ui_accept"):
 		emit_signal("changeLv")

@@ -1001,6 +1001,7 @@ shape = SubResource( 59 )
 
 [node name="BossSpawner" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1660, 81 )
+choosen_boss = 2
 
 [node name="AltarSpawner" parent="." instance=ExtResource( 1 )]
 position = Vector2( 684.441, 975.585 )

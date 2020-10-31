@@ -47,6 +47,10 @@ position = Vector2( 85, 2 )
 [node name="Anim" type="AnimationPlayer" parent="." index="11"]
 anims/Spin = SubResource( 2 )
 
+[editable path="HurtBox"]
+
+[editable path="Hitbox"]
+
 [editable path="Range"]
 
 [editable path="Hitbox2"]
