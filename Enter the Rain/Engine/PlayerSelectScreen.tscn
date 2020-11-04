@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Engine/PlayerSelectScreen.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/card-bomber.png" type="Texture" id=2]
@@ -6,6 +6,14 @@
 [ext_resource path="res://Assets/Sprites/card-base.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Sprites/card-engi.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Sprites/card-archer.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Sprites/charselectbtn-bomber.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Sprites/charselectbtn2-bomber.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Sprites/charselectbtn-archer.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Sprites/charselectbtn2-archer.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Sprites/charselectbtn-engineer.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Sprites/charselectbtn2-engineer.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Sprites/charselectbtn-trooper.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Sprites/charselectbtn2-trooper.png" type="Texture" id=14]
 
 [node name="PlayerSelectScreen" type="Control"]
 margin_right = 1024.0
@@ -15,28 +23,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-margin_right = 1024.0
-margin_bottom = 600.0
-custom_constants/margin_right = 120
-custom_constants/margin_top = 120
-custom_constants/margin_left = 120
-custom_constants/margin_bottom = 120
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-margin_left = 120.0
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_top = 120.0
-margin_right = 904.0
+margin_right = 1036.0
 margin_bottom = 480.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
-margin_right = 784.0
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_right = 1036.0
 margin_bottom = 14.0
 text = "Select your character:"
 align = 1
@@ -44,47 +40,48 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 18.0
-margin_right = 784.0
-margin_bottom = 78.0
-custom_constants/margin_top = 20
-custom_constants/margin_bottom = 20
+margin_right = 1036.0
+margin_bottom = 82.0
+rect_clip_content = true
+custom_constants/separation = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer"]
-margin_top = 20.0
-margin_right = 784.0
-margin_bottom = 40.0
-alignment = 1
+[node name="Button" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
+margin_right = 256.0
+margin_bottom = 64.0
+texture_normal = ExtResource( 14 )
+texture_pressed = ExtResource( 13 )
+texture_focused = ExtResource( 13 )
 
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
-margin_left = 218.0
-margin_right = 302.0
-margin_bottom = 20.0
-text = "Character 1"
+[node name="Button2" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
+margin_left = 256.0
+margin_right = 512.0
+margin_bottom = 64.0
+texture_normal = ExtResource( 12 )
+texture_pressed = ExtResource( 11 )
+texture_focused = ExtResource( 11 )
 
-[node name="Button2" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
-margin_left = 306.0
-margin_right = 390.0
-margin_bottom = 20.0
-text = "Character 2"
+[node name="Button3" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
+margin_left = 512.0
+margin_right = 768.0
+margin_bottom = 64.0
+texture_normal = ExtResource( 10 )
+texture_pressed = ExtResource( 9 )
+texture_focused = ExtResource( 9 )
 
-[node name="Button3" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
-margin_left = 394.0
-margin_right = 478.0
-margin_bottom = 20.0
-text = "Character 3"
+[node name="Button4" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
+margin_left = 768.0
+margin_right = 1024.0
+margin_bottom = 64.0
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 7 )
+texture_focused = ExtResource( 7 )
 
-[node name="Button4" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
-margin_left = 482.0
-margin_right = 566.0
-margin_bottom = 20.0
-text = "Character 4"
-
-[node name="Controles" type="Label" parent="MarginContainer/VBoxContainer"]
-margin_top = 82.0
-margin_right = 784.0
-margin_bottom = 215.0
+[node name="Controles" type="Label" parent="VBoxContainer"]
+margin_top = 86.0
+margin_right = 1036.0
+margin_bottom = 219.0
 text = "Controles:
 Mouse Direito - Dash
 Mouse Esquerdo - Tiro
@@ -94,27 +91,27 @@ P - Pause
 ESC - Restart Rápido
  "
 
-[node name="Sprite" type="Sprite" parent="MarginContainer/VBoxContainer"]
+[node name="Sprite" type="Sprite" parent="VBoxContainer"]
 visible = false
-position = Vector2( 390, 250 )
+position = Vector2( 520, 250 )
 scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 4 )
 
-[node name="Sprite2" type="Sprite" parent="MarginContainer/VBoxContainer"]
+[node name="Sprite2" type="Sprite" parent="VBoxContainer"]
 visible = false
-position = Vector2( 390, 250 )
+position = Vector2( 520, 250 )
 scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 5 )
 
-[node name="Sprite3" type="Sprite" parent="MarginContainer/VBoxContainer"]
+[node name="Sprite3" type="Sprite" parent="VBoxContainer"]
 visible = false
-position = Vector2( 390, 250 )
+position = Vector2( 520, 250 )
 scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 6 )
 
-[node name="Sprite4" type="Sprite" parent="MarginContainer/VBoxContainer"]
+[node name="Sprite4" type="Sprite" parent="VBoxContainer"]
 visible = false
-position = Vector2( 390, 250 )
+position = Vector2( 520, 250 )
 scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 2 )
 
@@ -125,8 +122,8 @@ margin_top = 550.0
 margin_right = 1024.0
 margin_bottom = 600.0
 texture_normal = ExtResource( 3 )
-[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/Button" to="." method="_on_Button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/Button2" to="." method="_on_Button2_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/Button3" to="." method="_on_Button3_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/Button4" to="." method="_on_Button4_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Button2" to="." method="_on_Button2_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Button3" to="." method="_on_Button3_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Button4" to="." method="_on_Button4_pressed"]
 [connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]

@@ -10,34 +10,34 @@ var player_selected = null
 
 func _on_Button_pressed():
 	player_selected = player_character_one
-	$MarginContainer/VBoxContainer/Sprite.visible = true
-	$MarginContainer/VBoxContainer/Sprite2.visible = false
-	$MarginContainer/VBoxContainer/Sprite3.visible = false
-	$MarginContainer/VBoxContainer/Sprite4.visible = false
+	$VBoxContainer/Sprite.visible = true
+	$VBoxContainer/Sprite2.visible = false
+	$VBoxContainer/Sprite3.visible = false
+	$VBoxContainer/Sprite4.visible = false
 	$TextureButton.visible = true
 
 func _on_Button2_pressed():
 	player_selected = player_character_two
-	$MarginContainer/VBoxContainer/Sprite.visible = false
-	$MarginContainer/VBoxContainer/Sprite2.visible = true
-	$MarginContainer/VBoxContainer/Sprite3.visible = false
-	$MarginContainer/VBoxContainer/Sprite4.visible = false
+	$VBoxContainer/Sprite.visible = false
+	$VBoxContainer/Sprite2.visible = true
+	$VBoxContainer/Sprite3.visible = false
+	$VBoxContainer/Sprite4.visible = false
 	$TextureButton.visible = true
 
 func _on_Button3_pressed():
 	player_selected = player_character_three
-	$MarginContainer/VBoxContainer/Sprite.visible = false
-	$MarginContainer/VBoxContainer/Sprite2.visible = false
-	$MarginContainer/VBoxContainer/Sprite3.visible = true
-	$MarginContainer/VBoxContainer/Sprite4.visible = false
+	$VBoxContainer/Sprite.visible = false
+	$VBoxContainer/Sprite2.visible = false
+	$VBoxContainer/Sprite3.visible = true
+	$VBoxContainer/Sprite4.visible = false
 	$TextureButton.visible = true
 
 func _on_Button4_pressed():
 	player_selected = player_character_four
-	$MarginContainer/VBoxContainer/Sprite.visible = false
-	$MarginContainer/VBoxContainer/Sprite2.visible = false
-	$MarginContainer/VBoxContainer/Sprite3.visible = false
-	$MarginContainer/VBoxContainer/Sprite4.visible = true
+	$VBoxContainer/Sprite.visible = false
+	$VBoxContainer/Sprite2.visible = false
+	$VBoxContainer/Sprite3.visible = false
+	$VBoxContainer/Sprite4.visible = true
 	$TextureButton.visible = true
 
 func _on_TextureButton_pressed():
