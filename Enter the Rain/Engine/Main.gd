@@ -1,6 +1,6 @@
 extends Node
 
-var levels = {"Level1":preload("res://Assets/Areas/Area1.tscn"), "Level2":preload("res://Arena2.tscn"), "Select":preload("res://Engine/PlayerSelectScreen.tscn")}
+var levels = {"Level1":preload("res://Assets/Areas/Area1.tscn"), "Level2":preload("res://Assets/Areas/Arena2.tscn"), "Select":preload("res://Engine/PlayerSelectScreen.tscn")}
 var player setget setPlayer, getPlayer
 var id = 0
 var fase = null

@@ -1,4 +1,4 @@
-extends "res://Assets/Enimies/InimigosNProntos/Enemy_attack_Base.gd"
+extends "res://Assets/Enimies/InimigosNProntos/Enemy_attack_base.gd"
 
 var can_move = false
 var teleporting = false

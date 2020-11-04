@@ -21,7 +21,7 @@ func _ready():
 	connect("Spawning", bossHealthBar, "_on_Boss_Spawning")
 	connect("Died", bossHealthBar, "_on_Boss_Died")
 	connect("healthChanged", bossHealthBar, "_on_Boss_healthChanged")
-	emit_signal("Spawning", $Stats.MaxHealth, 'Cobra')
+	emit_signal("Spawning", $Stats.MaxHealth, 'Roboconda')
 
 
 func _on_HurtBox_area_entered(area):
@@ -62,7 +62,7 @@ func _on_Timer_veneno_corpo_timeout():
 func _on_Timer_poison_shot_timeout():
 	if is_instance_valid(get_parent().get_parent().get_node('Player')):
 		var poison_shot = poison_bullet.instance()
-		var direction = (get_parent().get_node('Player').global_position - snake_head.global_position).angle()
+		var direction = (get_parent().get_parent().get_node('Player').global_position - snake_head.global_position).angle()
 		poison_shot.start(snake_head.global_position, direction)
 		get_parent().call_deferred('add_child', poison_shot)
 		$Timer_poison_shot.start(timer_poison_bullet)
