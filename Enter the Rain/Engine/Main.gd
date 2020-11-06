@@ -1,6 +1,8 @@
 extends Node
 
-var levels = {"Level1":preload("res://Assets/Areas/Area1.tscn"), "Level2":preload("res://Assets/Areas/Arena2.tscn"), "Select":preload("res://Engine/PlayerSelectScreen.tscn")}
+var levels = {"Level1":preload("res://Assets/Areas/Area1.tscn"), "Level2":preload("res://Assets/Areas/Arena2.tscn"),
+			  "Select":preload("res://Engine/PlayerSelectScreen.tscn"), "Level3":preload("res://Assets/Areas/Area3.tscn")
+			  }
 var player setget setPlayer, getPlayer
 var id = 0
 var fase = null
@@ -18,7 +20,7 @@ func instanciarlevel():
 		1:
 			fase = levels["Level2"].instance()
 		2:
-			pass
+			fase = levels["Level3"].instance()
 
 	id += (id + 1) % 4
 	self.add_child(fase)
