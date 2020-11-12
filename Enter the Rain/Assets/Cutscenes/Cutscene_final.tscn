@@ -4,4 +4,5 @@
 [ext_resource path="res://Assets/Cutscenes/Cutscene_final.gd" type="Script" id=2]
 
 [node name="Cutscene final" instance=ExtResource( 1 )]
+z_index = 4096
 script = ExtResource( 2 )

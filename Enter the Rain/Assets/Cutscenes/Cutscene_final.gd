@@ -8,4 +8,4 @@ func on_ready():
 	]
 
 func on_finish():
-	queue_free()
+	assert(get_tree().change_scene("res://StartMenu/StartMenu.tscn") == OK)

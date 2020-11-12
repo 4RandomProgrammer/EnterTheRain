@@ -24,7 +24,7 @@ func instanciarlevel():
 		3:
 			fase = levels["Level4"].instance()
 
-	id += (id + 1) % 4
+	id = (id + 1) % 4
 	self.add_child(fase)
 
 func select():
