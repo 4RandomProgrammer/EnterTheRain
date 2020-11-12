@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Engine/PlayerSelectScreen.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/card-bomber.png" type="Texture" id=2]
@@ -14,6 +14,12 @@
 [ext_resource path="res://Assets/Sprites/charselectbtn2-engineer.png" type="Texture" id=12]
 [ext_resource path="res://Assets/Sprites/charselectbtn-trooper.png" type="Texture" id=13]
 [ext_resource path="res://Assets/Sprites/charselectbtn2-trooper.png" type="Texture" id=14]
+[ext_resource path="res://fonts/m12.TTF" type="DynamicFontData" id=15]
+[ext_resource path="res://Assets/Sprites/outros_controles.png" type="Texture" id=16]
+
+[sub_resource type="DynamicFont" id=1]
+size = 22
+font_data = ExtResource( 15 )
 
 [node name="PlayerSelectScreen" type="Control"]
 margin_right = 1024.0
@@ -41,7 +47,8 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 margin_right = 1036.0
-margin_bottom = 14.0
+margin_bottom = 22.0
+custom_fonts/font = SubResource( 1 )
 text = "Select your character:"
 align = 1
 __meta__ = {
@@ -49,15 +56,16 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 18.0
+margin_top = 26.0
 margin_right = 1036.0
-margin_bottom = 82.0
+margin_bottom = 90.0
 rect_clip_content = true
 custom_constants/separation = 0
 
 [node name="Button" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
 margin_right = 256.0
 margin_bottom = 64.0
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 14 )
 texture_pressed = ExtResource( 13 )
 texture_focused = ExtResource( 13 )
@@ -66,6 +74,7 @@ texture_focused = ExtResource( 13 )
 margin_left = 256.0
 margin_right = 512.0
 margin_bottom = 64.0
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 12 )
 texture_pressed = ExtResource( 11 )
 texture_focused = ExtResource( 11 )
@@ -74,6 +83,7 @@ texture_focused = ExtResource( 11 )
 margin_left = 512.0
 margin_right = 768.0
 margin_bottom = 64.0
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 10 )
 texture_pressed = ExtResource( 9 )
 texture_focused = ExtResource( 9 )
@@ -82,46 +92,40 @@ texture_focused = ExtResource( 9 )
 margin_left = 768.0
 margin_right = 1024.0
 margin_bottom = 64.0
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 8 )
 texture_pressed = ExtResource( 7 )
 texture_focused = ExtResource( 7 )
 
-[node name="Controles" type="Label" parent="VBoxContainer"]
-margin_top = 86.0
-margin_right = 1036.0
-margin_bottom = 219.0
-text = "Controles:
-Mouse Direito - Dash
-Mouse Esquerdo - Tiro
-Q e E - Habilidades 1 e 2
-WASD - Movimentação
-P - Pause
-ESC - Restart Rápido
- "
-
 [node name="Sprite" type="Sprite" parent="VBoxContainer"]
 visible = false
-position = Vector2( 520, 250 )
+position = Vector2( 437, 250 )
 scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 4 )
 
 [node name="Sprite2" type="Sprite" parent="VBoxContainer"]
 visible = false
-position = Vector2( 520, 250 )
+position = Vector2( 437, 250 )
 scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 5 )
 
 [node name="Sprite3" type="Sprite" parent="VBoxContainer"]
 visible = false
-position = Vector2( 520, 250 )
+position = Vector2( 437, 250 )
 scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 6 )
 
 [node name="Sprite4" type="Sprite" parent="VBoxContainer"]
 visible = false
-position = Vector2( 520, 250 )
+position = Vector2( 437, 250 )
 scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 2 )
+
+[node name="outros_controles" type="Sprite" parent="VBoxContainer"]
+visible = false
+position = Vector2( 670.169, 300 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 16 )
 
 [node name="TextureButton" type="TextureButton" parent="."]
 visible = false
@@ -129,6 +133,7 @@ margin_left = 924.0
 margin_top = 550.0
 margin_right = 1024.0
 margin_bottom = 600.0
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 3 )
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Button" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Button2" to="." method="_on_Button2_pressed"]

@@ -49,14 +49,8 @@ one_shot = true
 [node name="Camera2D" parent="." index="11"]
 visible = false
 
-[node name="AbilityButton2" parent="Camera2D/CanvasLayer/Control/HBoxContainer" index="1"]
-cooldown = 3.0
-
-[node name="DashButton" parent="Camera2D/CanvasLayer/Control/HBoxContainer" index="2"]
-cooldown = 10.0
-
-[node name="Poison_bar" parent="Camera2D/CanvasLayer" index="6"]
-visible = true
+[node name="DashButton" parent="Camera2D/CanvasLayer/Control" index="2"]
+cooldown = 15.0
 
 [node name="RayCast2D" type="RayCast2D" parent="." index="13"]
 
@@ -68,6 +62,8 @@ disabled = true
 [editable path="Weapon"]
 
 [editable path="HurtBox"]
+
+[editable path="Camera2D/CanvasLayer/DeathScene"]
 
 [editable path="Buffs_Controller"]
 

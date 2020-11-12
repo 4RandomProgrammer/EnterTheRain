@@ -15,6 +15,7 @@ func _on_Button_pressed():
 	$VBoxContainer/Sprite3.visible = false
 	$VBoxContainer/Sprite4.visible = false
 	$TextureButton.visible = true
+	$VBoxContainer/outros_controles.visible = true
 
 func _on_Button2_pressed():
 	player_selected = player_character_two
@@ -23,6 +24,7 @@ func _on_Button2_pressed():
 	$VBoxContainer/Sprite3.visible = false
 	$VBoxContainer/Sprite4.visible = false
 	$TextureButton.visible = true
+	$VBoxContainer/outros_controles.visible = true
 
 func _on_Button3_pressed():
 	player_selected = player_character_three
@@ -31,6 +33,7 @@ func _on_Button3_pressed():
 	$VBoxContainer/Sprite3.visible = true
 	$VBoxContainer/Sprite4.visible = false
 	$TextureButton.visible = true
+	$VBoxContainer/outros_controles.visible = true
 
 func _on_Button4_pressed():
 	player_selected = player_character_four
@@ -39,6 +42,7 @@ func _on_Button4_pressed():
 	$VBoxContainer/Sprite3.visible = false
 	$VBoxContainer/Sprite4.visible = true
 	$TextureButton.visible = true
+	$VBoxContainer/outros_controles.visible = true
 
 func _on_TextureButton_pressed():
 	player_selected = player_selected.instance()
