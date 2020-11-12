@@ -120,8 +120,10 @@ margin_bottom = 46.7424
 [node name="Pause" parent="Camera2D/CanvasLayer" instance=ExtResource( 8 )]
 
 [node name="Itens_UI" type="Control" parent="Camera2D/CanvasLayer"]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_left = 183.001
+margin_top = 1.85318
+margin_right = 223.001
+margin_bottom = 41.8532
 script = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -147,12 +149,6 @@ __meta__ = {
 [node name="Timer_popup" type="Timer" parent="Camera2D/CanvasLayer/Itens_UI"]
 wait_time = 5.0
 one_shot = true
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Camera2D/CanvasLayer/Itens_UI"]
-margin_left = 137.0
-margin_right = 855.0
-margin_bottom = 40.0
-custom_constants/separation = 60
 
 [node name="HealthBarBoss" parent="Camera2D/CanvasLayer" instance=ExtResource( 9 )]
 visible = false

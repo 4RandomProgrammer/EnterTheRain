@@ -22,3 +22,4 @@ func _on_Player_set_maxhealth(value):
 	Health_bar.max_value = value
 	Heal_bar2.max_value = value
 	HP.text = str(Health_bar.value,"/",Health_bar.max_value)
+
