@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Cutscenes/cutscene_master.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Sprites/Background-cutscene.png" type="Texture" id=2]
+[ext_resource path="res://fonts/Goldman-Regular.ttf" type="DynamicFontData" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 18
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 20
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 20
+font_data = ExtResource( 4 )
+
+[node name="Cutscene_master" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 511.962, 299.995 )
+texture = ExtResource( 2 )
+
+[node name="Log" type="Label" parent="."]
+margin_left = 59.2545
+margin_top = 33.2503
+margin_right = 962.254
+margin_bottom = 515.25
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+autowrap = true
+percent_visible = 0.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Letters_timer" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
+autostart = true
+
+[node name="Pres_espaco" type="Label" parent="."]
+margin_left = 59.5502
+margin_top = 548.285
+margin_right = 529.55
+margin_bottom = 572.285
+custom_fonts/font = SubResource( 2 )
+text = "Pressione espaço para carregar log completo"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pres_ESC" type="Label" parent="."]
+margin_left = 592.149
+margin_top = 548.098
+margin_right = 958.149
+margin_bottom = 576.098
+custom_fonts/font = SubResource( 3 )
+text = "Pressione ESC para pular cutscene"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="timeout" from="Letters_timer" to="." method="_on_Letters_timer_timeout"]

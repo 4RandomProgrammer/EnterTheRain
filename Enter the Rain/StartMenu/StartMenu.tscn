@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://StartMenu/EnterTheRain.Png" type="Texture" id=1]
 [ext_resource path="res://StartMenu/StartMenu.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Sprites/creditos.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Cutscenes/Cutscene_inicial.tscn" type="PackedScene" id=4]
 
 [node name="StartMenu" type="Control"]
 anchor_right = 1.0
@@ -59,6 +60,8 @@ margin_top = 580.0
 margin_right = 1024.0
 margin_bottom = 600.0
 text = "Voltar"
+
+[node name="Cutscene_inicial" parent="." instance=ExtResource( 4 )]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Start" to="." method="_on_Start_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Creditos" to="." method="_on_Creditos_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]

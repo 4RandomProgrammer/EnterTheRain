@@ -9,7 +9,7 @@ enum {
 var speed = 150
 var state = SPAWNING
 onready var stats = $Stats
-onready var player = get_parent().get_node('Player')
+onready var player = get_parent().get_parent().get_node('Player')
 onready var minion = load('res://Assets/Enimies/Boss/Boss_spider_minion.tscn')
 onready var rng = RandomNumberGenerator.new()
 onready var random_moviment = $Movimento_aletorio
@@ -46,11 +46,11 @@ func movimentation(delta):  # Movimento "aleatório" da aranha
 func _ready():
 	randomize()
 	# Conectando os sinais:
-	var bossHealthBar = get_parent().get_node('Player').get_node('Camera2D').get_node('CanvasLayer').get_node('HealthBarBoss')
+	var bossHealthBar = get_parent().get_parent().get_node('Player').get_node('Camera2D').get_node('CanvasLayer').get_node('HealthBarBoss')
 	connect("Spawning", bossHealthBar, "_on_Boss_Spawning")
 	connect("Died", bossHealthBar, "_on_Boss_Died")
 	connect("healthChanged", bossHealthBar, "_on_Boss_healthChanged")
-	emit_signal("Spawning", $Stats.MaxHealth, 'Aranha')
+	emit_signal("Spawning", $Stats.MaxHealth, 'SP1D3ROTRON 3000')
 
 func _on_HurtBox_area_entered(area):
 	if state != SPAWNING:

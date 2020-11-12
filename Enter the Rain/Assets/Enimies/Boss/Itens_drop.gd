@@ -1,5 +1,7 @@
 extends Node2D
 
+onready var levelTransition = preload("res://Engine/LvChanger.tscn")
+
 onready var No_hit_item = preload('res://Assets/Itens/NoHitItem.tscn')
 onready var item_damage = preload("res://Assets/Itens/Item_damage.tscn")
 onready var item_atack_speed = preload("res://Assets/Itens/Item_atack_speed.tscn")
@@ -9,6 +11,7 @@ onready var item_extra_shots = preload("res://Assets/Itens/Item_extra_shots.tscn
 onready var item_maxhealth = preload("res://Assets/Itens/Item_maxhealth.tscn")
 onready var item_missile = preload("res://Assets/Itens/Item_missile.tscn")
 onready var item_life_steal = preload("res://Assets/Itens/Item_life_steal.tscn")
+
 onready var lista_de_itens = [item_damage, item_atack_speed, item_move_speed, item_stun_prob,
 							  item_extra_shots, item_maxhealth, item_missile, item_life_steal]
 
@@ -32,6 +35,12 @@ func spawn_bossReward_itens():
 	get_parent().get_parent().call_deferred('add_child', item)
 
 
+func spawn_AreaTransition():  # Spawnar o teleporte para a outra fase.
+	var level_transition = levelTransition.instance()
+	level_transition.global_position = spawn_position + Vector2(0, -100)
+	get_parent().get_parent().call_deferred('add_child', level_transition)
+
 func _on_Boss_Died():
 	spawn_bossReward_itens()
+	spawn_AreaTransition()
 

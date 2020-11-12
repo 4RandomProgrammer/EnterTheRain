@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Engine/HurtBox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Player/Character.gd" type="Script" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://Assets/UI/DashButton.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Engine/Weapon.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Assets/UI/DeathScene.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Assets/UI/UIEncaixe.png" type="Texture" id=16]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Flash"
@@ -69,52 +70,60 @@ current = true
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
 layer = 2
 
+[node name="UI_HOLDER" type="TextureRect" parent="Camera2D/CanvasLayer"]
+margin_left = 0.174885
+margin_top = 0.119213
+margin_right = 177.175
+margin_bottom = 99.1192
+texture = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="HealthBar" parent="Camera2D/CanvasLayer" instance=ExtResource( 4 )]
 
 [node name="Control" type="Control" parent="Camera2D/CanvasLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -0.126129
-margin_top = 32.0
-margin_right = 39.8739
-margin_bottom = 72.0001
+margin_left = 5.48238
+margin_top = 49.6598
+margin_right = 45.4824
+margin_bottom = 89.6599
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Camera2D/CanvasLayer/Control"]
-margin_right = 40.0
-margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="AbilityButton2" parent="Camera2D/CanvasLayer/Control" instance=ExtResource( 3 )]
+margin_left = 38.027
+margin_top = 0.189209
+margin_right = 74.027
+margin_bottom = 40.1892
 
-[node name="AbilityButton" parent="Camera2D/CanvasLayer/Control/HBoxContainer" instance=ExtResource( 5 )]
+[node name="AbilityButton" parent="Camera2D/CanvasLayer/Control" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 32.0
+margin_right = 36.0
 margin_bottom = 40.0
 
-[node name="AbilityButton2" parent="Camera2D/CanvasLayer/Control/HBoxContainer" instance=ExtResource( 3 )]
-margin_left = 36.0
-margin_right = 68.0
-margin_bottom = 40.0
+[node name="DashButton" parent="Camera2D/CanvasLayer/Control" instance=ExtResource( 13 )]
+margin_left = 76.0859
+margin_top = -0.33371
+margin_right = 112.086
+margin_bottom = 39.6663
 
-[node name="DashButton" parent="Camera2D/CanvasLayer/Control/HBoxContainer" instance=ExtResource( 13 )]
-margin_left = 72.0
-margin_right = 104.0
-margin_bottom = 40.0
-
-[node name="DinheiroCounter" parent="Camera2D/CanvasLayer/Control/HBoxContainer" instance=ExtResource( 6 )]
-margin_left = 108.0
-margin_right = 116.0
-margin_bottom = 40.0
+[node name="DinheiroCounter" parent="Camera2D/CanvasLayer/Control" instance=ExtResource( 6 )]
+margin_left = 115.848
+margin_top = 6.74239
+margin_right = 129.848
+margin_bottom = 46.7424
 
 [node name="Pause" parent="Camera2D/CanvasLayer" instance=ExtResource( 8 )]
 
 [node name="Itens_UI" type="Control" parent="Camera2D/CanvasLayer"]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_left = 183.001
+margin_top = 1.85318
+margin_right = 223.001
+margin_bottom = 41.8532
 script = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -140,12 +149,6 @@ __meta__ = {
 [node name="Timer_popup" type="Timer" parent="Camera2D/CanvasLayer/Itens_UI"]
 wait_time = 5.0
 one_shot = true
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Camera2D/CanvasLayer/Itens_UI"]
-margin_left = 137.0
-margin_right = 855.0
-margin_bottom = 40.0
-custom_constants/separation = 60
 
 [node name="HealthBarBoss" parent="Camera2D/CanvasLayer" instance=ExtResource( 9 )]
 visible = false
@@ -179,12 +182,12 @@ position = Vector2( -1, 0 )
 shape = SubResource( 2 )
 
 [node name="Buffs_Controller" parent="." instance=ExtResource( 11 )]
-[connection signal="Dash_used" from="." to="Camera2D/CanvasLayer/Control/HBoxContainer/DashButton" method="_on_Player_Dash_used"]
-[connection signal="PW1_used" from="." to="Camera2D/CanvasLayer/Control/HBoxContainer/AbilityButton" method="_on_Player_PW1_used"]
-[connection signal="PW2_used" from="." to="Camera2D/CanvasLayer/Control/HBoxContainer/AbilityButton2" method="_on_Player_PW2_used"]
+[connection signal="Dash_used" from="." to="Camera2D/CanvasLayer/Control/DashButton" method="_on_Player_Dash_used"]
+[connection signal="PW1_used" from="." to="Camera2D/CanvasLayer/Control/AbilityButton" method="_on_Player_PW1_used"]
+[connection signal="PW2_used" from="." to="Camera2D/CanvasLayer/Control/AbilityButton2" method="_on_Player_PW2_used"]
 [connection signal="healthChanged" from="." to="Camera2D/CanvasLayer/HealthBar" method="_on_Player_healthChanged"]
 [connection signal="maxhealthChanged" from="." to="Camera2D/CanvasLayer/HealthBar" method="_on_Player_maxhealthChanged"]
-[connection signal="moneyChanged" from="." to="Camera2D/CanvasLayer/Control/HBoxContainer/DinheiroCounter" method="_on_Player_moneyChanged"]
+[connection signal="moneyChanged" from="." to="Camera2D/CanvasLayer/Control/DinheiroCounter" method="_on_Player_moneyChanged"]
 [connection signal="poisonChanged" from="." to="Camera2D/CanvasLayer/Poison_bar" method="_on_Player_poisonChanged"]
 [connection signal="set_maxhealth" from="." to="Camera2D/CanvasLayer/HealthBar" method="_on_Player_set_maxhealth"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
@@ -193,8 +196,8 @@ shape = SubResource( 2 )
 [connection signal="timeout" from="ShotCD" to="." method="_on_ShotCD_timeout"]
 [connection signal="timeout" from="Camera2D/CanvasLayer/Itens_UI/Timer_popup" to="Camera2D/CanvasLayer/Itens_UI" method="_on_Timer_popup_timeout"]
 [connection signal="area_entered" from="ItemCollectArea" to="Camera2D/CanvasLayer/Itens_UI" method="_on_ItemCollectArea_area_entered"]
-[connection signal="CD_PW1" from="Buffs_Controller" to="Camera2D/CanvasLayer/Control/HBoxContainer/AbilityButton" method="_on_Buffs_Controller_CD_PW1"]
-[connection signal="CD_PW2" from="Buffs_Controller" to="Camera2D/CanvasLayer/Control/HBoxContainer/AbilityButton2" method="_on_Buffs_Controller_CD_PW2"]
+[connection signal="CD_PW1" from="Buffs_Controller" to="Camera2D/CanvasLayer/Control/AbilityButton" method="_on_Buffs_Controller_CD_PW1"]
+[connection signal="CD_PW2" from="Buffs_Controller" to="Camera2D/CanvasLayer/Control/AbilityButton2" method="_on_Buffs_Controller_CD_PW2"]
 
 [editable path="Weapon"]
 

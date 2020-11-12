@@ -1020,7 +1020,6 @@ shape = SubResource( 61 )
 
 [node name="LvChanger" parent="." instance=ExtResource( 6 )]
 position = Vector2( -204, 56 )
-[connection signal="changeLv" from="LvChanger" to="." method="_on_LvChanger_changeLv"]
 
 [editable path="Arena"]
 

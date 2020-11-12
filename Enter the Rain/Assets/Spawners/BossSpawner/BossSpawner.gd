@@ -17,7 +17,7 @@ func _process(_delta):
 	if can_start and Input.is_action_just_pressed("ui_accept"):  # Player apertou para spawnar o boss (escolher um aleatorio dependendo da fase)
 		randomize()
 		Mensageiro.playmusic(choosen_boss + 1)
-		var entities_list = boss_list[choosen_boss - 1]
+		var entities_list = boss_list[choosen_boss]
 		entities_list.shuffle()
 		var entity = entities_list[0].instance()
 		entity.position.y = position.y - 100
