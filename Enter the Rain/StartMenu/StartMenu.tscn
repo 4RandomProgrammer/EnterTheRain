@@ -3,7 +3,7 @@
 [ext_resource path="res://StartMenu/EnterTheRain.Png" type="Texture" id=1]
 [ext_resource path="res://StartMenu/StartMenu.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Sprites/creditos.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Cutscenes/cutscene_inicial.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Cutscenes/Cutscene_inicial.tscn" type="PackedScene" id=4]
 
 [node name="StartMenu" type="Control"]
 anchor_right = 1.0
