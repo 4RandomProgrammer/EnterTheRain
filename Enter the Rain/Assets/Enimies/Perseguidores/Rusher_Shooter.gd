@@ -30,10 +30,10 @@ func _on_ShootTimer_timeout():
 	can_shoot = true
 
 
-func _on_Rush_Area_body_entered(body):
+func _on_Rush_Area_body_entered(_body):
 	if enemy_range.entity_aimed():
 		velocidade = 200
 
 
-func _on_Rush_Area_body_exited(body):
+func _on_Rush_Area_body_exited(_body):
 	velocidade = 100

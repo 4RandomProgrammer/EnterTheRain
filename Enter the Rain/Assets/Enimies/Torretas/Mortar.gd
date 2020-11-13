@@ -10,7 +10,7 @@ func try_aim_player_and_shoot():
 		can_shoot = false
 		$ShootTimer.start()
 
-func shoot(pos): 
+func shoot(_pos): 
 	var explosion_target = Explosion_target.instance()
 	explosion_target.position = turret_range.target.position
 	get_parent().add_child(explosion_target)

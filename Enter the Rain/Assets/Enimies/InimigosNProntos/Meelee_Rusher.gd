@@ -4,9 +4,9 @@ func chase():
 	direction = global_position.direction_to(enemy_range.target.global_position)
 	velocity = velocity.move_toward(direction * velocidade, velocidade / 2)
 
-func _on_RushArea_body_entered(body):
+func _on_RushArea_body_entered(_body):
 	if enemy_range.entity_aimed():
 		velocidade = 300
 
-func _on_RushArea_body_exited(body):
+func _on_RushArea_body_exited(_body):
 	velocidade = 100

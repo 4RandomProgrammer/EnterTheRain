@@ -729,6 +729,7 @@ tile_data = PoolIntArray( -5898284, 3, 0, -5898282, 3, 0, -5898280, 3, 0, -58982
 [node name="BossSpawner" parent="." instance=ExtResource( 1 )]
 position = Vector2( -1514.36, -3634.02 )
 choosen_boss = 1
+music_player = 3
 
 [node name="ObjectsBehindPlayer" type="TileMap" parent="."]
 scale = Vector2( 2, 2 )

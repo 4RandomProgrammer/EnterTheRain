@@ -16,6 +16,7 @@ extents = Vector2( 40.1283, 15.7228 )
 [node name="BossSpawner" type="StaticBody2D"]
 collision_mask = 2
 script = ExtResource( 2 )
+music_player = 2
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.5, 0.5 )

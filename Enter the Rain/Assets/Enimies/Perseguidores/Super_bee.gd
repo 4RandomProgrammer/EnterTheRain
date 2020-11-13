@@ -11,7 +11,7 @@ func chase():
 func _on_Timer_spawn_timeout():
 	rng.randomize()
 	if screen_verification.is_on_screen and bee_quant <= 4:
-		for i in range(rng.randi_range(1, 2)):
+		for _i in range(rng.randi_range(1, 2)):
 			var bee = Bee.instance()
 			bee.position = global_position + Vector2(rng.randf_range(-64, 64), rng.randf_range(-64, 64))
 			bee.min_money = 0

@@ -117,7 +117,7 @@ func _on_StealthTimer_timeout():
 func _on_Attack_range_body_entered(body):
 	player = body
 
-func _on_Attack_range_body_exited(body):
+func _on_Attack_range_body_exited(_body):
 	player = null
 
 

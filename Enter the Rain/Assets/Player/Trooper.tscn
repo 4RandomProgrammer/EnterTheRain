@@ -77,7 +77,6 @@ position = Vector2( 26, -1 )
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 position = Vector2( 0, -0.220366 )
 shape = SubResource( 2 )
-disabled = true
 
 [node name="AnimationPlayer" parent="." index="4"]
 anims/Dash = SubResource( 3 )
@@ -86,7 +85,7 @@ anims/Dash = SubResource( 3 )
 process_mode = 0
 wait_time = 3.0
 
-[node name="Control" parent="Camera2D/CanvasLayer" index="1"]
+[node name="Control" parent="Camera2D/CanvasLayer" index="2"]
 margin_left = 0.0
 margin_right = 40.0
 

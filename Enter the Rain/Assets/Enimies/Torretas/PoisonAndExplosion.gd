@@ -16,7 +16,7 @@ func try_aim_player_and_shoot():
 		can_shoot = false
 		$ShootTimer.start(shoottimer)
 
-func shoot(pos): 
+func shoot(_pos): 
 	if choice:
 		var explosion_target = Explosion_target.instance()
 		explosion_target.position = turret_range.target.position

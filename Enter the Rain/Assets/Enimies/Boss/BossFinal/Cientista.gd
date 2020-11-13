@@ -31,7 +31,7 @@ var quant_bullets_circle_pat = 10
 signal Cientista_damaged(health)
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	update()
 	match state:
 		NORMAL:
@@ -78,7 +78,7 @@ func _on_Timer_power_timeout():
 		$Timer_pow1.start()
 	elif poder_selecionado == 2:
 		# Soltar os misseis
-		for i in range(quant_misseis):
+		for _i in range(quant_misseis):
 			spawn_missile()
 	elif poder_selecionado == 3:
 		# Soltar o pattern de circulo de bullets.

@@ -9,7 +9,7 @@ func chase():
 	velocity = velocity.move_toward(direction * velocidade, velocidade / 2)
 
 
-func _on_explosion_chase_body_entered(body):
+func _on_explosion_chase_body_entered(_body):
 	if enemy_range.entity_aimed():
 		started_explosive_run = true
 		velocidade = 300

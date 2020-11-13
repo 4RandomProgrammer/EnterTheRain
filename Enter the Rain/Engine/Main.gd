@@ -19,8 +19,10 @@ func instanciarlevel():
 			Mensageiro.playmusic(0)
 		1:
 			fase = levels["Level2"].instance()
+			Mensageiro.playmusic(2)
 		2:
 			fase = levels["Level3"].instance()
+			Mensageiro.playmusic(4)
 		3:
 			fase = levels["Level4"].instance()
 

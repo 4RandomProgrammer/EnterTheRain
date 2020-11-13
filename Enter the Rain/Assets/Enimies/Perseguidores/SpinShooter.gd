@@ -14,7 +14,7 @@ func chase():
 	direction = global_position.direction_to(enemy_range.target.global_position)
 	velocity = velocity.move_toward(direction * velocidade, velocidade / 2)
 
-func shoot(pos):
+func shoot(_pos):
 	var bullet = Bullet.instance()
 	bullet.start(global_position, rad2deg(spin))
 	get_parent().add_child(bullet)
