@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://Assets/tilesets Enter the Rain/ashlands_tileset.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Areas/Area3.gd" type="Script" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://Assets/tilesets Enter the Rain/TilseSetSemMargin[.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Spawners/Fase3/EnemySpawner3.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Spawners/BauSpawner/bau_spawner.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Engine/LvChanger.tscn" type="PackedScene" id=7]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -1964,9 +1963,6 @@ max_entities = 3
 [node name="CollisionShape2D" parent="Bau_spawner6" index="0"]
 position = Vector2( -5.4165, 0 )
 shape = SubResource( 41 )
-
-[node name="LvChanger" parent="." instance=ExtResource( 7 )]
-position = Vector2( 2265.12, -1647.36 )
 
 [editable path="EnemySpawner"]
 
