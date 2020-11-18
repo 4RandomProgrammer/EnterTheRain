@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/UI/Pause.gd" type="Script" id=1]
+[ext_resource path="res://fonts/m12.TTF" type="DynamicFontData" id=2]
+[ext_resource path="res://Assets/Sprites/menu.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Sprites/return2.png" type="Texture" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 2 )
 
 [node name="Pause" type="Control"]
 pause_mode = 2
@@ -23,29 +29,32 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="."]
-margin_left = 473.0
-margin_right = 573.0
-margin_bottom = 14.0
+margin_left = 381.0
+margin_top = 6.0
+margin_right = 554.0
+margin_bottom = 26.0
+custom_fonts/font = SubResource( 1 )
 text = "Pause Menu"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CharSelect" type="Button" parent="."]
-margin_left = 442.0
-margin_top = 278.0
-margin_right = 598.0
-margin_bottom = 298.0
+[node name="CharSelect" type="TextureButton" parent="."]
+margin_left = 274.0
+margin_top = 263.0
+margin_right = 675.0
+margin_bottom = 313.0
 mouse_default_cursor_shape = 2
-text = "Cha Select"
+texture_normal = ExtResource( 4 )
 
-[node name="Menu" type="Button" parent="."]
-margin_left = 442.0
-margin_top = 300.0
-margin_right = 598.0
-margin_bottom = 320.0
-text = "Menu"
+[node name="Menu" type="TextureButton" parent="."]
+margin_left = 437.295
+margin_top = 319.028
+margin_right = 537.295
+margin_bottom = 369.028
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

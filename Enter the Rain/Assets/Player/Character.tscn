@@ -117,8 +117,6 @@ margin_top = 6.74239
 margin_right = 129.848
 margin_bottom = 46.7424
 
-[node name="Pause" parent="Camera2D/CanvasLayer" instance=ExtResource( 8 )]
-
 [node name="Itens_UI" type="Control" parent="Camera2D/CanvasLayer"]
 margin_left = 183.001
 margin_top = 1.85318
@@ -172,6 +170,8 @@ margin_bottom = 256.921
 
 [node name="DeathScene" parent="Camera2D/CanvasLayer" instance=ExtResource( 15 )]
 visible = false
+
+[node name="Pause" parent="Camera2D/CanvasLayer" instance=ExtResource( 8 )]
 
 [node name="ItemCollectArea" type="Area2D" parent="."]
 collision_layer = 0
