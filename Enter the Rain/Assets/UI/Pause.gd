@@ -20,4 +20,4 @@ func _on_CharSelect_pressed():
 
 func _on_Menu_pressed():
 	get_tree().paused = not get_tree().paused
-	assert(get_tree().change_scene("res://StartMenu/StartMenu.tscn") == OK) 
+	assert(get_tree().change_scene("res://StartMenu/StartMenu.tscn") == OK)
