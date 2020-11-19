@@ -1,16 +1,45 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/Enimies/InimigosNProntos/Enemy_attack_base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Enimies/InimigosNProntos/Enemy_veneno.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Sprites/frog.png" type="Texture" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
+radius = 12.3596
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 12.3168
+
+[sub_resource type="CircleShape2D" id=3]
+
+[sub_resource type="CircleShape2D" id=4]
 radius = 400.0
 
 [node name="Enemy" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
-[node name="CollisionShape2D" parent="Range" index="0"]
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2( -1, 5 )
 shape = SubResource( 1 )
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2( -1, 5 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource( 3 )
+
+[node name="Range" parent="." index="6"]
+visible = false
+
+[node name="CollisionShape2D" parent="Range" index="0"]
+shape = SubResource( 4 )
+
+[node name="Attack_Range" parent="." index="7"]
+visible = false
 
 [editable path="HurtBox"]
 
