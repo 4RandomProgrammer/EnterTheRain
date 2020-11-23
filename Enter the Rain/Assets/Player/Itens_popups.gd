@@ -5,7 +5,6 @@ onready var itens_UI_panel = load("res://Assets/Itens/Itens_UI_panel.tscn")
 onready var sprite_popup = get_node("Sprite_popup")
 onready var label_popup = get_node('Label_popup')
 onready var timer_popup = get_node("Timer_popup")
-onready var Container_UI_itens = get_parent().get_node("HBoxContainer")
 var position = 0
 var itens_popups_queue = []
 var itens_UI_dict = {}

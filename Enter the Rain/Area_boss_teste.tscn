@@ -396,4 +396,3 @@ position = Vector2( 1362.16, -42.5332 )
 
 [node name="BossSpawner" parent="." instance=ExtResource( 3 )]
 position = Vector2( 1658.29, 79.7441 )
-choosen_boss = 3

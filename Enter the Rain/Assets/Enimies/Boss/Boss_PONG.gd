@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends "res://Assets/Enimies/Boss/Boss_master.gd"
 
 onready var velocity = 100
 onready var extra_speed = 1
@@ -12,7 +12,6 @@ onready var Enemy_bullet = load("res://Assets/Enimies/Enemy_bullet/EnemyBullet.t
 onready var Super_bullet = load("res://Assets/Enimies/Enemy_bullet/SuperBullet.tscn")
 onready var Big_bullet = load("res://Assets/Enimies/Enemy_bullet/SlowBigBullet.tscn")
 onready var stats = $Stats
-onready var boss_range = $Alcance
 onready var rng = RandomNumberGenerator.new()
 export var quant_bullets_pow2 = 50
 export var rotation_speed_pow1 = 100
@@ -34,19 +33,11 @@ enum {
 var state = SPAWNING
 var can_shoot = true
 
-signal healthChanged(health)
-signal Spawning(maxHealth, boss_name)
-signal Died
-
-
 func _ready():
 	rng.randomize()
 	velocity = directions[rng.randi_range(0, 3)]
 	var bossHealthBar = get_parent().get_parent().get_node('Player').get_node('Camera2D').get_node('CanvasLayer').get_node('HealthBarBoss')
-	connect("Spawning", bossHealthBar, "_on_Boss_Spawning")
-	connect("Died", bossHealthBar, "_on_Boss_Died")
-	connect("healthChanged", bossHealthBar, "_on_Boss_healthChanged")
-	emit_signal("Spawning", $Stats.MaxHealth, 'P0NG')
+	connect_signals(bossHealthBar, 'P0NG')
 
 
 func _physics_process(delta):
@@ -134,11 +125,6 @@ func _on_Timer_andar_timeout():  # Parar por 5s.
 		state = POWER_3
 
 
-func _on_Stats_no_health():
-	emit_signal('Died')
-	queue_free()
-
-
 func _on_HurtBox_area_entered(area):
 	if state != SPAWNING:
 		extra_speed += 0.05 * area.DAMAGE
@@ -153,3 +139,4 @@ func _on_HurtBox_area_entered(area):
 
 func _on_Bullet_timer_timeout():
 	can_shoot = true
+
