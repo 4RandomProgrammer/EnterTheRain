@@ -45,10 +45,10 @@ __meta__ = {
 [node name="Tween" type="Tween" parent="."]
 
 [node name="Label" type="Label" parent="."]
-margin_left = 54.7561
-margin_top = 3.95793
-margin_right = 94.7561
-margin_bottom = 20.9579
+margin_left = 51.7561
+margin_top = 2.95793
+margin_right = 91.7561
+margin_bottom = 22.9579
 custom_fonts/font = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false

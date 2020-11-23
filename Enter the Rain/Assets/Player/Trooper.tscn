@@ -89,6 +89,22 @@ wait_time = 3.0
 margin_left = 0.0
 margin_right = 40.0
 
+[node name="AbilityButton2" parent="Camera2D/CanvasLayer/Control" index="0"]
+margin_left = 43.027
+margin_right = 79.027
+
+[node name="AbilityButton" parent="Camera2D/CanvasLayer/Control" index="1"]
+margin_left = 5.0
+margin_right = 41.0
+
+[node name="DashButton" parent="Camera2D/CanvasLayer/Control" index="2"]
+margin_left = 81.0859
+margin_right = 117.086
+
+[node name="DinheiroCounter" parent="Camera2D/CanvasLayer/Control" index="3"]
+margin_left = 120.848
+margin_right = 134.848
+
 [node name="CollisionShape2D" parent="ItemCollectArea" index="0"]
 position = Vector2( 0.00890923, -0.0941588 )
 
