@@ -117,6 +117,26 @@ margin_top = 6.74239
 margin_right = 129.848
 margin_bottom = 46.7424
 
+[node name="HealthBarBoss" parent="Camera2D/CanvasLayer" instance=ExtResource( 9 )]
+visible = false
+margin_left = 278.915
+margin_top = 547.744
+margin_right = 278.915
+margin_bottom = 547.744
+
+[node name="HealthBarBoss2" parent="Camera2D/CanvasLayer" instance=ExtResource( 9 )]
+visible = false
+margin_left = 279.141
+margin_top = 494.066
+margin_right = 279.141
+margin_bottom = 494.065
+
+[node name="Poison_bar" parent="Camera2D/CanvasLayer" instance=ExtResource( 10 )]
+margin_left = 519.229
+margin_top = 256.921
+margin_right = 519.229
+margin_bottom = 256.921
+
 [node name="Itens_UI" type="Control" parent="Camera2D/CanvasLayer"]
 margin_left = 183.001
 margin_top = 1.85318
@@ -147,26 +167,6 @@ __meta__ = {
 [node name="Timer_popup" type="Timer" parent="Camera2D/CanvasLayer/Itens_UI"]
 wait_time = 5.0
 one_shot = true
-
-[node name="HealthBarBoss" parent="Camera2D/CanvasLayer" instance=ExtResource( 9 )]
-visible = false
-margin_left = 278.915
-margin_top = 547.744
-margin_right = 278.915
-margin_bottom = 547.744
-
-[node name="HealthBarBoss2" parent="Camera2D/CanvasLayer" instance=ExtResource( 9 )]
-visible = false
-margin_left = 279.141
-margin_top = 494.066
-margin_right = 279.141
-margin_bottom = 494.065
-
-[node name="Poison_bar" parent="Camera2D/CanvasLayer" instance=ExtResource( 10 )]
-margin_left = 519.229
-margin_top = 256.921
-margin_right = 519.229
-margin_bottom = 256.921
 
 [node name="DeathScene" parent="Camera2D/CanvasLayer" instance=ExtResource( 15 )]
 visible = false

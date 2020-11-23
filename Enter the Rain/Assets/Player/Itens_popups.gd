@@ -26,7 +26,7 @@ func update_itens_UI(item):
 			itens_ui.get_node("Sprite").texture = item.get_parent().sprite
 			itens_ui.get_node("Label").text = 'x1'
 			itens_ui.get_node("Description").text = item.get_parent().description
-			get_node('.').add_child(itens_ui)
+			self.add_child(itens_ui)
 			position += 50
 
 
