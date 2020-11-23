@@ -5,13 +5,16 @@
 [ext_resource path="res://Assets/Enimies/Perseguidores/Rusher_Shooter.gd" type="Script" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
-height = 10.665
+radius = 16.0
+height = 28.0
 
 [sub_resource type="CapsuleShape2D" id=2]
-height = 10.0
+radius = 16.0
+height = 28.0
 
 [sub_resource type="CapsuleShape2D" id=3]
-height = 10.0
+radius = 16.0
+height = 28.0
 
 [sub_resource type="CircleShape2D" id=4]
 radius = 400.0
@@ -24,6 +27,7 @@ script = ExtResource( 3 )
 velocidade = 100
 
 [node name="Sprite" parent="." index="0"]
+scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" parent="." index="1"]

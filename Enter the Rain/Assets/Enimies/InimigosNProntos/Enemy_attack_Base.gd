@@ -106,10 +106,12 @@ func _on_AttackDuration_timeout():
 	if not can_attack:
 		$Hitbox2/CollisionShape2D.set_deferred("disabled", false)
 		rotation = (enemy_range.target.position - position).angle()
+		$Hitbox2/AttackHit.visible = true
 		can_attack = true
 		attackduration.start(attack_cooldown)
 	else:
 		$Hitbox2/CollisionShape2D.set_deferred("disabled", true)
+		$Hitbox2/AttackHit.visible = false
 		can_attack = false
 		
 		if enemy_range.entity_aimed():
