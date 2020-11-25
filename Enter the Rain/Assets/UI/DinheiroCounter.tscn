@@ -14,9 +14,9 @@ __meta__ = {
 
 [node name="Dinheiro" type="Label" parent="."]
 modulate = Color( 0.937255, 0.839216, 0.0470588, 1 )
-margin_top = 7.0
-margin_right = 14.0
-margin_bottom = 24.0
+margin_top = 6.0
+margin_right = 18.0
+margin_bottom = 26.0
 custom_fonts/font = ExtResource( 2 )
 text = "0"
 uppercase = true

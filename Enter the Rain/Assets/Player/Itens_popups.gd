@@ -5,7 +5,6 @@ onready var itens_UI_panel = load("res://Assets/Itens/Itens_UI_panel.tscn")
 onready var sprite_popup = get_node("Sprite_popup")
 onready var label_popup = get_node('Label_popup')
 onready var timer_popup = get_node("Timer_popup")
-onready var Container_UI_itens = get_parent().get_node("HBoxContainer")
 var position = 0
 var itens_popups_queue = []
 var itens_UI_dict = {}
@@ -26,7 +25,7 @@ func update_itens_UI(item):
 			itens_ui.get_node("Sprite").texture = item.get_parent().sprite
 			itens_ui.get_node("Label").text = 'x1'
 			itens_ui.get_node("Description").text = item.get_parent().description
-			get_node('.').add_child(itens_ui)
+			self.add_child(itens_ui)
 			position += 50
 
 
