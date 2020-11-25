@@ -42,6 +42,11 @@ func estado_base(delta):
 		shot(false)
 		can_fire = false
 		$ShotCD.start(fire_rate)
+		$AnimationPlayer.play("Shoot")
+		
+	if Input.is_action_just_released("Shoot"):
+		$AnimationPlayer.stop()
+		$Weapon.frame = 0
 	
 	#tiros explosivos
 	elif Input.is_action_pressed("PowerUp1") and onemoretimeP1 < maxtimes:

@@ -1,9 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Assets/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/Doomguy sem arma skin2 2.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Player/Character.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Assets/Sprites/weapon futurista contornada.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Sprites/weapon-trooper.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Sprites/dashbar.png" type="Texture" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
@@ -54,7 +54,24 @@ tracks/2/keys = {
 "values": [ 0, 1, 2, 3, 4 ]
 }
 
-[sub_resource type="CapsuleShape2D" id=4]
+[sub_resource type="Animation" id=4]
+resource_name = "Shoot"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Weapon:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4 ]
+}
+
+[sub_resource type="CapsuleShape2D" id=5]
 height = 12.0
 
 [node name="Player" instance=ExtResource( 3 )]
@@ -70,6 +87,8 @@ shape = SubResource( 1 )
 
 [node name="Weapon" parent="." index="2"]
 texture = ExtResource( 4 )
+hframes = 5
+frame = 4
 
 [node name="Position2D" parent="Weapon" index="0"]
 position = Vector2( 26, -1 )
@@ -80,6 +99,7 @@ shape = SubResource( 2 )
 
 [node name="AnimationPlayer" parent="." index="4"]
 anims/Dash = SubResource( 3 )
+anims/Shoot = SubResource( 4 )
 
 [node name="PowerUp1CD" parent="." index="5"]
 process_mode = 0
@@ -109,7 +129,7 @@ margin_right = 134.848
 position = Vector2( 0.00890923, -0.0941588 )
 
 [node name="CollisionShape2D" parent="Buffs_Controller/Spikes" index="0"]
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="DashBar" type="Sprite" parent="." index="11"]
 visible = false

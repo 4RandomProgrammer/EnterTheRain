@@ -1,7 +1,7 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Assets/Player/Character.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Assets/Sprites/weapon bomber 1.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Sprites/weapon bomber.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Player/Bomber.gd" type="Script" id=3]
 [ext_resource path="res://Engine/Hitbox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Sprites/ohwell.png" type="Texture" id=5]
@@ -9,11 +9,11 @@
 [ext_resource path="res://Assets/Sprites/explosion-try.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Sprites/bomber 2.png" type="Texture" id=8]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 14, 14 )
+[sub_resource type="CapsuleShape2D" id=1]
+height = 9.0
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 14, 14 )
+[sub_resource type="CapsuleShape2D" id=2]
+height = 9.0
 
 [sub_resource type="CircleShape2D" id=3]
 radius = 64.0
@@ -70,6 +70,23 @@ tracks/3/keys = {
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ]
 }
 
+[sub_resource type="Animation" id=5]
+resource_name = "Shoot"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Weapon:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4 ]
+}
+
 [node name="Player" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 MaxHealth = 4
@@ -79,11 +96,11 @@ cooldownP1 = 15.0
 texture = ExtResource( 8 )
 
 [node name="CollisionShape2D" parent="." index="1"]
-visible = false
 shape = SubResource( 1 )
 
 [node name="Weapon" parent="." index="2"]
 texture = ExtResource( 2 )
+hframes = 5
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 shape = SubResource( 2 )
@@ -93,10 +110,10 @@ collision_mask = 25
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource( 3 )
-disabled = true
 
 [node name="AnimationPlayer" parent="." index="5"]
 anims/DashB = SubResource( 4 )
+anims/Shoot = SubResource( 5 )
 
 [node name="DurationPw1" type="Timer" parent="." index="9"]
 one_shot = true
@@ -107,13 +124,11 @@ one_shot = true
 [node name="Knockback_Duration" type="Timer" parent="." index="11"]
 one_shot = true
 
-[node name="AbilityButton" parent="Camera2D/CanvasLayer/Control/HBoxContainer" index="0"]
-cooldown = 15.0
-
 [node name="ItemCollectArea" parent="." index="13"]
 visible = false
 
 [node name="BarraTeste" type="Sprite" parent="." index="14"]
+visible = false
 position = Vector2( 0, 32 )
 texture = ExtResource( 5 )
 hframes = 100
@@ -123,12 +138,10 @@ visible = false
 texture = ExtResource( 6 )
 
 [node name="Explosion" type="Sprite" parent="." index="17"]
-visible = false
 scale = Vector2( 1.6, 1.6 )
 texture = ExtResource( 7 )
 vframes = 2
 hframes = 5
-frame = 8
 [connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="DurationPw1" to="." method="_on_DurationPw1_timeout"]
@@ -140,5 +153,7 @@ frame = 8
 [editable path="HurtBox"]
 
 [editable path="Hitbox"]
+
+[editable path="Camera2D/CanvasLayer/DeathScene"]
 
 [editable path="Buffs_Controller"]

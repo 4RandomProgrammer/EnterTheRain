@@ -1,15 +1,33 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/Player/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Sprites/arqueira 2.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Player/Archer.gd" type="Script" id=3]
-[ext_resource path="res://Assets/Sprites/arco arqueira 3.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Sprites/arco-arqueira.png" type="Texture" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
 height = 8.0
 
 [sub_resource type="CapsuleShape2D" id=2]
 height = 9.0
+
+[sub_resource type="Animation" id=3]
+resource_name = "Shoot"
+length = 0.5
+loop = true
+step = 0.125
+tracks/0/type = "value"
+tracks/0/path = NodePath("Weapon:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.125, 0.25, 0.375 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 0, 1, 2 ]
+}
 
 [node name="Player" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
@@ -24,12 +42,17 @@ shape = SubResource( 1 )
 
 [node name="Weapon" parent="." index="2"]
 texture = ExtResource( 4 )
+hframes = 4
+frame = 2
 
 [node name="RayCast2D" type="RayCast2D" parent="." index="3"]
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 position = Vector2( 0.297302, 0 )
 shape = SubResource( 2 )
+
+[node name="AnimationPlayer" parent="." index="5"]
+anims/Shoot = SubResource( 3 )
 
 [node name="DashCD" type="Timer" parent="." index="10"]
 one_shot = true

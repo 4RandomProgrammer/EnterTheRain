@@ -17,6 +17,7 @@ const DASH = preload("res://Assets/PowerUps/Shield.tscn")
 const MAXTURRETS = 2
 
 func estado_base(delta):
+	print($Weapon.rotation_degrees)
 	Mouse = get_global_mouse_position()
 	movement_loop(delta)
 	control_loop()
@@ -31,6 +32,11 @@ func estado_base(delta):
 		shot(false)
 		can_fire = false
 		$ShotCD.start(fire_rate)
+		$AnimationPlayer.play("Shoot")
+		
+	if Input.is_action_just_released("Shoot"):
+		$AnimationPlayer.stop()
+		$Weapon.frame = 0
 	
 	#Tworretas
 	elif Input.is_action_just_released("PowerUp1") and onemoretimeP1 < MAXTURRETS and sqrt(dx * dx + dy * dy) >= 40 and sqrt(dx * dx + dy * dy) <= 240:
