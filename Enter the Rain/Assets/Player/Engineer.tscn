@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Assets/Player/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Player/Engineer.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Sprites/Engineer sem arma 2.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Sprites/Engineer-sheet.png" type="Texture" id=3]
 [ext_resource path="res://Assets/PowerUps/shield.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Sprites/range2.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Sprites/weapon-engineer.png" type="Texture" id=6]
@@ -14,7 +14,7 @@ height = 12.0
 radius = 11.0
 height = 12.0
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 resource_name = "Shoot"
 length = 0.8
 loop = true
@@ -32,7 +32,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 4 ]
 }
 
-[sub_resource type="CapsuleShape2D" id=3]
+[sub_resource type="CapsuleShape2D" id=4]
 height = 12.0
 
 [node name="Player" instance=ExtResource( 1 )]
@@ -43,6 +43,7 @@ fire_rate = 0.8
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 3 )
+hframes = 8
 
 [node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource( 1 )
@@ -67,7 +68,7 @@ one_shot = true
 shape = SubResource( 2 )
 
 [node name="AnimationPlayer" parent="." index="6"]
-anims/Shoot = SubResource( 4 )
+anims/Shoot = SubResource( 3 )
 
 [node name="DashCD" type="Timer" parent="." index="10"]
 one_shot = true
@@ -81,7 +82,7 @@ cooldown = 15.0
 [node name="RayCast2D" type="RayCast2D" parent="." index="13"]
 
 [node name="CollisionShape2D" parent="Buffs_Controller/Spikes" index="0"]
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 disabled = true
 [connection signal="timeout" from="Shield/DurationShield" to="." method="_on_DurationShield_timeout"]
 

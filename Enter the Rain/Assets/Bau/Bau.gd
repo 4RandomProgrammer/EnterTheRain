@@ -28,7 +28,9 @@ func _process(_delta):
 
 func _on_Range_abrir_body_entered(body):
 	player = body
+	$Label2.visible = true
 
 
 func _on_Range_abrir_body_exited(_body):
 	player = null
+	$Label2.visible = false
