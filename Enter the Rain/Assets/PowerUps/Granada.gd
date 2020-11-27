@@ -4,7 +4,7 @@ onready var explosion = $Hitbox/CollisionShape2D
 
 const BULLETSPEED = 200
 
-var damage = 1
+var damage = 2
 
 func _ready():
 	$Timer.start()

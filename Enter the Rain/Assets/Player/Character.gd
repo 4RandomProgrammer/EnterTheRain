@@ -172,9 +172,9 @@ func apply_buff():
 func _on_HurtBox_area_entered(area):
 	if InvunerabilityTimer.is_stopped():
 		hurtbox.start_invincibility(0.5)
-		$AnimationPlayer.play("Flash")
 		set_NewHealth(- area.DAMAGE)
-		
+		if(!$AnimationPlayer.is_playing()):
+			$AnimationPlayer.play("Flash")
 
 func update_Money(money_value):
 	# Atualiza o dinheiro do player. Acontece ao matar inimigos(ganha dinheiro) e abrir baus(perde).

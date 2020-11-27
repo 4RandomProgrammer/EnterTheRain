@@ -15,7 +15,6 @@ extents = Vector2( 32.0791, 31.4578 )
 extents = Vector2( 32.6114, 31.2576 )
 
 [node name="Enemy" instance=ExtResource( 3 )]
-collision_mask = 19
 script = ExtResource( 2 )
 velocidade = 125
 

@@ -741,8 +741,8 @@ tile_data = PoolIntArray( -14418017, 1, 0, -14286941, 1, 0, -11140871, 0, 0, -89
 [node name="EnemySpawner" parent="." instance=ExtResource( 3 )]
 position = Vector2( 222.523, -2166.12 )
 scale = Vector2( 2, 2 )
-min_entities = 30
-max_entities = 50
+min_entities = 40
+max_entities = 60
 
 [node name="CollisionShape2D" parent="EnemySpawner" index="0"]
 position = Vector2( 0, 209.151 )
@@ -750,31 +750,31 @@ shape = SubResource( 28 )
 
 [node name="EnemySpawner2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 222.523, 2260.53 )
-min_entities = 15
-max_entities = 30
+min_entities = 20
+max_entities = 35
 
 [node name="CollisionShape2D" parent="EnemySpawner2" index="0"]
 shape = SubResource( 29 )
 
 [node name="EnemySpawner3" parent="." instance=ExtResource( 3 )]
 position = Vector2( 1889.39, 0 )
-min_entities = 20
-max_entities = 30
+min_entities = 30
+max_entities = 40
 
 [node name="CollisionShape2D" parent="EnemySpawner3" index="0"]
 shape = SubResource( 30 )
 
 [node name="EnemySpawner4" parent="." instance=ExtResource( 3 )]
 position = Vector2( -1551.36, 0 )
-min_entities = 15
-max_entities = 30
+min_entities = 20
+max_entities = 35
 
 [node name="CollisionShape2D" parent="EnemySpawner4" index="0"]
 shape = SubResource( 31 )
 
 [node name="Bau_spawner" parent="." instance=ExtResource( 5 )]
-min_entities = 20
-max_entities = 30
+min_entities = 35
+max_entities = 45
 
 [node name="CollisionShape2D" parent="Bau_spawner" index="0"]
 shape = SubResource( 32 )

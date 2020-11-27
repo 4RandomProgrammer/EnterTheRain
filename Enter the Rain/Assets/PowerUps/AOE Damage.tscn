@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Engine/Hitbox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/PowerUps/AOE Damage.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Sprites/Slow-sheet.png" type="Texture" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 64.0
@@ -9,14 +10,22 @@ radius = 64.0
 [sub_resource type="CircleShape2D" id=2]
 radius = 64.0
 
-[sub_resource type="ParticlesMaterial" id=3]
-trail_divisor = 10
-emission_shape = 1
-emission_sphere_radius = 40.0
-flag_disable_z = true
-gravity = Vector3( 0, 98, 0 )
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
+[sub_resource type="Animation" id=3]
+resource_name = "ArrowsFalling"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
 
 [node name="AOE Damage" type="Area2D"]
 collision_layer = 0
@@ -42,12 +51,14 @@ shape = SubResource( 2 )
 wait_time = 0.5
 one_shot = true
 
-[node name="Particles2D" type="Particles2D" parent="."]
-position = Vector2( 0, -19 )
-amount = 100
-explosiveness = 0.5
-randomness = 0.5
-process_material = SubResource( 3 )
+[node name="AnimatedSprite" type="Sprite" parent="."]
+rotation = 1.5708
+texture = ExtResource( 3 )
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "ArrowsFalling"
+anims/ArrowsFalling = SubResource( 3 )
 [connection signal="body_entered" from="." to="." method="_on_AOE_Damage_body_entered"]
 [connection signal="timeout" from="Duration" to="." method="_on_Duration_timeout"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]
