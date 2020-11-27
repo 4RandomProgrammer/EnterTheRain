@@ -7,6 +7,8 @@ var Bullet = load("res://Assets/Enimies/Enemy_bullet/EnemyBullet.tscn")
 
 
 func chase():
+	$Sprite.frame = 1
+	
 	if can_shoot:
 		shoot(enemy_range.target.position)
 	elif $ShootTimer.is_stopped():  # O timer acabou, recomeçar a contagem para o proximo tiro.
@@ -27,6 +29,7 @@ func player_exited_range():
 	# Player saiu do range. Parar o timer do tiro, para que o inimigo nao atire instantaneamente quando o player voltar.
 	$ShootTimer.stop()
 	can_shoot = false
+	$Sprite.frame = 0
 
 
 func _on_ShootTimer_timeout():

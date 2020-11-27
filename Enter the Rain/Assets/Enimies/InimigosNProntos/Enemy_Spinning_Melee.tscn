@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/Enimies/InimigosNProntos/Enemy_attack_base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Enimies/InimigosNProntos/Enemy_Spinning_Melee.gd" type="Script" id=2]
@@ -6,7 +6,10 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 400.0
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 100, 16 )
+
+[sub_resource type="Animation" id=3]
 loop = true
 step = 0.125
 tracks/0/type = "value"
@@ -38,14 +41,21 @@ tracks/1/keys = {
 script = ExtResource( 2 )
 attack_cooldown = 1.0
 
+[node name="Sprite" parent="." index="0"]
+texture = null
+
 [node name="CollisionShape2D" parent="Range" index="0"]
 shape = SubResource( 1 )
 
 [node name="Hitbox2" parent="." index="8"]
 position = Vector2( 85, 2 )
 
+[node name="CollisionShape2D" parent="Hitbox2" index="1"]
+position = Vector2( 0.453094, -4.76837e-07 )
+shape = SubResource( 2 )
+
 [node name="Anim" type="AnimationPlayer" parent="." index="11"]
-anims/Spin = SubResource( 2 )
+anims/Spin = SubResource( 3 )
 
 [editable path="HurtBox"]
 

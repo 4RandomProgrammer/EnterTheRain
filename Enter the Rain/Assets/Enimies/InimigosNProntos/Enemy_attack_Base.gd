@@ -103,6 +103,7 @@ func _on_Attack_Range_body_exited(_body):
 
 
 func _on_AttackDuration_timeout():
+	$Sprite.frame = 0
 	if not can_attack:
 		$Hitbox2/CollisionShape2D.set_deferred("disabled", false)
 		rotation = (enemy_range.target.position - position).angle()
