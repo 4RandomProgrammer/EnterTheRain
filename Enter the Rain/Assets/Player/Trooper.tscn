@@ -74,6 +74,9 @@ texture = ExtResource( 4 )
 [node name="Position2D" parent="Weapon" index="0"]
 position = Vector2( 26, -1 )
 
+[node name="HurtBox" parent="." index="3"]
+collision_layer = 0
+
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 position = Vector2( 0, -0.220366 )
 shape = SubResource( 2 )

@@ -777,6 +777,7 @@ min_entities = 20
 max_entities = 30
 
 [node name="CollisionShape2D" parent="Bau_spawner" index="0"]
+position = Vector2( 222.523, 0 )
 shape = SubResource( 32 )
 
 [editable path="EnemySpawner"]
