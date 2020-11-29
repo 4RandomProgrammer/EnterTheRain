@@ -4,11 +4,11 @@ extends KinematicBody2D
 onready var Stats = $Stats
 onready var Timer_shoot = $Timer_shoot
 onready var Timer_power = $Timer_power
+onready var boss_range = get_parent().get_node('Range')
 onready var Final_boss_bullet = load("res://Assets/Enimies/Enemy_bullet/FinalBossBullet.tscn")
 onready var Bullet = load("res://Assets/Enimies/Enemy_bullet/SlowBigBullet.tscn")
 onready var Missile = load("res://Assets/Enimies/Enemy_missile.tscn")
 onready var Bullet_circle_pat = load("res://Assets/Enimies/Enemy_bullet/CircleBulletPat2.tscn")
-onready var Player = get_parent().get_parent().get_parent().get_node('Player')
 onready var Current_bullet = Bullet
 onready var rng = RandomNumberGenerator.new()
 onready var teleport_positions = [get_parent().get_node("TurretExplosivo").global_position,
@@ -27,6 +27,7 @@ var power_min_reload = 10
 var quant_misseis = 1
 var reload_time_circle_pat = 0.4
 var quant_bullets_circle_pat = 10
+var start_pos
 
 signal Cientista_damaged(health)
 
@@ -38,9 +39,9 @@ func _physics_process(_delta):
 			shoot()
 
 func shoot():
-	if Timer_shoot.time_left == 0 and is_instance_valid(Player):
+	if Timer_shoot.time_left == 0 and boss_range.entity_aimed():
 		var bullet = Current_bullet.instance()
-		bullet.start(global_position, (Player.position - global_position).angle() + rand_range(-PI/3, PI/3))
+		bullet.start(global_position, (boss_range.target.position - global_position).angle() + rand_range(-PI/3, PI/3))
 		get_parent().get_parent().call_deferred('add_child', bullet)
 		Timer_shoot.start(reload_time)
 
@@ -89,16 +90,32 @@ func _on_Timer_pow1_timeout():
 	Current_bullet = Bullet
 
 func spawn_missile():
-	var missile = Missile.instance()
-	missile.start(global_position, (Player.position - global_position).angle() + rand_range(-0.05, 0.05))
-	get_parent().get_parent().call_deferred('add_child', missile)
+	if boss_range.entity_aimed():
+		var missile = Missile.instance()
+		missile.start(global_position, (boss_range.target.position - global_position).angle() + rand_range(-0.05, 0.05))
+		get_parent().get_parent().call_deferred('add_child', missile)
 
 func spawn_circle_pattern():
-	var circle_pat = Bullet_circle_pat.instance()
-	circle_pat.start(global_position, (Player.global_position - global_position).angle())
-	circle_pat.quant_bullets = quant_bullets_circle_pat
-	circle_pat.time_reload = reload_time_circle_pat
-	get_parent().get_parent().call_deferred('add_child', circle_pat)
+	if boss_range.entity_aimed():
+		var circle_pat = Bullet_circle_pat.instance()
+		# Arrumar a posicao do spawn do poder, para que ele não apareça na parede
+		if global_position.x > 10:
+			# Boos esta na direita
+			start_pos = global_position + Vector2(-150, 0)
+		elif global_position.x < -10:
+			# Boos esta na esquerda
+			start_pos = global_position + Vector2(150, 0)
+		elif global_position.y > 10:
+			# Boos esta embaixo
+			start_pos = global_position + Vector2(0, -150)
+		else:
+			# Boss esta emcima
+			start_pos = global_position + Vector2(0, 150)
+		
+		circle_pat.start(start_pos, (boss_range.target.position - global_position).angle())
+		circle_pat.quant_bullets = quant_bullets_circle_pat
+		circle_pat.time_reload = reload_time_circle_pat
+		get_parent().get_parent().call_deferred('add_child', circle_pat)
 
 
 func _on_Timer_change_pos_timeout(): # Poder 4: mudar de posição se as torres estiverem mortas
@@ -109,4 +126,4 @@ func _on_Timer_change_pos_timeout(): # Poder 4: mudar de posição se as torres 
 		teleport_positions.append(current_pos)
 		global_position = tp_pos
 		teleport_positions.shuffle()
-	$Timer_change_pos.start(rand_range(7, 20))
+	$Timer_change_pos.start(rand_range(7, 15))

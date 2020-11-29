@@ -1,0 +1,91 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Engine/Hitbox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Enimies/Boss/Boss_GUARDIAN.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Enimies/Boss/Boss_master.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Sprites/Laser.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Sprites/torreta.png" type="Texture" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 21.8337, 23.2548 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 22.7834, 23.8179 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 22.6727, 23.9285 )
+
+[node name="Boss" instance=ExtResource( 3 )]
+script = ExtResource( 2 )
+
+[node name="Sprite" parent="." index="0"]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 5 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2( -2.98881, 0 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2( -2.98881, 0 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+position = Vector2( -2.98881, 0 )
+shape = SubResource( 3 )
+
+[node name="Stats" parent="." index="4"]
+MaxHealth = 50
+
+[node name="CollisionShape2D" parent="Range" index="0"]
+visible = false
+
+[node name="Timer_spawn" type="Timer" parent="." index="7"]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="Timer_change_pow" type="Timer" parent="." index="8"]
+wait_time = 10.0
+autostart = true
+
+[node name="Timer_laser" type="Timer" parent="." index="9"]
+wait_time = 0.1
+one_shot = true
+
+[node name="Laser_sprite" type="Sprite" parent="." index="10"]
+visible = false
+position = Vector2( 514.267, -0.850861 )
+rotation = 1.5708
+texture = ExtResource( 4 )
+
+[node name="Laser_hitbox" parent="." index="11" instance=ExtResource( 1 )]
+collision_mask = 4
+
+[node name="Timer_missile_laser" type="Timer" parent="." index="12"]
+one_shot = true
+
+[node name="Timer_shoot" type="Timer" parent="." index="13"]
+wait_time = 0.3
+one_shot = true
+
+[node name="Timer_pulling" type="Timer" parent="." index="14"]
+wait_time = 0.5
+one_shot = true
+
+[node name="Timer_many_bullets" type="Timer" parent="." index="15"]
+wait_time = 3.0
+one_shot = true
+[connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
+[connection signal="timeout" from="Timer_spawn" to="." method="_on_Timer_spawn_timeout"]
+[connection signal="timeout" from="Timer_change_pow" to="." method="_on_Timer_change_pow_timeout"]
+[connection signal="timeout" from="Timer_laser" to="." method="_on_Timer_laser_timeout"]
+[connection signal="timeout" from="Timer_missile_laser" to="." method="_on_Timer_missile_laser_timeout"]
+[connection signal="timeout" from="Timer_pulling" to="." method="_on_Timer_pulling_timeout"]
+[connection signal="timeout" from="Timer_many_bullets" to="." method="_on_Timer_many_bullets_timeout"]
+
+[editable path="HurtBox"]
+
+[editable path="Hitbox"]
+
+[editable path="Range"]

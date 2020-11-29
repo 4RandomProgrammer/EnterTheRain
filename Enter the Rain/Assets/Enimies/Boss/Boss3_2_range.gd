@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-onready var player = get_parent().get_parent().get_parent().get_node('Player')
+onready var boss_range = get_parent().get_node('Range')
 onready var stats = $Stats_range
 onready var timer_shot = $Timer_shot
 onready var timer_power1 = $Timer_power_1
@@ -32,7 +32,7 @@ func _ready():
 	var bossHealthBar2 = get_parent().get_parent().get_parent().get_node('Player').get_node('Camera2D').get_node('CanvasLayer').get_node('HealthBarBoss2')
 	connect("Spawning", bossHealthBar2, "_on_Boss_Spawning")
 	connect("healthChanged", bossHealthBar2, "_on_Boss_healthChanged")
-	emit_signal("Spawning", stats.MaxHealth, 'Escuridão')
+	emit_signal("Spawning", stats.MaxHealth, 'Escuridao')
 
 func _physics_process(delta):
 	update()
@@ -40,7 +40,7 @@ func _physics_process(delta):
 		NORMAL:
 			shoot()
 			if player_is_near:
-				var direction = global_position.direction_to(player.position)
+				var direction = global_position.direction_to(boss_range.target.position)
 				velocity = velocity.move_toward(direction * speed * delta, speed / 2)
 				var collide = move_and_collide(-velocity)
 				if collide:
@@ -48,9 +48,9 @@ func _physics_process(delta):
 					$Timer_teleport.start()
 
 func shoot():
-	if timer_shot.time_left == 0 and is_instance_valid(player):
+	if timer_shot.time_left == 0 and boss_range.entity_aimed():
 		var bullet = Bullet.instance()
-		bullet.start(global_position, (player.position - global_position).angle() + rand_range(-PI/6, PI/6))
+		bullet.start(global_position, (boss_range.target.position - global_position).angle() + rand_range(-PI/6, PI/6))
 		get_parent().get_parent().call_deferred("add_child", bullet)
 		timer_shot.start()
 
@@ -95,12 +95,12 @@ func _on_Timer_teleport_timeout():
 		
 
 func _on_Timer_power_1_timeout(): # Atirar tiros que ricocheteam na parede
-	if is_instance_valid(player):
+	if boss_range.entity_aimed():
 		if state == NORMAL:
 			var angle = - PI / 3  # Em um cone de 120°
 			while angle < PI / 3:
 				var bounce_bullet = Bounce_bullet.instance()
-				bounce_bullet.start(global_position, (player.position - global_position).angle() + angle)
+				bounce_bullet.start(global_position, (boss_range.target.position - global_position).angle() + angle)
 				angle += PI / 12  # Atirar a cada 15° nesse cone
 				get_parent().get_parent().call_deferred('add_child', bounce_bullet)
 			timer_power1.start(rand_range(delay_min_p1, delay_max_p1))

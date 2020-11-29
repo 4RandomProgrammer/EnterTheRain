@@ -1,11 +1,10 @@
-extends KinematicBody2D
+extends "res://Assets/Enimies/Boss/Boss_master.gd"
 
 onready var random_moviment = $Movimento_aletorio
 onready var missile = load('res://Assets/Enimies/Enemy_missile.tscn')
 onready var explosive_bullet = load("res://Assets/Enimies/Enemy_bullet/Explosive_bullet.tscn")
 onready var super_explosive_bullet = load("res://Assets/Enimies/Enemy_bullet/SuperExplosiveBullet.tscn")
 onready var enemy_bullet = load("res://Assets/Enimies/Enemy_bullet/EnemyBullet.tscn")
-onready var boss_range = $Range
 onready var arena_boss_2 = load("res://Assets/Spawners/BossSpawner/ArenaBoss2.tscn")
 onready var target_resource = load('res://Assets/Enimies/Explosion_target.tscn')
 var already_used_power1 = false
@@ -30,20 +29,11 @@ enum {
 }
 var state = SPAWNING
 
-signal healthChanged(health)
-signal Spawning(maxHealth, boss_name)
-signal Died
-
-
 func _ready():
 	rng.randomize()
 	var bossHealthBar = get_parent().get_parent().get_node('Player').get_node('Camera2D').get_node('CanvasLayer').get_node('HealthBarBoss')
 	arena_pos = Vector2(position.x, position.y - 100)
-	boss_2 = get_node('.')
-	connect("Spawning", bossHealthBar, "_on_Boss_Spawning")
-	connect("Died", bossHealthBar, "_on_Boss_Died")
-	connect("healthChanged", bossHealthBar, "_on_Boss_healthChanged")
-	emit_signal("Spawning", $Stats.MaxHealth, 'Soldier MK.III')
+	connect_signals(bossHealthBar, 'P0NG')
 
 
 func _physics_process(delta):
@@ -88,7 +78,8 @@ func _physics_process(delta):
 						dir_bullet += PI / 5
 					state = WALKING
 					target_pos_pow2 = null
-					target_instance.queue_free() # Tirar a marcação
+					if is_instance_valid(target_instance):
+						target_instance.queue_free() # Tirar a marcação
 
 
 func movimentation(delta):
@@ -153,8 +144,8 @@ func _on_Shoot_timer_timeout():
 	can_shoot = true
 
 
-func _on_Timer_power_timeout():
-	$Timer_power.start(rand_range(3, 8))
+func _on_Power_timer_timeout():
+	$Power_timer.start(rand_range(3, 8))
 	if rng.randi_range(2, 3) == 2:  # Soltar o super BULLET
 		$Timer_pow1.start()
 		state = POWER1
@@ -163,9 +154,9 @@ func _on_Timer_power_timeout():
 		state = POWER2
 
 
-func _on_Timer_spawning_timeout():
+func _on_Spawning_timer_timeout():
 	state = WALKING
-	$Timer_power.start(rand_range(3, 8))
+	$Power_timer.start(rand_range(3, 8))
 	$Shoot_timer.start()
 	$Missile_timer.start(rng.randf_range(0, 5))
 	$Sprite.self_modulate.r = 1.0

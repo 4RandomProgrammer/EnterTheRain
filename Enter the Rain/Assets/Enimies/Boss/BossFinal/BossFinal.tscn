@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Enimies/Boss/BossFinal/TurretVeneno.tscn" type="PackedScene" id=2]
@@ -9,6 +9,10 @@
 [ext_resource path="res://Engine/HurtBox.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Engine/Stats.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Assets/Enimies/Boss/BossFinal/Cientista.gd" type="Script" id=9]
+[ext_resource path="res://Assets/Aim.tscn" type="PackedScene" id=10]
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 2115.08
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 31.5595, 31.3946 )
@@ -18,6 +22,12 @@ extents = Vector2( 32.9521, 32.2786 )
 
 [node name="Boss" type="Node2D"]
 script = ExtResource( 5 )
+
+[node name="Range" parent="." instance=ExtResource( 10 )]
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="Range" index="0"]
+shape = SubResource( 3 )
 
 [node name="Cientista" type="KinematicBody2D" parent="."]
 position = Vector2( 0, -725 )
@@ -88,10 +98,12 @@ autostart = true
 [connection signal="no_health" from="TurretTeia/Stats" to="Cientista" method="_on_Stats_no_health"]
 [connection signal="Turret_damaged" from="TurretExplosivo" to="." method="_on_TurretExplosivo_Turret_damaged"]
 [connection signal="no_health" from="TurretExplosivo/Stats" to="Cientista" method="_on_Stats_no_health"]
-[connection signal="timeout" from="Timer_spawn" to="TurretVeneno" method="_on_Timer_spawn_timeout"]
-[connection signal="timeout" from="Timer_spawn" to="TurretTeia" method="_on_Timer_spawn_timeout"]
-[connection signal="timeout" from="Timer_spawn" to="TurretExplosivo" method="_on_Timer_spawn_timeout"]
 [connection signal="timeout" from="Timer_spawn" to="Cientista" method="_on_Timer_spawn_timeout"]
+[connection signal="timeout" from="Timer_spawn" to="TurretTeia" method="_on_Timer_spawn_timeout"]
+[connection signal="timeout" from="Timer_spawn" to="TurretVeneno" method="_on_Timer_spawn_timeout"]
+[connection signal="timeout" from="Timer_spawn" to="TurretExplosivo" method="_on_Timer_spawn_timeout"]
+
+[editable path="Range"]
 
 [editable path="Cientista/HurtBox"]
 

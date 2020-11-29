@@ -4,7 +4,8 @@ onready var stats = $Stats_melee
 onready var timer_sword_hit = $Timer_hit
 onready var timer_power1 = $Timer_power_1
 onready var timer_shot_p1 = $Timer_shot_p1
-onready var player = get_parent().get_parent().get_parent().get_node('Player')
+onready var boss_range = get_parent().get_node('Range')
+
 onready var Bullet = load("res://Assets/Enimies/Enemy_bullet/SlowBigBullet.tscn")
 enum {
 	SPAWNING,
@@ -40,15 +41,15 @@ func _ready():
 	emit_signal("Spawning", stats.MaxHealth, 'Furioso')
 
 func _physics_process(delta):
-	if is_instance_valid(player):
+	if boss_range.entity_aimed():
 		match state:
 			NORMAL:
-				movimentation(speed, delta, player.position)
-				if global_position.distance_to(player.global_position) <= 60:  # Player está proximo do boss (hitar com espada)
+				movimentation(speed, delta, boss_range.target.position)
+				if global_position.distance_to(boss_range.target.position) <= 60:  # Player está proximo do boss (hitar com espada)
 					timer_sword_hit.start(hit_delay_time)
 					state = SWORD_HIT
 			DELAY_POWER_1:
-				player_last_pos = player.position
+				player_last_pos = boss_range.target.position
 			DASHING_POWER_1:
 				movimentation(speed * 2, delta, player_last_pos)
 				shoot_power1()

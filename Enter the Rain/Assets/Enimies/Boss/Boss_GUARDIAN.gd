@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends "res://Assets/Enimies/Boss/Boss_master.gd"
 
 onready var rng = RandomNumberGenerator.new()
 var damage = 1
@@ -8,7 +8,6 @@ onready var laser_hitbox = $Laser_hitbox/CollisionShape2D
 onready var laser_timer = $Timer_laser
 onready var laser_missile_timer = $Timer_missile_laser
 onready var shoot_timer = $Timer_shoot
-onready var player = get_parent().get_parent().get_node('Player')
 onready var Missile_shot = load('res://Assets/Enimies/Enemy_missile.tscn')
 onready var Shield_machine = load('res://Assets/Enimies/Boss/Shield_machine.tscn')
 onready var Big_bullet = load("res://Assets/Enimies/Enemy_bullet/SlowBigBullet.tscn")
@@ -35,13 +34,9 @@ enum {
 }
 var state = SPAWNING
 
-signal healthChanged(health)
-signal Spawning(maxHealth)
-signal Died
-
 func _physics_process(_delta):
 	update()
-	if is_instance_valid(player):
+	if boss_range.entity_aimed():
 		match state:
 			SPAWNING:
 				pass
@@ -49,12 +44,12 @@ func _physics_process(_delta):
 				rotate_turret()
 				shoot()
 			LASER:
-				player_positions_list.append(player.global_position)
+				player_positions_list.append(boss_range.target.position)
 				if displaying_laser:
 					rotation = (player_positions_list[0] - global_position).angle()
 					player_positions_list.pop_front()
 			PULLING:
-				player.position -= (player.position - position).normalized()  # puxar player
+				boss_range.target.position -= (boss_range.target.position - position).normalized()  # puxar player
 				rotate_turret()
 				shoot()
 			MANY_BULLETS:
@@ -63,7 +58,7 @@ func _physics_process(_delta):
 				get_parent().call_deferred('add_child', big_bullet)
 
 func rotate_turret():
-	ang_player = (player.position - position).angle()
+	ang_player = (boss_range.target.position - position).angle()
 	rotation = ang_player
 
 func shoot():
@@ -87,19 +82,14 @@ func _ready():
 func _draw():
 	if shield_machine_count != 0:
 		draw_arc(Vector2.ZERO, 50, 0, 360, 1000, ColorN('Green'))  # Desenhar escudo de proteção (circulo verde)
-	if state == PULLING and is_instance_valid(player):
-		draw_line(Vector2.ZERO, (player.position - position).rotated(-rotation), ColorN('Yellow')) # Desenhar laser que puxa.
+	if state == PULLING and boss_range.entity_aimed():
+		draw_line(Vector2.ZERO, (boss_range.target.position - position).rotated(-rotation), ColorN('Yellow')) # Desenhar laser que puxa.
 
 func _on_HurtBox_area_entered(area):
 	if state != SPAWNING and shield_machine_count == 0:
 		var damage_taken = area.DAMAGE
 		stats.Health -= damage_taken
 		emit_signal("healthChanged", stats.Health)
-
-
-func _on_Stats_no_health():
-	emit_signal('Died')
-	queue_free()
 
 
 func _on_Timer_spawn_timeout():
@@ -155,17 +145,17 @@ func _on_Timer_laser_timeout():  # Power 1
 
 func _on_Timer_missile_laser_timeout():  # Atirando misseis durante poder 1
 	# Soltar um missil e começar a contagem novamente...
-	if is_instance_valid(player):
+	if boss_range.entity_aimed():
 		var missile = Missile_shot.instance()
-		missile.start(global_position, (player.position - position).angle())
+		missile.start(global_position, (boss_range.target.position - position).angle())
 		get_parent().call_deferred('add_child', missile)
 		laser_missile_timer.start(rng.randf_range(0.5, 1.75))
 
 
 func _on_Timer_pulling_timeout():  # Power 3
-	if pulling_count != 4 and is_instance_valid(player):
+	if pulling_count != 4 and boss_range.entity_aimed():
 		var current_angle = 0
-		var target_position = (player.position - position).normalized() * (50 + 100 * extra_explosions)
+		var target_position = (boss_range.target.position - position).normalized() * (50 + 100 * extra_explosions)
 		while current_angle <= 2 * PI:
 			spawn_target_explosion(position + target_position.rotated(current_angle))
 			current_angle += PI / 10 / (extra_explosions + 1)

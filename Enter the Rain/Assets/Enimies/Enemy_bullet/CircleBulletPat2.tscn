@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Assets/Enimies/Enemy_bullet/CircleBulletPat2.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Aim.tscn" type="PackedScene" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 1003.32
 
 [node name="CirclePat2" type="Node2D"]
 script = ExtResource( 1 )
@@ -10,5 +14,12 @@ one_shot = true
 
 [node name="Timer_shoot" type="Timer" parent="."]
 one_shot = true
+
+[node name="Range" parent="." instance=ExtResource( 2 )]
+
+[node name="CollisionShape2D" parent="Range" index="0"]
+shape = SubResource( 1 )
 [connection signal="timeout" from="Timer_stop" to="." method="_on_Timer_stop_timeout"]
 [connection signal="timeout" from="Timer_shoot" to="." method="_on_Timer_shoot_timeout"]
+
+[editable path="Range"]

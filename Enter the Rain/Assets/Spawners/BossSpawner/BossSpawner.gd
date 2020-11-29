@@ -1,11 +1,11 @@
 extends StaticBody2D
-onready var boss_1_1 = load('res://Assets/Enimies/Boss/Boss_PONG.tscn')
-onready var boss_1_2 = load('res://Assets/Enimies/Boss/Boss2.tscn')
-onready var boss_2_1 = load('res://Assets/Enimies/Boss/Boss_Snake.tscn')
-onready var boss_2_2 = load('res://Assets/Enimies/Boss/Boss_spider.tscn')
-onready var boss_3_1 = load('res://Assets/Enimies/Boss/Boss_turret.tscn')
-onready var boss_3_2 = load('res://Assets/Enimies/Boss/Boss_3_2.tscn')
-onready var boss_list = [[boss_1_1, boss_2_1], [boss_1_2, boss_2_2], [boss_3_1, boss_3_2]]
+onready var Boss_PONG = load('res://Assets/Enimies/Boss/Boss_PONG.tscn')
+onready var Boss_SOLDIER = load('res://Assets/Enimies/Boss/Boss_SOLDIER.tscn')
+onready var Boss_ROBOCONDA = load('res://Assets/Enimies/Boss/Boss_ROBOCONDA.tscn')
+onready var Boss_SPIDERTRON = load('res://Assets/Enimies/Boss/Boss_SPIDERTRON.tscn')
+onready var Boss_GUARDIAN = load('res://Assets/Enimies/Boss/Boss_GUARDIAN.tscn')
+onready var Boss_DOUBLE = load('res://Assets/Enimies/Boss/Boss_DOUBLE.tscn')
+onready var boss_list = [[Boss_PONG, Boss_ROBOCONDA], [Boss_SOLDIER, Boss_SPIDERTRON], [Boss_GUARDIAN, Boss_DOUBLE]]
 export var choosen_boss = 0
 export var music_player = 0
 onready var altar = get_node('.')

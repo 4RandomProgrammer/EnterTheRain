@@ -1,22 +1,19 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://Engine/HurtBox.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Assets/Enimies/Boss/Boss_spider.gd" type="Script" id=2]
-[ext_resource path="res://Engine/Hitbox.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Assets/Sprites/bossaranha.png" type="Texture" id=4]
-[ext_resource path="res://Engine/Stats.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Assets/Movimento_aletorio.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Assets/Sprites/Explosion_target.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Enimies/Boss/Itens_drop_boss.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/Movimento_aletorio.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Sprites/Explosion_target.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Enimies/Boss/Boss_master.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Enimies/Boss/Boss_SPIDERTRON.gd" type="Script" id=4]
+[ext_resource path="res://Assets/Sprites/bossaranha.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 30.1372, 31.2287 )
+extents = Vector2( 22.52, 24.9899 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 28.9908, 31.2457 )
+extents = Vector2( 29.4709, 27.205 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 30.1588, 31.2457 )
+extents = Vector2( 27.1691, 26.1522 )
 
 [sub_resource type="Animation" id=4]
 resource_name = "GoDown"
@@ -203,80 +200,73 @@ tracks/6/keys = {
 "values": [ 180.0, 180.0 ]
 }
 
-[node name="Boss" type="KinematicBody2D"]
-z_index = 1
-collision_layer = 16
-collision_mask = 3
-script = ExtResource( 2 )
+[node name="Boss" instance=ExtResource( 3 )]
+script = ExtResource( 4 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite" parent="." index="0"]
 scale = Vector2( 2, 2 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource( 1 )
 
-[node name="Hitbox" parent="." instance=ExtResource( 3 )]
-collision_mask = 4
-
-[node name="CollisionShape2D" parent="Hitbox" index="0"]
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2( -1, 0 )
 shape = SubResource( 2 )
 
-[node name="HurtBox" parent="." instance=ExtResource( 1 )]
-collision_layer = 8
-
-[node name="CollisionShape2D" parent="HurtBox" index="0"]
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource( 3 )
 
-[node name="Timer_spawn" type="Timer" parent="."]
+[node name="Stats" parent="." index="4"]
+MaxHealth = 40
+
+[node name="CollisionShape2D" parent="Range" index="0"]
+visible = false
+
+[node name="Timer_spawn" type="Timer" parent="." index="7"]
 wait_time = 5.0
 autostart = true
 
-[node name="Stats" parent="." instance=ExtResource( 5 )]
-MaxHealth = 40
-
-[node name="Timer_minions" type="Timer" parent="."]
+[node name="Timer_minions" type="Timer" parent="." index="8"]
 wait_time = 5.0
 
-[node name="Movimento_aletorio" parent="." instance=ExtResource( 6 )]
+[node name="Movimento_aletorio" parent="." index="9" instance=ExtResource( 1 )]
 alcance_posic_aleatoria = 1000
 
-[node name="Timer_start_shoot" type="Timer" parent="."]
+[node name="Timer_start_shoot" type="Timer" parent="." index="10"]
 wait_time = 3.0
 
-[node name="Timer_delay_shoot" type="Timer" parent="."]
+[node name="Timer_delay_shoot" type="Timer" parent="." index="11"]
 wait_time = 0.2
 one_shot = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="12"]
 anims/GoDown = SubResource( 4 )
 anims/GoUp = SubResource( 5 )
 
-[node name="Timer_spider_up" type="Timer" parent="."]
+[node name="Timer_spider_up" type="Timer" parent="." index="13"]
 wait_time = 10.0
 autostart = true
 
-[node name="Line2D" type="Line2D" parent="."]
+[node name="Line2D" type="Line2D" parent="." index="14"]
 visible = false
 points = PoolVector2Array( -0.0354309, -31.2337, 0.256561, -629.854, -0.00140381, -922.347 )
 width = 3.0
 default_color = Color( 1, 1, 1, 1 )
 
-[node name="Target" type="Sprite" parent="."]
+[node name="Target" type="Sprite" parent="." index="15"]
 visible = false
-texture = ExtResource( 7 )
-
-[node name="Itens_drop" parent="." instance=ExtResource( 8 )]
-[connection signal="Died" from="." to="Itens_drop" method="_on_Boss_Died"]
+texture = ExtResource( 2 )
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="timeout" from="Timer_spawn" to="." method="_on_Timer_spawn_timeout"]
-[connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="timeout" from="Timer_minions" to="." method="_on_Timer_minions_timeout"]
 [connection signal="timeout" from="Timer_start_shoot" to="." method="_on_Timer_start_shoot_timeout"]
 [connection signal="timeout" from="Timer_delay_shoot" to="." method="_on_Timer_delay_shoot_timeout"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="Timer_spider_up" to="." method="_on_Timer_spider_up_timeout"]
 
+[editable path="HurtBox"]
+
 [editable path="Hitbox"]
 
-[editable path="HurtBox"]
+[editable path="Range"]

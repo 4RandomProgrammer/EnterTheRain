@@ -9,6 +9,7 @@ var probability_super_bullet = 5
 onready var poison = load('res://Assets/Enimies/Poison.tscn')
 onready var snake_head = get_node("Path2D/PathFollow2D/Corpo")
 onready var poison_bullet = load('res://Assets/Enimies/Enemy_bullet/Poison_bullet.tscn')
+onready var BossRange = $Range
 var timer_poison_bullet = 4
 
 signal Spawning(MaxHealth, boss_name)
@@ -60,9 +61,9 @@ func _on_Timer_veneno_corpo_timeout():
 
 
 func _on_Timer_poison_shot_timeout():
-	if is_instance_valid(get_parent().get_parent().get_node('Player')):
+	if BossRange.entity_aimed():
 		var poison_shot = poison_bullet.instance()
-		var direction = (get_parent().get_parent().get_node('Player').global_position - snake_head.global_position).angle()
+		var direction = (BossRange.target.global_position - snake_head.global_position).angle()
 		poison_shot.start(snake_head.global_position, direction)
 		get_parent().call_deferred('add_child', poison_shot)
 		$Timer_poison_shot.start(timer_poison_bullet)
