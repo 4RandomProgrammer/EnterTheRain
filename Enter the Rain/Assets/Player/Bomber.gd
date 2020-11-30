@@ -81,6 +81,7 @@ func state_powerup1(delta):
 func state_powerup2(delta):
 	movement_loop(delta)
 	control_loop()
+	$BarraTeste.visible = true
 	var pw2 = POWERUP2.instance()
 	Mouse = get_global_mouse_position()
 	dx = Mouse.x - global_position.x
@@ -110,6 +111,7 @@ func state_powerup2(delta):
 			get_parent().add_child(pw2)
 		
 		$BarraTeste.frame = 0
+		$BarraTeste.visible = false
 		charge = 0
 		
 		state = MOVE

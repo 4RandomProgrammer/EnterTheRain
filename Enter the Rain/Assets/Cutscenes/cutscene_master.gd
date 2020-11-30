@@ -2,7 +2,7 @@ extends Node2D
 
 onready var text_container = get_node("Log")
 onready var letter_timer = get_node("Letters_timer")
-onready var msg_espaco = get_node("Pres_espaco")
+onready var msg_espaco = get_node("Pres_espaco")#Pq não usar o $?
 
 var logs_texts
 

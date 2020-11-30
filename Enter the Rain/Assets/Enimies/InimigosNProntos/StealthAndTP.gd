@@ -10,7 +10,7 @@ func chase():
 		$StealthDuration.start(stealth_time)
 		$Sprite.visible = false
 		$HurtBox/CollisionShape2D.call_deferred("set", "disabled", true)
-		$Hitbox/CollisionShape2D.call_deferred("set", "disabled", true)
+		hitbox.call_deferred("set", "disabled", true)
 		$CollisionShape2D.call_deferred("set", "disabled", true)
 		state = STEALTH
 	elif stealthTimer.is_stopped():

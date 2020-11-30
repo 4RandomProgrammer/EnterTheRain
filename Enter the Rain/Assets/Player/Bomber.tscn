@@ -138,6 +138,7 @@ visible = false
 texture = ExtResource( 6 )
 
 [node name="Explosion" type="Sprite" parent="." index="17"]
+visible = false
 scale = Vector2( 1.6, 1.6 )
 texture = ExtResource( 7 )
 vframes = 2

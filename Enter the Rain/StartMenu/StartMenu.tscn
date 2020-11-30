@@ -1,8 +1,8 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://StartMenu/EnterTheRain.Png" type="Texture" id=1]
 [ext_resource path="res://StartMenu/StartMenu.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Sprites/creditos.png" type="Texture" id=3]
+[ext_resource path="res://Engine/Creditos.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Sprites/gamesplash.png" type="Texture" id=4]
 [ext_resource path="res://fonts/m12.TTF" type="DynamicFontData" id=5]
 
@@ -21,10 +21,6 @@ font_data = ExtResource( 5 )
 
 [sub_resource type="DynamicFont" id=4]
 outline_size = 1
-outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 5 )
-
-[sub_resource type="DynamicFont" id=5]
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 5 )
 
@@ -90,23 +86,8 @@ custom_colors/font_color_pressed = Color( 0.690196, 0.690196, 0.690196, 1 )
 text = "Quit"
 flat = true
 
-[node name="Creditos" type="TextureRect" parent="."]
-visible = false
-margin_right = 1024.0
-margin_bottom = 600.0
-texture = ExtResource( 3 )
-
-[node name="Button" type="Button" parent="Creditos"]
-margin_left = 920.0
-margin_top = 580.0
-margin_right = 1028.0
-margin_bottom = 602.0
-custom_fonts/font = SubResource( 5 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_pressed = Color( 0.690196, 0.690196, 0.690196, 1 )
-text = "Voltar"
-flat = true
+[node name="Creditos" parent="." instance=ExtResource( 3 )]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Start" to="." method="_on_Start_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Creditos" to="Creditos" method="_on_Creditos_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Creditos" to="." method="_on_Creditos_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
-[connection signal="pressed" from="Creditos/Button" to="." method="_on_Button_pressed"]

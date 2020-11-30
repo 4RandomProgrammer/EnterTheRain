@@ -19,10 +19,11 @@ func chase():
 	elif stealthTimer.is_stopped():
 		stealthTimer.start(stealth_time)
 	
-	if can_shoot:
+	if can_shoot and !can_stealth:
 		shoot(enemy_range.target.position)
 	elif $ShootTimer.is_stopped():  # O timer acabou, recomeçar a contagem para o proximo tiro.
 		$ShootTimer.start()
+		
 	
 	direction = global_position.direction_to(enemy_range.target.global_position)
 	velocity = velocity.move_toward(direction * velocidade, velocidade / 2)

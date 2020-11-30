@@ -13,7 +13,11 @@ func _physics_process(_delta):
 
 func _on_Area2D_body_entered(body):
 	player = body
+	$Label.visible = true
+	$Label2.visible = true
 
 
 func _on_Area2D_body_exited(_body):
 	player = null
+	$Label.visible = false
+	$Label2.visible = false

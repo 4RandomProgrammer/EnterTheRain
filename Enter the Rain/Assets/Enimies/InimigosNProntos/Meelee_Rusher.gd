@@ -7,6 +7,7 @@ func chase():
 func _on_RushArea_body_entered(_body):
 	if enemy_range.entity_aimed():
 		velocidade = 300
+		print("A")
 
 func _on_RushArea_body_exited(_body):
 	velocidade = 100

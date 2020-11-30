@@ -5,12 +5,13 @@
 [ext_resource path="res://Assets/Sprites/frog.png" type="Texture" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 12.3596
+radius = 21.0
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 12.3168
+radius = 21.0
 
 [sub_resource type="CircleShape2D" id=3]
+radius = 21.0
 
 [sub_resource type="CircleShape2D" id=4]
 radius = 400.0
@@ -19,17 +20,19 @@ radius = 400.0
 script = ExtResource( 2 )
 
 [node name="Sprite" parent="." index="0"]
+scale = Vector2( 2, 2 )
 texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" parent="." index="1"]
-position = Vector2( -1, 5 )
+position = Vector2( 0, 10 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
-position = Vector2( -1, 5 )
+position = Vector2( 0, 10 )
 shape = SubResource( 2 )
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
+position = Vector2( 0, 10 )
 shape = SubResource( 3 )
 
 [node name="Range" parent="." index="6"]
