@@ -33,7 +33,9 @@ func _process(_delta):
 
 func _on_RangeParaAbrir_body_entered(body):
 		player = body
+		$Label3.visible = true
 
 
 func _on_RangeParaAbrir_body_exited(_body):
 	player = null
+	$Label3.visible = false
