@@ -11,12 +11,14 @@ func _on_AttackDuration_timeout():
 		can_attack = true
 		attackduration.start(attack_cooldown * 5)
 		$Attack_Range/CollisionShape2D.set_deferred("disabled", true)
+		$Hitbox2/AttackHit.visible = true
 		
 	else:
 		$Hitbox2/CollisionShape2D.set_deferred("disabled", true)
 		can_attack = false
 		$Attack_Range/CollisionShape2D.set_deferred("disabled", false)
 		$Anim.stop()
+		$Hitbox2/AttackHit.visible = false
 		
 	if enemy_range.entity_aimed():
 		state = CHASING

@@ -1,15 +1,28 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Assets/Enimies/InimigosNProntos/Enemy_attack_base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Enimies/InimigosNProntos/Enemy_Spinning_Melee.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Sprites/weapon spinning melee.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Sprites/spinning melee.png" type="Texture" id=4]
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CapsuleShape2D" id=1]
+height = 33.803
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 12.0
+height = 37.0
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 11.0
+height = 36.0
+
+[sub_resource type="CircleShape2D" id=4]
 radius = 400.0
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 100, 16 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=6]
 loop = true
 step = 0.125
 tracks/0/type = "value"
@@ -42,20 +55,39 @@ script = ExtResource( 2 )
 attack_cooldown = 1.0
 
 [node name="Sprite" parent="." index="0"]
-texture = null
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource( 3 )
+
+[node name="Range" parent="." index="6"]
+visible = false
 
 [node name="CollisionShape2D" parent="Range" index="0"]
-shape = SubResource( 1 )
+shape = SubResource( 4 )
+
+[node name="Attack_Range" parent="." index="7"]
+visible = false
 
 [node name="Hitbox2" parent="." index="8"]
 position = Vector2( 85, 2 )
 
+[node name="AttackHit" parent="Hitbox2" index="0"]
+rotation = 1.5708
+texture = ExtResource( 3 )
+
 [node name="CollisionShape2D" parent="Hitbox2" index="1"]
 position = Vector2( 0.453094, -4.76837e-07 )
-shape = SubResource( 2 )
+shape = SubResource( 5 )
 
 [node name="Anim" type="AnimationPlayer" parent="." index="11"]
-anims/Spin = SubResource( 3 )
+anims/Spin = SubResource( 6 )
 
 [editable path="HurtBox"]
 
